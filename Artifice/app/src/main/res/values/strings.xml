@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Artifice</string>
+    <string name="title_activity_open_gles20">OpenGLES20Activity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+</resources>

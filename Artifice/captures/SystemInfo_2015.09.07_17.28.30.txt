@@ -1,0 +1,62 @@
+Applications Graphics Acceleration Info:
+Uptime: 23223432 Realtime: 40259014
+
+** Graphics info for pid 313 [com.underwaterotter.corridor] **
+
+Recent DisplayList operations
+Save
+DrawRenderNode
+  DrawRenderNode
+    DrawRect
+  DrawRenderNode
+    DrawRenderNode
+      DrawRenderNode
+        DrawColor
+RestoreToCount
+DrawRect
+DrawColor
+Save
+DrawRenderNode
+  DrawRenderNode
+    DrawRect
+  DrawRenderNode
+    DrawRenderNode
+      DrawRenderNode
+        DrawColor
+RestoreToCount
+DrawRect
+DrawColor
+
+Caches:
+Current memory usage / total memory usage (bytes):
+  TextureCache                0 / 25165824
+  LayerCache                  0 / 16777216 (numLayers = 0)
+  Garbage layers              0
+  Active layers               0
+  RenderBufferCache           0 /  2097152
+  GradientCache               0 /   524288
+  PathCache                   0 / 10485760
+  TessellationCache           0 /  1048576
+  TextDropShadowCache         0 /  2097152
+  PatchCache                  0 /   131072
+  FontRenderer 0 A8           0 /        0
+  FontRenderer 0 RGBA         0 /        0
+  FontRenderer 0 total        0 /        0
+Other:
+  FboCache                    0 /        0
+Total memory usage:
+  0 bytes, 0.00 MB
+
+Profile data in ms:
+
+	com.underwaterotter.corridor/com.underwaterotter.artifice.Artifice/android.view.ViewRootImpl@15958172 (visibility=0)
+View hierarchy:
+
+  com.underwaterotter.corridor/com.underwaterotter.artifice.Artifice/android.view.ViewRootImpl@15958172
+  5 views, 4.71 kB of display lists
+
+
+Total ViewRootImpl: 1
+Total Views:        5
+Total DisplayList:  4.71 kB
+

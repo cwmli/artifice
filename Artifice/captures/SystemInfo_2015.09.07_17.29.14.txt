@@ -1,0 +1,34 @@
+Applications Memory Usage (kB):
+Uptime: 23267576 Realtime: 40303157
+
+** MEMINFO in pid 313 [com.underwaterotter.corridor] **
+                   Pss  Private  Private  Swapped     Heap     Heap     Heap
+                 Total    Dirty    Clean    Dirty     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------   ------
+  Native Heap     2333     2320        0     1416     5324     4721      109
+  Dalvik Heap     3223     3072        0     5412    12455     8219     4236
+ Dalvik Other      472      472        0        0                           
+        Stack      124      124        0        0                           
+    Other dev     1161     1156        4        0                           
+     .so mmap     1176      320      240     1544                           
+    .apk mmap      143        0       20        0                           
+    .dex mmap      696        0      692        0                           
+    code mmap      778        0      168        0                           
+   image mmap     5660     5428       20      192                           
+   Other mmap       11        4        0        0                           
+     Graphics    25328    25328        0        0                           
+      Unknown      375      364        0       56                           
+        TOTAL    41480    38588     1144     8620    17779    12940     4345
+ 
+ Objects
+               Views:        5         ViewRootImpl:        1
+         AppContexts:        3           Activities:        1
+              Assets:        2        AssetManagers:        2
+       Local Binders:        8        Proxy Binders:       12
+    Death Recipients:        0
+     OpenSSL Sockets:        0
+ 
+ SQL
+         MEMORY_USED:        0
+  PAGECACHE_OVERFLOW:        0          MALLOC_SIZE:        0
+ 
