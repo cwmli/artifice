@@ -37,6 +37,8 @@ public class World {
                     Seed.genPoints(Magic.randRange(10,20), 3, 3),
                     Terrain.GRASS);
         }
+
+        Artifice.level.map = map;
     }
 
     private static void buildDecoration(int[] map, int noise, int smooth){

@@ -17,23 +17,20 @@ public class Painter {
         return cell;
     }
 
-    public static int[] fill(int[] map, int terrain){
-        Arrays.fill(map, terrain);
-        return map;
+    public static void fill(Level.Map map, int terrain){
+       map.fill(terrain);
     }
 
-    public static int[] fillRect(int[] map, int terrain, int width, int height){
+    public static void fillRect(Level.Map map, int terrain, int width, int height){
         int levelWidth = Artifice.level.mapSize_W;
         for(int cy = 0; cy < height; cy++){
             for(int cx = cell + (cy * levelWidth); cx < cell + (cy * levelWidth) + width; cx++){
-               map[cx] = terrain;
+               map.add(cell, terrain);
             }
         }
-
-        return map;
     }
 
-    public static int[] fillPolygon(int[] map, int[] points, int terrain){
+    public static void fillPolygon(Level.Map map, int[] points, int terrain){
         double levelWidth = Artifice.level.mapSize_W;
         int[] polygon = new int[Artifice.level.mapLength];
         Arrays.fill(polygon, VOID_CELL);
@@ -78,11 +75,11 @@ public class Painter {
             }
         }
 
-        return overwriteMap(map, polygon);
+        overwriteMap(map, polygon);
     }
 
     //uses cell as center point
-    public static int[] fillCircle(int[] map, int terrain, int radius){
+    public static void fillCircle(Level.Map map, int terrain, int radius){
         int levelWidth = Artifice.level.mapSize_W;
         int[] fillcells = new int[Artifice.level.mapLength];
         Arrays.fill(fillcells, VOID_CELL);
@@ -115,16 +112,14 @@ public class Painter {
             }
         }
 
-        return overwriteMap(map, fillcells);
+        overwriteMap(map, fillcells);
     }
 
-    private static int[] overwriteMap(int[] base, int[] layer){
+    private static void overwriteMap(Level.Map base, int[] layer){
         for(int i = 0; i < Artifice.level.mapLength; i++){
             if(layer[i] != VOID_CELL){
-                base[i] = layer[i];
+                base.add(i, layer[i]);
             }
         }
-
-        return base;
     }
 }

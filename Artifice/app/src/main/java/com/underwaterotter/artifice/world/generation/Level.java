@@ -37,7 +37,7 @@ public abstract class Level implements Storable {
     public ItemMapper im;
     public MobMapper mm;
 
-    public int[] map;
+    public Map map;
     public boolean[] explored;
 
     public boolean[] passable = new boolean[mapLength];
@@ -47,7 +47,7 @@ public abstract class Level implements Storable {
 
     public void init(){
 
-        map = new int[mapLength];
+        map = new Map(mapLength);
         explored = new boolean[mapLength];
         Arrays.fill(explored, false);
 
@@ -70,7 +70,7 @@ public abstract class Level implements Storable {
 
         block.put(UNDERGROUND, underground);
 
-        block.put(MAP, map);
+        block.put(MAP, map.data);
         block.put(EXPLORED, explored);
         block.put(PASSABLE, passable);
         block.put(CLIMBABLE, climbable);
@@ -85,7 +85,7 @@ public abstract class Level implements Storable {
 
         underground = block.getBoolean(UNDERGROUND);
 
-        map = block.getIntArray(MAP);
+        map.data = block.getIntArray(MAP);
         explored = block.getBooleanArray(EXPLORED);
         passable = block.getBooleanArray(PASSABLE);
         climbable = block.getBooleanArray(CLIMBABLE);
@@ -111,11 +111,31 @@ public abstract class Level implements Storable {
     public void buildFlags(){
 
         for(int i = 0; i < mapLength; i++){
-            int flags = Terrain.flags[map[i]];
+            int flags = Terrain.flags[map.data[i]];
             passable[i] = (flags & Terrain.PASSABLE) != 0;
             climbable[i] = (flags & Terrain.CLIMBABLE) != 0;
             flammable[i] = (flags & Terrain.FLAMMABLE) != 0;
             unstable[i] = (flags & Terrain.UNSTABLE) != 0;
+        }
+    }
+
+    public static class Map{
+        private int[] data;
+
+        public Map(int length){
+            data = new int[length];
+        }
+
+        public void data(int[] map){
+            this.data = map;
+        }
+
+        public void fill(int id){
+            Arrays.fill(data, id);
+        }
+
+        public void add(int pos, int id){
+            data[pos] = id;
         }
     }
 }
