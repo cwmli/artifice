@@ -6,7 +6,7 @@ import com.underwaterotter.math.Magic;
 
 public class Room extends Painter{
 
-    private static int[] room(Level.Map map, int pos, int w, int h){
+    private static void room(Level.Map map, int pos, int w, int h){
         //setup room entrances
         // X---side1----X
         // |            |
@@ -23,13 +23,13 @@ public class Room extends Painter{
                     map.add(pos + selection_w, Terrain.WOOD_DOOR);
                     break;
                 case 2:
-                    map[pos + (Artifice.level.mapSize_W * selection_h) + w - 1] = Terrain.WOOD_DOOR;
+                    map.add(pos + (Artifice.level.mapSize_W * selection_h) + w - 1, Terrain.WOOD_DOOR);
                     break;
                 case 3:
-                    map[pos + (Artifice.level.mapSize_W * (h - 1)) + selection_w] = Terrain.WOOD_DOOR;
+                    map.add(pos + (Artifice.level.mapSize_W * (h - 1)) + selection_w, Terrain.WOOD_DOOR);
                     break;
                 case 4:
-                    map[pos + (Artifice.level.mapSize_W * selection_h)] = Terrain.WOOD_DOOR;
+                    map.add(pos + (Artifice.level.mapSize_W * selection_h), Terrain.WOOD_DOOR);
                     break;
             }
         }
@@ -37,7 +37,6 @@ public class Room extends Painter{
         setCell(pos + Artifice.level.mapSize_W + 1);
         fillRect(map, Terrain.DUNGEON_FLOOR, w - 1, h - 1);
         //check for doors or open chambers
-        return map;
     }
 
     private static void chamber(int[] map, int pos, int l, int h){

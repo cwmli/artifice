@@ -12,7 +12,7 @@ public class World {
     private boolean exitRoom;
     private boolean entranceRoom;
 
-    public static void buildworld(int[] map){
+    public static void buildworld(Level.Map map){
         boolean exitRoom = false;
         boolean entranceRoom = false;
         int rooms = 0;
@@ -37,8 +37,6 @@ public class World {
                     Seed.genPoints(Magic.randRange(10,20), 3, 3),
                     Terrain.GRASS);
         }
-
-        Artifice.level.map = map;
     }
 
     private static void buildDecoration(int[] map, int noise, int smooth){
