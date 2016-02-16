@@ -11,6 +11,8 @@ import java.util.Arrays;
 public abstract class Level implements Storable {
 
     public static final String UNDERGROUND = "underground";
+    public static final String OVERWORLD_MAP = "overworld";
+    public static final String OVERWORLD_SUCCESS = "overworld_gen";
     public static final String MAP = "map";
     public static final String EXPLORED = "explored";
     public static final String PASSABLE = "passable";
@@ -18,6 +20,8 @@ public abstract class Level implements Storable {
     public static final String FLAMMABLE = "flammable";
     public static final String UNSTABLE = "unstable";
     public static final String HIDDEN = "hidden";
+
+    public static boolean overworldGenerated = false;
 
     public int mapSize_W = 64;
     public int mapSize_H = 64;
@@ -32,12 +36,12 @@ public abstract class Level implements Storable {
                                              -1, + 1,
                                              mapSize_W - 1, mapSize_W, mapSize_W + 1 };
 
-    public boolean underground;
+    public boolean isUnderground;
 
     public ItemMapper im;
     public MobMapper mm;
 
-    public Map map;
+    public int[] map;
     public boolean[] explored;
 
     public boolean[] passable = new boolean[mapLength];
@@ -47,7 +51,7 @@ public abstract class Level implements Storable {
 
     public void init(){
 
-        map = new Map(mapLength);
+        map = new int[mapLength];
         explored = new boolean[mapLength];
         Arrays.fill(explored, false);
 
@@ -68,9 +72,14 @@ public abstract class Level implements Storable {
         im.saveToBlock(block);
         mm.saveToBlock(block);
 
-        block.put(UNDERGROUND, underground);
+        block.put(UNDERGROUND, isUnderground);
 
-        block.put(MAP, map.data);
+        block.put(OVERWORLD_SUCCESS, overworldGenerated);
+        if(!isUnderground)
+            block.put(OVERWORLD_MAP, map);
+        else
+            block.put(MAP, map);
+
         block.put(EXPLORED, explored);
         block.put(PASSABLE, passable);
         block.put(CLIMBABLE, climbable);
@@ -83,9 +92,14 @@ public abstract class Level implements Storable {
         im.loadFromBlock(block);
         mm.loadFromBlock(block);
 
-        underground = block.getBoolean(UNDERGROUND);
+        isUnderground = block.getBoolean(UNDERGROUND);
 
-        map.data = block.getIntArray(MAP);
+        overworldGenerated = block.getBoolean(OVERWORLD_SUCCESS);
+        if(!isUnderground)
+            map = block.getIntArray(OVERWORLD_MAP);
+        else if(overworldGenerated)
+            map = block.getIntArray(MAP);
+
         explored = block.getBooleanArray(EXPLORED);
         passable = block.getBooleanArray(PASSABLE);
         climbable = block.getBooleanArray(CLIMBABLE);
@@ -111,31 +125,11 @@ public abstract class Level implements Storable {
     public void buildFlags(){
 
         for(int i = 0; i < mapLength; i++){
-            int flags = Terrain.flags[map.data[i]];
+            int flags = Terrain.flags[map[i]];
             passable[i] = (flags & Terrain.PASSABLE) != 0;
             climbable[i] = (flags & Terrain.CLIMBABLE) != 0;
             flammable[i] = (flags & Terrain.FLAMMABLE) != 0;
             unstable[i] = (flags & Terrain.UNSTABLE) != 0;
-        }
-    }
-
-    public static class Map{
-        private int[] data;
-
-        public Map(int length){
-            data = new int[length];
-        }
-
-        public void data(int[] map){
-            this.data = map;
-        }
-
-        public void fill(int id){
-            Arrays.fill(data, id);
-        }
-
-        public void add(int pos, int id){
-            data[pos] = id;
         }
     }
 }

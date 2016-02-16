@@ -6,7 +6,7 @@ import com.underwaterotter.math.Magic;
 
 public class Room extends Painter{
 
-    private static void room(Level.Map map, int pos, int w, int h){
+    private static void room(int[] map, int pos, int w, int h){
         //setup room entrances
         // X---side1----X
         // |            |
@@ -20,16 +20,16 @@ public class Room extends Painter{
             int selection_h = Magic.randRange(1, h - 2);
             switch (side){
                 case 1:
-                    map.add(pos + selection_w, Terrain.WOOD_DOOR);
+                    map[pos + selection_w] = Terrain.WOOD_DOOR;
                     break;
                 case 2:
-                    map.add(pos + (Artifice.level.mapSize_W * selection_h) + w - 1, Terrain.WOOD_DOOR);
+                    map[pos + (Artifice.level.mapSize_W * selection_h) + w - 1] = Terrain.WOOD_DOOR;
                     break;
                 case 3:
-                    map.add(pos + (Artifice.level.mapSize_W * (h - 1)) + selection_w, Terrain.WOOD_DOOR);
+                    map[pos + (Artifice.level.mapSize_W * (h - 1)) + selection_w] = Terrain.WOOD_DOOR;
                     break;
                 case 4:
-                    map.add(pos + (Artifice.level.mapSize_W * selection_h), Terrain.WOOD_DOOR);
+                    map[pos + (Artifice.level.mapSize_W * selection_h)] = Terrain.WOOD_DOOR;
                     break;
             }
         }

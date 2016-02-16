@@ -28,7 +28,7 @@ public class GameScene extends UIScene {
     public void create(){
         //pre-init level setup
         if(Artifice.depth < 0){
-            Artifice.level.underground = true;
+            Artifice.level.isUnderground = true;
         }
         Artifice.level.init();
 

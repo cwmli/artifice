@@ -17,20 +17,20 @@ public class Painter {
         return cell;
     }
 
-    public static void fill(Level.Map map, int terrain){
-       map.fill(terrain);
+    public static void fill(int[] map, int terrain){
+       Arrays.fill(map, terrain);
     }
 
-    public static void fillRect(Level.Map map, int terrain, int width, int height){
+    public static void fillRect(int[] map, int terrain, int width, int height){
         int levelWidth = Artifice.level.mapSize_W;
         for(int cy = 0; cy < height; cy++){
             for(int cx = cell + (cy * levelWidth); cx < cell + (cy * levelWidth) + width; cx++){
-               map.add(cell, terrain);
+               map[cell] = terrain;
             }
         }
     }
 
-    public static void fillPolygon(Level.Map map, int[] points, int terrain){
+    public static void fillPolygon(int[] map, int[] points, int terrain){
         double levelWidth = Artifice.level.mapSize_W;
         int[] polygon = new int[Artifice.level.mapLength];
         Arrays.fill(polygon, VOID_CELL);
@@ -79,7 +79,7 @@ public class Painter {
     }
 
     //uses cell as center point
-    public static void fillCircle(Level.Map map, int terrain, int radius){
+    public static void fillCircle(int[] map, int terrain, int radius){
         int levelWidth = Artifice.level.mapSize_W;
         int[] fillcells = new int[Artifice.level.mapLength];
         Arrays.fill(fillcells, VOID_CELL);
@@ -115,10 +115,10 @@ public class Painter {
         overwriteMap(map, fillcells);
     }
 
-    private static void overwriteMap(Level.Map base, int[] layer){
+    private static void overwriteMap(int[] base, int[] layer){
         for(int i = 0; i < Artifice.level.mapLength; i++){
             if(layer[i] != VOID_CELL){
-                base.add(i, layer[i]);
+                base[i] = layer[i];
             }
         }
     }

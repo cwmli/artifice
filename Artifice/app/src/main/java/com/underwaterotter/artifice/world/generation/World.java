@@ -12,7 +12,7 @@ public class World {
     private boolean exitRoom;
     private boolean entranceRoom;
 
-    public static void buildworld(Level.Map map){
+    public static void buildWorld(int[] map){
         boolean exitRoom = false;
         boolean entranceRoom = false;
         int rooms = 0;
@@ -20,7 +20,7 @@ public class World {
         int roomLimit = Magic.randRange(Artifice.depth * 10 - 3, Artifice.depth * 10 + 3);
 
         //build base
-        if(Artifice.level.underground){
+        if(Artifice.level.isUnderground){
             Painter.fill(map, Terrain.DUNGEON_WALL);
             do {
                 //place the entrance first
@@ -29,13 +29,15 @@ public class World {
                 }
                 //as the rooms approaches roomLimit, the chance of exitRoom increases
             } while(rooms < roomLimit);
-        } else {
+        } else if(!Artifice.level.overworldGenerated) { //build the overworld if it has not been generated
             Painter.fill(map, Terrain.DEEP_WATER);
             //generate geometric island
             Painter.fillPolygon(
                     map,
                     Seed.genPoints(Magic.randRange(10,20), 3, 3),
                     Terrain.GRASS);
+
+            Artifice.level.overworldGenerated = true;
         }
     }
 

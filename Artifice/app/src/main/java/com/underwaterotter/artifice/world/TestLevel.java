@@ -1,7 +1,6 @@
 package com.underwaterotter.artifice.world;
 
 import com.underwaterotter.artifice.world.generation.Level;
-import com.underwaterotter.artifice.world.generation.Painter;
 import com.underwaterotter.artifice.world.generation.World;
 
 public class TestLevel extends Level {
@@ -11,7 +10,7 @@ public class TestLevel extends Level {
     }
 
     public void generate(){
-        World.buildworld(map);
+        World.buildWorld(map);
     }
 
     public void decorate(){
