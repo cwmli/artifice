@@ -36,10 +36,10 @@ public abstract class Level implements Storable {
                                              -1, + 1,
                                              mapSize_W - 1, mapSize_W, mapSize_W + 1 };
 
-    public boolean isUnderground;
+    public boolean isUnderground = false;
 
-    public ItemMapper im;
-    public MobMapper mm;
+    public ItemMapper im = new ItemMapper();
+    public MobMapper mm = new MobMapper();
 
     public int[] map;
     public boolean[] explored;

@@ -5,8 +5,8 @@ import android.util.Log;
 
 import com.underwaterotter.artifice.Artifice;
 import com.underwaterotter.artifice.world.Assets;
+import com.underwaterotter.artifice.world.TestLevel;
 import com.underwaterotter.ceto.Camera;
-import com.underwaterotter.ceto.Game;
 import com.underwaterotter.ceto.Image;
 import com.underwaterotter.ceto.Text;
 import com.underwaterotter.ceto.ui.Button;
@@ -32,6 +32,7 @@ public class MenuScene extends UIScene {
         //BACKGROUND SCROLL OF TERRAIN
         MenuItem keyPlay = new MenuItem(BTN_START, 0){
             public void onClick(){
+                Artifice.switchLevel(new TestLevel());
                 Artifice.switchScene(GameScene.class);
             }
         };

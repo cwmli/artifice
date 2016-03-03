@@ -3,6 +3,7 @@ package com.underwaterotter.artifice;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.underwaterotter.ceto.Game;
@@ -14,8 +15,8 @@ import com.underwaterotter.artifice.world.generation.Level;
 public class Artifice extends Game {
 
     public static Settings settings;
-    public static Level level;
-    public static int depth;
+    public static Level level = null;
+    public static int depth = 0;
 
     public Artifice() {
         super(MenuScene.class);
@@ -37,18 +38,15 @@ public class Artifice extends Game {
         checkImmersiveMode();
     }
 
-    public void switchLevel(Level level){
+    public static void switchLevel(Level slevel){
 
-        if(level == null){
-            return;
-        }
-
-        if(this.level != null){
+        if(level != null){
             GameScene.scene.destroy();
-            this.level.destroy();
+            level.destroy();
         }
 
-        this.level = level;
+        level = slevel;
+        GameScene.scene = new GameScene();
         GameScene.scene.create();
     }
 
