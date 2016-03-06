@@ -1,79 +1,62 @@
 package com.underwaterotter.artifice.world.generation;
 
 import com.underwaterotter.artifice.Artifice;
+import com.underwaterotter.artifice.world.Terrain;
 import com.underwaterotter.math.Magic;
 
 public class Seed{
 
       //specify a polygon of N vertices
-      public static int[] genPoints(int vertices, int lower_limit, int upper_limit){
+      public static void genIsland(int[] map, int passes, int jitter){
 
-          int[] points = new int[vertices];
+          final int g_scale = Math.round(100 / passes);
+          final int j_scale = Math.round(passes / g_scale);
+          //odd center is (map.length - 1) / 2
+          //even center is (int)Math.floor((map.length) / 2) + 2
 
-          for(int i = 0; i < vertices; i++){
-              int x_jitter = Magic.randRange(lower_limit, upper_limit);
-              int y_jitter = Magic.randRange(lower_limit, upper_limit);
+          for(int pass = passes - 1; pass >= 0; pass--){
+              int grass_chance = Magic.randRange(100 - (g_scale * pass), 100);
+              int jitter_chance = Magic.randRange(100 - (j_scale * pass), 100);
 
-              //Grab center cell
-              points[i] = Painter.retrieveCell() + x_jitter + (y_jitter * Artifice.level.mapSize_W);
+              spiralTopRight(map, 0, 0, Artifice.level.mapSize_W - 1, Artifice.level.mapSize_H - 1, grass_chance);
           }
-
-          return sortClockwise(points);
       }
 
-    private static int[] sortClockwise(int[] copy) {
+    private static void spiralTopRight(int[] map, int row, int col, int row_max, int col_max, int chance){
 
-        final int width = Artifice.level.mapSize_W;
-        final int[] vertices = copy;
-
-
-        //sort col in ascending order by insertion
-        for (int i = 2; i < vertices.length; i += 2) {
-            for (int n = 1; n <= i / 2; n++){
-                int x1 = vertices[i - (n - 1)] % width;
-                int x2 = vertices[i - (2 * n)] % width; //previous
-                if(x1 < x2){
-                    int temp = vertices[i - (2 * n)];
-                    vertices[i - (2 * n)] = vertices[i - (n - 1)];
-                    vertices[i - (n - 1)] = temp;
-                } else {
-                    break;
-                }
-            }
+        for (int i = col; i < col_max; i++) {
+            int random = Magic.randRange(0, 100);
+            map[(row * Artifice.level.mapSize_W) + i] =
+                    random < chance ? Terrain.GRASS : Terrain.WATER;
         }
 
-        int halfx = (int) Math.floor((vertices[0] + 1 + vertices[vertices.length]) / 2);
-        //sort row to lowest point (top to bottom) for right half of polygon
-        for (int i = halfx + 1; i < vertices.length; i += 2) {
-            for (int n = 1; n <= i / 2; n++){
-                int y1 = (int) Math.floor(vertices[i - (n - 1)] / width);
-                int y2 = (int) Math.floor(vertices[i - (2 * n)] / width); //previous
-                if(y1 < y2){
-                    int temp = vertices[i - (2 * n)];
-                    vertices[i - (2 * n)] = vertices[i - (n - 1)];
-                    vertices[i - (n - 1)] = temp;
-                } else {
-                    break;
-                }
-            }
+        for(int i = row + 1; i < row_max; i++){
+            int random = Magic.randRange(0, 100);
+            map[(i * Artifice.level.mapSize_W) + Artifice.level.mapSize_W - 1] =
+                    random < chance ? Terrain.GRASS : Terrain.WATER;
         }
 
-        //sort row from lowest back to highest point (bottom to top) for left half of polygon
-        for (int i = 1; i < halfx + 1; i += 2) {
-            for (int n = 1; n <= i / 2; n++){
-                int y1 = (int) Math.floor(vertices[i - (n - 1)] / width);
-                int y2 = (int) Math.floor(vertices[i - (2 * n)] / width); //previous
-                if(y1 > y2){
-                    int temp = vertices[i - (2 * n)];
-                    vertices[i - (2 * n)] = vertices[i - (n - 1)];
-                    vertices[i - (n - 1)] = temp;
-                } else {
-                    break;
-                }
-            }
+        if(col_max - col > 0){
+            spiralBottomRight(map, col, row + 1, col_max - 1, row_max, chance);
+        }
+    }
+
+    private static void spiralBottomRight(int[] map, int row, int col, int row_max, int col_max, int chance){
+
+        for(int i = col_max; i > col; i--){
+            int random = Magic.randRange(0, 100);
+            map[(i * Artifice.level.mapSize_W) + Artifice.level.mapSize_W - 1] =
+                    random < chance ? Terrain.GRASS : Terrain.WATER;
         }
 
+        for(int i = row_max - 1; i > row; i--){
+            int random = Magic.randRange(0, 100);
+            map[(i * Artifice.level.mapSize_W) + Artifice.level.mapSize_W - 1] =
+                    random < chance ? Terrain.GRASS : Terrain.WATER;
+        }
 
-        return vertices;
+        if(col_max - col > 0){
+            spiralBottomRight(map, col + 1, row, col_max, row_max - 1, chance);
+        }
     }
 }

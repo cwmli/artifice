@@ -32,10 +32,7 @@ public class World {
         } else if(!Artifice.level.overworldGenerated) { //build the overworld if it has not been generated
             Painter.fill(map, Terrain.DEEP_WATER);
             //generate geometric island
-            Painter.fillPolygon(
-                    map,
-                    Seed.genPoints(Magic.randRange(10,20), 3, 3),
-                    Terrain.GRASS);
+
 
             Artifice.level.overworldGenerated = true;
         }
