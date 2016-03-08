@@ -18,45 +18,45 @@ public class Seed{
               int grass_chance = Magic.randRange(100 - (g_scale * pass), 100);
               int jitter_chance = Magic.randRange(100 - (j_scale * pass), 100);
 
-              spiralTopRight(map, 0, 0, Artifice.level.mapSize_W - 1, Artifice.level.mapSize_H - 1, grass_chance);
+              spiralTopRight(map, 0, 0, Artifice.level.mapSideLength - 1, Artifice.level.mapSideLength - 1, grass_chance);
           }
       }
 
-    private static void spiralTopRight(int[] map, int row, int col, int row_max, int col_max, int chance){
+    private static void spiralTopRight(int[] map, int x, int y, int x_max, int y_max, int chance){
 
-        for (int i = col; i < col_max; i++) {
+        for (int i = x; i < x_max; i++) {
             int random = Magic.randRange(0, 100);
-            map[(row * Artifice.level.mapSize_W) + i] =
+            map[(y * Artifice.level.mapSideLength) + i] =
                     random < chance ? Terrain.GRASS : Terrain.WATER;
         }
 
-        for(int i = row + 1; i < row_max; i++){
+        for(int i = y + 1; i < y_max; i++){
             int random = Magic.randRange(0, 100);
-            map[(i * Artifice.level.mapSize_W) + Artifice.level.mapSize_W - 1] =
+            map[(i * Artifice.level.mapSideLength) + x_max] =
                     random < chance ? Terrain.GRASS : Terrain.WATER;
         }
 
-        if(col_max - col > 0){
-            spiralBottomRight(map, col, row + 1, col_max - 1, row_max, chance);
+        if(x_max - x > 0){
+            spiralBottomRight(map, x, y + 1, x_max - 1, y_max, chance);
         }
     }
 
-    private static void spiralBottomRight(int[] map, int row, int col, int row_max, int col_max, int chance){
+    private static void spiralBottomRight(int[] map, int x, int y, int x_max, int y_max, int chance){
 
-        for(int i = col_max; i > col; i--){
+        for(int i = x_max; i > x; i--){
             int random = Magic.randRange(0, 100);
-            map[(i * Artifice.level.mapSize_W) + Artifice.level.mapSize_W - 1] =
+            map[(y * Artifice.level.mapSideLength) + i] =
                     random < chance ? Terrain.GRASS : Terrain.WATER;
         }
 
-        for(int i = row_max - 1; i > row; i--){
+        for(int i = y_max - 1; i > y; i--){
             int random = Magic.randRange(0, 100);
-            map[(i * Artifice.level.mapSize_W) + Artifice.level.mapSize_W - 1] =
+            map[(i * Artifice.level.mapSideLength) + x] =
                     random < chance ? Terrain.GRASS : Terrain.WATER;
         }
 
-        if(col_max - col > 0){
-            spiralBottomRight(map, col + 1, row, col_max, row_max - 1, chance);
+        if(x_max - x > 0){
+            spiralBottomRight(map, x + 1, y, x_max - 1, y_max - 1, chance);
         }
     }
 }

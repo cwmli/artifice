@@ -25,6 +25,7 @@ public abstract class Level implements Storable {
 
     public int mapSize_W = 64;
     public int mapSize_H = 64;
+    public int mapSideLength = (int)Math.sqrt(mapSize_W); //always a square map
 
     public int mapLength = mapSize_W * mapSize_H;
 
