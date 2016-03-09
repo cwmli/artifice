@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class Painter {
 
-    private static int VOID_CELL = -1;
+    private static final int VOID_CELL = -1;
     private static int cell;
 
     public static void setCell(int c){
