@@ -5,8 +5,86 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6e953ade-3add-41d4-ab69-a566b50017cb" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/classes-9369e01f81d7bf1339ce5ed175b5fe7342059dcf.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/classes-b03998a2c37486de3cee671904c9e8620e056e70.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-77e04151c7b2a914f5869cb08a41a32ce2021256.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-5c03e9166c11029e48974a2e24c909328ee94db9.jar" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/Artifice.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/Artifice.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/gleswrap/Attribute.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/gleswrap/Attribute.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/utils/BitmapCache$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/utils/BitmapCache$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/utils/BitmapCache$Bit.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/utils/BitmapCache$Bit.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/utils/BitmapCache.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/utils/BitmapCache.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/utils/BitmapSequence.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/utils/BitmapSequence.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/utils/Block.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/utils/Block.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/ui/Button$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/ui/Button$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/ui/Button.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/ui/Button.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/Camera.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/Camera.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/entities/main/Char.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/entities/main/Char.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/ui/CirclePad$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/ui/CirclePad$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/ui/CirclePad$TouchCircle.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/ui/CirclePad$TouchCircle.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/ui/CirclePad.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/ui/CirclePad.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/particle/Emitter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/particle/Emitter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/gleswrap/FrameBuffer.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/gleswrap/FrameBuffer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/glesutils/GLSL.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/glesutils/GLSL.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/Game.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/Game.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/scenes/GameScene.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/scenes/GameScene.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/Group.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/Group.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/entities/items/Item.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/entities/items/Item.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/entities/items/ItemMapper.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/entities/items/ItemMapper.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/sprites/ItemSprite.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/sprites/ItemSprite.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/Joystick.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/Joystick.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/cetoinput/Keys.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/cetoinput/Keys.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/world/generation/Level.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/world/generation/Level.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/scenes/MenuScene$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/scenes/MenuScene$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/scenes/MenuScene$2.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/scenes/MenuScene$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/scenes/MenuScene$MenuItem.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/scenes/MenuScene$MenuItem.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/scenes/MenuScene.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/scenes/MenuScene.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/entities/Mob$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/entities/Mob$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/entities/Mob$Buff.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/entities/Mob$Buff.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/entities/Mob$Status.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/entities/Mob$Status.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/entities/Mob.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/entities/Mob.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/entities/MobMapper.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/entities/MobMapper.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/sprites/MobSprite$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/sprites/MobSprite$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/sprites/MobSprite$Effect.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/sprites/MobSprite$Effect.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/sprites/MobSprite.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/sprites/MobSprite.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/glesutils/ModelTexture.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/glesutils/ModelTexture.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/cetoinput/Motions.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/cetoinput/Motions.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/Overlay.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/Overlay.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/world/generation/Painter.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/world/generation/Painter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/gleswrap/Program.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/gleswrap/Program.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/gleswrap/RenderBuffer.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/gleswrap/RenderBuffer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/Renderer.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/Renderer.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/world/generation/Room.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/world/generation/Room.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/Scene$1.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/Scene$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/Scene.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/Scene.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/world/generation/Seed.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/world/generation/Seed.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/utils/Serialized.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/utils/Serialized.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/Settings.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/Settings.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/gleswrap/Shader.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/gleswrap/Shader.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/world/TestLevel.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/world/TestLevel.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/Text$Font.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/Text$Font.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/Text.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/Text.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/gleswrap/Texture.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/gleswrap/Texture.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/glesutils/TextureAtlas.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/glesutils/TextureAtlas.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/glesutils/TextureCache.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/glesutils/TextureCache.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/TouchBox.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/ceto/TouchBox.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/scenes/UIScene.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/scenes/UIScene.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/glesutils/VertexQuad.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/glesutils/VertexQuad.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/world/generation/World.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/world/generation/World.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/WorldTilemap.class" afterPath="$PROJECT_DIR$/app/build/intermediates/classes/debug/com/underwaterotter/artifice/WorldTilemap.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug-unaligned.apk" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" afterPath="$PROJECT_DIR$/app/build/outputs/apk/app-debug.apk" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.2/taskArtifacts/cache.properties.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build/intermediates/dex/debug/classes.dex" afterPath="$PROJECT_DIR$/app/build/intermediates/dex/debug/classes.dex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.2/taskArtifacts/fileHashes.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.2/taskArtifacts/fileSnapshots.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.2/taskArtifacts/outputFileStates.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.2/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.2/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/underwaterotter/artifice/world/generation/Painter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/underwaterotter/artifice/world/generation/Painter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/underwaterotter/artifice/world/generation/Seed.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/underwaterotter/artifice/world/generation/Seed.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/underwaterotter/artifice/world/generation/World.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/underwaterotter/artifice/world/generation/World.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Artifice.iws" />
@@ -45,11 +123,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="World.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="World.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/underwaterotter/artifice/world/generation/World.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+            <state vertical-scroll-proportion="0.6876061">
+              <caret line="39" column="63" selection-start-line="39" selection-start-column="63" selection-end-line="39" selection-end-column="63" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -57,11 +135,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Seed.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Seed.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/underwaterotter/artifice/world/generation/Seed.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.58573854">
-              <caret line="26" column="71" selection-start-line="26" selection-start-column="71" selection-end-line="26" selection-end-column="71" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -73,7 +151,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/underwaterotter/artifice/world/generation/Painter.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="25" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
+              <caret line="26" column="47" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -83,7 +161,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/underwaterotter/artifice/world/generation/Room.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="29" column="26" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
+              <caret line="45" column="44" selection-start-line="45" selection-start-column="44" selection-end-line="45" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -103,7 +181,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/underwaterotter/artifice/scenes/MenuScene.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="32" column="29" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="29" />
+              <caret line="64" column="56" selection-start-line="64" selection-start-column="56" selection-end-line="64" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -1490,7 +1568,6 @@
     <panes>
       <pane id="Scratches" />
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane" />
       <pane id="AndroidView">
         <subPane>
@@ -1500,8 +1577,73 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Artifice" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Artifice" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Artifice" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="underwaterotter" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Artifice" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="underwaterotter" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="artifice" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1510,6 +1652,8 @@
     <property name="device.picker.selection" value="Nexus_4_API_23" />
     <property name="recentsLimit" value="5" />
     <property name="FullScreen" value="false" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="Nexus_5_API_23_x86" />
   </component>
   <component name="RunManager" selected="Android Application.Artifice">
     <configuration default="false" name="Artifice" type="AndroidRunConfigurationType" factoryName="Android Application" temporary="true">
@@ -1721,7 +1865,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="24" width="1366" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1744,9 +1888,9 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14545454" sideWeight="0.49335548" order="3" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962137" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32956383" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962137" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2080,14 +2224,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/underwaterotter/artifice/scenes/MenuScene.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="29" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/underwaterotter/artifice/world/TestLevel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14808363">
@@ -2138,6 +2274,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/underwaterotter/artifice/scenes/MenuScene.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="64" column="56" selection-start-line="64" selection-start-column="56" selection-end-line="64" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/underwaterotter/artifice/Artifice.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2149,7 +2293,7 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/underwaterotter/artifice/world/generation/Room.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="26" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
+          <caret line="45" column="44" selection-start-line="45" selection-start-column="44" selection-end-line="45" selection-end-column="44" />
           <folding />
         </state>
       </provider>
@@ -2157,25 +2301,25 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/underwaterotter/artifice/world/generation/Painter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="25" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
+          <caret line="26" column="47" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/underwaterotter/artifice/world/generation/World.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/underwaterotter/artifice/world/generation/Seed.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+          <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/underwaterotter/artifice/world/generation/Seed.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/underwaterotter/artifice/world/generation/World.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.58573854">
-          <caret line="26" column="71" selection-start-line="26" selection-start-column="71" selection-end-line="26" selection-end-column="71" />
+        <state vertical-scroll-proportion="0.6876061">
+          <caret line="39" column="63" selection-start-line="39" selection-start-column="63" selection-end-line="39" selection-end-column="63" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

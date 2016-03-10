@@ -22,11 +22,9 @@ public class Painter {
     }
 
     public static void fillRect(int[] map, int terrain, int width, int height){
-        int levelWidth = Artifice.level.mapSize_W;
         for(int cy = 0; cy < height; cy++){
-            for(int cx = cell + (cy * levelWidth); cx < cell + (cy * levelWidth) + width; cx++){
-               map[cell] = terrain;
-            }
+            Arrays.fill(map, cell, cell + width, terrain);
+            cell += Math.sqrt(map.length) * cy;
         }
     }
 }
