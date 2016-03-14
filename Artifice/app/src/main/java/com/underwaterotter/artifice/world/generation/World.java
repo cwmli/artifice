@@ -18,7 +18,8 @@ public class World {
         int rooms = 0;
         int roomLimit = Magic.randRange(Artifice.depth * 10 - 3, Artifice.depth * 10 + 3);
 
-        int growthFactor = Artifice.level.mapSideLength / Seed.MIN_SIDE_LENGTH;
+        int enlargeW = Artifice.level.mapSizeW / Seed.MIN_SIDE_LENGTH;
+        int enlargeH = Artifice.level.mapSizeH / Seed.MIN_SIDE_LENGTH;
 
         //build base
         if(Artifice.level.isUnderground){
@@ -35,8 +36,8 @@ public class World {
 
             Painter.fill(map, Terrain.DEEP_WATER);
 
-            for(int cells = 0; cells < seedBase.size(); cells++){
-                Painter.setCell(seedBase.get(cells) + );
+            for(int seedValue = 0; seedValue < seedBase.size(); seedValue++){
+                Painter.setCell(seedBase.get(seedValue) + );
                 //shift the original positions to growth factor
             }
 

@@ -23,19 +23,18 @@ public abstract class Level implements Storable {
 
     public static boolean overworldGenerated = false;
 
-    public int mapSize_W = 64;
-    public int mapSize_H = 64;
-    public int mapSideLength = (int)Math.sqrt(mapSize_W); //always a square map
+    public int mapSizeW = 64;
+    public int mapSizeH = 64;
 
-    public int mapLength = mapSize_W * mapSize_H;
+    public int mapLength = mapSizeW * mapSizeH;
 
     //Surrounding cells index
     //0 1 2
     //3 C 4
     //5 6 7
-    public int[] SURROUNDING_CELLS = {-mapSize_W - 1, -mapSize_W, -mapSize_W + 1,
+    public int[] SURROUNDING_CELLS = {-mapSizeW - 1, -mapSizeW, -mapSizeW + 1,
                                              -1, + 1,
-                                             mapSize_W - 1, mapSize_W, mapSize_W + 1 };
+                                             mapSizeW - 1, mapSizeW, mapSizeW + 1 };
 
     public boolean isUnderground = false;
 
