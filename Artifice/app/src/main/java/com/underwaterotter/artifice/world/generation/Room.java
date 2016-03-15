@@ -23,18 +23,18 @@ public class Room extends Painter{
                     map[pos + selection_w] = Terrain.WOOD_DOOR;
                     break;
                 case 2:
-                    map[pos + (Artifice.level.mapSize_W * selection_h) + w - 1] = Terrain.WOOD_DOOR;
+                    map[pos + (Artifice.level.mapSizeW * selection_h) + w - 1] = Terrain.WOOD_DOOR;
                     break;
                 case 3:
-                    map[pos + (Artifice.level.mapSize_W * (h - 1)) + selection_w] = Terrain.WOOD_DOOR;
+                    map[pos + (Artifice.level.mapSizeW * (h - 1)) + selection_w] = Terrain.WOOD_DOOR;
                     break;
                 case 4:
-                    map[pos + (Artifice.level.mapSize_W * selection_h)] = Terrain.WOOD_DOOR;
+                    map[pos + (Artifice.level.mapSizeW * selection_h)] = Terrain.WOOD_DOOR;
                     break;
             }
         }
 
-        setCell(pos + Artifice.level.mapSize_W + 1);
+        setCell(pos + Artifice.level.mapSizeW + 1);
         fillRect(map, Terrain.DUNGEON_FLOOR, w - 1, h - 1);
         //check for doors or open chambers
     }

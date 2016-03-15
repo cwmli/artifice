@@ -11,7 +11,7 @@ public class WorldTilemap extends Tilemap {
 
     public WorldTilemap(){
         super(Artifice.level.tiles(), CELL_SIZE_W, CELL_SIZE_H);
-        readMapData(Artifice.level.map, Artifice.level.mapSize_W);
+        readMapData(Artifice.level.map, Artifice.level.mapSizeW);
     }
 
     //draw a "lightened" colored tile texture over the existing tilemap

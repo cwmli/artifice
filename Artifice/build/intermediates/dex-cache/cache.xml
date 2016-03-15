@@ -2,32 +2,32 @@
 <items version="2" >
 
     <item
-        jar="/home/calvin/Documents/artifice/Artifice/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/jars/classes.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
-        <dex dex="/home/calvin/Documents/artifice/Artifice/app/build/intermediates/pre-dexed/debug/classes-521b5d5e0329c3d1a78e1169783766a52b0f3575.jar" />
-    </item>
-    <item
-        jar="/home/calvin/Documents/artifice/Artifice/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/libs/internal_impl-22.2.0.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
-        <dex dex="/home/calvin/Documents/artifice/Artifice/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-0e0aeac68af842f87b3c446716432bb011ba69ee.jar" />
-    </item>
-    <item
-        jar="/home/calvin/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.0/support-annotations-22.2.0.jar"
-        jumboMode="false"
-        revision="23.0.0"
-        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
-        <dex dex="/home/calvin/Documents/artifice/Artifice/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-a67156fe19bb6c54ea52e8fbedd03a60e7a3d3db.jar" />
-    </item>
-    <item
-        jar="/home/calvin/Documents/artifice/Artifice/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/classes.jar"
+        jar="C:\Users\Calvin\Documents\GitHub\artifice\Artifice\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.0"
         sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
-        <dex dex="/home/calvin/Documents/artifice/Artifice/app/build/intermediates/pre-dexed/debug/classes-c7754454d2fcd64a144fd33de9be2c656c20f54f.jar" />
+        <dex dex="C:\Users\Calvin\Documents\GitHub\artifice\Artifice\app\build\intermediates\pre-dexed\debug\classes-b03998a2c37486de3cee671904c9e8620e056e70.jar" />
+    </item>
+    <item
+        jar="C:\Users\Calvin\Documents\GitHub\artifice\Artifice\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
+        <dex dex="C:\Users\Calvin\Documents\GitHub\artifice\Artifice\app\build\intermediates\pre-dexed\debug\classes-9369e01f81d7bf1339ce5ed175b5fe7342059dcf.jar" />
+    </item>
+    <item
+        jar="C:\Users\Calvin\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.0\support-annotations-22.2.0.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
+        <dex dex="C:\Users\Calvin\Documents\GitHub\artifice\Artifice\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.0-5c03e9166c11029e48974a2e24c909328ee94db9.jar" />
+    </item>
+    <item
+        jar="C:\Users\Calvin\Documents\GitHub\artifice\Artifice\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.0\jars\libs\internal_impl-22.2.0.jar"
+        jumboMode="false"
+        revision="23.0.0"
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="C:\Users\Calvin\Documents\GitHub\artifice\Artifice\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.0-77e04151c7b2a914f5869cb08a41a32ce2021256.jar" />
     </item>
 
 </items>
