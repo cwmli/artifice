@@ -2,39 +2,54 @@ package com.underwaterotter.artifice.world;
 
 public class Terrain {
 
-    public static final int AIR = 0;
+    public static final int WATER = 27;
+    public static final int DEEP_WATER = 28;
 
-    public static final int GRASS = 1;
-    public static final int TALL_GRASS = 2;
+    //S = solid, E = edge, C = corner, T = top, D = diagonal
 
-    public static final int DIRT_WALL = 15;
-    public static final int STONE_WALL = 16;
-    public static final int DUNGEON_WALL = 17;
-    public static final int DUNGEON_FLOOR = 18;
+    public static final int SGRASS_1 = 0;
+    public static final int EGRASS_1 = 1;
+    public static final int CGRASS_1 = 2;
+    public static final int TGRASS_1 = 3;
+    public static final int D1GRASS_1 = 4;
+    public static final int D2GRASS_1 = 5;
 
-    public static final int WATER = 50;
-    public static final int DEEP_WATER = 51;
-    public static final int LAVA = 52;
+    public static final int SGRASS_2 = 6;
+    public static final int EGRASS_2 = 7;
+    public static final int CGRASS_2 = 8;
+    public static final int TGRASS_2 = 9;
+    public static final int D1GRASS_2 = 10;
+    public static final int D2GRASS_2 = 11;
 
-    public static final int TRAP_1 = 21;
-    public static final int TRAP_2 = 22;
-    public static final int TRAP_3 = 23;
-    public static final int TRAP_4 = 24;
-    public static final int TRAP_5 = 25;
+    public static final int SGRASS_3 = 12;
+    public static final int EGRASS_3 = 13;
+    public static final int CGRASS_3 = 14;
+    public static final int TGRASS_3 = 15;
+    public static final int D1GRASS_3 = 16;
+    public static final int D2GRASS_3 = 17;
 
-    public static final int WOOD_DOOR = 26;
-    public static final int STONE_DOOR = 27;
-    public static final int IRON_DOOR = 28;
+    public static final int ROCK_1 = 18;
+    public static final int ROCK_2 = 19;
+    public static final int ROCK_3 = 20;
 
-    //Decorations
-    //Fauna
-    public static final int TREE = 100;
-    public static final int THICK_TREE = 101;
-    public static final int BUSH = 102;
-    public static final int THICK_BUSH = 103;
-    public static final int STONE = 104;
-    public static final int LARGE_STONE = 105;
-    public static final int LARGE_STONE_C = 106;
+    public static final int STUMP_1 = 21;
+    public static final int STUMP_2 = 22;
+    public static final int STUMP_3 = 23;
+
+    public static final int TALL_GRASS_1 = 24;
+    public static final int TALL_GRASS_2 = 25;
+    public static final int FLOWER = 26;
+
+    public static final int DUNGEON_FLOOR = 100;
+    public static final int DUNGEON_WALL = 101;
+    public static final int WOOD_DOOR = 102;
+    public static final int TREE = 103;
+    public static final int THICK_TREE = 104;
+    public static final int BUSH = 105;
+    public static final int THICK_BUSH = 106;
+    public static final int STONE = 107;
+    public static final int LARGE_STONE = 108;
+    public static final int LARGE_STONE_C = 109;
 
 
     //Flag Bitmasks
@@ -48,8 +63,8 @@ public class Terrain {
 
     public static final int[] flags = new int[512];
     static {
-        flags[GRASS] = PASSABLE | FLAMMABLE;
-        flags[TALL_GRASS] = flags[GRASS];
+        flags[SGRASS_1] = PASSABLE | FLAMMABLE;
+        flags[EGRASS_1] = flags[CGRASS_1] = flags[TGRASS_1] = flags[D1GRASS_1] =  flags[SGRASS_1] = flags[D2GRASS_1] = flags[SGRASS_1];
         flags[WATER] = PASSABLE | LIQUID;
         flags[DEEP_WATER] = flags[WATER];
         flags[TREE] = PASSABLE | FLAMMABLE;

@@ -41,13 +41,10 @@ public class Artifice extends Game {
     public static void switchLevel(Level slevel){
 
         if(level != null){
-            GameScene.scene.destroy();
             level.destroy();
         }
 
         level = slevel;
-        GameScene.scene = new GameScene();
-        GameScene.scene.create();
     }
 
     public static void checkImmersiveMode(){

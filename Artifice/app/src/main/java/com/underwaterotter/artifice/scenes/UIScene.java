@@ -110,6 +110,4 @@ public class UIScene extends Scene{
 
         return text;
     }
-
-
 }

@@ -4,14 +4,26 @@ import com.underwaterotter.ceto.Image;
 import com.underwaterotter.ceto.Tilemap;
 import com.underwaterotter.math.Vector3;
 
+import java.util.Arrays;
+
 public class WorldTilemap extends Tilemap {
 
-    public static final int CELL_SIZE_W = 32;
-    public static final int CELL_SIZE_H = 32;
+    public static final int CELL_SIZE_W = 16;
+    public static final int CELL_SIZE_H = 16;
+
+    private static int[] oldmap;
 
     public WorldTilemap(){
         super(Artifice.level.tiles(), CELL_SIZE_W, CELL_SIZE_H);
+        oldmap = Artifice.level.map.clone();
         readMapData(Artifice.level.map, Artifice.level.mapSizeW);
+    }
+
+    public void update(){
+        if(!Arrays.equals(Artifice.level.map, oldmap)){
+            readMapData(Artifice.level.map, Artifice.level.mapSizeW);
+            oldmap = Artifice.level.map.clone();
+        }
     }
 
     //draw a "lightened" colored tile texture over the existing tilemap

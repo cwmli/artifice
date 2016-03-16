@@ -43,17 +43,17 @@ public class TextureAtlas {
                     cells.put(
                             ids[r * cols + c],
                             texture.stRect(c * cellWidth,
-                                    texture.height - r * cellHeight - cellHeight,
+                                    r * cellHeight,
                                     c * cellWidth + cellWidth,
-                                    texture.height - r * cellHeight)
+                                    r * cellHeight + cellHeight)
                     );
                 } else {
                     cells.put(
                             r * cols + c,
                             texture.stRect(c * cellWidth,
-                                    texture.height - r * cellHeight - cellHeight,
+                                    r * cellHeight,
                                     c * cellWidth + cellWidth,
-                                    texture.height - r * cellHeight)
+                                    r * cellHeight + cellHeight)
                     );
                 }
             }
