@@ -59,9 +59,9 @@ public class Tilemap extends Overlay {
 
     protected void updateAllVertices(){
 
-        for(int x = 0; x < mapCellsW; x++){
+        for(int y = 0; y < mapCellsH; y++){
 
-            for(int y = 0; y < mapCellsH; y++){
+            for(int x = 0; x < mapCellsW; x++){
 
                 //update regular vertices
                 vertices[0] = x * cellW;
@@ -79,7 +79,7 @@ public class Tilemap extends Overlay {
                 vertexBuffer.put(vertices);
 
                 //retrieve texture id and return a rect
-                RectF tileRect = src.get(mapData[x * y + x]);
+                RectF tileRect = src.get(mapData[y * mapCellsW + x]);
                 //now update texture vertices
                 stVertices[0] = tileRect.left;
                 stVertices[1] = tileRect.top;

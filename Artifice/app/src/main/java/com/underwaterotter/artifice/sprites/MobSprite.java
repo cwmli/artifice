@@ -20,6 +20,7 @@ public class MobSprite extends Sprite {
     public MobSprite(Object id){
         super(id);
 
+        setAnimations();
         hitbox = new RectF();
     }
 
@@ -82,4 +83,6 @@ public class MobSprite extends Sprite {
                 break;
         }
     }
+
+    protected void setAnimations(){}
 }

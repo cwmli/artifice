@@ -57,6 +57,8 @@ public abstract class Mob extends Entity implements Storable {
     enum Status{ BLEEDING, FIRE, FROZEN, SHOCK, WET }
 
     public Mob(){
+        super();
+
         status = new HashSet<Status>();
         buffs = new HashSet<Buff>();
 

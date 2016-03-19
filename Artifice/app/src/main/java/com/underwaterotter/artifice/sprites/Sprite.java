@@ -20,6 +20,8 @@ public class Sprite extends Player {
     public void update(){
         super.update();
 
+        hitbox.set(pos.x, pos.y, pos.x + width, pos.y + height);
+
         updateDirection();
     }
 

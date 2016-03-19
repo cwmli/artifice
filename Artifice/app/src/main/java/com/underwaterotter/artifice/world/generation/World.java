@@ -32,11 +32,11 @@ public class World {
                 //as the rooms approaches roomLimit, the chance of exitRoom increases
             } while(rooms < roomLimit);
         } else if(!Artifice.level.overworldGenerated) { //build the overworld if it has not been generated
-            //ArrayList<int[]> seedBase = Seed.initBase();
+            ArrayList<int[]> seedBase = Seed.initBase();
 
 
             Painter.fill(map, Terrain.DEEP_WATER);
-            /*
+
             for(int[] seedXY : seedBase){
 		        //do water border
                 Painter.setCell((seedXY[0] + enlargeW + SPACING) + ((seedXY[1] + enlargeH + SPACING) * Artifice.level.mapSizeW ));
@@ -44,8 +44,8 @@ public class World {
 
                 Painter.setCell((seedXY[0] + enlargeW) + ((seedXY[1] + enlargeH) * Artifice.level.mapSizeW ));
 		        Painter.fillRect(map, Terrain.SGRASS_1, enlargeW, enlargeH);
-            }*/
-            Artifice.level.map = Seed.initBase();
+            }
+            //Artifice.level.map = Seed.initBase();
 
             Artifice.level.overworldGenerated = true;
         }

@@ -1,5 +1,7 @@
 package com.underwaterotter.artifice;
 
+import android.util.Log;
+
 import com.underwaterotter.ceto.Image;
 import com.underwaterotter.ceto.ui.CirclePad;
 import com.underwaterotter.cetoinput.Motions;
@@ -29,16 +31,18 @@ public class Joystick extends CirclePad {
     public Joystick(float screen_x, float screen_y){
         super(screen_x, screen_y, (32f / UIScene.uiCamera.zoom));
 
-        joystick = new Image(new Vector3(screen_x, screen_y, 0),
-                Assets.JOY);
-
-        nob = new Image(new Vector3(screen_x + (16 / UIScene.uiCamera.zoom), screen_y + (16 / UIScene.uiCamera.zoom), 0),
-                Assets.JOY_NOB);
+        resize(32);
     }
 
     @Override
     public void createContent(){
         super.createContent();
+
+        joystick = new Image(new Vector3(x, y, 0),
+                Assets.JOY);
+
+        nob = new Image(new Vector3(x + (16 / UIScene.uiCamera.zoom), y + (16 / UIScene.uiCamera.zoom), 0),
+                Assets.JOY_NOB);
 
         add(joystick);
         add(nob);

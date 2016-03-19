@@ -17,6 +17,10 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Build Intermediates
+build/
+taskArtifacts/
+
 # =========================
 # Operating System Files
 # =========================

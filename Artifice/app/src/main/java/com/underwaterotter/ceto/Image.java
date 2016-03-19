@@ -27,7 +27,7 @@ public class Image extends Overlay {
     public Image(){
         super();
 
-        texRect = new RectF(0, 0, 1, 1);
+        texRect = new RectF(0, 1, 1, 0);
 
         vertices = new float[8];
         stVertices = new float[8];
@@ -49,6 +49,7 @@ public class Image extends Overlay {
     public Image(Vector3 pos, Object bitmap){
         this();
 
+        position(pos);
         texture = bitmap instanceof ModelTexture ? (ModelTexture)bitmap : TextureCache.get((String)bitmap);
         texRect = texture.stRect(0, 1, 1, 0);
     }

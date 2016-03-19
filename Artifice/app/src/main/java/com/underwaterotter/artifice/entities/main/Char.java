@@ -5,22 +5,27 @@ import android.graphics.RectF;
 import com.underwaterotter.artifice.entities.Mob;
 import com.underwaterotter.artifice.sprites.MobSprite;
 import com.underwaterotter.artifice.world.Assets;
+import com.underwaterotter.ceto.Animation;
+import com.underwaterotter.ceto.Camera;
+import com.underwaterotter.math.Vector3;
 
 import java.util.ArrayList;
 
 public class Char extends Mob {
 
-    public static final int SIZE_W = 32;
-    public static final int SIZE_H = 64;
+    public static final int SIZE_W = 16;
+    public static final int SIZE_H = 16;
 
     public String currentAction;
 
     public Char(){
+        super();
 
         name = "player";
         max_hp = 100;
         hp = 100;
         def = 0;
+        worldPosition(new Vector3(0,0,0));
         //the player can see everything in the room/screen if in open area
         agroRadius = -1;
 
@@ -31,16 +36,28 @@ public class Char extends Mob {
         actions.add("use");
         actions.add("climb");
 
-        sprite = new MobSprite(Assets.HERO);
-        sprite.setMob(this);
+        sprite = new MobSprite(Assets.HERO){
+            @Override
+            public void setMob(Mob mob){
+                super.setMob(mob);
+                width = SIZE_W;
+                height = SIZE_H;
+            }
 
-        sprite.idle.setFrames(new RectF());
+            @Override
+            protected void setAnimations(){
+                idle = new Animation(30, true);
+                idle.setFrames(new RectF(0, 1, 1, 0));
+            }
+        };
+        sprite.setMob(this);
     }
 
     @Override
     public void update(){
         super.update();
 
+        Camera.main.setFocusPoint(worldPosition.x, worldPosition.y);
         checkCollision();
         parseAction();
     }

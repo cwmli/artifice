@@ -3,11 +3,8 @@ package com.underwaterotter.artifice.scenes;
 import android.util.Log;
 
 import com.underwaterotter.artifice.Artifice;
+import com.underwaterotter.artifice.Joystick;
 import com.underwaterotter.artifice.world.Assets;
-import com.underwaterotter.artifice.world.Terrain;
-import com.underwaterotter.artifice.world.generation.Painter;
-import com.underwaterotter.artifice.world.generation.Seed;
-import com.underwaterotter.ceto.Camera;
 import com.underwaterotter.ceto.Group;
 import com.underwaterotter.artifice.WorldTilemap;
 import com.underwaterotter.artifice.entities.Mob;
@@ -18,6 +15,7 @@ import com.underwaterotter.artifice.sprites.MobSprite;
 import com.underwaterotter.ceto.Image;
 import com.underwaterotter.ceto.Text;
 import com.underwaterotter.ceto.ui.Button;
+import com.underwaterotter.math.Vector3;
 
 public class GameScene extends UIScene {
 
@@ -26,6 +24,8 @@ public class GameScene extends UIScene {
     public WorldTilemap tilemap;
 
     public Char player;
+
+    private Group ui;
 
     private Group world;
     private Group liquid;
@@ -38,6 +38,7 @@ public class GameScene extends UIScene {
     public void create(){
         super.create();
         //debugging stuff
+        /*
         DebugButton regenerate = new DebugButton("Regen"){
             public void onClick(){
                 Painter.fill(Artifice.level.map, Terrain.DEEP_WATER);
@@ -45,16 +46,21 @@ public class GameScene extends UIScene {
             }
         };
         regenerate.position(180, 0);
-        add(regenerate);
+        add(regenerate);*/
 
         //pre-init level setup
         if(Artifice.depth < 0){
             Artifice.level.isUnderground = true;
         }
-
         Artifice.level.init();
 
         tilemap = new WorldTilemap();
+        Char player = new Char();
+        Artifice.level.mm.add(player);
+
+        ui = new Group();
+        ui.add(new Joystick());
+        add(ui);
 
         world = new Group();
         add(world);

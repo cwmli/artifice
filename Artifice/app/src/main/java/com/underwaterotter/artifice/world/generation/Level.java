@@ -22,12 +22,12 @@ public abstract class Level implements Storable {
     public static final String HIDDEN = "hidden";
 
     public static boolean overworldGenerated = false;
-    /*
-    public int mapSizeW = 64;
-    public int mapSizeH = 64;*/
 
-    public int mapSizeW = 10;
-    public int mapSizeH = 10;
+    public int mapSizeW = 64;
+    public int mapSizeH = 64;
+
+    //public int mapSizeW = 10;
+    //public int mapSizeH = 10;
 
     public int mapLength = mapSizeW * mapSizeH;
 
