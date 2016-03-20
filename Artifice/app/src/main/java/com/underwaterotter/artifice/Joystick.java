@@ -1,5 +1,6 @@
 package com.underwaterotter.artifice;
 
+import android.graphics.Color;
 import android.util.Log;
 
 import com.underwaterotter.ceto.Image;
@@ -9,6 +10,7 @@ import com.underwaterotter.artifice.entities.main.CharController;
 import com.underwaterotter.artifice.scenes.GameScene;
 import com.underwaterotter.artifice.scenes.UIScene;
 import com.underwaterotter.artifice.world.Assets;
+import com.underwaterotter.glesutils.TextureCache;
 import com.underwaterotter.math.Vector2;
 import com.underwaterotter.math.Vector3;
 
@@ -42,7 +44,7 @@ public class Joystick extends CirclePad {
                 Assets.JOY);
 
         nob = new Image(new Vector3(x + (16 / UIScene.uiCamera.zoom), y + (16 / UIScene.uiCamera.zoom), 0),
-                Assets.JOY_NOB);
+                TextureCache.createCircle(16, Color.GRAY, true));
 
         add(joystick);
         add(nob);

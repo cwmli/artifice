@@ -51,14 +51,14 @@ public class TextureCache {
         }
     }
 
-    public static ModelTexture createPolygon(int w, int h, int color, boolean fill){
+    public static ModelTexture createRect(int w, int h, int color, boolean fill){
         Bitmap bmp = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
 
         Paint paint = new Paint();
         Canvas canvas = new Canvas(bmp);
 
         paint.setColor(color);
-        paint.setStrokeWidth(3);
+        paint.setStrokeWidth(0);
         if(!fill) {
             paint.setStyle(Paint.Style.STROKE);
         } else {
@@ -66,6 +66,25 @@ public class TextureCache {
         }
 
         canvas.drawRect(0, 0, w, h, paint);
+
+        return new ModelTexture(bmp);
+    }
+
+    public static ModelTexture createCircle(int r, int color, boolean fill){
+        Bitmap bmp = Bitmap.createBitmap(r * 2, r * 2, Bitmap.Config.ARGB_8888);
+
+        Paint paint = new Paint();
+        Canvas canvas = new Canvas(bmp);
+
+        paint.setColor(color);
+        paint.setStrokeWidth(0);
+        if(!fill) {
+            paint.setStyle(Paint.Style.STROKE);
+        } else {
+            paint.setStyle(Paint.Style.FILL);
+        }
+
+        canvas.drawCircle(r, r, r, paint);
 
         return new ModelTexture(bmp);
     }
