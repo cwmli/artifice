@@ -1,6 +1,5 @@
 package com.underwaterotter.ceto.ui;
 
-import com.underwaterotter.cetoinput.Motions;
 
 public class Toggle extends Button {
 

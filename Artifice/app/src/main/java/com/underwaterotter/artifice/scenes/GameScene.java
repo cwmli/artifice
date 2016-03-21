@@ -5,6 +5,9 @@ import android.util.Log;
 import com.underwaterotter.artifice.Artifice;
 import com.underwaterotter.artifice.Joystick;
 import com.underwaterotter.artifice.world.Assets;
+import com.underwaterotter.artifice.world.Terrain;
+import com.underwaterotter.artifice.world.generation.Painter;
+import com.underwaterotter.artifice.world.generation.Seed;
 import com.underwaterotter.ceto.Group;
 import com.underwaterotter.artifice.WorldTilemap;
 import com.underwaterotter.artifice.entities.Mob;
@@ -25,8 +28,6 @@ public class GameScene extends UIScene {
 
     public Char player;
 
-    private Group ui;
-
     private Group world;
     private Group liquid;
     private Group weather;
@@ -38,15 +39,16 @@ public class GameScene extends UIScene {
     public void create(){
         super.create();
         //debugging stuff
-        /*
-        DebugButton regenerate = new DebugButton("Regen"){
+
+        DebugButton regenerate = new DebugButton("Regen"){/*
             public void onClick(){
                 Painter.fill(Artifice.level.map, Terrain.DEEP_WATER);
                 Artifice.level.map = Seed.initBase();
-            }
+            }*/
         };
         regenerate.position(180, 0);
-        add(regenerate);*/
+        regenerate.camera = uiCamera;
+        add(regenerate);
 
         //pre-init level setup
         if(Artifice.depth < 0){
@@ -55,12 +57,14 @@ public class GameScene extends UIScene {
         Artifice.level.init();
 
         tilemap = new WorldTilemap();
-        Char player = new Char();
+        player = new Char();
         Artifice.level.mm.add(player);
 
-        ui = new Group();
-        ui.add(new Joystick());
-        add(ui);
+        Joystick joy = new Joystick();
+        joy.camera = uiCamera;
+        joy.position(Artifice.settings.getInt(Joystick.JOY_X, 10),
+                Artifice.settings.getInt(Joystick.JOY_Y, 130));
+        add(joy);
 
         world = new Group();
         add(world);
@@ -108,24 +112,19 @@ public class GameScene extends UIScene {
     public synchronized void update(){
         super.update();
 
-
-
         mobs.update();
-
         items.update();
     }
 
     public void addMob(Mob mob){
-        MobSprite s = mob.sprite;
-        s.visible = s.isVisible();
         mobs.add(mob);
-        s.setMob(mob);
+        mob.sprite.visible = mob.isVisible();
+        mob.sprite.setMob(mob);
     }
 
     public void addItem(Item item){
-        ItemSprite s = item.sprite;
-        s.visible = s.isVisible();
         items.add(item);
+        item.sprite.visible = item.isVisible();
     }
 
     public static void add(Mob mob){

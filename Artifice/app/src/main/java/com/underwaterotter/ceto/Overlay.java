@@ -95,7 +95,6 @@ public class Overlay extends Article {
     public boolean screenPointOverlap(int x, int y){
         Camera camera = camera();
         Vector2 converted = camera.screenToCamera(x, y);
-        Log.v("POINTER_INFO", "Virtual screen point: " + converted.x + ", " + converted.y);
         return pointOverlap((int)converted.x, (int)converted.y);
     }
 

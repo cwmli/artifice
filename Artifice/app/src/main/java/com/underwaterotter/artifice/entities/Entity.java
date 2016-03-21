@@ -1,11 +1,11 @@
 package com.underwaterotter.artifice.entities;
 
-import com.underwaterotter.ceto.Article;
+import com.underwaterotter.ceto.Group;
 import com.underwaterotter.math.Vector3;
 import com.underwaterotter.utils.Block;
 import com.underwaterotter.utils.Storable;
 
-public class Entity extends Article implements Storable {
+public class Entity extends Group implements Storable {
 
     public static String ID = "id";
     public static String TIMER = "timer";

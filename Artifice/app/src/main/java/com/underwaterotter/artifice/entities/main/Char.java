@@ -25,6 +25,7 @@ public class Char extends Mob {
         max_hp = 100;
         hp = 100;
         def = 0;
+        currentAction = "none";
         worldPosition(new Vector3(0,0,0));
         //the player can see everything in the room/screen if in open area
         agroRadius = -1;
@@ -51,6 +52,7 @@ public class Char extends Mob {
             }
         };
         sprite.setMob(this);
+        add(sprite);
     }
 
     @Override

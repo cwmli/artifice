@@ -1,26 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" >
+<items version="2" />
 
-    <item
-        jar="C:\Users\Calvin\Documents\GitHub\artifice\Artifice\app\build\intermediates\transforms\instantRunSlicer\debug\jars\1\5\main_sliceb.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="ce5400ca91d2fd629451dbcf01f1713ad2c68d6a">
-        <dex dex="C:\Users\Calvin\Documents\GitHub\artifice\Artifice\app\build\intermediates\transforms\dex\debug\folders\1000\5\main_sliceb_c2305ef08efa4188b89511f898ddfcabab99eb21\classes.dex" />
-    </item>
-    <item
-        jar="C:\Users\Calvin\Documents\GitHub\artifice\Artifice\app\build\intermediates\transforms\instantRunSlicer\debug\jars\1\5\main_slice.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="d7054853282a5cc860b792c5b7f4b431026896cf">
-        <dex dex="C:\Users\Calvin\Documents\GitHub\artifice\Artifice\app\build\intermediates\transforms\dex\debug\folders\1000\5\main_slice_3f89f925181c808debca39508b8f54de54db3015\classes.dex" />
-    </item>
-    <item
-        jar="C:\Users\Calvin\Documents\GitHub\artifice\Artifice\app\build\intermediates\transforms\instantRunSlicer\debug\jars\1\1a\dependencies.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="05d01f9097c9f45a26cff4a93ce28ea4e3ec0c49">
-        <dex dex="C:\Users\Calvin\Documents\GitHub\artifice\Artifice\app\build\intermediates\transforms\dex\debug\folders\1000\1a\dependencies_63efca977f008a75a7d488b2e88e58cbaa02da2d\classes.dex" />
-    </item>
-
-</items>

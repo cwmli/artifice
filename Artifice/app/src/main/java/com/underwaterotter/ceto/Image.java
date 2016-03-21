@@ -51,7 +51,7 @@ public class Image extends Overlay {
 
         position(pos);
         texture = bitmap instanceof ModelTexture ? (ModelTexture)bitmap : TextureCache.get((String)bitmap);
-        texRect = texture.stRect(0, 1, 1, 0);
+        textureRect(texture.stRect(0, texture.height, texture.width, 0));
     }
 
     public void copy(Image img){

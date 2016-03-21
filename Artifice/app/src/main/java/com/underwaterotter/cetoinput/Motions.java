@@ -1,7 +1,10 @@
 package com.underwaterotter.cetoinput;
 
+import android.util.Log;
 import android.view.MotionEvent;
 
+import com.underwaterotter.artifice.scenes.GameScene;
+import com.underwaterotter.ceto.Camera;
 import com.underwaterotter.math.Vector2;
 import com.underwaterotter.utils.Listener;
 
@@ -23,6 +26,9 @@ public class Motions {
         for(MotionEvent e : events){
 
             int latest_index = e.getActionIndex();
+
+            Vector2 converted = GameScene.uiCamera.screenToCamera((int)e.getX(), (int)e.getY());
+            Log.v("POINTER_INFO", "Virtual screen point: " + converted.x + ", " + converted.y);
 
             switch (e.getActionMasked()){
                 case MotionEvent.ACTION_DOWN:
