@@ -79,10 +79,10 @@ public class Overlay extends Article {
     @Override
     public boolean isVisible(){
         //check if overlay bounds intersect with those of the camera
-        Camera main = camera();
+        Camera camera = camera();
 
-        return  pos.x + width() >= main.distanceToFocus.x && pos.x <= main.distanceToFocus.x + main.viewWidth &&
-                pos.y + height() >= main.distanceToFocus.y && pos.y <= main.distanceToFocus.y + main.viewHeight;
+        return  pos.x + width() >= camera.distanceToFocus.x && pos.x <= camera.distanceToFocus.x + camera.viewWidth &&
+                pos.y + height() >= camera.distanceToFocus.y && pos.y <= camera.distanceToFocus.y + camera.viewHeight;
     }
 
     //check if a point IN WORLD overlaps this overlay object

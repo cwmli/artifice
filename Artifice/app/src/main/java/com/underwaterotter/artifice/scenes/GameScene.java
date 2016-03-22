@@ -98,6 +98,8 @@ public class GameScene extends UIScene {
 
         pouches = new Group();
         add(pouches);
+
+        scene = this;
     }
 
     @Override

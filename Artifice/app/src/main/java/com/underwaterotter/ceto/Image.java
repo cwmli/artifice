@@ -27,7 +27,7 @@ public class Image extends Overlay {
     public Image(){
         super();
 
-        texRect = new RectF(0, 1, 1, 0);
+        texRect = new RectF(0, 0, 1, 1);
 
         vertices = new float[8];
         stVertices = new float[8];
@@ -51,7 +51,15 @@ public class Image extends Overlay {
 
         position(pos);
         texture = bitmap instanceof ModelTexture ? (ModelTexture)bitmap : TextureCache.get((String)bitmap);
-        textureRect(texture.stRect(0, texture.height, texture.width, 0));
+        textureRect(texture.stRect(0, 0, texture.width, texture.height));
+    }
+
+    @Override
+    public void update(){
+        super.update();
+
+        updateSTVertices();
+        updateVertices();
     }
 
     public void copy(Image img){

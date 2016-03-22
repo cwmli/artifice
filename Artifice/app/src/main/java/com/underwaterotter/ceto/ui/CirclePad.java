@@ -17,7 +17,7 @@ public abstract class CirclePad extends HotCircle {
         hitZone = new TouchBox(x, y, radius * 2, radius * 2){
 
             @Override
-            public boolean screenPointOverlap(int x, int y){
+            public boolean pointOverlap(int x, int y){
 
                 int distance = (int)center().distance(new Vector2(x, y));
                 if(distance * distance <= radius * radius){

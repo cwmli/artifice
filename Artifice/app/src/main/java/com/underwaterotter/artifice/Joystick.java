@@ -1,12 +1,12 @@
 package com.underwaterotter.artifice;
 
 import android.graphics.Color;
+import android.util.Log;
 
 import com.underwaterotter.ceto.Image;
 import com.underwaterotter.ceto.ui.CirclePad;
 import com.underwaterotter.cetoinput.Motions;
 import com.underwaterotter.artifice.entities.main.CharController;
-import com.underwaterotter.artifice.scenes.GameScene;
 import com.underwaterotter.artifice.world.Assets;
 import com.underwaterotter.glesutils.TextureCache;
 import com.underwaterotter.math.Vector2;
@@ -18,6 +18,7 @@ public class Joystick extends CirclePad {
     public static final String JOY_Y = "joy_y";
 
     public static final int SIZE_R = 16;
+    public static final int SIZE_N = 8;
 
     private Image joystick;
     private Image nob;
@@ -46,91 +47,65 @@ public class Joystick extends CirclePad {
     public void updateHitbox(){
         super.updateHitbox();
 
-        nob.pos.x = x + (SIZE_R / 2) - (nob.width / 2);
-        nob.pos.y = y + (SIZE_R / 2) - (nob.height / 2);
+        nob.pos.x = x + SIZE_R - (nob.width / 2);
+        nob.pos.y = y + SIZE_R - (nob.height / 2);
 
         joystick.pos.x = x;
         joystick.pos.y = y;
     }
 
-    protected Vector2 screenToJoystick(Motions.Point p){
-
-        float y = p.startPos.y;
-        float x = p.startPos.x;
-
-        //localize the vector signs
-        boolean positiveY = y > center().y;
-        //divide the joystick area into quadrants
-        if (x > center().x){
-            if(!positiveY){
-                y *= -1;
-            }
-
-        } else {
-            x *= -1;
-            if(!positiveY){
-                y *= -1;
-            }
-        }
-
-        return new Vector2(x, y);
-    }
-
     public double angle(Motions.Point p){
-        Vector2 center = center();
-        Vector2 touchPoint = screenToJoystick(p);
-        Vector2 refPoint = new Vector2(center.x + x, center.y);
+        Vector2 pos = camera().screenToCamera((int)p.startPos.x, (int)p.startPos.y);
+        pos.set(pos.x - center().x, pos.y - center().y);
+        Vector2 refPoint = new Vector2(SIZE_R, 0);
 
-        double a1 = Math.atan2(refPoint.y - center.y, refPoint.x - center.x);
-        double a2 = Math.atan2(touchPoint.y - center.y, touchPoint.x - center.x);
+        Log.v("JOYSTICK ANGLE", String.valueOf(Math.atan2(pos.dot(refPoint), pos.det(refPoint))));
 
-        return a1 - a2;
+        return Math.atan2(pos.dot(refPoint), pos.det(refPoint));
     }
 
     protected void onLongTouch(Motions.Point p){
-        nob.position(p.startPos.x - 8, p.startPos.y - 8, 0);
 
-        CharController.setVelocity((float)Math.toDegrees(angle(p)));
     }
 
     protected void onTouch(Motions.Point p){
-        nob.position(p.startPos.x - 8,
-                p.startPos.y - 8 , 0);
 
-        CharController.setVelocity((float) Math.toDegrees(angle(p)));
     }
 
     protected void onRelease(Motions.Point p){
         //recenter the nob
         Vector2 lcJoy = position();
-        nob.position(lcJoy.x + (SIZE_R / 2) - (nob.width / 2), lcJoy.y + (SIZE_R / 2) - (nob.height / 2), 0);
+        nob.position(lcJoy.x + SIZE_R - (nob.width / 2), lcJoy.y + SIZE_R - (nob.height / 2), 0);
+
+        Log.v("JOYNOB", "JOYSTICK NOB HAS MOVED.");
 
         initialDrag = false;
 
         CharController.setSpeed(0);
-        CharController.setAction("idle");
+        CharController.setAction("none");
     }
 
     protected void onDragged(Motions.Point p){
+        Vector2 pos = camera().screenToCamera((int)p.endPos.x, (int)p.endPos.y);
         CharController.setVelocity((float) Math.toDegrees(angle(p)));
 
         if(initialDrag) {
 
-            Vector2 dxy = lastPoint.difference(p.endPos);
+            Vector2 dxy = lastPoint.difference(pos);
 
             Vector3 oldPos = nob.position();
             Vector2 result = new Vector2(
-                    oldPos.x + dxy.x,
-                    oldPos.y + dxy.y);
+                    oldPos.x + dxy.x - (SIZE_N / 2),
+                    oldPos.y + dxy.y - (SIZE_N / 2));
 
             if(Math.abs(center().distance(result)) > radius){
-                return;
+                nob.position((int)Math.cos(Math.toDegrees(angle(p))) * SIZE_R + center().x,
+                        (int)Math.sin(Math.toDegrees(angle(p))) * SIZE_R + center().y, 0);
             } else {
                 nob.position(result.x, result.y, 0);
             }
 
-            int speed = Math.round(GameScene.scene.player.speed *
-                    (Math.abs(center().distance(position())) / radius));
+            int speed = 1;
 
             CharController.setSpeed(speed);
 

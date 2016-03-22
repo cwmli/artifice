@@ -50,14 +50,18 @@ public class Vector2 {
     }
 
     public float length(){
-        return (float)Math.sqrt(Math.hypot(x,y));
+        return (float)Math.sqrt(Math.pow(x,2) + Math.pow(y,2));
     }
 
     public Vector2 normalize(){
         return new Vector2( x / length(), y / length());
     }
 
-    public float dot(Vector2 vec2){
+    public double dot(Vector2 vec2){
         return ((x * vec2.x) + (y * vec2.y));
+    }
+
+    public double det(Vector2 vec2) {
+        return x * vec2.y - y * vec2.x;
     }
 }
