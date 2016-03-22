@@ -55,13 +55,14 @@ public class Joystick extends CirclePad {
     }
 
     public double angle(Motions.Point p){
-        Vector2 pos = camera().screenToCamera((int)p.startPos.x, (int)p.startPos.y);
+        Vector2 pos = camera().screenToCamera((int)p.endPos.x, (int)p.endPos.y);
         pos.set(pos.x - center().x, pos.y - center().y);
         Vector2 refPoint = new Vector2(SIZE_R, 0);
 
-        Log.v("JOYSTICK ANGLE", String.valueOf(Math.atan2(pos.dot(refPoint), pos.det(refPoint))));
+        double angle = Math.toDegrees(Math.atan2(refPoint.x, refPoint.y) - Math.atan2(pos.x, pos.y));
+        if (angle < 0) angle += 2 * Math.PI;
 
-        return Math.atan2(pos.dot(refPoint), pos.det(refPoint));
+        return angle;
     }
 
     protected void onLongTouch(Motions.Point p){
@@ -77,8 +78,6 @@ public class Joystick extends CirclePad {
         Vector2 lcJoy = position();
         nob.position(lcJoy.x + SIZE_R - (nob.width / 2), lcJoy.y + SIZE_R - (nob.height / 2), 0);
 
-        Log.v("JOYNOB", "JOYSTICK NOB HAS MOVED.");
-
         initialDrag = false;
 
         CharController.setSpeed(0);
@@ -87,7 +86,7 @@ public class Joystick extends CirclePad {
 
     protected void onDragged(Motions.Point p){
         Vector2 pos = camera().screenToCamera((int)p.endPos.x, (int)p.endPos.y);
-        CharController.setVelocity((float) Math.toDegrees(angle(p)));
+        CharController.setVelocity((float)angle(p));
 
         if(initialDrag) {
 
@@ -99,9 +98,10 @@ public class Joystick extends CirclePad {
                     oldPos.y + dxy.y - (SIZE_N / 2));
 
             if(Math.abs(center().distance(result)) > radius){
-                nob.position((int)Math.cos(Math.toDegrees(angle(p))) * SIZE_R + center().x,
-                        (int)Math.sin(Math.toDegrees(angle(p))) * SIZE_R + center().y, 0);
+                nob.position((float)Math.cos(Math.toRadians(angle(p))) * SIZE_R + center().x - (nob.width / 2),
+                        (float)Math.sin(Math.toRadians(angle(p))) * SIZE_R + center().y - (nob.height / 2), 0);
             } else {
+                Log.v("JOYSTICK ANGLE", "In bounds");
                 nob.position(result.x, result.y, 0);
             }
 

@@ -38,18 +38,6 @@ public class GameScene extends UIScene {
 
     public void create(){
         super.create();
-        //debugging stuff
-
-        DebugButton regenerate = new DebugButton("Regen"){/*
-            public void onClick(){
-                Painter.fill(Artifice.level.map, Terrain.DEEP_WATER);
-                Artifice.level.map = Seed.initBase();
-            }*/
-        };
-        regenerate.position(180, 0);
-        regenerate.camera = uiCamera;
-        add(regenerate);
-
         //pre-init level setup
         if(Artifice.depth < 0){
             Artifice.level.isUnderground = true;
@@ -59,12 +47,6 @@ public class GameScene extends UIScene {
         tilemap = new WorldTilemap();
         player = new Char();
         Artifice.level.mm.add(player);
-
-        Joystick joy = new Joystick();
-        joy.camera = uiCamera;
-        joy.position(Artifice.settings.getInt(Joystick.JOY_X, 10),
-                Artifice.settings.getInt(Joystick.JOY_Y, 130));
-        add(joy);
 
         world = new Group();
         add(world);
@@ -98,6 +80,12 @@ public class GameScene extends UIScene {
 
         pouches = new Group();
         add(pouches);
+
+        Joystick joy = new Joystick();
+        joy.camera = uiCamera;
+        joy.position(Artifice.settings.getInt(Joystick.JOY_X, 10),
+                Artifice.settings.getInt(Joystick.JOY_Y, 130));
+        add(joy);
 
         scene = this;
     }
