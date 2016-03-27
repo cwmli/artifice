@@ -27,9 +27,9 @@ public class Sprite extends Player {
 
     public void updateDirection(){
 
-        if(speed < 0){
+        if(velocity.x < 0){
             flipHorizontal = true;
-        } else if (speed > 0){
+        } else if (velocity.x > 0){
             flipHorizontal = false;
         }
     }

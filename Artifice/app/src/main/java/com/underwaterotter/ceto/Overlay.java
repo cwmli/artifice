@@ -2,7 +2,6 @@ package com.underwaterotter.ceto;
 
 import android.graphics.Color;
 import android.opengl.Matrix;
-import android.util.Log;
 
 import com.underwaterotter.math.Vector2;
 import com.underwaterotter.math.Vector3;
@@ -229,9 +228,9 @@ public class Overlay extends Article {
     public void updateMatrix(){
         Matrix.setIdentityM(modelMatrix, 0);
         Matrix.translateM(modelMatrix, 0, pos.x, pos.y, pos.z);
-        if(angle > 0) {
-            Matrix.rotateM(modelMatrix, 0, angle, rOrigin.x, rOrigin.y, 0);
-        }
+        //if(angle > 0) {
+         //   Matrix.rotateM(modelMatrix, 0, angle, rOrigin.x, rOrigin.y, 0);
+        //}
         if (scaleX != 1f || scaleY != 1f){
             Matrix.scaleM(modelMatrix, 0, scaleX, scaleY, 1);
         }

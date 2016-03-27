@@ -9,11 +9,9 @@ public class Assets {
     public static final String FONT20 = "font20x.png";
 
     public static final String JOY = "joystick.png";
-    public static final String JOY_BUTTON = "joystick_button.png";
 
     public static final String SELECTORS = "selectors.png";
 
-    public static final String HERO = "plr_idle.png";
-    public static final String HERO_RUN = "plr_run.png";
+    public static final String HERO = "plr.png";
 
 }

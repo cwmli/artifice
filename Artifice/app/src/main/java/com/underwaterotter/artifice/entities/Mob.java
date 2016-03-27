@@ -119,7 +119,6 @@ public abstract class Mob extends Entity implements Storable {
         super.update();
 
         sprite.speed = speed * hindrance;
-        sprite.update();
         worldPosition = sprite.position();
 
         updateBounds();

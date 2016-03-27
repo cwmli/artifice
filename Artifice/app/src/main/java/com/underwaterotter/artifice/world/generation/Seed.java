@@ -3,7 +3,6 @@ package com.underwaterotter.artifice.world.generation;
 import com.underwaterotter.artifice.world.Terrain;
 import com.underwaterotter.math.Magic;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Seed{
@@ -39,7 +38,6 @@ public class Seed{
         }
 
         return grassTiles;
-        //return map;
     }
 
     private static void spiralTopRight(int[] map, int x, int y, int x_max, int y_max){

@@ -31,6 +31,7 @@ public class Game extends Activity implements GLSurfaceView.Renderer, View.OnTou
 
     protected long elapsedMilli;
     protected long lastUpdateMilli;
+    protected long elapsedUpdateMilli;
 
     protected Scene currentScene;
     protected Scene newScene;
@@ -122,7 +123,8 @@ public class Game extends Activity implements GLSurfaceView.Renderer, View.OnTou
 
         Time.tick();
         elapsedMilli = Time.time;
-        lastUpdateMilli = (elapsedMilli == 0 ? 0 : elapsedMilli - lastUpdateMilli);
+        elapsedUpdateMilli = elapsedMilli - lastUpdateMilli;
+        lastUpdateMilli = elapsedMilli;
 
         update();
 
@@ -193,7 +195,7 @@ public class Game extends Activity implements GLSurfaceView.Renderer, View.OnTou
             }
         }
 
-        elapsedTime = slowFactor * lastUpdateMilli * 0.001f;
+        elapsedTime = slowFactor * elapsedUpdateMilli * 0.001f;
 
         synchronized (motionEvents){
             Motions.processMotionEvents(motionEvents);

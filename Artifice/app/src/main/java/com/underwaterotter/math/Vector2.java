@@ -46,7 +46,7 @@ public class Vector2 {
     }
 
     public float distance(Vector2 vec2){
-        return (float)Math.sqrt((vec2.x - x) * (vec2.x - x) + (vec2.y - y) * (vec2.y - y));
+        return (float)Math.sqrt(Math.pow((vec2.x - x), 2) + Math.pow((vec2.y - y), 2));
     }
 
     public float length(){

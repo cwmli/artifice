@@ -1,11 +1,12 @@
 package com.underwaterotter.artifice.world.generation;
 
+import android.util.Log;
+
 import com.underwaterotter.artifice.Artifice;
 import com.underwaterotter.artifice.world.Terrain;
 import com.underwaterotter.math.Magic;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class World {
 
@@ -19,8 +20,8 @@ public class World {
         int rooms = 0;
         int roomLimit = Magic.randRange(Artifice.depth * 10 - 3, Artifice.depth * 10 + 3);
 
-        int enlargeW = Artifice.level.mapSizeW / Seed.MIN_SIDE_LENGTH;
-        int enlargeH = Artifice.level.mapSizeH / Seed.MIN_SIDE_LENGTH;
+        int enlargeW = (int)Math.floor(Artifice.level.mapSizeW / Seed.MIN_SIDE_LENGTH);
+        int enlargeH = (int)Math.floor(Artifice.level.mapSizeH / Seed.MIN_SIDE_LENGTH);
 
         //build base
         if(Artifice.level.isUnderground){
@@ -39,13 +40,12 @@ public class World {
 
             for(int[] seedXY : seedBase){
 		        //do water border
-                Painter.setCell((seedXY[0] + enlargeW + SPACING) + ((seedXY[1] + enlargeH + SPACING) * Artifice.level.mapSizeW ));
-                Painter.fillRect(map, Terrain.WATER, enlargeW + SPACING, enlargeH + SPACING);
+                //Painter.setCell((seedXY[0] * enlargeW) - SPACING + ((seedXY[1] + enlargeH - SPACING) * Artifice.level.mapSizeW ));
+                //Painter.fillRect(map, Terrain.WATER, enlargeW + SPACING, enlargeH + SPACING);
 
-                Painter.setCell((seedXY[0] + enlargeW) + ((seedXY[1] + enlargeH) * Artifice.level.mapSizeW ));
-		        Painter.fillRect(map, Terrain.SGRASS_1, enlargeW, enlargeH);
+                Painter.setCell((seedXY[0] * enlargeW) + ((seedXY[1] * enlargeH) * Artifice.level.mapSizeW ));
+                Painter.fillRect(map, Terrain.SGRASS_1, enlargeW, enlargeH);
             }
-            //Artifice.level.map = Seed.initBase();
 
             Artifice.level.overworldGenerated = true;
         }

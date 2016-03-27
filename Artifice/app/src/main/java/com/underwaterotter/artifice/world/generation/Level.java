@@ -23,11 +23,11 @@ public abstract class Level implements Storable {
 
     public static boolean overworldGenerated = false;
 
-    public int mapSizeW = 64;
-    public int mapSizeH = 64;
+    public int mapSizeW = 20;
+    public int mapSizeH = 20;
 
-    //public int mapSizeW = 10;
-    //public int mapSizeH = 10;
+    //public int mapSizeW = 100;
+    //public int mapSizeH = 100;
 
     public int mapLength = mapSizeW * mapSizeH;
 
@@ -54,12 +54,12 @@ public abstract class Level implements Storable {
 
     public void init(){
 
+        im.init();
+        mm.init();
+
         map = new int[mapLength];
         explored = new boolean[mapLength];
         Arrays.fill(explored, false);
-
-        im.init();
-        mm.init();
 
         generate();
         decorate();

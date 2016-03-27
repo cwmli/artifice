@@ -3,14 +3,10 @@ package com.underwaterotter.ceto.ui;
 import com.underwaterotter.ceto.TouchBox;
 import com.underwaterotter.cetoinput.Motions;
 import com.underwaterotter.math.Vector2;
-import com.underwaterotter.utils.Time;
 
 public abstract class CirclePad extends HotCircle {
 
     protected TouchBox hitZone;
-
-    private long start;
-    private float duration;
 
     @Override
     public void createContent(){
@@ -29,21 +25,12 @@ public abstract class CirclePad extends HotCircle {
 
             @Override
             public void onDownTouch(Motions.Point t){
-                start = Time.time;
                 onTouch(t);
             }
 
             @Override
             public void onTouchRelease(Motions.Point t){
-
-                duration = Time.time - start;
-
-                //longer than 1.25 seconds
-                if (duration > 1250){
-                    onLongTouch(t);
-                } else {
-                    onRelease(t);
-                }
+                onRelease(t);
             }
 
             @Override
@@ -72,8 +59,6 @@ public abstract class CirclePad extends HotCircle {
         hitZone.width = radius * 2;
         hitZone.height = radius * 2;
     }
-
-    protected abstract void onLongTouch(Motions.Point p);
 
     protected abstract void onTouch(Motions.Point p);
 

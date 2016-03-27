@@ -47,12 +47,17 @@ public class Char extends Mob {
 
             @Override
             protected void setAnimations(){
-                idle = new Animation(30, true);
-                idle.setFrames(new RectF(0, 1, 1, 0));
+                idle = new Animation(5f, true);
+                idle.setFrames(new RectF(0, 0, 0.125f, 0.5f));
+
+                run = new Animation(5f, true);
+                run.setFrames(new RectF(0, 0, 0.125f, 0.5f), new RectF(0.125f, 0, 0.25f, 0.5f),  new RectF(0.25f, 0, 0.375f, 0.5f), new RectF(0.125f, 0, 0.25f, 0.5f),
+                        new RectF(0, 0, 0.125f, 0.5f),  new RectF(0.375f, 0, 0.5f, 0.5f),  new RectF(0.5f, 0, 0.625f, 0.5f),  new RectF(0.375f, 0, 0.5f, 0.5f));
             }
         };
         sprite.setMob(this);
         add(sprite);
+        sprite.idle();
     }
 
     @Override

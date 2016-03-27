@@ -83,7 +83,7 @@ public class GameScene extends UIScene {
 
         Joystick joy = new Joystick();
         joy.camera = uiCamera;
-        joy.position(Artifice.settings.getInt(Joystick.JOY_X, 10),
+        joy.position(Artifice.settings.getInt(Joystick.JOY_X, 20),
                 Artifice.settings.getInt(Joystick.JOY_Y, 130));
         add(joy);
 

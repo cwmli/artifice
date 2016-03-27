@@ -8,7 +8,7 @@ public class CharController {
         GameScene.scene.player.sprite.angle = angle;
     }
 
-    public static void setSpeed(int speed){
+    public static void setSpeed(float speed){
         GameScene.scene.player.speed = speed;
     }
 

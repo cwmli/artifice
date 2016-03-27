@@ -1,7 +1,6 @@
 package com.underwaterotter.artifice;
 
 import android.graphics.Color;
-import android.util.Log;
 
 import com.underwaterotter.ceto.Image;
 import com.underwaterotter.ceto.ui.CirclePad;
@@ -10,7 +9,6 @@ import com.underwaterotter.artifice.entities.main.CharController;
 import com.underwaterotter.artifice.world.Assets;
 import com.underwaterotter.glesutils.TextureCache;
 import com.underwaterotter.math.Vector2;
-import com.underwaterotter.math.Vector3;
 
 public class Joystick extends CirclePad {
 
@@ -90,30 +88,20 @@ public class Joystick extends CirclePad {
 
         if(initialDrag) {
 
-            Vector2 dxy = lastPoint.difference(pos);
-
-            Vector3 oldPos = nob.position();
-            Vector2 result = new Vector2(
-                    oldPos.x + dxy.x - (SIZE_N / 2),
-                    oldPos.y + dxy.y - (SIZE_N / 2));
-
-            if(Math.abs(center().distance(result)) > radius){
-                nob.position((float)Math.cos(Math.toRadians(angle(p))) * SIZE_R + center().x - (nob.width / 2),
-                        (float)Math.sin(Math.toRadians(angle(p))) * SIZE_R + center().y - (nob.height / 2), 0);
+            if(joystick.center().distance(pos) > SIZE_R){
+                nob.position((float)Math.cos(Math.toRadians(angle(p))) * SIZE_R + joystick.center().x - (nob.width / 2),
+                        (float)Math.sin(Math.toRadians(angle(p))) * SIZE_R + joystick.center().y - (nob.height / 2), 0);
+                CharController.setSpeed(0.5f);
             } else {
-                Log.v("JOYSTICK ANGLE", "In bounds");
-                nob.position(result.x, result.y, 0);
+                nob.position(pos.x - SIZE_N, pos.y - SIZE_N, 0);
+                CharController.setSpeed(joystick.center().distance(pos) / (SIZE_R * 2));
             }
 
-            int speed = 1;
-
-            CharController.setSpeed(speed);
-
-            lastPoint.set(p.endPos);
+            lastPoint.set(pos);
 
         } else {
             initialDrag = true;
-            lastPoint =  p.endPos;
+            lastPoint =  pos;
         }
     }
 }

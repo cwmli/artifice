@@ -1,5 +1,7 @@
 package com.underwaterotter.ceto;
 
+import android.util.Log;
+
 import com.underwaterotter.glesutils.TextureCache;
 
 public class Player extends Image {
@@ -27,22 +29,30 @@ public class Player extends Image {
 
     public void play(Animation animation, boolean interrupt){
 
+        if(activeAnimation == animation){
+            return;
+        }
+
         if(activeAnimation != null && playing && interrupt){
-            done();
+            forceStop();
 
             activeAnimation = animation;
             currentFrame = 0;
             timer = 0;
 
             playing = true;
-        } else {
-            return;
+        } else if (activeAnimation == null) {
+            activeAnimation = animation;
+            currentFrame = 0;
+            timer = 0;
+
+            playing = true;
         }
     }
 
     public void forceStop(){
 
-        if(activeAnimation != null && playing){
+        if(activeAnimation != null){
             playing = false;
             done();
         }
@@ -59,11 +69,13 @@ public class Player extends Image {
 
     public void updateFrame(){
 
-        if(activeAnimation.frames.length > 1) {
+        if(activeAnimation.frames.length > 0) {
 
             timer += Game.elapsedTime;
 
-            while (timer > activeAnimation.frameDuration) {
+            Log.v("TIMING", "Timer: " + String.valueOf(timer) + " FPS: " + activeAnimation.frameDuration + "TIMER > DURATION?: " + String.valueOf(timer > activeAnimation.frameDuration));
+
+            if (timer > activeAnimation.frameDuration) {
                 timer -= activeAnimation.frameDuration;
                 next();
             }

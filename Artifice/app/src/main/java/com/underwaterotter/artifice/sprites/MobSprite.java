@@ -33,19 +33,19 @@ public class MobSprite extends Sprite {
     }
 
     public void idle(){
-        play(idle, false);
+        play(idle, true);
     }
 
     public void run(){
-        play(run, false);
+        play(run, true);
     }
 
     public void dodge(){
-        play(dodge, false);
+        play(dodge, true);
     }
 
     public void attack(int type){
-        play(attack[type], false);
+        play(attack[type], true);
     }
 
     public void die(){
