@@ -1,7 +1,5 @@
 package com.underwaterotter.artifice.world.generation;
 
-import android.util.Log;
-
 import com.underwaterotter.artifice.Artifice;
 import com.underwaterotter.artifice.world.Terrain;
 import com.underwaterotter.math.Magic;
@@ -10,7 +8,11 @@ import java.util.ArrayList;
 
 public class World {
 
-    private static final int SPACING = 3;
+    private static final int SMOOTH_PASSES = 3;
+    private static final int BASE_TOUCH = 3;
+
+    private static final int NOISE_PASS = 5;
+    private static final int NOISE_CHANCE = 60;
 
     public static void buildWorld(int[] map){
 
@@ -35,18 +37,60 @@ public class World {
         } else if(!Artifice.level.overworldGenerated) { //build the overworld if it has not been generated
             ArrayList<int[]> seedBase = Seed.initBase();
 
+            Painter.fill(map, Terrain.WATER);
 
-            Painter.fill(map, Terrain.DEEP_WATER);
-
+            //enlarge seedBase to actual level size
             for(int[] seedXY : seedBase){
-		        //do water border
-                //Painter.setCell((seedXY[0] * enlargeW) - SPACING + ((seedXY[1] + enlargeH - SPACING) * Artifice.level.mapSizeW ));
-                //Painter.fillRect(map, Terrain.WATER, enlargeW + SPACING, enlargeH + SPACING);
-
                 Painter.setCell((seedXY[0] * enlargeW) + ((seedXY[1] * enlargeH) * Artifice.level.mapSizeW ));
                 Painter.fillRect(map, Terrain.SGRASS_1, enlargeW, enlargeH);
             }
+            //smooth out land
+            for(int i = 0; i < SMOOTH_PASSES; i++) {
+                ArrayList<Integer> mapSmooth = new ArrayList<>();
+                for (int c = 0; c < map.length; c++) {
+                    if (map[c] == Terrain.WATER) {
+                        int surrounding = 0;
+                        //check surrounding cells for tiles
+                        for(int x = 0; x < Artifice.level.SURROUNDING_CELLS.length; x++) {
+                            int index = c + Artifice.level.SURROUNDING_CELLS[x];
+                            if (index > 0 && index < map.length && map[index] == Terrain.SGRASS_1) {
+                                surrounding += 1;
 
+                                if(surrounding == BASE_TOUCH + i){
+                                    break;
+                                }
+                            }
+                        }
+                        //queue up the smooth
+                        if(surrounding == BASE_TOUCH + i){
+                            mapSmooth.add(c);
+                        }
+                    }
+                }
+                for(int cell : mapSmooth){
+                    map[cell] = Terrain.SGRASS_1;
+                }
+            }
+            //randomly expand the island
+            for(int i = 0; i < NOISE_PASS; i++) {
+                ArrayList<Integer> mapChanges = new ArrayList<>();
+                for (int c = 0; c < map.length; c++) {
+                    if (map[c] == Terrain.WATER) {
+                        //check surrounding cells for tiles
+                        for(int x = 0; x < Artifice.level.SURROUNDING_CELLS.length; x++) {
+                            int index = c + Artifice.level.SURROUNDING_CELLS[x];
+                            if (index > 0 && index < map.length && map[index] == Terrain.SGRASS_1) {
+                                if(Magic.randRange(0, 100) < NOISE_CHANCE){
+                                    mapChanges.add(c);
+                                }
+                            }
+                        }
+                    }
+                }
+                for(int cell : mapChanges){
+                    map[cell] = Terrain.SGRASS_1;
+                }
+            }
             Artifice.level.overworldGenerated = true;
         }
     }

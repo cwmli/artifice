@@ -1,5 +1,7 @@
 package com.underwaterotter.artifice.world.generation;
 
+import com.underwaterotter.artifice.Artifice;
+
 import java.util.Arrays;
 
 public class Painter {
@@ -22,7 +24,7 @@ public class Painter {
     public static void fillRect(int[] map, int terrain, int width, int height){
         for(int cy = 0; cy < height; cy++){
             Arrays.fill(map, cell, cell + width, terrain);
-            cell += Math.sqrt(map.length);
+            cell += Artifice.level.mapSizeW;
         }
     }
 }

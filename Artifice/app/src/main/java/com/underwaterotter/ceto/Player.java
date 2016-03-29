@@ -1,7 +1,5 @@
 package com.underwaterotter.ceto;
 
-import android.util.Log;
-
 import com.underwaterotter.glesutils.TextureCache;
 
 public class Player extends Image {
@@ -72,8 +70,6 @@ public class Player extends Image {
         if(activeAnimation.frames.length > 0) {
 
             timer += Game.elapsedTime;
-
-            Log.v("TIMING", "Timer: " + String.valueOf(timer) + " FPS: " + activeAnimation.frameDuration + "TIMER > DURATION?: " + String.valueOf(timer > activeAnimation.frameDuration));
 
             if (timer > activeAnimation.frameDuration) {
                 timer -= activeAnimation.frameDuration;
