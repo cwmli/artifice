@@ -3,7 +3,6 @@ package com.underwaterotter.ceto;
 import android.graphics.RectF;
 
 import com.underwaterotter.glesutils.TextureAtlas;
-import com.underwaterotter.glesutils.TextureCache;
 import com.underwaterotter.glesutils.VertexQuad;
 
 import java.nio.FloatBuffer;
@@ -12,6 +11,7 @@ public class Tilemap extends Overlay {
 
     protected TextureAtlas src;
 
+    protected boolean[] flipData;
     protected int[] mapData;
     protected int mapCellsW;
     protected int mapCellsH;
@@ -42,9 +42,10 @@ public class Tilemap extends Overlay {
         stVertices = new float[8];
     }
 
-    public void readMapData(int[] data, int horizontalCells){
+    public void readMapData(int[] data, boolean[] flipData, int horizontalCells){
 
         this.mapData = data;
+        this.flipData = flipData;
 
         mapCellsW = horizontalCells;
         mapCellsH = data.length / horizontalCells;
@@ -80,18 +81,34 @@ public class Tilemap extends Overlay {
 
                 //retrieve texture id and return a rect
                 RectF tileRect = src.get(mapData[y * mapCellsW + x]);
+                boolean flipHorizontal = flipData[y * mapCellsW + x];
                 //now update texture vertices
-                stVertices[0] = tileRect.left;
-                stVertices[1] = tileRect.top;
 
-                stVertices[2] = tileRect.left;
-                stVertices[3] = tileRect.bottom;
+                if(!flipHorizontal) {
+                    stVertices[0] = tileRect.left;
+                    stVertices[1] = tileRect.top;
 
-                stVertices[4] = tileRect.right;
-                stVertices[5] = tileRect.top;
+                    stVertices[2] = tileRect.left;
+                    stVertices[3] = tileRect.bottom;
 
-                stVertices[6] = tileRect.right;
-                stVertices[7] = tileRect.bottom;
+                    stVertices[4] = tileRect.right;
+                    stVertices[5] = tileRect.top;
+
+                    stVertices[6] = tileRect.right;
+                    stVertices[7] = tileRect.bottom;
+                } else {
+                    stVertices[0] = tileRect.right;
+                    stVertices[1] = tileRect.top;
+
+                    stVertices[2] = tileRect.right;
+                    stVertices[3] = tileRect.bottom;
+
+                    stVertices[4] = tileRect.left;
+                    stVertices[5] = tileRect.top;
+
+                    stVertices[6] = tileRect.left;
+                    stVertices[7] = tileRect.bottom;
+                }
 
                 stVertexBuffer.put(stVertices);
             }

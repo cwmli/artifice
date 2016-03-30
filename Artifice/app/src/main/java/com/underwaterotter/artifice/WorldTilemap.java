@@ -11,19 +11,19 @@ public class WorldTilemap extends Tilemap {
     public static final int CELL_SIZE_W = 16;
     public static final int CELL_SIZE_H = 16;
 
-    private static int[] oldmap;
+    public static final int INVALID_TILE = -1;
+
+    protected int[] oldmap;
 
     public WorldTilemap(){
         super(Artifice.level.tiles(), CELL_SIZE_W, CELL_SIZE_H);
-        oldmap = Artifice.level.map.clone();
-        readMapData(Artifice.level.map, Artifice.level.mapSizeW);
-    }
+        oldmap = new int[Artifice.level.mapLength];
+        Arrays.fill(oldmap, INVALID_TILE);
 
-    public void update(){
-        if(!Arrays.equals(Artifice.level.map, oldmap)){
-            readMapData(Artifice.level.map, Artifice.level.mapSizeW);
-            oldmap = Artifice.level.map.clone();
-        }
+        flipData = new boolean[Artifice.level.mapLength];
+        Arrays.fill(flipData, false);
+
+        readMapData(oldmap, flipData, Artifice.level.mapSizeW);
     }
 
     //draw a "lightened" colored tile texture over the existing tilemap
@@ -33,6 +33,10 @@ public class WorldTilemap extends Tilemap {
         whiteOverlay.tint(0xff000000, 0.5f);
 
         parent.add(whiteOverlay);
+    }
+
+    public void updateFlipData(int index, boolean bool){
+        flipData[index] = bool;
     }
 
     public Vector3 cellToWorld(int cellPos){

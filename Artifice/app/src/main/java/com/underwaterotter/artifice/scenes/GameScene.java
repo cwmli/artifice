@@ -5,20 +5,16 @@ import android.util.Log;
 import com.underwaterotter.artifice.Artifice;
 import com.underwaterotter.artifice.Joystick;
 import com.underwaterotter.artifice.world.Assets;
-import com.underwaterotter.artifice.world.Terrain;
-import com.underwaterotter.artifice.world.generation.Painter;
-import com.underwaterotter.artifice.world.generation.Seed;
 import com.underwaterotter.ceto.Group;
 import com.underwaterotter.artifice.WorldTilemap;
 import com.underwaterotter.artifice.entities.Mob;
 import com.underwaterotter.artifice.entities.items.Item;
 import com.underwaterotter.artifice.entities.main.Char;
-import com.underwaterotter.artifice.sprites.ItemSprite;
-import com.underwaterotter.artifice.sprites.MobSprite;
 import com.underwaterotter.ceto.Image;
 import com.underwaterotter.ceto.Text;
 import com.underwaterotter.ceto.ui.Button;
-import com.underwaterotter.math.Vector3;
+
+import java.util.Arrays;
 
 public class GameScene extends UIScene {
 
@@ -38,13 +34,22 @@ public class GameScene extends UIScene {
 
     public void create(){
         super.create();
+
+        scene = this;
+        tilemap = new WorldTilemap(){
+            public void update(){
+                if(!Arrays.equals(Artifice.level.map, oldmap)){
+                    readMapData(Artifice.level.map, flipData, Artifice.level.mapSizeW);
+                    oldmap = Artifice.level.map.clone();
+                }
+            }
+        };
         //pre-init level setup
         if(Artifice.depth < 0){
             Artifice.level.isUnderground = true;
         }
         Artifice.level.init();
 
-        tilemap = new WorldTilemap();
         player = new Char();
         Artifice.level.mm.add(player);
 
@@ -86,8 +91,6 @@ public class GameScene extends UIScene {
         joy.position(Artifice.settings.getInt(Joystick.JOY_X, 20),
                 Artifice.settings.getInt(Joystick.JOY_Y, 130));
         add(joy);
-
-        scene = this;
     }
 
     @Override
