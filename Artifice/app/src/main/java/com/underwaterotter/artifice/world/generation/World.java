@@ -1,5 +1,7 @@
 package com.underwaterotter.artifice.world.generation;
 
+import android.util.Log;
+
 import com.underwaterotter.artifice.Artifice;
 import com.underwaterotter.artifice.scenes.GameScene;
 import com.underwaterotter.artifice.world.Terrain;
@@ -107,7 +109,7 @@ public class World {
     private static void convertTiles(int[] map){
         for (int c = 0; c < map.length; c++) {
             if (map[c] == Terrain.SGRASS_3) {
-                //check surrounding cells for tiles
+                //check surrounding cells for tiles - DOWN TILES
                 if(map[c + Artifice.level.SURROUNDING_CELLS[3]] != Terrain.WATER && map[c + Artifice.level.SURROUNDING_CELLS[1]] == Terrain.SGRASS_3 &&
                             map[c + Artifice.level.SURROUNDING_CELLS[6]] == Terrain.WATER && map[c + Artifice.level.SURROUNDING_CELLS[4]] == Terrain.WATER){
                     map[c + Artifice.level.SURROUNDING_CELLS[1]] = Terrain.D1GRASS_3;
@@ -123,13 +125,22 @@ public class World {
                    if(Magic.randRange(0, 100) < 50){
                        GameScene.scene.tilemap.updateFlipData(c, true);
                    }
-                } else if(map[c + Artifice.level.SURROUNDING_CELLS[1]] == Terrain.WATER && map[c + Artifice.level.SURROUNDING_CELLS[6]] == Terrain.SGRASS_3){
-                    map[c] = Terrain.EGRASS_3;
-                    if(Magic.randRange(0, 100) < 50){
-                        GameScene.scene.tilemap.updateFlipData(c, true);
-                    }
                 } else if(map[c + Artifice.level.SURROUNDING_CELLS[6]] == Terrain.WATER){
                    map[c] = Terrain.WATER;
+                } else if(map[c + Artifice.level.SURROUNDING_CELLS[1]] == Terrain.WATER && map[c + Artifice.level.SURROUNDING_CELLS[4]] == Terrain.WATER
+                        && map[c + Artifice.level.SURROUNDING_CELLS[3]] != Terrain.WATER){
+                    map[c] = Terrain.CGRASS_3;
+                    GameScene.scene.tilemap.updateFlipData(c, true);
+                    Log.v("INFO", "Corner block");
+                } else if(map[c + Artifice.level.SURROUNDING_CELLS[1]] == Terrain.WATER && map[c + Artifice.level.SURROUNDING_CELLS[3]] == Terrain.WATER
+                        && map[c + Artifice.level.SURROUNDING_CELLS[4]] != Terrain.WATER) {
+                    map[c] = Terrain.CGRASS_3;
+                    Log.v("INFO", "Corner block");
+                } else if(map[c + Artifice.level.SURROUNDING_CELLS[1]] == Terrain.WATER && map[c + Artifice.level.SURROUNDING_CELLS[6]] == Terrain.SGRASS_3) {
+                    map[c] = Terrain.EGRASS_3;
+                    if (Magic.randRange(0, 100) < 50) {
+                        GameScene.scene.tilemap.updateFlipData(c, true);
+                    }
                 }
             }
         }
