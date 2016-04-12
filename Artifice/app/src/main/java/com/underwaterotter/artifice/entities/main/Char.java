@@ -1,22 +1,31 @@
 package com.underwaterotter.artifice.entities.main;
 
 import android.graphics.RectF;
+import android.util.Log;
 
+import com.underwaterotter.artifice.Artifice;
 import com.underwaterotter.artifice.entities.Mob;
+import com.underwaterotter.artifice.scenes.GameScene;
 import com.underwaterotter.artifice.sprites.MobSprite;
 import com.underwaterotter.artifice.world.Assets;
 import com.underwaterotter.ceto.Animation;
 import com.underwaterotter.ceto.Camera;
+import com.underwaterotter.ceto.Image;
 import com.underwaterotter.math.Vector3;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Char extends Mob {
 
     public static final int SIZE_W = 16;
     public static final int SIZE_H = 16;
+    public static final int SHADOW_OFFSET = 8;
+    public static final int SAFE_ZONE = 4;
 
     public String currentAction;
+    public boolean[] availableDirections;
+    //{left, top, right, bottom}
 
     public Char(){
         super();
@@ -37,7 +46,68 @@ public class Char extends Mob {
         actions.add("use");
         actions.add("climb");
 
+        availableDirections = new boolean[4];
+        Arrays.fill(availableDirections, true);
+
+        shadow = new Image(Assets.SHADOWS);
+
         sprite = new MobSprite(Assets.HERO){
+
+            @Override
+            public void updateBounds(){
+                boolean top = Artifice.level.passable[GameScene.scene.tilemap.worldToCell((int)(boundingBox.left + boundingBox.width() / 2),
+                        (int)boundingBox.bottom - SAFE_ZONE)];
+
+                boolean left = Artifice.level.passable[GameScene.scene.tilemap.worldToCell((int)(boundingBox.left + SAFE_ZONE),
+                        (int)(boundingBox.top + boundingBox.height() / 2))];
+
+                boolean bottom = Artifice.level.passable[GameScene.scene.tilemap.worldToCell((int)(boundingBox.left + boundingBox.width() / 2),
+                        (int)(boundingBox.bottom))];
+
+                boolean right = Artifice.level.passable[GameScene.scene.tilemap.worldToCell((int)(boundingBox.right - SAFE_ZONE),
+                        (int)(boundingBox.top + boundingBox.height() / 2))];
+
+                if(top && left && bottom && right){
+                    Arrays.fill(availableDirections, true);
+                }
+
+                if(sprite.velocity.x < 0 && !left) {
+                    availableDirections[0] = false;
+                }
+                if(sprite.velocity.x > 0 && !right) {
+                    availableDirections[2] = false;
+                }
+                if(sprite.velocity.y > 0 && !bottom) {
+                    availableDirections[3] = false;
+                }
+                if(sprite.velocity.y < 0 && !top){
+                    availableDirections[1] = false;
+                }
+            }
+
+            @Override
+            public void updateMotion(){
+                boolean movingLeft = Math.cos(Math.toRadians(angle)) * speed < 0;
+                boolean movingDown = Math.sin(Math.toRadians(angle)) * speed > 0;
+
+                Log.v("STUFF", "isLeft: " + String.valueOf(movingLeft) + " isDown: " + String.valueOf(movingDown));
+
+                float vX = speed * (float)Math.cos(Math.toRadians(angle)); //a * Math.PI / 180
+                if(!availableDirections[0] && movingLeft || !availableDirections[2] && !movingLeft){
+                    vX = 0;
+                }
+
+                float vY = speed * (float)Math.sin(Math.toRadians(angle));
+                if(!availableDirections[1] && !movingDown || !availableDirections[3] && movingDown) {
+                    vY = 0;
+                }
+
+                velocity.set(vX, vY);
+
+                pos.x += velocity.x;
+                pos.y += velocity.y;
+            }
+
             @Override
             public void setMob(Mob mob){
                 super.setMob(mob);
@@ -58,6 +128,8 @@ public class Char extends Mob {
         sprite.setMob(this);
         add(sprite);
         sprite.idle();
+
+        add(shadow);
     }
 
     @Override
@@ -65,15 +137,17 @@ public class Char extends Mob {
         super.update();
 
         Camera.main.setFocusPoint(worldPosition.x, worldPosition.y);
-        checkCollision();
+
+        sprite.speed = speed * hindrance;
+        worldPosition = sprite.position();
+        shadow.position(worldPosition.x, worldPosition.y + SHADOW_OFFSET, 0);
+
+        checkMobCollision();
         parseAction();
     }
 
-    public void checkCollision(){
+    public void checkMobCollision(){
         Mob[] mobs = getCollided();
-        if(mobs == null){
-            return;
-        }
 
         float netX = 0;
         float netY = 0;

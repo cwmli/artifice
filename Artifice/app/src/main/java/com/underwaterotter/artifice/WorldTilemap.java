@@ -42,7 +42,7 @@ public class WorldTilemap extends Tilemap {
     public Vector3 cellToWorld(int cellPos){
         int row = (int)Math.ceil(cellPos / mapCellsW);
         //offset 1 for index at 0
-        int col = row * mapCellsW - cellPos - 1;
+        int col = cellPos & mapCellsW;
 
 
         //center of cell
@@ -50,8 +50,12 @@ public class WorldTilemap extends Tilemap {
     }
 
     public int worldToCell(Vector3 wPos){
-        int col = Math.round(wPos.x / cellW);
-        int row = Math.round(wPos.y / cellH);
+       return worldToCell((int)wPos.x, (int)wPos.y);
+    }
+
+    public int worldToCell(int x, int y){
+        int col = Math.round(x / cellW);
+        int row = Math.round(y / cellH);
 
         return row * mapCellsW + col;
     }

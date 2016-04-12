@@ -6,6 +6,7 @@ import com.underwaterotter.artifice.Artifice;
 import com.underwaterotter.artifice.entities.items.Item;
 import com.underwaterotter.artifice.sprites.ItemSprite;
 import com.underwaterotter.artifice.sprites.MobSprite;
+import com.underwaterotter.ceto.Image;
 import com.underwaterotter.math.Vector3;
 import com.underwaterotter.utils.Block;
 import com.underwaterotter.utils.Storable;
@@ -29,6 +30,7 @@ public abstract class Mob extends Entity implements Storable {
     private UUID mob_id;
 
     public MobSprite sprite;
+    public Image shadow;
 
     public ItemSprite[] equipped; //equal in length to attachPositions, corresponds to index
     public Vector3[] attachPositions;
@@ -118,10 +120,6 @@ public abstract class Mob extends Entity implements Storable {
     public void update(){
         super.update();
 
-        sprite.speed = speed * hindrance;
-        worldPosition = sprite.position();
-
-        updateBounds();
         updateStatusEffects();
     }
 
@@ -153,7 +151,7 @@ public abstract class Mob extends Entity implements Storable {
 
         if(mobs != null) {
             for(Mob mob : mobs) {
-                if (RectF.intersects(mob.sprite.hitbox, this.sprite.hitbox) && mob.worldPosition().y - worldPosition().y <= MOB_THICKNESS) {
+                if (RectF.intersects(mob.sprite.boundingBox, this.sprite.boundingBox) && mob.worldPosition().y - worldPosition().y <= MOB_THICKNESS) {
                     collided.add(mob);
                     mob.hindrance = 1 - (feather * 0.01f);
                 }
@@ -163,11 +161,6 @@ public abstract class Mob extends Entity implements Storable {
         collided.toArray(collidedMobs);
 
         return collidedMobs;
-    }
-
-    protected void updateBounds(){
-        sprite.hitbox.union(worldPosition.x, worldPosition.y,
-                worldPosition.x + sprite.width(), worldPosition.y + sprite.height());
     }
 
     public void damage(int damage, Item source){

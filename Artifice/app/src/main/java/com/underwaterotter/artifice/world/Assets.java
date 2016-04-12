@@ -13,5 +13,5 @@ public class Assets {
     public static final String SELECTORS = "selectors.png";
 
     public static final String HERO = "plr.png";
-
+    public static final String SHADOWS = "shadow.png";
 }

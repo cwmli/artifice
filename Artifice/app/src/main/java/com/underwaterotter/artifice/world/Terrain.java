@@ -63,10 +63,30 @@ public class Terrain {
 
     public static final int[] flags = new int[512];
     static {
+        flags[SGRASS_1] = PASSABLE | FLAMMABLE;
+        flags[EGRASS_1] = PASSABLE | FLAMMABLE;
+        flags[CGRASS_1] = PASSABLE | FLAMMABLE;
+        flags[TGRASS_1] = SOLID | FLAMMABLE;
+        flags[D1GRASS_1] = PASSABLE | FLAMMABLE;
+        flags[D2GRASS_1] = SOLID | FLAMMABLE;
+
+        flags[SGRASS_2] = PASSABLE | FLAMMABLE;
+        flags[EGRASS_2] = PASSABLE | FLAMMABLE;
+        flags[CGRASS_2] = PASSABLE | FLAMMABLE;
+        flags[TGRASS_2] = SOLID | FLAMMABLE;
+        flags[D1GRASS_2] = PASSABLE | FLAMMABLE;
+        flags[D2GRASS_2] = SOLID | FLAMMABLE;
+
         flags[SGRASS_3] = PASSABLE | FLAMMABLE;
-        flags[EGRASS_1] = flags[CGRASS_1] = flags[TGRASS_1] = flags[D1GRASS_1] =  flags[SGRASS_3] = flags[D2GRASS_1] = flags[SGRASS_3];
-        flags[WATER] = PASSABLE | LIQUID;
+        flags[EGRASS_3] = PASSABLE | FLAMMABLE;
+        flags[CGRASS_3] = PASSABLE | FLAMMABLE;
+        flags[TGRASS_3] = SOLID | FLAMMABLE;
+        flags[D1GRASS_3] = PASSABLE | FLAMMABLE;
+        flags[D2GRASS_3] = SOLID | FLAMMABLE;
+
+        flags[WATER] = SOLID | LIQUID;
         flags[DEEP_WATER] = flags[WATER];
+
         flags[TREE] = PASSABLE | FLAMMABLE;
         flags[THICK_TREE] = SOLID | FLAMMABLE;
         flags[BUSH] = flags[TREE];

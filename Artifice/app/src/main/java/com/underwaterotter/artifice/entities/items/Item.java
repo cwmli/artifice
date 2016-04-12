@@ -86,7 +86,7 @@ public class Item extends Entity{
 
         if(mobs != null) {
             for(Mob mob : mobs) {
-                if (RectF.intersects(mob.sprite.hitbox, this.sprite.hitbox) && mob.worldPosition().y - worldPosition().y <= ITEM_THICKNESS) {
+                if (RectF.intersects(mob.sprite.boundingBox, this.sprite.boundingBox) && mob.worldPosition().y - worldPosition().y <= ITEM_THICKNESS) {
                     collided.add(mob);
                 }
             }

@@ -19,7 +19,6 @@ import java.util.Arrays;
 public class GameScene extends UIScene {
 
     public static GameScene scene;
-
     public WorldTilemap tilemap;
 
     public Char player;
@@ -44,13 +43,14 @@ public class GameScene extends UIScene {
                 }
             }
         };
+
+        player = new Char();
         //pre-init level setup
         if(Artifice.depth < 0){
             Artifice.level.isUnderground = true;
         }
         Artifice.level.init();
 
-        player = new Char();
         Artifice.level.mm.add(player);
 
         world = new Group();

@@ -21,7 +21,6 @@ public class MobSprite extends Sprite {
         super(id);
 
         setAnimations();
-        hitbox = new RectF();
     }
 
     public void setMob(Mob mob){

@@ -1,6 +1,7 @@
 package com.underwaterotter.ceto;
 
 import android.graphics.Color;
+import android.graphics.RectF;
 import android.opengl.Matrix;
 
 import com.underwaterotter.math.Vector2;
@@ -17,6 +18,8 @@ public class Overlay extends Article {
 
     protected float scaleX;
     protected float scaleY;
+
+    public RectF boundingBox;
 
     public float width;
     public float height;
@@ -53,6 +56,8 @@ public class Overlay extends Article {
         this.width = width;
         this.height = height;
 
+        boundingBox = new RectF();
+
         velocity = new Vector2();
         rOrigin = new Vector2();
         angle = 0;
@@ -67,6 +72,9 @@ public class Overlay extends Article {
 
     @Override
     public void update(){
+        boundingBox.set(pos.x, pos.y, pos.x + width, pos.y + height);
+
+        updateBounds();
         updateMotion();
     }
 
@@ -213,6 +221,8 @@ public class Overlay extends Article {
         mr = mg = mb = ma = 1;
         ar = ag = ab = aa = 0;
     }
+
+    public void updateBounds(){}
 
     public void updateMotion(){
         //based on the supplied angle, find the velocity vector

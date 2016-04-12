@@ -6,8 +6,6 @@ import com.underwaterotter.ceto.Player;
 
 public class Sprite extends Player {
 
-    public RectF hitbox;
-
     public Sprite(){
         super();
     }
@@ -19,8 +17,6 @@ public class Sprite extends Player {
     @Override
     public void update(){
         super.update();
-
-        hitbox.set(pos.x, pos.y, pos.x + width, pos.y + height);
 
         updateDirection();
     }
