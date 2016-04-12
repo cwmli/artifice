@@ -15,8 +15,12 @@ public class Char extends Mob {
 
     public static final int SIZE_W = 16;
     public static final int SIZE_H = 16;
+    
+    public static final int SATK_LIM = 3;
+    public static final int[] SPCATK_LIM = { 1, 1, 2 }
 
     public String currentAction;
+    public int comboCounter;
 
     public Char(){
         super();
@@ -26,6 +30,7 @@ public class Char extends Mob {
         hp = 100;
         def = 0;
         currentAction = "none";
+        comboCounter = 0;
         worldPosition(new Vector3(0,0,0));
         //the player can see everything in the room/screen if in open area
         agroRadius = -1;
@@ -37,14 +42,14 @@ public class Char extends Mob {
         actions.add("use");
         actions.add("climb");
 
-        sprite = new MobSprite(Assets.HERO){
+        sprite = new MobSprite(Assets.HERO){ //FIXME EXTEND MOBSPRITE FOR CUSTOM CHARSPRITE CLASS
             @Override
             public void setMob(Mob mob){
                 super.setMob(mob);
                 width = SIZE_W;
                 height = SIZE_H;
             }
-
+       
             @Override
             protected void setAnimations(){
                 idle = new Animation(5f, true);
@@ -101,7 +106,7 @@ public class Char extends Mob {
 
         switch (currentAction){
             case "bsc_atk":
-                sprite.attack(0);
+                ;
                 basicAttack();
                 break;
             case "hvy_atk":
