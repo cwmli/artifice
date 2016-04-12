@@ -36,10 +36,15 @@ public class Item extends Entity{
     public int throwSpeed;
 
     protected ArrayList<String> actions;
+    protected ArrayList<int[]> rotations; //Rotation angle and position in a size 2 array, equal to length of animation
 
     public Mob mob; //Equipped to; therefore, will follow animations
 
     private Pouch host;//can be a chest or any other inventory
+    
+    public void item(){
+        super();
+    }
 
     @Override
     public void saveToBlock(Block block){
