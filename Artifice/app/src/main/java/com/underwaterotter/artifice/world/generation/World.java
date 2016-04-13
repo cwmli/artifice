@@ -1,7 +1,5 @@
 package com.underwaterotter.artifice.world.generation;
 
-import android.util.Log;
-
 import com.underwaterotter.artifice.Artifice;
 import com.underwaterotter.artifice.scenes.GameScene;
 import com.underwaterotter.artifice.world.Terrain;
@@ -109,7 +107,9 @@ public class World {
                 if(passable[c + Artifice.level.SURROUNDING_CELLS[3]] && passable[c + Artifice.level.SURROUNDING_CELLS[1]] &&
                             !passable[c + Artifice.level.SURROUNDING_CELLS[6]] && !passable[c + Artifice.level.SURROUNDING_CELLS[4]]){
                     map[c + Artifice.level.SURROUNDING_CELLS[1]] = Terrain.D1GRASS_3;
+                    GameScene.scene.tilemap.updateFlipData(c + Artifice.level.SURROUNDING_CELLS[1], false);
                     map[c] = Terrain.D2GRASS_3;
+                    GameScene.scene.tilemap.updateFlipData(c, false);
                 } else if(passable[c + Artifice.level.SURROUNDING_CELLS[4]] && passable[c + Artifice.level.SURROUNDING_CELLS[1]] &&
                         !passable[c + Artifice.level.SURROUNDING_CELLS[6]] && !passable[c + Artifice.level.SURROUNDING_CELLS[3]]){
                     map[c + Artifice.level.SURROUNDING_CELLS[1]] = Terrain.D1GRASS_3;
@@ -123,14 +123,15 @@ public class World {
                    }
                 } else if(!passable[c + Artifice.level.SURROUNDING_CELLS[6]]){
                    map[c] = Terrain.WATER;
+                }  else if(!passable[c + Artifice.level.SURROUNDING_CELLS[1]] && !passable[c + Artifice.level.SURROUNDING_CELLS[3]]
+                        && passable[c + Artifice.level.SURROUNDING_CELLS[4]]) {
+                    map[c] = Terrain.CGRASS_3;
+                    GameScene.scene.tilemap.updateFlipData(c, false);
                 } else if(!passable[c + Artifice.level.SURROUNDING_CELLS[1]] && !passable[c + Artifice.level.SURROUNDING_CELLS[4]]
                         && passable[c + Artifice.level.SURROUNDING_CELLS[3]]){
                     map[c] = Terrain.CGRASS_3;
-                    //GameScene.scene.tilemap.updateFlipData(c, true); //FIX UNINTENTIONAL FLIPPING OF D1_GRASS
-                } else if(!passable[c + Artifice.level.SURROUNDING_CELLS[1]] && !passable[c + Artifice.level.SURROUNDING_CELLS[3]]
-                        && passable[c + Artifice.level.SURROUNDING_CELLS[4]]) {
-                    map[c] = Terrain.CGRASS_3;
-                } else if(!passable[c + Artifice.level.SURROUNDING_CELLS[1]] && passable[c + Artifice.level.SURROUNDING_CELLS[6]]) {
+                    GameScene.scene.tilemap.updateFlipData(c, true);
+                }  else if(!passable[c + Artifice.level.SURROUNDING_CELLS[1]] && passable[c + Artifice.level.SURROUNDING_CELLS[6]]) {
                     map[c] = Terrain.EGRASS_3;
                     if (Magic.randRange(0, 100) < 50) {
                         GameScene.scene.tilemap.updateFlipData(c, true);
