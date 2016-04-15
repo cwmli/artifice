@@ -13,6 +13,7 @@ public class WorldTilemap extends Tilemap {
 
     public static final int INVALID_TILE = -1;
 
+    protected int[] map;
     protected int[] oldmap;
 
     public WorldTilemap(){
@@ -24,6 +25,17 @@ public class WorldTilemap extends Tilemap {
         Arrays.fill(flipData, false);
 
         readMapData(oldmap, flipData, Artifice.level.mapSizeW);
+    }
+
+    public void update(){
+        if(!Arrays.equals(map, oldmap)){
+            readMapData(map, flipData, Artifice.level.mapSizeW);
+            oldmap = map.clone();
+        }
+    }
+
+    public void setMap(int[] map){
+        this.map = map;
     }
 
     //draw a "lightened" colored tile texture over the existing tilemap

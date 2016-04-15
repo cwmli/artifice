@@ -59,13 +59,13 @@ public class Char extends Mob {
                         (int)boundingBox.bottom - SAFE_ZONE)];
 
                 boolean left = Artifice.level.passable[GameScene.scene.tilemap.worldToCell((int)(boundingBox.left + SAFE_ZONE),
-                        (int)(boundingBox.top + boundingBox.height() / 2))];
+                        (int)boundingBox.bottom - SAFE_ZONE)];
 
                 boolean bottom = Artifice.level.passable[GameScene.scene.tilemap.worldToCell((int)(boundingBox.left + boundingBox.width() / 2),
-                        (int)(boundingBox.bottom))];
+                        (int)boundingBox.bottom)];
 
                 boolean right = Artifice.level.passable[GameScene.scene.tilemap.worldToCell((int)(boundingBox.right - SAFE_ZONE),
-                        (int)(boundingBox.top + boundingBox.height() / 2))];
+                        (int)boundingBox.bottom - SAFE_ZONE)];
 
                 if(top && left && bottom && right){
                     Arrays.fill(availableDirections, true);
@@ -89,8 +89,6 @@ public class Char extends Mob {
             public void updateMotion(){
                 boolean movingLeft = Math.cos(Math.toRadians(angle)) * speed < 0;
                 boolean movingDown = Math.sin(Math.toRadians(angle)) * speed > 0;
-
-                Log.v("STUFF", "isLeft: " + String.valueOf(movingLeft) + " isDown: " + String.valueOf(movingDown));
 
                 float vX = speed * (float)Math.cos(Math.toRadians(angle)); //a * Math.PI / 180
                 if(!availableDirections[0] && movingLeft || !availableDirections[2] && !movingLeft){

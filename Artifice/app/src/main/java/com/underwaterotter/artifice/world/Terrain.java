@@ -2,8 +2,12 @@ package com.underwaterotter.artifice.world;
 
 public class Terrain {
 
+    public static final int EMPTY = 511;
+
     public static final int WATER = 27;
     public static final int DEEP_WATER = 28;
+
+    public static final int TEMP_SOIL = 29;
 
     //S = solid, E = edge, C = corner, T = top, D = diagonal
 
@@ -63,6 +67,9 @@ public class Terrain {
 
     public static final int[] flags = new int[512];
     static {
+        flags[EMPTY] = SOLID;
+        flags[TEMP_SOIL] = SOLID;
+
         flags[SGRASS_1] = PASSABLE | FLAMMABLE;
         flags[EGRASS_1] = PASSABLE | FLAMMABLE;
         flags[CGRASS_1] = PASSABLE | FLAMMABLE;

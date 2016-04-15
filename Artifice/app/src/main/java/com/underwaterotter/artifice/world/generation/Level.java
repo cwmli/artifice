@@ -42,6 +42,9 @@ public abstract class Level implements Storable {
     public MobMapper mm = new MobMapper();
 
     public int[] map;
+    public int[] watermap;
+    public int[] heightmap;
+
     public boolean[] explored;
 
     public boolean[] passable = new boolean[mapLength];
@@ -55,6 +58,9 @@ public abstract class Level implements Storable {
         mm.init();
 
         map = new int[mapLength];
+        watermap = new int[mapLength];
+        heightmap = new int[mapLength];
+
         explored = new boolean[mapLength];
         Arrays.fill(explored, false);
 

@@ -83,6 +83,9 @@ public class Tilemap extends Overlay {
                 RectF tileRect = src.get(mapData[y * mapCellsW + x]);
                 boolean flipHorizontal = flipData[y * mapCellsW + x];
                 //now update texture vertices
+                if(tileRect == null){
+                    continue;
+                }
 
                 if(!flipHorizontal) {
                     stVertices[0] = tileRect.left;

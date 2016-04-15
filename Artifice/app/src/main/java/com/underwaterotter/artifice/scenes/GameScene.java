@@ -14,12 +14,12 @@ import com.underwaterotter.ceto.Image;
 import com.underwaterotter.ceto.Text;
 import com.underwaterotter.ceto.ui.Button;
 
-import java.util.Arrays;
-
 public class GameScene extends UIScene {
 
     public static GameScene scene;
+    public WorldTilemap watermap;
     public WorldTilemap tilemap;
+    public WorldTilemap heightmap;
 
     public Char player;
 
@@ -35,14 +35,9 @@ public class GameScene extends UIScene {
         super.create();
 
         scene = this;
-        tilemap = new WorldTilemap(){
-            public void update(){
-                if(!Arrays.equals(Artifice.level.map, oldmap)){
-                    readMapData(Artifice.level.map, flipData, Artifice.level.mapSizeW);
-                    oldmap = Artifice.level.map.clone();
-                }
-            }
-        };
+        watermap = new WorldTilemap();
+        tilemap = new WorldTilemap();
+        //heightmap = new WorldTilemap(Artifice.level.heightmap);
 
         player = new Char();
         //pre-init level setup
@@ -50,6 +45,8 @@ public class GameScene extends UIScene {
             Artifice.level.isUnderground = true;
         }
         Artifice.level.init();
+        watermap.setMap(Artifice.level.watermap);
+        tilemap.setMap(Artifice.level.map);
 
         Artifice.level.mm.add(player);
 
@@ -62,6 +59,7 @@ public class GameScene extends UIScene {
         weather = new Group();
         add(weather);
 
+        world.add(watermap);
         world.add(tilemap);
         world.add(liquid);
         world.add(weather);
@@ -104,6 +102,10 @@ public class GameScene extends UIScene {
     @Override
     public synchronized void update(){
         super.update();
+
+        watermap.setMap(Artifice.level.watermap);
+        tilemap.setMap(Artifice.level.map);
+        //heightmap.setMap(Artifice.level.heightmap);
 
         mobs.update();
         items.update();

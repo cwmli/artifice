@@ -22,8 +22,9 @@ public class TestLevel extends Level {
 
         World.smoothMap(map, passable);
         buildFlags();
+        World.addLiquids(watermap, passable);
 
-        World.convertTiles(map, passable);
+        World.convertTiles(map, watermap, passable);
         buildFlags();
     }
 
@@ -34,7 +35,7 @@ public class TestLevel extends Level {
 
     public void prespawnMobs(){
         GameScene.scene.player.worldPosition(
-                GameScene.scene.tilemap.cellToWorld(((mapSizeW / 2) * mapSizeW + (mapSizeH / 2))));
+                GameScene.scene.tilemap.cellToWorld(((mapSizeW / 2) * mapSizeW + (mapSizeH / 3) + 1)));
     }
 
     public void prespawnItems(){
