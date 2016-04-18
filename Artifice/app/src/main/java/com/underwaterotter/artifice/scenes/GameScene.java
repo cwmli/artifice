@@ -37,10 +37,10 @@ public class GameScene extends UIScene {
         super.create();
 
         scene = this;
-        watermap = new AnimatedTilemap(Artifice.level.tiles(), 2){
+        watermap = new AnimatedTilemap(Artifice.level.tiles(), 2) {
 
             @Override
-            protected  void setTileAnimations(){
+            protected void setTileAnimations() {
                 int[] ids = {Terrain.DWATER_1, Terrain.DWATER_2, Terrain.DWATER_3, Terrain.DWATER_2};
                 tileAnimations.put(Terrain.DWATER_1, ids);
                 tileAnimations.put(Terrain.DWATER_2, ids);
@@ -48,8 +48,15 @@ public class GameScene extends UIScene {
 
                 frames = 4;
             }
+
         };
-        tilemap = new WorldTilemap(Artifice.level.tiles());
+
+        tilemap = new AnimatedTilemap(Artifice.level.tiles(), 2){
+
+            @Override
+            protected  void setTileAnimations(){
+            }
+        };
         //heightmap = new WorldTilemap(Artifice.level.heightmap);
 
         player = new Char();
@@ -72,8 +79,8 @@ public class GameScene extends UIScene {
         weather = new Group();
         add(weather);
 
-        world.add(watermap);
         world.add(tilemap);
+        world.add(watermap);
         world.add(liquid);
         world.add(weather);
 

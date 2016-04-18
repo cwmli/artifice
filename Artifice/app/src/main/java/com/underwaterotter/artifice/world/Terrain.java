@@ -79,6 +79,7 @@ public class Terrain {
         flags[TGRASS_1] = SOLID | FLAMMABLE;
         flags[D1GRASS_1] = PASSABLE | FLAMMABLE;
         flags[D2GRASS_1] = SOLID | FLAMMABLE;
+        flags[CONV_GRASS_1] = SOLID | FLAMMABLE;
 
         flags[SGRASS_2] = PASSABLE | FLAMMABLE;
         flags[EGRASS_2] = PASSABLE | FLAMMABLE;
@@ -86,6 +87,7 @@ public class Terrain {
         flags[TGRASS_2] = SOLID | FLAMMABLE;
         flags[D1GRASS_2] = PASSABLE | FLAMMABLE;
         flags[D2GRASS_2] = SOLID | FLAMMABLE;
+        flags[CONV_GRASS_2] = SOLID | FLAMMABLE;
 
         flags[SGRASS_3] = PASSABLE | FLAMMABLE;
         flags[EGRASS_3] = PASSABLE | FLAMMABLE;
@@ -93,17 +95,21 @@ public class Terrain {
         flags[TGRASS_3] = SOLID | FLAMMABLE;
         flags[D1GRASS_3] = PASSABLE | FLAMMABLE;
         flags[D2GRASS_3] = SOLID | FLAMMABLE;
+        flags[CONV_GRASS_3] = SOLID | FLAMMABLE;
 
         flags[SWATER] = SOLID | LIQUID;
         flags[DWATER_1] = SOLID | LIQUID;
         flags[DWATER_2] = SOLID | LIQUID;
         flags[DWATER_3] = SOLID | LIQUID;
 
+        flags[STONE] = SOLID;
+        flags[DSTONE] = SOLID;
+        flags[CONV_STONE] = SOLID;
+
         flags[TREE] = PASSABLE | FLAMMABLE;
         flags[THICK_TREE] = SOLID | FLAMMABLE;
         flags[BUSH] = flags[TREE];
         flags[THICK_BUSH] = flags[THICK_TREE];
-        flags[STONE] = PASSABLE;
         flags[LARGE_STONE] = SOLID;
         flags[LARGE_STONE_C] = flags[LARGE_STONE] | CLIMBABLE;
     }

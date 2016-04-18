@@ -59,7 +59,6 @@ public abstract class AnimatedTilemap extends WorldTilemap{
     public void next(){
         if (currentFrame < frames){
             for(int i = 0; i < map.length; i++){
-                Log.v("MAP_DATA", "ID: " + String.valueOf(map[i]) + " is in animation: " + String.valueOf(tileAnimations.containsKey(map[i])));
                 if(map[i] != Terrain.EMPTY && tileAnimations.containsKey(map[i])){
                     map[i] = tileAnimations.get(map[i])[currentFrame];
                 }

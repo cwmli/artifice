@@ -101,6 +101,9 @@ public class World {
     }
 
     public static void addLiquids(int[] watermap, boolean[] passable){
+
+        Painter.fill(watermap, Terrain.EMPTY);
+
         for(int i = 0; i < watermap.length; i++){
             if(!passable[i]){
                 watermap[i] = Terrain.SWATER;
@@ -115,35 +118,40 @@ public class World {
                 if(passable[c + Artifice.level.SURROUNDING_CELLS[3]] && passable[c + Artifice.level.SURROUNDING_CELLS[1]] &&
                             !passable[c + Artifice.level.SURROUNDING_CELLS[6]] && !passable[c + Artifice.level.SURROUNDING_CELLS[4]]){
 
-                    map[c + Artifice.level.SURROUNDING_CELLS[1]] = Terrain.EMPTY;
-                    watermap[c + Artifice.level.SURROUNDING_CELLS[1]] = Terrain.D1GRASS_3;
-                    GameScene.scene.watermap.updateFlipData(c + Artifice.level.SURROUNDING_CELLS[1], false);
+                    watermap[c + Artifice.level.SURROUNDING_CELLS[1]] = Terrain.EMPTY;
+                    map[c + Artifice.level.SURROUNDING_CELLS[1]] = Terrain.D1GRASS_3;
+                    GameScene.scene.tilemap.updateFlipData(c + Artifice.level.SURROUNDING_CELLS[1], false);
 
-                    map[c] = Terrain.EMPTY;
-                    watermap[c] = Terrain.D2GRASS_3;
-                    GameScene.scene.watermap.updateFlipData(c, false);
-
-                    map[c] = Terrain.DWATER_1;
+                    watermap[c] = Terrain.EMPTY;
+                    map[c] = Terrain.CONV_GRASS_3;
                     GameScene.scene.tilemap.updateFlipData(c, false);
+                    map[c + Artifice.level.SURROUNDING_CELLS[6]] = Terrain.CONV_STONE;
+                    GameScene.scene.tilemap.updateFlipData(c + Artifice.level.SURROUNDING_CELLS[6], false);
+
+                    watermap[c] = Terrain.DWATER_1;
+                    GameScene.scene.watermap.updateFlipData(c, false);
 
                 } else if(passable[c + Artifice.level.SURROUNDING_CELLS[4]] && passable[c + Artifice.level.SURROUNDING_CELLS[1]] &&
                         !passable[c + Artifice.level.SURROUNDING_CELLS[6]] && !passable[c + Artifice.level.SURROUNDING_CELLS[3]]){
 
-                    map[c + Artifice.level.SURROUNDING_CELLS[1]] = Terrain.EMPTY;
-                    watermap[c + Artifice.level.SURROUNDING_CELLS[1]] = Terrain.D1GRASS_3;
-                    GameScene.scene.watermap.updateFlipData(c + Artifice.level.SURROUNDING_CELLS[1], true);
+                    watermap[c + Artifice.level.SURROUNDING_CELLS[1]] = Terrain.EMPTY;
+                    map[c + Artifice.level.SURROUNDING_CELLS[1]] = Terrain.D1GRASS_3;
+                    GameScene.scene.tilemap.updateFlipData(c + Artifice.level.SURROUNDING_CELLS[1], true);
 
-                    map[c] = Terrain.EMPTY;
-                    watermap[c] = Terrain.D2GRASS_3;
-                    GameScene.scene.watermap.updateFlipData(c, true);
-
-                    map[c] = Terrain.DWATER_1;
+                    watermap[c] = Terrain.EMPTY;
+                    map[c] = Terrain.CONV_GRASS_3;
                     GameScene.scene.tilemap.updateFlipData(c, true);
+                    map[c + Artifice.level.SURROUNDING_CELLS[6]] = Terrain.CONV_STONE;
+                    GameScene.scene.tilemap.updateFlipData(c + Artifice.level.SURROUNDING_CELLS[6], true);
+
+                    watermap[c] = Terrain.DWATER_1;
+                    GameScene.scene.watermap.updateFlipData(c, true);
 
                 } else if(!passable[c + Artifice.level.SURROUNDING_CELLS[6]] && passable[c + Artifice.level.SURROUNDING_CELLS[1]]) {
 
                     map[c] = Terrain.TGRASS_3;
-                    watermap[c] = Terrain.SWATER;
+                    map[c + Artifice.level.SURROUNDING_CELLS[6]] = Terrain.STONE;
+                    watermap[c + Artifice.level.SURROUNDING_CELLS[6]] = Terrain.SWATER;
                    if(Magic.randRange(0, 100) < 50){
                        GameScene.scene.tilemap.updateFlipData(c, true);
                    }
