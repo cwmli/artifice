@@ -16,8 +16,8 @@ public class WorldTilemap extends Tilemap {
     protected int[] map;
     protected int[] oldmap;
 
-    public WorldTilemap(){
-        super(Artifice.level.tiles(), CELL_SIZE_W, CELL_SIZE_H);
+    public WorldTilemap(String tiles){
+        super(tiles, CELL_SIZE_W, CELL_SIZE_H);
         oldmap = new int[Artifice.level.mapLength];
         Arrays.fill(oldmap, INVALID_TILE);
 
@@ -27,6 +27,7 @@ public class WorldTilemap extends Tilemap {
         readMapData(oldmap, flipData, Artifice.level.mapSizeW);
     }
 
+    @Override
     public void update(){
         if(!Arrays.equals(map, oldmap)){
             readMapData(map, flipData, Artifice.level.mapSizeW);

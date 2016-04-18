@@ -46,12 +46,12 @@ public class Seed{
 
         for (int i = x; i < x_max; i++) {
             int random = Magic.randRange(0, 100);
-            map[(y * MIN_SIDE_LENGTH) + i] = random < grass_chance ? Terrain.SGRASS_1 : Terrain.DEEP_WATER;
+            map[(y * MIN_SIDE_LENGTH) + i] = random < grass_chance ? Terrain.SGRASS_1 : Terrain.SWATER;
         }
 
         for(int i = y + 1; i < y_max; i++){
             int random = Magic.randRange(0, 100);
-            map[(i * MIN_SIDE_LENGTH) + (x_max - 1)] = random < grass_chance ? Terrain.SGRASS_1 : Terrain.DEEP_WATER;
+            map[(i * MIN_SIDE_LENGTH) + (x_max - 1)] = random < grass_chance ? Terrain.SGRASS_1 : Terrain.SWATER;
         }
 
         if(x_max - x > 0){
@@ -65,12 +65,12 @@ public class Seed{
 
         for(int i = x_max - 1; i > x; i--){
             int random = Magic.randRange(0, 100);
-            map[((y_max - 1) * MIN_SIDE_LENGTH) + i] = random < grass_chance ? Terrain.SGRASS_1 : Terrain.DEEP_WATER;
+            map[((y_max - 1) * MIN_SIDE_LENGTH) + i] = random < grass_chance ? Terrain.SGRASS_1 : Terrain.SWATER;
         }
 
         for(int i = y_max - 1; i >= y; i--){
             int random = Magic.randRange(0, 100);
-            map[(i * MIN_SIDE_LENGTH) + x] = random < grass_chance ? Terrain.SGRASS_1 : Terrain.DEEP_WATER;
+            map[(i * MIN_SIDE_LENGTH) + x] = random < grass_chance ? Terrain.SGRASS_1 : Terrain.SWATER;
         }
 
         if(x_max - x > 0){

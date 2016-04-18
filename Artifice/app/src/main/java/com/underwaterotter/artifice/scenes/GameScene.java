@@ -2,9 +2,11 @@ package com.underwaterotter.artifice.scenes;
 
 import android.util.Log;
 
+import com.underwaterotter.artifice.AnimatedTilemap;
 import com.underwaterotter.artifice.Artifice;
 import com.underwaterotter.artifice.Joystick;
 import com.underwaterotter.artifice.world.Assets;
+import com.underwaterotter.artifice.world.Terrain;
 import com.underwaterotter.ceto.Group;
 import com.underwaterotter.artifice.WorldTilemap;
 import com.underwaterotter.artifice.entities.Mob;
@@ -17,7 +19,7 @@ import com.underwaterotter.ceto.ui.Button;
 public class GameScene extends UIScene {
 
     public static GameScene scene;
-    public WorldTilemap watermap;
+    public AnimatedTilemap watermap;
     public WorldTilemap tilemap;
     public WorldTilemap heightmap;
 
@@ -35,8 +37,19 @@ public class GameScene extends UIScene {
         super.create();
 
         scene = this;
-        watermap = new WorldTilemap();
-        tilemap = new WorldTilemap();
+        watermap = new AnimatedTilemap(Artifice.level.tiles(), 2){
+
+            @Override
+            protected  void setTileAnimations(){
+                int[] ids = {Terrain.DWATER_1, Terrain.DWATER_2, Terrain.DWATER_3, Terrain.DWATER_2};
+                tileAnimations.put(Terrain.DWATER_1, ids);
+                tileAnimations.put(Terrain.DWATER_2, ids);
+                tileAnimations.put(Terrain.DWATER_3, ids);
+
+                frames = 4;
+            }
+        };
+        tilemap = new WorldTilemap(Artifice.level.tiles());
         //heightmap = new WorldTilemap(Artifice.level.heightmap);
 
         player = new Char();

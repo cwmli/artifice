@@ -1,13 +1,15 @@
 package com.underwaterotter.artifice;
 
+import android.util.Log;
+
 import com.underwaterotter.artifice.world.Terrain;
 import com.underwaterotter.ceto.Game;
 
 import java.util.HashMap;
 
-public class AnimatedTilemap extends WorldTilemap{
+public abstract class AnimatedTilemap extends WorldTilemap{
 
-    public HashMap<Terrain, int[]> tileAnimations;
+    public HashMap<Integer, int[]> tileAnimations; //int[] -> terrain id in Terrain.java
     public int frames;
 
     private float timer;
@@ -19,12 +21,13 @@ public class AnimatedTilemap extends WorldTilemap{
 
     public boolean playing;
 
-    public AnimatedTilemap(int fps){
-        super();
+    public AnimatedTilemap(String tiles, int fps){
+        super(tiles);
 
         currentFrame = 0;
 
         frameDuration = 1f / fps;
+        playing = true;
         repeat = true;
 
         tileAnimations = new HashMap<>();
@@ -54,20 +57,26 @@ public class AnimatedTilemap extends WorldTilemap{
         }
     }
     public void next(){
-        for(int i = 0; i < map.length; i++){
-            if(map[i] != Terrain.EMPTY){
-                map[i] = tileAnimations.get(map[i])[currentFrame];
-            }
-        }
-
         if (currentFrame < frames){
+            for(int i = 0; i < map.length; i++){
+                Log.v("MAP_DATA", "ID: " + String.valueOf(map[i]) + " is in animation: " + String.valueOf(tileAnimations.containsKey(map[i])));
+                if(map[i] != Terrain.EMPTY && tileAnimations.containsKey(map[i])){
+                    map[i] = tileAnimations.get(map[i])[currentFrame];
+                }
+            }
             currentFrame++;
         } else if (repeat == true){
             currentFrame = 0;
+            for(int i = 0; i < map.length; i++){
+                if(map[i] != Terrain.EMPTY && tileAnimations.containsKey(map[i])){
+                    map[i] = tileAnimations.get(map[i])[currentFrame];
+                }
+            }
+            currentFrame++;
         } else {
             playing = false;
         }
     }
 
-    protected void setTileAnimations(){}
+    protected abstract void setTileAnimations();
 }
