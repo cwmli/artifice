@@ -4,6 +4,10 @@ public class Terrain {
 
     public static final int EMPTY = 98;
 
+    public static final int TWATER_1 = 77;
+    public static final int TWATER_2 = 78;
+    public static final int TWATER_3 = 79;
+
     public static final int DWATER_1 = 87;
     public static final int DWATER_2 = 88;
     public static final int DWATER_3 = 89;

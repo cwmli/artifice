@@ -41,10 +41,15 @@ public class GameScene extends UIScene {
 
             @Override
             protected void setTileAnimations() {
-                int[] ids = {Terrain.DWATER_1, Terrain.DWATER_2, Terrain.DWATER_3, Terrain.DWATER_2};
-                tileAnimations.put(Terrain.DWATER_1, ids);
-                tileAnimations.put(Terrain.DWATER_2, ids);
-                tileAnimations.put(Terrain.DWATER_3, ids);
+                int[] dwater = {Terrain.DWATER_1, Terrain.DWATER_2, Terrain.DWATER_3, Terrain.DWATER_2};
+                tileAnimations.put(Terrain.DWATER_1, dwater);
+                tileAnimations.put(Terrain.DWATER_2, dwater);
+                tileAnimations.put(Terrain.DWATER_3, dwater);
+
+                int[] twater = {Terrain.TWATER_1, Terrain.TWATER_2, Terrain.TWATER_3, Terrain.TWATER_2};
+                tileAnimations.put(Terrain.TWATER_1, twater);
+                tileAnimations.put(Terrain.TWATER_2, twater);
+                tileAnimations.put(Terrain.TWATER_3, twater);
 
                 frames = 4;
             }

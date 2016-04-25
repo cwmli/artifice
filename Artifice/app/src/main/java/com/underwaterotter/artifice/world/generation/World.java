@@ -15,6 +15,8 @@ public class World {
     private static final int NOISE_PASS = 5;
     private static final int NOISE_CHANCE = 60;
 
+    private static final int BED_PATTERN_FREQ = 3;
+
     public static void buildWorld(int[] map){
 
         boolean exitRoom = false;
@@ -38,7 +40,7 @@ public class World {
         } else if(!Artifice.level.overworldGenerated) { //build the overworld if it has not been generated
             ArrayList<int[]> seedBase = Seed.initBase();
 
-            Painter.fill(map, Terrain.EMPTY);
+            Painter.fill(map, Terrain.STONE);
 
             //enlarge seedBase to actual level size
             for(int[] seedXY : seedBase){
@@ -111,6 +113,24 @@ public class World {
         }
     }
 
+    public static void buildLiquidBed(int[] map){
+
+        final int[] BORDERSET_1 = [];
+        final int[] BORDERSET_2 = [];
+
+        for(int i = 0; i < map.length; i += BED_PATTERN_FREQ){
+            if(map[i] == Terrain.STONE){
+                if(Magic.randRange(0, 100) < 30){
+                    Painter.setCell(i);
+                    if(Magic.randRange(0, 100) < 50)
+                        Painter.fillBorderRect(map, Terrain.SOLID_BED, BORDERSET_1, Magic.randRange(2, 5), Magic.randRange(2, 5));
+                    else
+                        Painter.fillBorderRect(map, Terrain.SOLID_BED, BORDERSET_2, Magic.randRange(2, 5), Magic.randRange(2, 5));
+                }
+            }
+        }
+    }
+
     public static void convertTiles(int[] map, int[] watermap, boolean[] passable){
         for (int c = 0; c < map.length; c++) {
             if (passable[c]) {
@@ -125,7 +145,12 @@ public class World {
                     watermap[c] = Terrain.EMPTY;
                     map[c] = Terrain.CONV_GRASS_3;
                     GameScene.scene.tilemap.updateFlipData(c, false);
-                    map[c + Artifice.level.SURROUNDING_CELLS[6]] = Terrain.CONV_STONE;
+
+                    if(Magic.randRange(0, 100) < 30) {
+                        map[c + Artifice.level.SURROUNDING_CELLS[6]] = Terrain.CONV_STONE;
+                    } else {
+                        map[c + Artifice.level.SURROUNDING_CELLS[6]] = Terrain.STONE;
+                    }
                     GameScene.scene.tilemap.updateFlipData(c + Artifice.level.SURROUNDING_CELLS[6], false);
 
                     watermap[c] = Terrain.DWATER_1;
@@ -141,7 +166,12 @@ public class World {
                     watermap[c] = Terrain.EMPTY;
                     map[c] = Terrain.CONV_GRASS_3;
                     GameScene.scene.tilemap.updateFlipData(c, true);
-                    map[c + Artifice.level.SURROUNDING_CELLS[6]] = Terrain.CONV_STONE;
+
+                    if(Magic.randRange(0, 100) < 30) {
+                        map[c + Artifice.level.SURROUNDING_CELLS[6]] = Terrain.CONV_STONE;
+                    } else {
+                        map[c + Artifice.level.SURROUNDING_CELLS[6]] = Terrain.STONE;
+                    }
                     GameScene.scene.tilemap.updateFlipData(c + Artifice.level.SURROUNDING_CELLS[6], true);
 
                     watermap[c] = Terrain.DWATER_1;
@@ -151,7 +181,7 @@ public class World {
 
                     map[c] = Terrain.TGRASS_3;
                     map[c + Artifice.level.SURROUNDING_CELLS[6]] = Terrain.STONE;
-                    watermap[c + Artifice.level.SURROUNDING_CELLS[6]] = Terrain.SWATER;
+                    watermap[c + Artifice.level.SURROUNDING_CELLS[6]] = Terrain.TWATER_1;
                    if(Magic.randRange(0, 100) < 50){
                        GameScene.scene.tilemap.updateFlipData(c, true);
                    }
