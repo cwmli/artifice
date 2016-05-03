@@ -23,8 +23,8 @@ public abstract class Level implements Storable {
 
     public static boolean overworldGenerated = false;
 
-    public int mapSizeW = 20;
-    public int mapSizeH = 20;
+    public int mapSizeW = 50;
+    public int mapSizeH = 50;
 
     public int mapLength = mapSizeW * mapSizeH;
 

@@ -40,7 +40,7 @@ public class World {
         } else if(!Artifice.level.overworldGenerated) { //build the overworld if it has not been generated
             ArrayList<int[]> seedBase = Seed.initBase();
 
-            Painter.fill(map, Terrain.STONE);
+            Painter.fill(map, Terrain.SOLID_BED);
 
             //enlarge seedBase to actual level size
             for(int[] seedXY : seedBase){
@@ -108,24 +108,23 @@ public class World {
 
         for(int i = 0; i < watermap.length; i++){
             if(!passable[i]){
-                watermap[i] = Terrain.SWATER;
+                watermap[i] = Terrain.SWATER_1;
             }
         }
     }
 
     public static void buildLiquidBed(int[] map){
 
-        final int[] BORDERSET_1 = [];
-        final int[] BORDERSET_2 = [];
+        final int[] BORDERSET = {Terrain.TOP_BED, Terrain.LFT_BED, Terrain.BOT_BED, Terrain.RND_CORNER_BED, Terrain.RND_CORNER_BED_B};
 
         for(int i = 0; i < map.length; i += BED_PATTERN_FREQ){
-            if(map[i] == Terrain.STONE){
+            if(map[i] == Terrain.SOLID_BED){
                 if(Magic.randRange(0, 100) < 30){
                     Painter.setCell(i);
-                    if(Magic.randRange(0, 100) < 50)
-                        Painter.fillBorderRect(map, Terrain.SOLID_BED, BORDERSET_1, Magic.randRange(2, 5), Magic.randRange(2, 5));
-                    else
-                        Painter.fillBorderRect(map, Terrain.SOLID_BED, BORDERSET_2, Magic.randRange(2, 5), Magic.randRange(2, 5));
+                    int[] queueflips = Painter.fillSelectiveBorderRect(map, Terrain.SOLID_BED, BORDERSET, Terrain.SOLID_BED, Magic.randRange(2, 5), Magic.randRange(2, 5));
+                    for(int x = 0; x < queueflips.length; x++){
+                        GameScene.scene.tilemap.updateFlipData(queueflips[x], true);
+                    }
                 }
             }
         }
@@ -187,25 +186,27 @@ public class World {
                    }
 
                 } else if(!passable[c + Artifice.level.SURROUNDING_CELLS[6]]){
-                   map[c] = Terrain.SWATER;
+                   map[c] = Terrain.SWATER_1;
                 }  else if(!passable[c + Artifice.level.SURROUNDING_CELLS[1]] && !passable[c + Artifice.level.SURROUNDING_CELLS[3]]
                         && passable[c + Artifice.level.SURROUNDING_CELLS[4]]) {
 
                     map[c] = Terrain.CGRASS_3;
-                    watermap[c] = Terrain.SWATER;
                     GameScene.scene.tilemap.updateFlipData(c, false);
+                    watermap[c] = Terrain.SWATER_2;
+                    GameScene.scene.watermap.updateFlipData(c, false);
 
                 } else if(!passable[c + Artifice.level.SURROUNDING_CELLS[1]] && !passable[c + Artifice.level.SURROUNDING_CELLS[4]]
                         && passable[c + Artifice.level.SURROUNDING_CELLS[3]]){
 
                     map[c] = Terrain.CGRASS_3;
-                    watermap[c] = Terrain.SWATER;
                     GameScene.scene.tilemap.updateFlipData(c, true);
+                    watermap[c] = Terrain.SWATER_2;
+                    GameScene.scene.watermap.updateFlipData(c, true);
 
                 }  else if(!passable[c + Artifice.level.SURROUNDING_CELLS[1]] && passable[c + Artifice.level.SURROUNDING_CELLS[6]]) {
 
                     map[c] = Terrain.EGRASS_3;
-                    watermap[c] = Terrain.SWATER;
+                    watermap[c] = Terrain.SWATER_3;
                     if (Magic.randRange(0, 100) < 50) {
                         GameScene.scene.tilemap.updateFlipData(c, true);
                     }

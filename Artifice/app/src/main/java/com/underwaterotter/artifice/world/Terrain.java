@@ -2,7 +2,7 @@ package com.underwaterotter.artifice.world;
 
 public class Terrain {
 
-    public static final int EMPTY = 98;
+    public static final int EMPTY = 96;
 
     public static final int TWATER_1 = 77;
     public static final int TWATER_2 = 78;
@@ -11,9 +11,12 @@ public class Terrain {
     public static final int DWATER_1 = 87;
     public static final int DWATER_2 = 88;
     public static final int DWATER_3 = 89;
-    public static final int SWATER = 99;
 
-    public static final int[] WATER = {DWATER_1, DWATER_2, DWATER_3, SWATER};
+    public static final int SWATER_3 = 97;
+    public static final int SWATER_2 = 98;
+    public static final int SWATER_1 = 99;
+
+    public static final int[] WATER = {DWATER_1, DWATER_2, DWATER_3, SWATER_1, SWATER_2};
 
     //water bed tiles
     public static final int SOLID_BED = 17;
@@ -22,6 +25,9 @@ public class Terrain {
     public static final int RGH_CORNER_BED = 27;
     public static final int LFT_BED = 28;
     public static final int BOT_BED = 29;
+    public static final int RGH_CORNER_BED_B = 37;
+    public static final int RND_CORNER_BED_B = 38;
+    public static final int LSOLID_BED = 39;
 
     public static final int STONE = 7;
     public static final int DSTONE = 8;
@@ -101,7 +107,8 @@ public class Terrain {
         flags[D2GRASS_3] = SOLID | FLAMMABLE;
         flags[CONV_GRASS_3] = SOLID | FLAMMABLE;
 
-        flags[SWATER] = SOLID | LIQUID;
+        flags[SWATER_1] = SOLID | LIQUID;
+        flags[SWATER_2] = SOLID | LIQUID;
         flags[DWATER_1] = SOLID | LIQUID;
         flags[DWATER_2] = SOLID | LIQUID;
         flags[DWATER_3] = SOLID | LIQUID;

@@ -1,7 +1,5 @@
 package com.underwaterotter.artifice;
 
-import android.util.Log;
-
 import com.underwaterotter.artifice.world.Terrain;
 import com.underwaterotter.ceto.Game;
 
