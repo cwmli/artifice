@@ -67,22 +67,22 @@ public class Char extends Mob {
                 boolean right = Artifice.level.passable[GameScene.scene.tilemap.worldToCell((int)(boundingBox.right - SAFE_ZONE),
                         (int)boundingBox.bottom - SAFE_ZONE)];
 
-                if(top && left && bottom && right){
-                    Arrays.fill(availableDirections, true);
-                }
-
-                if(sprite.velocity.x < 0 && !left) {
-                    availableDirections[0] = false;
-                }
-                if(sprite.velocity.x > 0 && !right) {
-                    availableDirections[2] = false;
-                }
-                if(sprite.velocity.y > 0 && !bottom) {
-                    availableDirections[3] = false;
-                }
-                if(sprite.velocity.y < 0 && !top){
-                    availableDirections[1] = false;
-                }
+//                if(top && left && bottom && right){
+//                    Arrays.fill(availableDirections, true);
+//                }
+//
+//                if(sprite.velocity.x < 0 && !left) {
+//                    availableDirections[0] = false;
+//                }
+//                if(sprite.velocity.x > 0 && !right) {
+//                    availableDirections[2] = false;
+//                }
+//                if(sprite.velocity.y > 0 && !bottom) {
+//                    availableDirections[3] = false;
+//                }
+//                if(sprite.velocity.y < 0 && !top){
+//                    availableDirections[1] = false;
+//                }
             }
 
             @Override

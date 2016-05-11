@@ -117,11 +117,12 @@ public class World {
 
         final int[] BORDERSET = {Terrain.TOP_BED, Terrain.LFT_BED, Terrain.BOT_BED, Terrain.RND_CORNER_BED, Terrain.RND_CORNER_BED_B};
 
+
         for(int i = 0; i < map.length; i += BED_PATTERN_FREQ){
             if(map[i] == Terrain.SOLID_BED){
                 if(Magic.randRange(0, 100) < 30){
                     Painter.setCell(i);
-                    int[] queueflips = Painter.fillSelectiveBorderRect(map, Terrain.SOLID_BED, BORDERSET, Terrain.SOLID_BED, Magic.randRange(2, 5), Magic.randRange(2, 5));
+                    int[] queueflips = Painter.fillSelectiveBorderRect(map, Terrain.LSOLID_BED, BORDERSET, Terrain.SOLID_BED, Magic.randRange(2, 5), Magic.randRange(2, 5));
                     for(int x = 0; x < queueflips.length; x++){
                         GameScene.scene.tilemap.updateFlipData(queueflips[x], true);
                     }
@@ -215,7 +216,25 @@ public class World {
         }
     }
 
-    private static void buildDecoration(int[] map, int noise, int smooth){
+    public static void addWorldLayers(int[] map, int[] maplayer){
+        final int[] BORDERSETLIGHT = {Terrain.TGRASS_2, Terrain.LFT_BED, Terrain.BOT_BED, Terrain.CGRASS_2, Terrain.CGRASS_2};
+        final int[] BORDERSETDARK = {Terrain.TGRASS_1, Terrain.LFT_BED, Terrain.BOT_BED, Terrain.CGRASS_1, Terrain.CGRASS_1};
+
+        for(int i = 0; i < map.length; i += 5){
+            if(map[i] == Terrain.SGRASS_3){
+                if(Magic.randRange(0, 100) < 30){
+                    Painter.setCell(i);
+                    int[] queueflips = Painter.fillSelectiveBorderRect(map, Terrain.LSOLID_BED,
+                            Magic.randRange(0, 100) < 30 ? BORDERSETLIGHT : BORDERSETDARK, Terrain.SOLID_BED, Magic.randRange(2, 5), Magic.randRange(2, 5));
+                    for(int x = 0; x < queueflips.length; x++){
+                        GameScene.scene.tilemap.updateFlipData(queueflips[x], true);
+                    }
+                }
+            }
+        }
+    }
+
+    public static void buildDecoration(int[] map, int noise, int smooth){
 
     }
 }

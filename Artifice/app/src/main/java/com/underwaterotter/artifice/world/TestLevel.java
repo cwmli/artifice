@@ -17,12 +17,15 @@ public class TestLevel extends Level {
 
         World.smoothMap(map, passable);
         buildFlags();
+
         World.addLiquids(watermap, passable);
         World.buildLiquidBed(map);
         buildFlags();
 
         World.convertTiles(map, watermap, passable);
         buildFlags();
+
+        World.addWorldLayers(map, maplayer);
     }
 
     public void decorate(){

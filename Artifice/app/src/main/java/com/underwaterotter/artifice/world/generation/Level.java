@@ -23,8 +23,8 @@ public abstract class Level implements Storable {
 
     public static boolean overworldGenerated = false;
 
-    public int mapSizeW = 50;
-    public int mapSizeH = 50;
+    public int mapSizeW = 20;
+    public int mapSizeH = 20;
 
     public int mapLength = mapSizeW * mapSizeH;
 
@@ -42,6 +42,7 @@ public abstract class Level implements Storable {
     public MobMapper mm = new MobMapper();
 
     public int[] map;
+    public int[] maplayer;
     public int[] watermap;
     public int[] heightmap;
 
@@ -58,6 +59,7 @@ public abstract class Level implements Storable {
         mm.init();
 
         map = new int[mapLength];
+        maplayer = new int[mapLength];
         watermap = new int[mapLength];
         heightmap = new int[mapLength];
 
