@@ -20,6 +20,7 @@ public class GameScene extends UIScene {
 
     public static GameScene scene;
     public AnimatedTilemap watermap;
+    public WorldTilemap maplayer;
     public WorldTilemap tilemap;
     public WorldTilemap heightmap;
 
@@ -62,6 +63,10 @@ public class GameScene extends UIScene {
             protected  void setTileAnimations(){
             }
         };
+
+        maplayer = new WorldTilemap(Artifice.level.tiles());
+
+
         //heightmap = new WorldTilemap(Artifice.level.heightmap);
 
         player = new Char();
@@ -72,6 +77,7 @@ public class GameScene extends UIScene {
         Artifice.level.init();
         watermap.setMap(Artifice.level.watermap);
         tilemap.setMap(Artifice.level.map);
+        maplayer.setMap(Artifice.level.maplayer);
 
         Artifice.level.mm.add(player);
 
@@ -86,6 +92,7 @@ public class GameScene extends UIScene {
 
         world.add(tilemap);
         world.add(watermap);
+        world.add(maplayer);
         world.add(liquid);
         world.add(weather);
 

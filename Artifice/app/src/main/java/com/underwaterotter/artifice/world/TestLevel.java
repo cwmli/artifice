@@ -12,6 +12,8 @@ public class TestLevel extends Level {
     }
 
     public void generate(){
+        World coarsemap = new World(mapSizeW, mapSizeH, World.AMP, World.SMOOTH, World.DROP,
+                World.F1, World.F2, World.F3, World.REDIS);
         World.buildWorld(map);
         buildFlags();
 

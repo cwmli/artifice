@@ -9,46 +9,60 @@ import java.util.ArrayList;
 
 public class World {
 
+    public static final int DEFAULT = 0;
+
     private static final int SMOOTH_PASSES = 3;
     private static final int BASE_TOUCH = 3;
 
     private static final int NOISE_PASS = 5;
     private static final int NOISE_CHANCE = 60;
 
+    public static final double F1 = 1.0;
+    public static final double F2 = 2.0;
+    public static final double F3 = 4.0;
+
+    public static final double REDIS = 3.65;
+
+    public static final double AMP = 0.05;
+    public static final double SMOOTH = 1.30;
+    public static final double DROP = 2.60;
+
     private static final int BED_PATTERN_FREQ = 3;
 
-    public static void buildWorld(int[] map){
+    private double[][] elevation;
 
-        boolean exitRoom = false;
-        boolean entranceRoom = false;
+    /*
+     * amplitude = 0.0 - 1.0
+     * smoothing = 0.0 - 2.0
+     * dropoff = 0.0 - 10.0
+     */
+    public World(int w, int h, double amplitude, double smooth, double drop, double f1, double f2, double f3, double redistribution){
+        Noise noise = new Noise(Artifice.level.mapSizeW, Artifice.level.mapSizeH);
 
-        int rooms = 0;
-        int roomLimit = Magic.randRange(Artifice.depth * 10 - 3, Artifice.depth * 10 + 3);
+        elevation = new double[Artifice.level.mapSizeH][Artifice.level.mapSizeW];
 
-        int enlargeW = (int)Math.floor(Artifice.level.mapSizeW / Seed.MIN_SIDE_LENGTH);
-        int enlargeH = (int)Math.floor(Artifice.level.mapSizeH / Seed.MIN_SIDE_LENGTH);
+        for(int y = 0; y < elevation.length; y++){
+            for (int x = 0; x < elevation[0].length; x++){
+                double e =  noise.smoothNoise(x / f1, y / f1)
+                         +  noise.smoothNoise(x / f2, y / f2)
+                         +  noise.smoothNoise(x / f3, y / f3);
+                e = Math.pow(e, redistribution);
 
-        //build base
-        if(Artifice.level.isUnderground){
-            Painter.fill(map, Terrain.DUNGEON_WALL);
-            do {
-                if(!entranceRoom){
+                //Manhattan Distance
+                double d = 2 * Math.max(Math.abs(x), Math.abs(y));
 
-                }
-                //as the rooms approaches roomLimit, the chance of exitRoom increases
-            } while(rooms < roomLimit);
-        } else if(!Artifice.level.overworldGenerated) { //build the overworld if it has not been generated
-            ArrayList<int[]> seedBase = Seed.initBase();
-
-            Painter.fill(map, Terrain.SOLID_BED);
-
-            //enlarge seedBase to actual level size
-            for(int[] seedXY : seedBase){
-                Painter.setCell((seedXY[0] * enlargeW) + ((seedXY[1] * enlargeH) * Artifice.level.mapSizeW ));
-                Painter.fillRect(map, Terrain.SGRASS_3, enlargeW, enlargeH);
+                elevation[y][x] = (e + amplitude) * (1 - smooth * Math.pow(d, drop));
             }
-            Artifice.level.overworldGenerated = true;
         }
+    }
+
+    public double[][] getElevation(){
+        return elevation;
+    }
+
+    public int getBiome(double e){
+        if(e < 0.1) return Terrain.SWATER_1;
+        else if(e < 0.12) return Terrain.
     }
 
     public static void smoothMap(int[] map, boolean[] passable){
@@ -217,15 +231,19 @@ public class World {
     }
 
     public static void addWorldLayers(int[] map, int[] maplayer){
-        final int[] BORDERSETLIGHT = {Terrain.TGRASS_2, Terrain.LFT_BED, Terrain.BOT_BED, Terrain.CGRASS_2, Terrain.CGRASS_2};
-        final int[] BORDERSETDARK = {Terrain.TGRASS_1, Terrain.LFT_BED, Terrain.BOT_BED, Terrain.CGRASS_1, Terrain.CGRASS_1};
+        final int[] BORDERSETLIGHT = {Terrain.TOPGRASS_2, Terrain.LFTGRASS_2, Terrain.BOTGRASS_2, Terrain.CORNERGRASS_2, Terrain.CORNERGRASS_2_B};
+        final int[] BORDERSETDARK = {Terrain.TOPGRASS_1, Terrain.LFTGRASS_1, Terrain.BOTGRASS_1, Terrain.CORNERGRASS_1, Terrain.CORNERGRASS_1_B};
 
         for(int i = 0; i < map.length; i += 5){
             if(map[i] == Terrain.SGRASS_3){
                 if(Magic.randRange(0, 100) < 30){
                     Painter.setCell(i);
-                    int[] queueflips = Painter.fillSelectiveBorderRect(map, Terrain.LSOLID_BED,
-                            Magic.randRange(0, 100) < 30 ? BORDERSETLIGHT : BORDERSETDARK, Terrain.SOLID_BED, Magic.randRange(2, 5), Magic.randRange(2, 5));
+                    int[] queueflips;
+                    if(Magic.randRange(0, 100) < 50) {
+                        queueflips = Painter.fillSelectiveBorderRect(maplayer, Terrain.SGRASS_2, BORDERSETLIGHT, Terrain.SGRASS_3, Magic.randRange(2, 5), Magic.randRange(2, 5));
+                    } else {
+                        queueflips = Painter.fillSelectiveBorderRect(maplayer, Terrain.SGRASS_1, BORDERSETDARK, Terrain.SGRASS_3, Magic.randRange(2, 5), Magic.randRange(2, 5));
+                    }
                     for(int x = 0; x < queueflips.length; x++){
                         GameScene.scene.tilemap.updateFlipData(queueflips[x], true);
                     }

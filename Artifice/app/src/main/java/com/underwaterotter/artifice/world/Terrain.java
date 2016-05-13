@@ -19,37 +19,41 @@ public class Terrain {
     public static final int[] WATER = {DWATER_1, DWATER_2, DWATER_3, SWATER_1, SWATER_2};
 
     //water bed tiles
-    public static final int SOLID_BED = 17;
-    public static final int RND_CORNER_BED = 18;
-    public static final int TOP_BED = 19;
-    public static final int RGH_CORNER_BED = 27;
-    public static final int LFT_BED = 28;
-    public static final int BOT_BED = 29;
-    public static final int RGH_CORNER_BED_B = 37;
-    public static final int RND_CORNER_BED_B = 38;
-    public static final int LSOLID_BED = 39;
+    public static final int SOLID_BED = 37;
+    public static final int RND_CORNER_BED = 38;
+    public static final int TOP_BED = 39;
+    public static final int RGH_CORNER_BED = 47;
+    public static final int LFT_BED = 48;
+    public static final int BOT_BED = 49;
+    public static final int RGH_CORNER_BED_B = 57;
+    public static final int RND_CORNER_BED_B = 58;
+    public static final int LSOLID_BED = 59;
 
-    public static final int STONE = 7;
-    public static final int DSTONE = 8;
-    public static final int CONV_STONE = 9;
-
-    //S = solid, E = top edge, C = top corner, T =  bottom top, D = diagonal
+    public static final int STONE = 27;
+    public static final int DSTONE = 28;
+    public static final int CONV_STONE = 29;
 
     public static final int SGRASS_1 = 0;
-    public static final int EGRASS_1 = 1;
-    public static final int CGRASS_1 = 2;
-    public static final int TGRASS_1 = 3;
-    public static final int D1GRASS_1 = 4;
-    public static final int D2GRASS_1 = 5;
-    public static final int CONV_GRASS_1 = 6;
+    public static final int TOPGRASS_1 = 1;
+    public static final int CORNERGRASS_1 = 2;
+    public static final int LFTGRASS_1 = 3;
+    public static final int BOTGRASS_1 = 4;
+    public static final int CORNERGRASS_1_B = 5;
+    public static final int TGRASS_1 = 6;
+    public static final int D1GRASS_1 = 7;
+    public static final int D2GRASS_1 = 8;
+    public static final int CONV_GRASS_1 = 9;
 
     public static final int SGRASS_2 = 10;
-    public static final int EGRASS_2 = 11;
-    public static final int CGRASS_2 = 12;
-    public static final int TGRASS_2 = 13;
-    public static final int D1GRASS_2 = 14;
-    public static final int D2GRASS_2 = 15;
-    public static final int CONV_GRASS_2 = 16;
+    public static final int TOPGRASS_2 = 11;
+    public static final int CORNERGRASS_2 = 12;
+    public static final int LFTGRASS_2 = 13;
+    public static final int BOTGRASS_2 = 14;
+    public static final int CORNERGRASS_2_B = 15;
+    public static final int TGRASS_2 = 16;
+    public static final int D1GRASS_2 = 17;
+    public static final int D2GRASS_2 = 18;
+    public static final int CONV_GRASS_2 = 19;
 
     public static final int SGRASS_3 = 20;
     public static final int EGRASS_3 = 21;
@@ -84,16 +88,16 @@ public class Terrain {
         flags[EMPTY] = SOLID;
 
         flags[SGRASS_1] = PASSABLE | FLAMMABLE;
-        flags[EGRASS_1] = PASSABLE | FLAMMABLE;
-        flags[CGRASS_1] = PASSABLE | FLAMMABLE;
+        flags[TOPGRASS_1] = PASSABLE | FLAMMABLE;
+        flags[CORNERGRASS_1] = PASSABLE | FLAMMABLE;
         flags[TGRASS_1] = SOLID | FLAMMABLE;
         flags[D1GRASS_1] = PASSABLE | FLAMMABLE;
         flags[D2GRASS_1] = SOLID | FLAMMABLE;
         flags[CONV_GRASS_1] = SOLID | FLAMMABLE;
 
         flags[SGRASS_2] = PASSABLE | FLAMMABLE;
-        flags[EGRASS_2] = PASSABLE | FLAMMABLE;
-        flags[CGRASS_2] = PASSABLE | FLAMMABLE;
+        flags[TOPGRASS_2] = PASSABLE | FLAMMABLE;
+        flags[CORNERGRASS_2] = PASSABLE | FLAMMABLE;
         flags[TGRASS_2] = SOLID | FLAMMABLE;
         flags[D1GRASS_2] = PASSABLE | FLAMMABLE;
         flags[D2GRASS_2] = SOLID | FLAMMABLE;
