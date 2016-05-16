@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 
 import com.underwaterotter.ceto.Game;
 import com.underwaterotter.ceto.Image;
-import com.underwaterotter.math.Magic;
+import com.underwaterotter.math.Rand;
 import com.underwaterotter.math.Vector3;
 
 public class Particle extends Image {
@@ -52,7 +52,7 @@ public class Particle extends Image {
     }
 
     public void pulsateSize(){
-        scale(Magic.randRange(sizeLower, sizeUpper));
+        scale(Rand.range(sizeLower, sizeUpper));
     }
 
     @Override

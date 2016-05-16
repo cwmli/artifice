@@ -1,6 +1,6 @@
 package com.underwaterotter.artifice.world.generation;
 
-import com.underwaterotter.math.Magic;
+import com.underwaterotter.math.*;
 
 public class Noise {
 
@@ -8,14 +8,18 @@ public class Noise {
     private int xmax;
     private int ymax;
 
-    public Noise(int xmax, int ymax){
+    private Seed seed;
+
+    public Noise(int xmax, int ymax, long seedValue){
         this.xmax = xmax;
         this.ymax = ymax;
         noise = new float[ymax][xmax];
 
+        seed = new Seed(seedValue);
+
         for(int y = 0; y < ymax; y++){
             for(int x = 0; x < xmax; x++){
-                noise[y][x] = Magic.randRange(0.0f, 1.0f);
+                noise[y][x] = seed.range(0.0f, 1.0f);
             }
         }
     }
