@@ -30,12 +30,12 @@ public class Noise {
         double fractY = y - (int)y;
 
         //wrap around
-        int x1 = ((int)x + xmax) % ymax;
-        int y1 = ((int)y + xmax) % ymax;
+        int x1 = ((int)x + xmax) % xmax;
+        int y1 = ((int)y + ymax) % ymax;
 
         //neighbor values
         int x2 = (x1 + xmax - 1) % xmax;
-        int y2 = (y1 + xmax - 1) % ymax;
+        int y2 = (y1 + ymax - 1) % ymax;
 
         //smooth the noise with bilinear interpolation
         double value = 0.0;

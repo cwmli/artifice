@@ -3,7 +3,7 @@ package com.underwaterotter.artifice.world;
 
 import com.underwaterotter.artifice.scenes.GameScene;
 import com.underwaterotter.artifice.world.generation.Level;
-import com.underwaterotter.artifice.world.generation.World;
+import com.underwaterotter.artifice.world.generation.Map;
 import com.underwaterotter.math.Rand;
 
 public class TestLevel extends Level {
@@ -13,13 +13,15 @@ public class TestLevel extends Level {
     }
 
     public void generate(){
-        World coarsemap = new World(mapSizeW, mapSizeH, Rand.range(0,65536l),World.AMP, World.RISE, World.DROP,
-                World.F1, World.F2, World.F3, World.SMOOTH, World.REDIS);
+        Map heightmap = new Map(
+                mapSizeW, mapSizeH, Rand.range(0,65536l),
+                Map.AMP, Map.RISE, Map.DROP,
+                Map.F1, Map.F2, Map.F3,
+                Map.EOCT1, Map.EOCT2, Map.EOCT3,
+                Map.SMOOTH, Map.REDIS);
+        heightmap.build();
 
-        World.convertTiles(map, watermap, passable);
-        buildFlags();
-
-        World.addWorldLayers(map, maplayer);
+        map = heightmap.generateDisplayMap(safeSizeW, safeSizeH);
     }
 
     public void decorate(){

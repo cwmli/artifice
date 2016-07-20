@@ -21,20 +21,26 @@ public abstract class Level implements Storable {
     public static final String UNSTABLE = "unstable";
     public static final String HIDDEN = "hidden";
 
+    public static final int SAFE_SIZE = 10;
+
     public static boolean overworldGenerated = false;
 
     public int mapSizeW = 20;
     public int mapSizeH = 20;
 
+    public int safeSizeW = mapSizeW;
+    public int safeSizeH = mapSizeH + SAFE_SIZE;
+
     public int mapLength = mapSizeW * mapSizeH;
+    public int safeLength = safeSizeW * safeSizeH;
 
     //Surrounding cells index
     //0 1 2
     //3 C 4
     //5 6 7
-    public int[] SURROUNDING_CELLS = {-mapSizeW - 1, -mapSizeW, -mapSizeW + 1,
+    public int[] SURROUNDING_CELLS = {-safeSizeW - 1, -safeSizeW, -safeSizeW + 1,
                                              -1, + 1,
-                                             mapSizeW - 1, mapSizeW, mapSizeW + 1 };
+                                             safeSizeW - 1, safeSizeW, safeSizeW + 1 };
 
     public boolean isUnderground = false;
 
@@ -42,28 +48,24 @@ public abstract class Level implements Storable {
     public MobMapper mm = new MobMapper();
 
     public int[] map;
-    public int[] maplayer;
     public int[] watermap;
-    public int[] heightmap;
 
     public boolean[] explored;
 
-    public boolean[] passable = new boolean[mapLength];
-    public boolean[] climbable = new boolean[mapLength];
-    public boolean[] flammable = new boolean[mapLength];
-    public boolean[] unstable = new boolean[mapLength];
+    public boolean[] passable = new boolean[safeLength];
+    public boolean[] climbable = new boolean[safeLength];
+    public boolean[] flammable = new boolean[safeLength];
+    public boolean[] unstable = new boolean[safeLength];
 
     public void init(){
 
         im.init();
         mm.init();
 
-        map = new int[mapLength];
-        maplayer = new int[mapLength];
-        watermap = new int[mapLength];
-        heightmap = new int[mapLength];
+        map = new int[safeLength];
+        watermap = new int[safeLength];
 
-        explored = new boolean[mapLength];
+        explored = new boolean[safeLength];
         Arrays.fill(explored, false);
 
         generate();

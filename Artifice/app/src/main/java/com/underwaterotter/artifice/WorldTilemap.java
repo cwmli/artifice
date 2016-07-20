@@ -18,19 +18,19 @@ public class WorldTilemap extends Tilemap {
 
     public WorldTilemap(String tiles){
         super(tiles, CELL_SIZE_W, CELL_SIZE_H);
-        oldmap = new int[Artifice.level.mapLength];
+        oldmap = new int[Artifice.level.safeLength];
         Arrays.fill(oldmap, INVALID_TILE);
 
-        flipData = new boolean[Artifice.level.mapLength];
+        flipData = new boolean[Artifice.level.safeLength];
         Arrays.fill(flipData, false);
 
-        readMapData(oldmap, flipData, Artifice.level.mapSizeW);
+        readMapData(oldmap, flipData, Artifice.level.safeSizeW);
     }
 
     @Override
     public void update(){
         if(!Arrays.equals(map, oldmap)){
-            readMapData(map, flipData, Artifice.level.mapSizeW);
+            readMapData(map, flipData, Artifice.level.safeSizeW);
             oldmap = map.clone();
         }
     }
