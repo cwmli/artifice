@@ -130,7 +130,7 @@ public abstract class Mob extends Entity implements Storable {
         super.destroy();
 
         hp = 0;
-        Artifice.level.mm.remove(this);
+        Artifice.level.mobMapper.remove(this);
     }
 
     protected void updateAgro(){
@@ -146,7 +146,7 @@ public abstract class Mob extends Entity implements Storable {
 
     protected Mob[] getCollided(){
         //find closest mobs to check
-        Mob[] mobs = Artifice.level.mm.findByCell(cellPosition());
+        Mob[] mobs = Artifice.level.mobMapper.findByCell(cellPosition());
         ArrayList<Mob> collided = new ArrayList<Mob>();
 
         if(mobs != null) {

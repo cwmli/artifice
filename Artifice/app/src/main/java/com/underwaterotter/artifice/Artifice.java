@@ -14,11 +14,19 @@ import com.underwaterotter.artifice.world.generation.Level;
 public class Artifice extends Game {
 
     public static Settings settings;
-    public static Level level = null;
-    public static int depth = 0;
+    private static Level level = null;
+    private static int depth = 0;
 
     public Artifice() {
         super(MenuScene.class);
+    }
+
+    public static Level getLevel(){
+        return level;
+    }
+
+    public static int getDepth(){
+        return depth;
     }
 
     @Override

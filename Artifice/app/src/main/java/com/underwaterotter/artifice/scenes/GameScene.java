@@ -7,6 +7,7 @@ import com.underwaterotter.artifice.Artifice;
 import com.underwaterotter.artifice.Joystick;
 import com.underwaterotter.artifice.world.Assets;
 import com.underwaterotter.artifice.world.Terrain;
+import com.underwaterotter.artifice.world.generation.Level;
 import com.underwaterotter.ceto.Group;
 import com.underwaterotter.artifice.WorldTilemap;
 import com.underwaterotter.artifice.entities.Mob;
@@ -24,6 +25,9 @@ public class GameScene extends UIScene {
 
     public Char player;
 
+    private Level currentLevel;
+    private int currentDepth;
+
     private Group world;
     private Group liquid;
     private Group weather;
@@ -36,7 +40,11 @@ public class GameScene extends UIScene {
         super.create();
 
         scene = this;
-        watermap = new AnimatedTilemap(Artifice.level.tiles(), 2) {
+
+        currentLevel = Artifice.getLevel();
+        currentDepth = Artifice.getDepth();
+
+        watermap = new AnimatedTilemap(currentLevel.tiles(), 2) {
 
             @Override
             protected void setTileAnimations() {
@@ -55,7 +63,7 @@ public class GameScene extends UIScene {
 
         };
 
-        tilemap = new AnimatedTilemap(Artifice.level.tiles(), 2){
+        tilemap = new AnimatedTilemap(currentLevel.tiles(), 2){
 
             @Override
             protected  void setTileAnimations(){
@@ -67,14 +75,14 @@ public class GameScene extends UIScene {
 
         player = new Char();
         //pre-init level setup
-        if(Artifice.depth < 0){
-            Artifice.level.isUnderground = true;
+        if(currentDepth < 0){
+            currentLevel.isUnderground = true;
         }
-        Artifice.level.init();
-        watermap.setMap(Artifice.level.watermap);
-        tilemap.setMap(Artifice.level.map);
+        currentLevel.init();
+        watermap.setMap(currentLevel.watermap);
+        tilemap.setMap(currentLevel.backgroundmap);
 
-        Artifice.level.mm.add(player);
+        currentLevel.mobMapper.add(player);
 
         world = new Group();
         add(world);
@@ -92,14 +100,14 @@ public class GameScene extends UIScene {
 
         mobs = new Group();
 
-        for(Mob m : Artifice.level.mm.mobs.values()){
+        for(Mob m : currentLevel.mobMapper.mobs.values()){
             addMob(m);
         }
         add(mobs);
 
         items = new Group();
 
-        for(Item i : Artifice.level.im.items.values()){
+        for(Item i : currentLevel.itemMapper.items.values()){
             addItem(i);
         }
         add(items);
@@ -129,8 +137,8 @@ public class GameScene extends UIScene {
     public synchronized void update(){
         super.update();
 
-        watermap.setMap(Artifice.level.watermap);
-        tilemap.setMap(Artifice.level.map);
+        watermap.setMap(currentLevel.watermap);
+        tilemap.setMap(currentLevel.backgroundmap);
         //heightmap.setMap(Artifice.level.heightmap);
 
         mobs.update();
@@ -148,20 +156,18 @@ public class GameScene extends UIScene {
         item.sprite.visible = item.isVisible();
     }
 
-    public static void add(Mob mob){
-        Artifice.level.mm.add(mob);
+    public void add(Mob mob){
+        currentLevel.mobMapper.add(mob);
         scene.addMob(mob);
     }
 
-    public static void add(Item item){
-        Artifice.level.im.add(item);
-        scene.addItem(item);
+    public void add(Item item){
+        currentLevel.itemMapper.add(item);
+        addItem(item);
     }
 
-    public static void exploreCell(int cell){
-        if(scene != null){
-            scene.tilemap.explore(cell);
-        }
+    public void exploreCell(int cell){
+        tilemap.explore(cell);
     }
 
 

@@ -163,26 +163,33 @@ public class Map {
         build();
     }
 
-    public int[] generateDisplayMap(int w, int h){
-        int[] map = new int[w * h];
+
+    public int[][] generateDisplayMap(int w, int h){
+        int[] bg = new int[w * h];
+        int[] fg = new int[w * h];
+        int[] wm = new int[w * h];
+
         int[] shiftY = new int[w];
         for(int y = h - 2; y > 0; y--){
             for(int x = w - 1; x > 0; x--){
                 int h1 = getHeight(heightmap[y][x]);
                 int h2 = getHeight(heightmap[y + 1][x]);
+
                 if(h1 == 0 || h2 == 0)
-                    continue;
+                    wm[y * w + x] = getBiome(heightmap[y][x]);
 
                 if(h1 - h2 > 0) {
                     shiftY[x] = h1 - h2;
-                    map[(y - shiftY[x]) * w + x] = getBiome(heightmap[y][x]);
+                    fg[(y - shiftY[x]) * w + x] = getBiome(heightmap[y][x]);
                     //fill intermediate height blocks
                 } else if (h1 - h2 == 0)
-                    map[y * w + x] = getBiome(heightmap[y][x]);
+                    fg[(y - shiftY[x]) * w + x] = getBiome(heightmap[y][x]);
+                else //h1 - h2 < 0
+                    bg[y * w + x] = getBiome(heightmap[y][x]);
             }
         }
 
-        return map;
+        return new int[][] {fg, bg, wm};
     }
 
     private void smoothMap(double[][] map, int sampleSize){

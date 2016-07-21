@@ -21,7 +21,12 @@ public class TestLevel extends Level {
                 Map.SMOOTH, Map.REDIS);
         heightmap.build();
 
-        map = heightmap.generateDisplayMap(safeSizeW, safeSizeH);
+        int[][] displaymap = heightmap.generateDisplayMap(safeSizeW, safeSizeH);
+
+        foregroundmap = displaymap[0];
+        backgroundmap = displaymap[1];
+        watermap = displaymap[2];
+
     }
 
     public void decorate(){
@@ -31,7 +36,7 @@ public class TestLevel extends Level {
 
     public void prespawnMobs(){
         GameScene.scene.player.worldPosition(
-                GameScene.scene.tilemap.cellToWorld((int)Math.floor((map.length) / 2) + 2));
+                GameScene.scene.tilemap.cellToWorld((int)Math.floor((backgroundmap.length) / 2) + 2));
     }
 
     public void prespawnItems(){
