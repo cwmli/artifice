@@ -1,7 +1,5 @@
 package com.underwaterotter.artifice.sprites;
 
-import android.graphics.RectF;
-
 import com.underwaterotter.ceto.Animation;
 import com.underwaterotter.artifice.entities.Mob;
 

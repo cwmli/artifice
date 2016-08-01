@@ -1,5 +1,7 @@
 package com.underwaterotter.artifice.entities;
 
+import com.underwaterotter.artifice.scenes.GameScene;
+import com.underwaterotter.artifice.world.generation.Level;
 import com.underwaterotter.ceto.Group;
 import com.underwaterotter.math.Vector3;
 import com.underwaterotter.utils.Block;
@@ -13,11 +15,18 @@ public class Entity extends Group implements Storable {
     public static String C_NUM = "cnum";
 
     protected Vector3 worldPosition; //xy position
-    protected int cellNumber; //cell position based in tilemap mapData[]
+    protected int cellNumber;        //cell position based in tilemap mapData[]
+    protected Level currentLevel;
 
     protected float timer;
 
     private int id = 0;
+
+    @Override
+    public void update(){
+        super.update();
+        cellNumber = GameScene.scene.getTilemap().worldToCell(worldPosition);
+    }
 
     @Override
     public void saveToBlock(Block block){
@@ -52,6 +61,7 @@ public class Entity extends Group implements Storable {
 
     public void cellPosition(int pos){
         cellNumber = pos;
+        worldPosition = GameScene.scene.getTilemap().cellToWorld(pos);
     }
 
     public Vector3 worldPosition(){

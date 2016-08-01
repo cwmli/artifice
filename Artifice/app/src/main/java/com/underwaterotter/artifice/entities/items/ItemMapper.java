@@ -21,7 +21,7 @@ public class ItemMapper implements Storable {
 
         levelItems = new HashSet<String>();
         items = new HashMap<UUID, Item>();
-        //load all potential items form level and add to game scene
+        //load all potential items form level and addMob to game scene
     }
 
     @Override

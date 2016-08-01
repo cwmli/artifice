@@ -68,6 +68,13 @@ public abstract class Mob extends Entity implements Storable {
     }
 
     @Override
+    public void destroy(){
+        super.destroy();
+
+        hp = 0;
+    }
+
+    @Override
     public void saveToBlock(Block block){
         super.saveToBlock(block);
 
@@ -94,89 +101,10 @@ public abstract class Mob extends Entity implements Storable {
         );
     }
 
-
-    public float speed(){
-        return speed * hindrance;
-    }
-
-    public UUID mobID(){
-        return mob_id;
-    }
-
-    public UUID setMobID(UUID id){
-        return mob_id = id;
-    }
-
-    public Vector3 center(){
-        return new Vector3(worldPosition.x + sprite.width() / 2,
-                worldPosition.y + sprite.height() / 2, worldPosition.z);
-    }
-
-    public void clearEquipped(){
-        Arrays.fill(equipped, null);
-    }
-
     @Override
     public void update(){
         super.update();
 
-        updateStatusEffects();
-    }
-
-    //// FIXME: 02/09/15 GameScene.scene.tilemap.worldToCell(center()); finds cell based on center of sprite
-
-    @Override
-    public void destroy(){
-        super.destroy();
-
-        hp = 0;
-        Artifice.level.mobMapper.remove(this);
-    }
-
-    protected void updateAgro(){
-        visibleCells.clear();
-        for(int i = 0; i < Artifice.level.SURROUNDING_CELLS.length; i++){
-            visibleCells.add(Artifice.level.SURROUNDING_CELLS[i] * 2);
-        }
-    }
-
-    public boolean isAlive(){
-        return hp > 0;
-    }
-
-    protected Mob[] getCollided(){
-        //find closest mobs to check
-        Mob[] mobs = Artifice.level.mobMapper.findByCell(cellPosition());
-        ArrayList<Mob> collided = new ArrayList<Mob>();
-
-        if(mobs != null) {
-            for(Mob mob : mobs) {
-                if (RectF.intersects(mob.sprite.boundingBox, this.sprite.boundingBox) && mob.worldPosition().y - worldPosition().y <= MOB_THICKNESS) {
-                    collided.add(mob);
-                    mob.hindrance = 1 - (feather * 0.01f);
-                }
-            }
-        }
-        Mob[] collidedMobs = new Mob[collided.size()];
-        collided.toArray(collidedMobs);
-
-        return collidedMobs;
-    }
-
-    public void damage(int damage, Item source){
-        damage -= def;
-        //log damage
-
-        hp -= damage;
-    }
-
-    public void addStatus(Status s){
-        status.add(s);
-        updateStatusEffects();
-    }
-
-    public void removeStatus(Status s){
-        status.remove(s);
         updateStatusEffects();
     }
 
@@ -202,6 +130,77 @@ public abstract class Mob extends Entity implements Storable {
             }
         }
     }
+
+    protected void updateAgro(){
+        visibleCells.clear();
+        for(int i = 0; i < Artifice.getLevel().SURROUNDING_CELLS.length; i++){
+            visibleCells.add(Artifice.getLevel().SURROUNDING_CELLS[i] * 2);
+        }
+    }
+
+    public UUID getMobID(){
+        return mob_id;
+    }
+
+    protected Mob[] getCollided(){
+        //find closest mobs to check
+        Mob[] mobs = currentLevel.mobMapper.findByCell(cellPosition());
+        ArrayList<Mob> collided = new ArrayList<Mob>();
+
+        if(mobs != null) {
+            for(Mob mob : mobs) {
+                if (RectF.intersects(mob.sprite.boundingBox, this.sprite.boundingBox) && mob.worldPosition().y - worldPosition().y <= MOB_THICKNESS) {
+                    collided.add(mob);
+                    mob.hindrance = 1 - (feather * 0.01f);
+                }
+            }
+        }
+        Mob[] collidedMobs = new Mob[collided.size()];
+        collided.toArray(collidedMobs);
+
+        return collidedMobs;
+    }
+
+    public float getSpeed(){
+        return speed * hindrance;
+    }
+
+
+    public UUID setMobID(UUID id){
+        return mob_id = id;
+    }
+
+    public boolean isAlive(){
+        return hp > 0;
+    }
+
+    public Vector3 center(){
+        return new Vector3(worldPosition.x + sprite.width() / 2,
+                worldPosition.y + sprite.height() / 2, worldPosition.z);
+    }
+
+    public void clearEquipped(){
+        Arrays.fill(equipped, null);
+    }
+
+    public void damage(int damage, Item source){
+        damage -= def;
+        //log damage
+
+        hp -= damage;
+    }
+
+    public void addStatus(Status s){
+        status.add(s);
+        updateStatusEffects();
+    }
+
+    public void removeStatus(Status s){
+        status.remove(s);
+        updateStatusEffects();
+    }
+
+
 
     public abstract String desc();
 }

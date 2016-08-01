@@ -2,14 +2,12 @@ package com.underwaterotter.artifice.scenes;
 
 import android.util.Log;
 
-import com.underwaterotter.artifice.AnimatedTilemap;
+import com.underwaterotter.artifice.world.AnimatedTilemap;
 import com.underwaterotter.artifice.Artifice;
 import com.underwaterotter.artifice.Joystick;
 import com.underwaterotter.artifice.world.Assets;
-import com.underwaterotter.artifice.world.Terrain;
 import com.underwaterotter.artifice.world.generation.Level;
 import com.underwaterotter.ceto.Group;
-import com.underwaterotter.artifice.WorldTilemap;
 import com.underwaterotter.artifice.entities.Mob;
 import com.underwaterotter.artifice.entities.items.Item;
 import com.underwaterotter.artifice.entities.main.Char;
@@ -20,16 +18,12 @@ import com.underwaterotter.ceto.ui.Button;
 public class GameScene extends UIScene {
 
     public static GameScene scene;
-    public AnimatedTilemap watermap;
-    public WorldTilemap tilemap;
-
-    public Char player;
 
     private Level currentLevel;
-    private int currentDepth;
+
+    private Char player;
 
     private Group world;
-    private Group liquid;
     private Group weather;
     private Group mobs;
     private Group items;
@@ -40,62 +34,24 @@ public class GameScene extends UIScene {
         super.create();
 
         scene = this;
-
         currentLevel = Artifice.getLevel();
-        currentDepth = Artifice.getDepth();
-
-        watermap = new AnimatedTilemap(currentLevel.tiles(), 2) {
-
-            @Override
-            protected void setTileAnimations() {
-                int[] dwater = {Terrain.DWATER_1, Terrain.DWATER_2, Terrain.DWATER_3, Terrain.DWATER_2};
-                tileAnimations.put(Terrain.DWATER_1, dwater);
-                tileAnimations.put(Terrain.DWATER_2, dwater);
-                tileAnimations.put(Terrain.DWATER_3, dwater);
-
-                int[] twater = {Terrain.TWATER_1, Terrain.TWATER_2, Terrain.TWATER_3, Terrain.TWATER_2};
-                tileAnimations.put(Terrain.TWATER_1, twater);
-                tileAnimations.put(Terrain.TWATER_2, twater);
-                tileAnimations.put(Terrain.TWATER_3, twater);
-
-                frames = 4;
-            }
-
-        };
-
-        tilemap = new AnimatedTilemap(currentLevel.tiles(), 2){
-
-            @Override
-            protected  void setTileAnimations(){
-            }
-        };
-
-
-        //heightmap = new WorldTilemap(Artifice.level.heightmap);
 
         player = new Char();
-        //pre-init level setup
-        if(currentDepth < 0){
+        //pre-init currentLevel setup
+        if(Artifice.getDepth() < 0){
             currentLevel.isUnderground = true;
         }
         currentLevel.init();
-        watermap.setMap(currentLevel.watermap);
-        tilemap.setMap(currentLevel.backgroundmap);
 
-        currentLevel.mobMapper.add(player);
+        currentLevel.mobMapper.addMob(player);
 
         world = new Group();
         add(world);
 
-        liquid = new Group();
-        add(liquid);
-
         weather = new Group();
         add(weather);
 
-        world.add(tilemap);
         world.add(watermap);
-        world.add(liquid);
         world.add(weather);
 
         mobs = new Group();
@@ -127,7 +83,6 @@ public class GameScene extends UIScene {
 
     @Override
     public void destroy(){
-
         scene = null;
 
         super.destroy();
@@ -137,12 +92,16 @@ public class GameScene extends UIScene {
     public synchronized void update(){
         super.update();
 
-        watermap.setMap(currentLevel.watermap);
-        tilemap.setMap(currentLevel.backgroundmap);
-        //heightmap.setMap(Artifice.level.heightmap);
-
         mobs.update();
         items.update();
+    }
+
+    public AnimatedTilemap getTilemap(){
+        return tilemap;
+    }
+
+    public Char getPlayer(){
+        return player;
     }
 
     public void addMob(Mob mob){
@@ -157,7 +116,7 @@ public class GameScene extends UIScene {
     }
 
     public void add(Mob mob){
-        currentLevel.mobMapper.add(mob);
+        currentLevel.mobMapper.addMob(mob);
         scene.addMob(mob);
     }
 
@@ -169,7 +128,6 @@ public class GameScene extends UIScene {
     public void exploreCell(int cell){
         tilemap.explore(cell);
     }
-
 
     private static class DebugButton extends Button {
 

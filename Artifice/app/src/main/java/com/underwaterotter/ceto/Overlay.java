@@ -40,7 +40,7 @@ public class Overlay extends Article {
     protected float mg;
     protected float mb;
     protected float ma;
-    //add
+    //addMob
     protected float ar;
     protected float ag;
     protected float ab;

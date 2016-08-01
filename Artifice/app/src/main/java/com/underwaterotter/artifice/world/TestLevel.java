@@ -8,8 +8,46 @@ import com.underwaterotter.math.Rand;
 
 public class TestLevel extends Level {
 
-    public String tiles(){
-        return Assets.TEST_TILES;
+    @Override
+    public void init(){
+        super.init();
+
+        tilemap = new AnimatedTilemap(Assets.TEST_TILES, this,
+                WorldTilemap.TILEMAP.LAND, 2) {
+            @Override
+            protected void setTileAnimations() {
+
+            }
+        };
+
+        foretilemap = new AnimatedTilemap(Assets.TEST_TILES, this,
+                WorldTilemap.TILEMAP.FOREGROUND, 2) {
+            @Override
+            protected void setTileAnimations() {
+
+            }
+        };
+
+        watertilemap = new AnimatedTilemap(Assets.TEST_TILES, this,
+                WorldTilemap.TILEMAP.WATER, 2) {
+
+            @Override
+            protected void setTileAnimations() {
+                int[] dwater = {
+                        Terrain.DWATER_1, Terrain.DWATER_2, Terrain.DWATER_3, Terrain.DWATER_2};
+                tileAnimations.put(Terrain.DWATER_1, dwater);
+                tileAnimations.put(Terrain.DWATER_2, dwater);
+                tileAnimations.put(Terrain.DWATER_3, dwater);
+
+                int[] twater = {
+                        Terrain.TWATER_1, Terrain.TWATER_2, Terrain.TWATER_3, Terrain.TWATER_2};
+                tileAnimations.put(Terrain.TWATER_1, twater);
+                tileAnimations.put(Terrain.TWATER_2, twater);
+                tileAnimations.put(Terrain.TWATER_3, twater);
+
+                frames = 4;
+            }
+        };
     }
 
     public void generate(){
@@ -21,12 +59,12 @@ public class TestLevel extends Level {
                 Map.SMOOTH, Map.REDIS);
         heightmap.build();
 
-        int[][] displaymap = heightmap.generateDisplayMap(safeSizeW, safeSizeH);
+        int[][] displaymap = heightmap.genDispMap();
 
-        foregroundmap = displaymap[0];
-        backgroundmap = displaymap[1];
-        watermap = displaymap[2];
+        map = displaymap[0];
+        watermap = displaymap[1];
 
+        buildFlags();
     }
 
     public void decorate(){
@@ -35,8 +73,9 @@ public class TestLevel extends Level {
     }
 
     public void prespawnMobs(){
-        GameScene.scene.player.worldPosition(
-                GameScene.scene.tilemap.cellToWorld((int)Math.floor((backgroundmap.length) / 2) + 2));
+        GameScene.scene.getPlayer().worldPosition(
+                GameScene.scene.getTilemap().cellToWorld(
+                        (int)Math.floor((map.length) / 2) + 2));
     }
 
     public void prespawnItems(){

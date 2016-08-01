@@ -17,6 +17,10 @@ public class Article {
         exists = true;
     }
 
+    public void destroy(){
+        parent = null;
+    }
+
     public void update(){
     }
 
@@ -32,10 +36,6 @@ public class Article {
         } else {
             return null;
         }
-    }
-
-    public void destroy(){
-        parent = null;
     }
 
     public void kill(){

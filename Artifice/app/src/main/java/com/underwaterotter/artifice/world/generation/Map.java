@@ -19,6 +19,8 @@ public class Map {
 
     public static final double REDIS = 3.65;
     public static final int SMOOTH = 5;
+
+    private static final double INTERMEDIATE_TILE = 100d;
     //------------------------------------
     private Noise hmapnoise;
     private Noise vmapnoise;
@@ -100,17 +102,6 @@ public class Map {
         return moisturemap;
     }
 
-    public int getHeight(double e){
-        return 0;
-    }
-
-    public int getBiome(double e){
-        //take data from moisture and elevation
-        if(e < 0.1) return Terrain.SWATER_1;
-        //do rest of biomes here
-        return Terrain.EMPTY;
-    }
-
     public int getVegetation(double m){
         if(m < 0.1) return Terrain.BUSH;
         //do rest of vegetation here
@@ -163,33 +154,54 @@ public class Map {
         build();
     }
 
+    public int[][] genDispMap(){
+        int[] md = new int[xsize * (ysize + Level.SAFE_OFFSET)]; //map data
+        int[] wm = new int[xsize * (ysize + Level.SAFE_OFFSET)]; //water
 
-    public int[][] generateDisplayMap(int w, int h){
-        int[] bg = new int[w * h];
-        int[] fg = new int[w * h];
-        int[] wm = new int[w * h];
-
-        int[] shiftY = new int[w];
-        for(int y = h - 2; y > 0; y--){
-            for(int x = w - 1; x > 0; x--){
+        int[] shiftY = new int[xsize];
+        for(int y = (ysize + Level.SAFE_OFFSET) - 2; y > 0; y--){
+            for(int x = xsize - 1; x > 0; x--){
                 int h1 = getHeight(heightmap[y][x]);
                 int h2 = getHeight(heightmap[y + 1][x]);
 
                 if(h1 == 0 || h2 == 0)
-                    wm[y * w + x] = getBiome(heightmap[y][x]);
-
-                if(h1 - h2 > 0) {
+                    wm[y * xsize + x] = getTile(heightmap[y][x]);
+                else if(h1 - h2 > 0) {
                     shiftY[x] = h1 - h2;
-                    fg[(y - shiftY[x]) * w + x] = getBiome(heightmap[y][x]);
-                    //fill intermediate height blocks
+                    md[(y - shiftY[x]) * xsize + x] = getTile(heightmap[y][x]);
+                    for(int i = 0; i < shiftY[x]; i++){
+                        md[(y - i) * xsize + x] = getTile(INTERMEDIATE_TILE);
+                    }
                 } else if (h1 - h2 == 0)
-                    fg[(y - shiftY[x]) * w + x] = getBiome(heightmap[y][x]);
+                    md[(y - shiftY[x]) * xsize + x] = getTile(heightmap[y][x]);
                 else //h1 - h2 < 0
-                    bg[y * w + x] = getBiome(heightmap[y][x]);
+                    md[y * xsize + x] = md[(y + 1)* xsize + x]; //adjust for invisible lower levels than foreground
             }
         }
 
-        return new int[][] {fg, bg, wm};
+        return new int[][] {md, wm};
+    }
+
+    private int getHeight(double e){
+        if(e < 0.1)
+            return 0;
+        else if(e < 0.2)
+            return 1;
+        else if(e < 0.3)
+            return 2;
+        else if(e < 0.4)
+            return 3;
+        else if(e < 0.5)
+            return 4;
+        else
+            return 5;
+    }
+
+    private int getTile(double e){
+        //take data from moisture and elevation
+        if(e < 0.1) return Terrain.SWATER_1;
+        //do rest of biomes here
+        return Terrain.EMPTY;
     }
 
     private void smoothMap(double[][] map, int sampleSize){

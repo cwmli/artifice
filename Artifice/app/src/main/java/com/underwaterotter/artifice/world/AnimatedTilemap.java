@@ -1,6 +1,6 @@
-package com.underwaterotter.artifice;
+package com.underwaterotter.artifice.world;
 
-import com.underwaterotter.artifice.world.Terrain;
+import com.underwaterotter.artifice.world.generation.Level;
 import com.underwaterotter.ceto.Game;
 
 import java.util.HashMap;
@@ -19,8 +19,8 @@ public abstract class AnimatedTilemap extends WorldTilemap{
 
     public boolean playing;
 
-    public AnimatedTilemap(String tiles, int fps){
-        super(tiles);
+    public AnimatedTilemap(String tiles, Level level, WorldTilemap.TILEMAP type, int fps){
+        super(tiles, level, type);
 
         currentFrame = 0;
 

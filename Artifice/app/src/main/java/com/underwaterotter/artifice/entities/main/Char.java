@@ -1,9 +1,7 @@
 package com.underwaterotter.artifice.entities.main;
 
 import android.graphics.RectF;
-import android.util.Log;
 
-import com.underwaterotter.artifice.Artifice;
 import com.underwaterotter.artifice.entities.Mob;
 import com.underwaterotter.artifice.scenes.GameScene;
 import com.underwaterotter.artifice.sprites.MobSprite;
@@ -55,17 +53,25 @@ public class Char extends Mob {
 
             @Override
             public void updateBounds(){
-                boolean top = Artifice.level.passable[GameScene.scene.tilemap.worldToCell((int)(boundingBox.left + boundingBox.width() / 2),
-                        (int)boundingBox.bottom - SAFE_ZONE)];
+                boolean top = currentLevel.isPassable(
+                        GameScene.scene.getTilemap().worldToCell(
+                                (int)(boundingBox.left + boundingBox.width() / 2),
+                                (int)boundingBox.bottom - SAFE_ZONE));
 
-                boolean left = Artifice.level.passable[GameScene.scene.tilemap.worldToCell((int)(boundingBox.left + SAFE_ZONE),
-                        (int)boundingBox.bottom - SAFE_ZONE)];
+                boolean left = currentLevel.isPassable(
+                        GameScene.scene.getTilemap().worldToCell(
+                                (int)(boundingBox.left + SAFE_ZONE),
+                                (int)boundingBox.bottom - SAFE_ZONE));
 
-                boolean bottom = Artifice.level.passable[GameScene.scene.tilemap.worldToCell((int)(boundingBox.left + boundingBox.width() / 2),
-                        (int)boundingBox.bottom)];
+                boolean bottom = currentLevel.isPassable(
+                        GameScene.scene.getTilemap().worldToCell(
+                                (int)(boundingBox.left + boundingBox.width() / 2),
+                                (int)boundingBox.bottom));
 
-                boolean right = Artifice.level.passable[GameScene.scene.tilemap.worldToCell((int)(boundingBox.right - SAFE_ZONE),
-                        (int)boundingBox.bottom - SAFE_ZONE)];
+                boolean right = currentLevel.isPassable(
+                        GameScene.scene.getTilemap().worldToCell(
+                                (int)(boundingBox.right - SAFE_ZONE),
+                            (int)boundingBox.bottom - SAFE_ZONE));
 
 //                if(top && left && bottom && right){
 //                    Arrays.fill(availableDirections, true);
@@ -154,7 +160,7 @@ public class Char extends Mob {
             netX += m.sprite.velocity.x ;
             netY += m.sprite.velocity.y;
         }
-        //add velocity of itself
+        //addMob velocity of itself
         netX += sprite.velocity.x;
         netY += sprite.velocity.y;
         sprite.velocity.set(netX, netY);

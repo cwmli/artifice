@@ -2,34 +2,36 @@ package com.underwaterotter.artifice.world.generation;
 
 import com.underwaterotter.artifice.entities.MobMapper;
 import com.underwaterotter.artifice.entities.items.ItemMapper;
+import com.underwaterotter.artifice.world.AnimatedTilemap;
 import com.underwaterotter.artifice.world.Terrain;
+import com.underwaterotter.artifice.world.WorldTilemap;
+import com.underwaterotter.ceto.Group;
 import com.underwaterotter.utils.Block;
 import com.underwaterotter.utils.Storable;
 
 import java.util.Arrays;
 
-public abstract class Level implements Storable {
+public abstract class Level extends Group implements Storable {
+    public static final int SAFE_OFFSET = 10;
 
-    public static final String UNDERGROUND = "underground";
-    public static final String OVERWORLD_MAP = "overworld";
-    public static final String OVERWORLD_SUCCESS = "overworld_gen";
-    public static final String MAP = "backgroundmap";
-    public static final String EXPLORED = "explored";
-    public static final String PASSABLE = "passable";
-    public static final String CLIMBABLE = "climbable";
-    public static final String FLAMMABLE = "flammable";
-    public static final String UNSTABLE = "unstable";
-    public static final String HIDDEN = "hidden";
+    private static final String UNDERGROUND = "underground";
+    private static final String OVERWORLD_MAP = "overworld";
+    private static final String OVERWORLD_SUCCESS = "overworld_gen";
+    private static final String MAP = "map";
+    private static final String EXPLORED = "explored";
+    private static final String PASSABLE = "passable";
+    private static final String CLIMBABLE = "climbable";
+    private static final String FLAMMABLE = "flammable";
+    private static final String UNSTABLE = "unstable";
+    private static final String HIDDEN = "hidden";
 
-    public static final int SAFE_SIZE = 10;
-
-    public static boolean overworldGenerated = false;
+    private static boolean overworldGenerated = false;
 
     public int mapSizeW = 20;
     public int mapSizeH = 20;
 
     public int safeSizeW = mapSizeW;
-    public int safeSizeH = mapSizeH + SAFE_SIZE;
+    public int safeSizeH = mapSizeH + SAFE_OFFSET;
 
     public int mapLength = mapSizeW * mapSizeH;
     public int safeLength = safeSizeW * safeSizeH;
@@ -44,31 +46,55 @@ public abstract class Level implements Storable {
 
     public boolean isUnderground = false;
 
-    public ItemMapper itemMapper = new ItemMapper();
-    public MobMapper mobMapper = new MobMapper();
+    private ItemMapper itemMapper;
+    private MobMapper mobMapper;
 
-    public int[] backgroundmap;
-    public int[] foregroundmap;
-    public int[] watermap;
+    protected int[] map;
+    protected int[] foremap;
+    protected int[] watermap;
 
-    public boolean[] explored;
+    Group tilemaps;
+    protected AnimatedTilemap tilemap;
+    protected AnimatedTilemap foretilemap;
+    protected AnimatedTilemap watertilemap;
 
-    public boolean[] passable = new boolean[safeLength];
-    public boolean[] climbable = new boolean[safeLength];
-    public boolean[] flammable = new boolean[safeLength];
-    public boolean[] unstable = new boolean[safeLength];
+    Group controllers;
+
+    private boolean[] explored;
+    private boolean[] passable;
+    private boolean[] climbable;
+    private boolean[] flammable;
+    private boolean[] unstable;
 
     public void init(){
 
-        itemMapper.init();
-        mobMapper.init();
+        itemMapper = new ItemMapper();
+        mobMapper = new MobMapper();
 
-        backgroundmap = new int[safeLength];
-        foregroundmap = new int[safeLength];
+        map = new int[safeLength];
+        foremap = new int[safeLength];
         watermap = new int[safeLength];
 
         explored = new boolean[safeLength];
         Arrays.fill(explored, false);
+
+        passable = new boolean[safeLength];
+        climbable = new boolean[safeLength];
+        flammable = new boolean[safeLength];
+        unstable = new boolean[safeLength];
+
+        tilemaps = new Group();
+        add(tilemaps);
+
+        tilemaps.add(watertilemap);
+        tilemaps.add(tilemap);
+        tilemaps.add(foretilemap);
+
+        controllers = new Group();
+        add(controllers);
+
+        controllers.add(itemMapper);
+        controllers.add(mobMapper);
 
         generate();
         decorate();
@@ -76,7 +102,6 @@ public abstract class Level implements Storable {
         prespawnMobs();
         prespawnItems();
     }
-
     @Override
     public void saveToBlock(Block block){
         itemMapper.saveToBlock(block);
@@ -86,9 +111,9 @@ public abstract class Level implements Storable {
 
         block.put(OVERWORLD_SUCCESS, overworldGenerated);
         if(!isUnderground)
-            block.put(OVERWORLD_MAP, backgroundmap);
+            block.put(OVERWORLD_MAP, map);
         else
-            block.put(MAP, backgroundmap);
+            block.put(MAP, map);
 
         block.put(EXPLORED, explored);
         block.put(PASSABLE, passable);
@@ -106,9 +131,9 @@ public abstract class Level implements Storable {
 
         overworldGenerated = block.getBoolean(OVERWORLD_SUCCESS);
         if(!isUnderground)
-            backgroundmap = block.getIntArray(OVERWORLD_MAP);
+            map = block.getIntArray(OVERWORLD_MAP);
         else if(overworldGenerated)
-            backgroundmap = block.getIntArray(MAP);
+            map = block.getIntArray(MAP);
 
         explored = block.getBooleanArray(EXPLORED);
         passable = block.getBooleanArray(PASSABLE);
@@ -119,7 +144,21 @@ public abstract class Level implements Storable {
 
     public void destroy(){
         itemMapper.destroy();
-        mobMapper.destroy();
+        mobMapper.destroyMob();
+        //clear all arrays
+    }
+
+    public int[] getMapData(WorldTilemap.TILEMAP type){
+        if(type == WorldTilemap.TILEMAP.WATER)
+            return watermap;
+        else if(type == WorldTilemap.TILEMAP.LAND)
+            return map;
+        else
+            return foremap;
+    }
+
+    public boolean isPassable(int index){
+        return passable[index];
     }
 
     public abstract void generate();
@@ -130,12 +169,10 @@ public abstract class Level implements Storable {
 
     protected abstract void prespawnItems();
 
-    public abstract String tiles();
-
     public void buildFlags(){
 
         for(int i = 0; i < mapLength; i++){
-            int flags = Terrain.flags[backgroundmap[i]];
+            int flags = Terrain.flags[map[i]];
             passable[i] = (flags & Terrain.PASSABLE) != 0;
             climbable[i] = (flags & Terrain.CLIMBABLE) != 0;
             flammable[i] = (flags & Terrain.FLAMMABLE) != 0;

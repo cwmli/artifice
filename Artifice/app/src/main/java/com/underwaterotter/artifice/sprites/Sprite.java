@@ -1,7 +1,5 @@
 package com.underwaterotter.artifice.sprites;
 
-import android.graphics.RectF;
-
 import com.underwaterotter.ceto.Player;
 
 public class Sprite extends Player {
@@ -19,6 +17,11 @@ public class Sprite extends Player {
         super.update();
 
         updateDirection();
+    }
+
+    @Override
+    public void updateBounds(){
+
     }
 
     public void updateDirection(){

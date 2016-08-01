@@ -1,5 +1,7 @@
-package com.underwaterotter.artifice;
+package com.underwaterotter.artifice.world;
 
+import com.underwaterotter.artifice.Artifice;
+import com.underwaterotter.artifice.world.generation.Level;
 import com.underwaterotter.ceto.Image;
 import com.underwaterotter.ceto.Tilemap;
 import com.underwaterotter.math.Vector3;
@@ -13,30 +15,40 @@ public class WorldTilemap extends Tilemap {
 
     public static final int INVALID_TILE = -1;
 
-    protected int[] map;
-    protected int[] oldmap;
+    public enum TILEMAP {
+        WATER,
+        LAND,
+        FOREGROUND
+    }
 
-    public WorldTilemap(String tiles){
+    private Level level;
+    private TILEMAP type;
+
+    protected int[] map;
+    private int[] oldmap;
+
+    public WorldTilemap(String tiles, Level level, TILEMAP type){
         super(tiles, CELL_SIZE_W, CELL_SIZE_H);
-        oldmap = new int[Artifice.level.safeLength];
+
+        this.level = level;
+        this.type = type;
+
+        oldmap = new int[map.length];
         Arrays.fill(oldmap, INVALID_TILE);
 
-        flipData = new boolean[Artifice.level.safeLength];
+        flipData = new boolean[level.safeLength];
         Arrays.fill(flipData, false);
 
-        readMapData(oldmap, flipData, Artifice.level.safeSizeW);
+        readMapData(oldmap, flipData, level.safeSizeW);
     }
 
     @Override
     public void update(){
+        map = level.getMapData(type);
         if(!Arrays.equals(map, oldmap)){
-            readMapData(map, flipData, Artifice.level.safeSizeW);
+            readMapData(map, flipData, level.safeSizeW);
             oldmap = map.clone();
         }
-    }
-
-    public void setMap(int[] map){
-        this.map = map;
     }
 
     //draw a "lightened" colored tile texture over the existing tilemap
