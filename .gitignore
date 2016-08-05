@@ -1,16 +1,16 @@
 #track only source files
 /*
 !.gitignore
-!Artifice/
+!Artifice
 
-Artifice/*
-!Artifice/app/
+/Artifice/*
+!/Artifice/app
 
-Artifice/app/*
-!Artifice/app/src
+/Artifice/app/*
+!/Artifice/app/src
 
-Artifice/app/src/*
-!Artifice/app/src/main
+/Artifice/app/src/*
+!/Artifice/app/src/main
 
 # Windows image file caches
 Thumbs.db
