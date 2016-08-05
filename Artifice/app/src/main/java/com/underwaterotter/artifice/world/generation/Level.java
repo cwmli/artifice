@@ -1,18 +1,22 @@
 package com.underwaterotter.artifice.world.generation;
 
+import com.underwaterotter.artifice.entities.Mob;
 import com.underwaterotter.artifice.entities.MobMapper;
+import com.underwaterotter.artifice.entities.items.Item;
 import com.underwaterotter.artifice.entities.items.ItemMapper;
 import com.underwaterotter.artifice.world.AnimatedTilemap;
 import com.underwaterotter.artifice.world.Terrain;
 import com.underwaterotter.artifice.world.WorldTilemap;
 import com.underwaterotter.ceto.Group;
+import com.underwaterotter.ceto.Tilemap;
 import com.underwaterotter.utils.Block;
 import com.underwaterotter.utils.Storable;
 
 import java.util.Arrays;
+import java.util.HashSet;
 
 public abstract class Level extends Group implements Storable {
-    public static final int SAFE_OFFSET = 10;
+    public static final int SAFE_OFFSET = 20;
 
     private static final String UNDERGROUND = "underground";
     private static final String OVERWORLD_MAP = "overworld";
@@ -27,8 +31,8 @@ public abstract class Level extends Group implements Storable {
 
     private static boolean overworldGenerated = false;
 
-    public int mapSizeW = 20;
-    public int mapSizeH = 20;
+    public int mapSizeW = 40;
+    public int mapSizeH = 40;
 
     public int safeSizeW = mapSizeW;
     public int safeSizeH = mapSizeH + SAFE_OFFSET;
@@ -49,11 +53,14 @@ public abstract class Level extends Group implements Storable {
     private ItemMapper itemMapper;
     private MobMapper mobMapper;
 
+    private HashSet<Item> items;
+    private HashSet<Mob> mobs;
+
     protected int[] map;
     protected int[] foremap;
     protected int[] watermap;
 
-    Group tilemaps;
+    protected Group tilemaps;
     protected AnimatedTilemap tilemap;
     protected AnimatedTilemap foretilemap;
     protected AnimatedTilemap watertilemap;
@@ -86,9 +93,7 @@ public abstract class Level extends Group implements Storable {
         tilemaps = new Group();
         add(tilemaps);
 
-        tilemaps.add(watertilemap);
-        tilemaps.add(tilemap);
-        tilemaps.add(foretilemap);
+        //add the tilemaps when they have been generated
 
         controllers = new Group();
         add(controllers);
@@ -98,10 +103,8 @@ public abstract class Level extends Group implements Storable {
 
         generate();
         decorate();
-
-        prespawnMobs();
-        prespawnItems();
     }
+
     @Override
     public void saveToBlock(Block block){
         itemMapper.saveToBlock(block);
@@ -144,7 +147,7 @@ public abstract class Level extends Group implements Storable {
 
     public void destroy(){
         itemMapper.destroy();
-        mobMapper.destroyMob();
+        mobMapper.destroy();
         //clear all arrays
     }
 
@@ -157,8 +160,30 @@ public abstract class Level extends Group implements Storable {
             return foremap;
     }
 
+    public AnimatedTilemap getTilemap(){
+        return tilemap;
+    }
+
     public boolean isPassable(int index){
         return passable[index];
+    }
+
+    public MobMapper getMobMapper(){
+        return mobMapper;
+    }
+
+    public ItemMapper getItemMapper(){
+        return itemMapper;
+    }
+
+    public void addMob(Mob mob){
+        mobMapper.addMob(mob);
+        mob.sprite.visible = mob.isVisible();
+    }
+
+    public void addItem(Item item){
+        itemMapper.addItem(item);
+        item.sprite.visible = item.isVisible();
     }
 
     public abstract void generate();
@@ -170,7 +195,6 @@ public abstract class Level extends Group implements Storable {
     protected abstract void prespawnItems();
 
     public void buildFlags(){
-
         for(int i = 0; i < mapLength; i++){
             int flags = Terrain.flags[map[i]];
             passable[i] = (flags & Terrain.PASSABLE) != 0;

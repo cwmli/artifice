@@ -17,7 +17,7 @@ public class Program {
     public void attach(Shader shader, boolean keep){
         GLES20.glAttachShader(programHandle, shader.getShaderHandle());
 
-        if(keep == false){
+        if(!keep){
             shader.delete();
         }
     }

@@ -107,7 +107,7 @@ public class Group extends Article {
         int counter = 0;
 
         for(Article e : entities){
-            if(e.active == true){
+            if(e.active){
                 counter++;
             }
         }

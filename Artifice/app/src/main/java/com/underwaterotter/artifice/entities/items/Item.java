@@ -68,7 +68,7 @@ public class Item extends Entity{
         mob = null;
         host = null;
 
-        Artifice.level.itemMapper.remove(this);
+        currentLevel.getItemMapper().removeItem(this);
     }
 
     public UUID itemID(){
@@ -81,7 +81,7 @@ public class Item extends Entity{
 
     protected Mob[] checkCollision(){
         //find closest mob(s) to check
-        Mob[] mobs = Artifice.level.mobMapper.findByCell(cellPosition());
+        Mob[] mobs = currentLevel.getMobMapper().findByCell(cellPosition());
         ArrayList<Mob> collided = new ArrayList<Mob>();
 
         if(mobs != null) {

@@ -1,17 +1,21 @@
 package com.underwaterotter.artifice.sprites;
 
+import com.underwaterotter.artifice.world.generation.Level;
 import com.underwaterotter.ceto.Animation;
 import com.underwaterotter.artifice.entities.Mob;
 
-public class MobSprite extends Sprite {
+public abstract class MobSprite extends Sprite {
 
-    public Animation[] attack;
-    public Animation run;
-    public Animation dodge;
-    public Animation die;
-    public Animation idle;
+    private static final int SAFE_ZONE = 4;
 
-    public Mob mob;
+    protected Animation[] attack;
+    protected Animation run;
+    protected Animation dodge;
+    protected Animation die;
+    protected Animation idle;
+
+    private Mob mob;
+    private Level level;
 
     public enum Effect{ BLEEDING, FIRE, FROZEN, SHOCK, WET }
 
@@ -21,8 +25,31 @@ public class MobSprite extends Sprite {
         setAnimations();
     }
 
+    public void updateBounds(){
+        boolean top = level.isPassable(
+                level.getTilemap().worldToCell(
+                        (int)(boundingBox.left + boundingBox.width() / 2),
+                        (int)boundingBox.bottom - SAFE_ZONE));
+
+        boolean left = level.isPassable(
+                level.getTilemap().worldToCell(
+                        (int)(boundingBox.left + SAFE_ZONE),
+                        (int)boundingBox.bottom - SAFE_ZONE));
+
+        boolean bottom = level.isPassable(
+                level.getTilemap().worldToCell(
+                        (int)(boundingBox.left + boundingBox.width() / 2),
+                        (int)boundingBox.bottom));
+
+        boolean right = level.isPassable(
+                level.getTilemap().worldToCell(
+                        (int)(boundingBox.right - SAFE_ZONE),
+                        (int)boundingBox.bottom - SAFE_ZONE));
+    }
+
     public void setMob(Mob mob){
         this.mob = mob;
+        level = mob.level();
         mob.sprite = this;
 
         position(mob.worldPosition());
@@ -81,5 +108,5 @@ public class MobSprite extends Sprite {
         }
     }
 
-    protected void setAnimations(){}
+    protected abstract void setAnimations();
 }

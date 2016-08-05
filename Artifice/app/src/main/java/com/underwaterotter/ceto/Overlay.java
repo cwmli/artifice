@@ -74,7 +74,6 @@ public class Overlay extends Article {
     public void update(){
         boundingBox.set(pos.x, pos.y, pos.x + width, pos.y + height);
 
-        updateBounds();
         updateMotion();
     }
 
@@ -221,8 +220,6 @@ public class Overlay extends Article {
         mr = mg = mb = ma = 1;
         ar = ag = ab = aa = 0;
     }
-
-    public void updateBounds(){}
 
     public void updateMotion(){
         //based on the supplied angle, find the velocity vector

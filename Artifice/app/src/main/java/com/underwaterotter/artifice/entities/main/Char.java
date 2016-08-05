@@ -5,6 +5,7 @@ import android.graphics.RectF;
 import com.underwaterotter.artifice.entities.Mob;
 import com.underwaterotter.artifice.scenes.GameScene;
 import com.underwaterotter.artifice.sprites.MobSprite;
+import com.underwaterotter.artifice.world.AnimatedTilemap;
 import com.underwaterotter.artifice.world.Assets;
 import com.underwaterotter.ceto.Animation;
 import com.underwaterotter.ceto.Camera;
@@ -16,13 +17,12 @@ import java.util.Arrays;
 
 public class Char extends Mob {
 
-    public static final int SIZE_W = 16;
-    public static final int SIZE_H = 16;
-    public static final int SHADOW_OFFSET = 8;
-    public static final int SAFE_ZONE = 4;
+    private static final int SIZE_W = 16;
+    private static final int SIZE_H = 16;
+    private static final int SHADOW_OFFSET = 8;
 
-    public String currentAction;
-    public boolean[] availableDirections;
+    private String currentAction;
+    private boolean[] availableDirections;
     //{left, top, right, bottom}
 
     public Char(){
@@ -53,26 +53,6 @@ public class Char extends Mob {
 
             @Override
             public void updateBounds(){
-                boolean top = currentLevel.isPassable(
-                        GameScene.scene.getTilemap().worldToCell(
-                                (int)(boundingBox.left + boundingBox.width() / 2),
-                                (int)boundingBox.bottom - SAFE_ZONE));
-
-                boolean left = currentLevel.isPassable(
-                        GameScene.scene.getTilemap().worldToCell(
-                                (int)(boundingBox.left + SAFE_ZONE),
-                                (int)boundingBox.bottom - SAFE_ZONE));
-
-                boolean bottom = currentLevel.isPassable(
-                        GameScene.scene.getTilemap().worldToCell(
-                                (int)(boundingBox.left + boundingBox.width() / 2),
-                                (int)boundingBox.bottom));
-
-                boolean right = currentLevel.isPassable(
-                        GameScene.scene.getTilemap().worldToCell(
-                                (int)(boundingBox.right - SAFE_ZONE),
-                            (int)boundingBox.bottom - SAFE_ZONE));
-
 //                if(top && left && bottom && right){
 //                    Arrays.fill(availableDirections, true);
 //                }
@@ -148,6 +128,14 @@ public class Char extends Mob {
 
         checkMobCollision();
         parseAction();
+    }
+
+    public String getCurrentAction(){
+        return currentAction;
+    }
+
+    public void setCurrentAction(String action){
+        currentAction = action;
     }
 
     public void checkMobCollision(){

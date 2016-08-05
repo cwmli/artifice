@@ -1,6 +1,6 @@
 package com.underwaterotter.artifice.entities;
 
-import com.underwaterotter.artifice.scenes.GameScene;
+import com.underwaterotter.artifice.Artifice;
 import com.underwaterotter.artifice.world.generation.Level;
 import com.underwaterotter.ceto.Group;
 import com.underwaterotter.math.Vector3;
@@ -22,10 +22,15 @@ public class Entity extends Group implements Storable {
 
     private int id = 0;
 
+    public Entity(){
+        super();
+        currentLevel = Artifice.getLevel();
+    }
+
     @Override
     public void update(){
         super.update();
-        cellNumber = GameScene.scene.getTilemap().worldToCell(worldPosition);
+        cellNumber = currentLevel.getTilemap().worldToCell(worldPosition);
     }
 
     @Override
@@ -61,7 +66,7 @@ public class Entity extends Group implements Storable {
 
     public void cellPosition(int pos){
         cellNumber = pos;
-        worldPosition = GameScene.scene.getTilemap().cellToWorld(pos);
+        worldPosition = currentLevel.getTilemap().cellToWorld(pos);
     }
 
     public Vector3 worldPosition(){
@@ -70,5 +75,9 @@ public class Entity extends Group implements Storable {
 
     public void worldPosition(Vector3 pos){
         worldPosition = pos;
+    }
+
+    public Level level(){
+        return currentLevel;
     }
 }

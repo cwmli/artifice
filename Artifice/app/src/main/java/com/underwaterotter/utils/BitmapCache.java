@@ -30,7 +30,7 @@ public class BitmapCache {
         if (bit.containsKey(assetName)){
             return bit.get(assetName);
         } else {
-            InputStream is = null;
+            InputStream is;
             try{
                 is =  context.getResources().getAssets().open(assetName);
             } catch (IOException e) {

@@ -81,7 +81,7 @@ public class Player extends Image {
     public void next(){
         if (currentFrame < activeAnimation.frames.length){
             textureRect(activeAnimation.frames[currentFrame++]);
-        } else if (activeAnimation.repeat == true){
+        } else if (activeAnimation.repeat){
             currentFrame = 0;
             textureRect(activeAnimation.frames[currentFrame++]);
             done();

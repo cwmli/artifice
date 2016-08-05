@@ -5,14 +5,14 @@ import com.underwaterotter.artifice.scenes.GameScene;
 public class CharController {
 
     public static void setVelocity(float angle){
-        GameScene.scene.player.sprite.angle = angle;
+        GameScene.scene.getPlayer().sprite.angle = angle;
     }
 
     public static void setSpeed(float speed){
-        GameScene.scene.player.speed = speed;
+        GameScene.scene.getPlayer().speed = speed;
     }
 
     public static void setAction(String action){
-        GameScene.scene.player.currentAction = action;
+        GameScene.scene.getPlayer().setCurrentAction(action);;
     }
 }

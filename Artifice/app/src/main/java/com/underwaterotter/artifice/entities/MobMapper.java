@@ -1,7 +1,6 @@
 package com.underwaterotter.artifice.entities;
 
 import com.underwaterotter.ceto.Article;
-import com.underwaterotter.ceto.Group;
 import com.underwaterotter.utils.Block;
 import com.underwaterotter.utils.Storable;
 
@@ -21,7 +20,6 @@ public class MobMapper extends Article implements Storable{
     public HashMap<UUID, Mob> mobs;
 
     public MobMapper(){
-
         levelMobs = new HashSet<String>();
         mobs = new HashMap<UUID, Mob>();
         //load all potential mobs from level and addMob to game scene
@@ -44,6 +42,7 @@ public class MobMapper extends Article implements Storable{
         }
     }
 
+    @Override
     public void destroy(){
         for(Mob m : mobs.values()){
             m.destroy();
@@ -75,17 +74,9 @@ public class MobMapper extends Article implements Storable{
             mobs.put(m.getMobID(), m);
         }
     }
-    
+
     public void addMob(Mob mob){
         mobs.put(mob.setMobID(UUID.randomUUID()), mob);
-    }
-
-    public void removeMob(Mob mob){
-        if(mob == null){
-            return;
-        } else if(mob.id() > 0){
-            mobs.remove(mob.getMobID());
-        }
     }
 
     public void destroyMob(Mob mob){

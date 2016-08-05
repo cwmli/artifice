@@ -33,7 +33,7 @@ public class WorldTilemap extends Tilemap {
         this.level = level;
         this.type = type;
 
-        oldmap = new int[map.length];
+        oldmap = new int[level.safeLength];
         Arrays.fill(oldmap, INVALID_TILE);
 
         flipData = new boolean[level.safeLength];

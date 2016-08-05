@@ -48,11 +48,18 @@ public class TestLevel extends Level {
                 frames = 4;
             }
         };
+
+        tilemaps.add(tilemap);
+//        tilemaps.add(foretilemap);
+        tilemaps.add(watertilemap);
+
+        prespawnMobs();
+        prespawnItems();
     }
 
     public void generate(){
         Map heightmap = new Map(
-                mapSizeW, mapSizeH, Rand.range(0,65536l),
+                mapSizeW, mapSizeH, Rand.range(0,65536L),
                 Map.AMP, Map.RISE, Map.DROP,
                 Map.F1, Map.F2, Map.F3,
                 Map.EOCT1, Map.EOCT2, Map.EOCT3,
@@ -74,7 +81,7 @@ public class TestLevel extends Level {
 
     public void prespawnMobs(){
         GameScene.scene.getPlayer().worldPosition(
-                GameScene.scene.getTilemap().cellToWorld(
+                tilemap.cellToWorld(
                         (int)Math.floor((map.length) / 2) + 2));
     }
 

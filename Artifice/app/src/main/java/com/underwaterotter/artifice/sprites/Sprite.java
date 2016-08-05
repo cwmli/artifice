@@ -2,7 +2,7 @@ package com.underwaterotter.artifice.sprites;
 
 import com.underwaterotter.ceto.Player;
 
-public class Sprite extends Player {
+public abstract class Sprite extends Player {
 
     public Sprite(){
         super();
@@ -17,11 +17,6 @@ public class Sprite extends Player {
         super.update();
 
         updateDirection();
-    }
-
-    @Override
-    public void updateBounds(){
-
     }
 
     public void updateDirection(){

@@ -49,20 +49,19 @@ public abstract class Mob extends Entity implements Storable {
     public int agroRadius;
     //view radius is calculated by cell blocks
 
-    protected HashSet<Status> status;
-    protected HashSet<Buff> buffs;
+    protected HashSet<Mob.STATUS> status;
+    protected HashSet<BUFF> buffs;
 
     protected ArrayList<String> actions;
 
-    enum Buff{ DEFENSE, MAX_HP, ATTACK, SPEED}
-    //convert this into a full enum class
-    enum Status{ BLEEDING, FIRE, FROZEN, SHOCK, WET }
+    private enum BUFF { DEFENSE, MAX_HP, ATTACK, SPEED}
+    private enum STATUS { BLEEDING, FIRE, FROZEN, SHOCK, WET }
 
     public Mob(){
         super();
 
-        status = new HashSet<Status>();
-        buffs = new HashSet<Buff>();
+        status = new HashSet<Mob.STATUS>();
+        buffs = new HashSet<BUFF>();
 
         visibleCells = new ArrayList<Integer>();
     }
@@ -70,8 +69,8 @@ public abstract class Mob extends Entity implements Storable {
     @Override
     public void destroy(){
         super.destroy();
-
-        hp = 0;
+        sprite.destroy();
+        sprite = null;
     }
 
     @Override
@@ -91,13 +90,13 @@ public abstract class Mob extends Entity implements Storable {
         hp = block.getInt(HP);
 
         // FIXME: 8/26/2015
-        status = new HashSet<Status>(
+        status = new HashSet<Mob.STATUS>(
                 //Arrays.asList(
-                    //    (Status[])block.getArrayOf(STATUS).toArray())
+                    //    (STATUS[])block.getArrayOf(STATUS).toArray())
         );
-        buffs = new HashSet<Buff>(
+        buffs = new HashSet<BUFF>(
                 //Arrays.asList(
-                  //      (Buff[])block.getArrayOf(BUFFS).toArray())
+                  //      (BUFF[])block.getArrayOf(BUFFS).toArray())
         );
     }
 
@@ -110,7 +109,7 @@ public abstract class Mob extends Entity implements Storable {
 
     public void updateStatusEffects(){
 
-        for(Status s : status){
+        for(Mob.STATUS s : status){
             switch (s){
                 case BLEEDING:
                     sprite.addEffect(MobSprite.Effect.BLEEDING);
@@ -144,7 +143,7 @@ public abstract class Mob extends Entity implements Storable {
 
     protected Mob[] getCollided(){
         //find closest mobs to check
-        Mob[] mobs = currentLevel.mobMapper.findByCell(cellPosition());
+        Mob[] mobs = currentLevel.getMobMapper().findByCell(cellPosition());
         ArrayList<Mob> collided = new ArrayList<Mob>();
 
         if(mobs != null) {
@@ -190,12 +189,12 @@ public abstract class Mob extends Entity implements Storable {
         hp -= damage;
     }
 
-    public void addStatus(Status s){
+    public void addStatus(Mob.STATUS s){
         status.add(s);
         updateStatusEffects();
     }
 
-    public void removeStatus(Status s){
+    public void removeStatus(Mob.STATUS s){
         status.remove(s);
         updateStatusEffects();
     }

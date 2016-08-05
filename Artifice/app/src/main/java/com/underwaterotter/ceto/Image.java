@@ -50,7 +50,7 @@ public class Image extends Overlay {
         this();
 
         position(pos);
-        texture = bitmap instanceof ModelTexture ? (ModelTexture)bitmap : TextureCache.get((String)bitmap);
+        texture = bitmap instanceof ModelTexture ? (ModelTexture)bitmap : TextureCache.get(bitmap);
         textureRect(texture.stRect(0, 0, texture.width, texture.height));
     }
 

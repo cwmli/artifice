@@ -2,6 +2,8 @@ package com.underwaterotter.artifice.world.generation;
 
 import com.underwaterotter.artifice.world.Terrain;
 
+import java.util.Arrays;
+
 public class Map {
 
     //-------DEFAULT CONSTANTS-----------
@@ -78,8 +80,8 @@ public class Map {
                 e = Math.pow(e, redis);
 
                 //Manhattan Distance
-                double d = 2 * Math.max(Math.abs(x / xsize - 0.5),
-                        Math.abs(y / ysize - 0.5));
+                double d = 2 * Math.max(Math.abs((double)x / xsize - 0.5),
+                        Math.abs((double)y / ysize - 0.5));
 
                 heightmap[y][x] = (e + amp) * (1 - rise * Math.pow(d, drop));
             }
@@ -91,7 +93,7 @@ public class Map {
             }
         }
 
-        smoothMap(heightmap, smooth);
+        //smoothMap(heightmap, smooth);
     }
 
     public double[][] getHeightmap(){
@@ -156,26 +158,44 @@ public class Map {
 
     public int[][] genDispMap(){
         int[] md = new int[xsize * (ysize + Level.SAFE_OFFSET)]; //map data
+        Arrays.fill(md, Terrain.SOLID_BED);
         int[] wm = new int[xsize * (ysize + Level.SAFE_OFFSET)]; //water
+        Arrays.fill(wm, Terrain.SWATER_1);
 
         int[] shiftY = new int[xsize];
-        for(int y = (ysize + Level.SAFE_OFFSET) - 2; y > 0; y--){
-            for(int x = xsize - 1; x > 0; x--){
+        for(int y = ysize - 2; y >= 0; y--){
+            for(int x = xsize - 1; x >= 0; x--) {
                 int h1 = getHeight(heightmap[y][x]);
                 int h2 = getHeight(heightmap[y + 1][x]);
+                int y1 = y + Level.SAFE_OFFSET;
 
-                if(h1 == 0 || h2 == 0)
-                    wm[y * xsize + x] = getTile(heightmap[y][x]);
-                else if(h1 - h2 > 0) {
-                    shiftY[x] = h1 - h2;
-                    md[(y - shiftY[x]) * xsize + x] = getTile(heightmap[y][x]);
-                    for(int i = 0; i < shiftY[x]; i++){
-                        md[(y - i) * xsize + x] = getTile(INTERMEDIATE_TILE);
+                if (h1 == 0) {
+                    wm[(y1 - shiftY[x]) * xsize + x] = Terrain.SWATER_1;
+                    md[(y1 - shiftY[x]) * xsize + x] = Terrain.SOLID_BED;
+                } else if(h2 == 0 && h1 > 0) {
+                    md[(y1 - shiftY[x]) * xsize + x] = Terrain.TGRASS_3;
+                    wm[(y1 - shiftY[x]) * xsize + x] = Terrain.EMPTY;
+                    md[(y1 - shiftY[x] - 1) * xsize + x] = Terrain.SGRASS_3;
+                    wm[(y1 - shiftY[x] - 1) * xsize + x] = Terrain.EMPTY;
+                    shiftY[x] += 1;
+                } else if (h1 > h2) {
+                    shiftY[x] += h1 - h2;
+                    md[(y1 - shiftY[x]) * xsize + x] = Terrain.SGRASS_3;
+                    wm[(y1 - shiftY[x]) * xsize + x] = Terrain.EMPTY;
+                    for (int i = 1; i < shiftY[x]; i++) {
+                        if(i == 1)
+                            md[(y1 - shiftY[x] + i) * xsize + x] = Terrain.TGRASS_3;
+                        else
+                            md[(y1 - shiftY[x] + i) * xsize + x] = Terrain.STONE;
+                        wm[(y1 - shiftY[x] + i) * xsize + x] = Terrain.EMPTY;
                     }
-                } else if (h1 - h2 == 0)
-                    md[(y - shiftY[x]) * xsize + x] = getTile(heightmap[y][x]);
-                else //h1 - h2 < 0
-                    md[y * xsize + x] = md[(y + 1)* xsize + x]; //adjust for invisible lower levels than foreground
+                } else if (h1 == h2) {
+                    md[(y1 - shiftY[x]) * xsize + x] = Terrain.SGRASS_3;
+                    wm[(y1 - shiftY[x]) * xsize + x] = Terrain.EMPTY;
+                } else { //h1 < h2
+                    md[(y1 - shiftY[x]) * xsize + x] = md[(y1 - shiftY[x] + 1) * xsize + x]; //adjust for invisible lower levels than foreground
+                    wm[(y1 - shiftY[x]) * xsize + x] = Terrain.EMPTY;
+                }
             }
         }
 
@@ -199,7 +219,9 @@ public class Map {
 
     private int getTile(double e){
         //take data from moisture and elevation
-        if(e < 0.1) return Terrain.SWATER_1;
+        if(e < 0.1)
+            return Terrain.SWATER_1;
+
         //do rest of biomes here
         return Terrain.EMPTY;
     }

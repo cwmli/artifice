@@ -25,8 +25,6 @@ public class GameScene extends UIScene {
 
     private Group world;
     private Group weather;
-    private Group mobs;
-    private Group items;
     private Group fauna;
     private Group pouches;
 
@@ -42,8 +40,7 @@ public class GameScene extends UIScene {
             currentLevel.isUnderground = true;
         }
         currentLevel.init();
-
-        currentLevel.mobMapper.addMob(player);
+        currentLevel.addMob(player);
 
         world = new Group();
         add(world);
@@ -51,22 +48,8 @@ public class GameScene extends UIScene {
         weather = new Group();
         add(weather);
 
-        world.add(watermap);
+        world.add(currentLevel);
         world.add(weather);
-
-        mobs = new Group();
-
-        for(Mob m : currentLevel.mobMapper.mobs.values()){
-            addMob(m);
-        }
-        add(mobs);
-
-        items = new Group();
-
-        for(Item i : currentLevel.itemMapper.items.values()){
-            addItem(i);
-        }
-        add(items);
 
         fauna = new Group();
         add(fauna);
@@ -91,42 +74,10 @@ public class GameScene extends UIScene {
     @Override
     public synchronized void update(){
         super.update();
-
-        mobs.update();
-        items.update();
-    }
-
-    public AnimatedTilemap getTilemap(){
-        return tilemap;
     }
 
     public Char getPlayer(){
         return player;
-    }
-
-    public void addMob(Mob mob){
-        mobs.add(mob);
-        mob.sprite.visible = mob.isVisible();
-        mob.sprite.setMob(mob);
-    }
-
-    public void addItem(Item item){
-        items.add(item);
-        item.sprite.visible = item.isVisible();
-    }
-
-    public void add(Mob mob){
-        currentLevel.mobMapper.addMob(mob);
-        scene.addMob(mob);
-    }
-
-    public void add(Item item){
-        currentLevel.itemMapper.add(item);
-        addItem(item);
-    }
-
-    public void exploreCell(int cell){
-        tilemap.explore(cell);
     }
 
     private static class DebugButton extends Button {
