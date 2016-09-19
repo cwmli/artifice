@@ -132,8 +132,8 @@ public abstract class Mob extends Entity implements Storable {
 
     protected void updateAgro(){
         visibleCells.clear();
-        for(int i = 0; i < Artifice.getLevel().SURROUNDING_CELLS.length; i++){
-            visibleCells.add(Artifice.getLevel().SURROUNDING_CELLS[i] * 2);
+        for(int i = 0; i < Artifice.getLevel().s_cells.length; i++){
+            visibleCells.add(Artifice.getLevel().s_cells[i] * 2);
         }
     }
 

@@ -91,7 +91,7 @@ public class Joystick extends CirclePad {
             if(joystick.center().distance(pos) > SIZE_R){
                 nob.position((float)Math.cos(Math.toRadians(angle(p))) * SIZE_R + joystick.center().x - (nob.width / 2),
                         (float)Math.sin(Math.toRadians(angle(p))) * SIZE_R + joystick.center().y - (nob.height / 2), 0);
-                CharController.setSpeed(1f);
+                CharController.setSpeed(1.0f);
             } else {
                 nob.position(pos.x - SIZE_N, pos.y - SIZE_N, 0);
                 CharController.setSpeed(joystick.center().distance(pos) / (SIZE_R * 2));

@@ -8,7 +8,6 @@ import com.underwaterotter.artifice.world.AnimatedTilemap;
 import com.underwaterotter.artifice.world.Terrain;
 import com.underwaterotter.artifice.world.WorldTilemap;
 import com.underwaterotter.ceto.Group;
-import com.underwaterotter.ceto.Tilemap;
 import com.underwaterotter.utils.Block;
 import com.underwaterotter.utils.Storable;
 
@@ -16,7 +15,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 public abstract class Level extends Group implements Storable {
-    public static final int SAFE_OFFSET = 20;
+    public static final int SAFE_OFFSET = 3;
 
     private static final String UNDERGROUND = "underground";
     private static final String OVERWORLD_MAP = "overworld";
@@ -31,22 +30,22 @@ public abstract class Level extends Group implements Storable {
 
     private static boolean overworldGenerated = false;
 
-    public int mapSizeW = 40;
-    public int mapSizeH = 40;
+    public int mapWidth = 100;
+    public int mapHeight = 100;
 
-    public int safeSizeW = mapSizeW;
-    public int safeSizeH = mapSizeH + SAFE_OFFSET;
+    public int sfMapW = mapWidth;
+    public int sfMapH = mapHeight + SAFE_OFFSET;
 
-    public int mapLength = mapSizeW * mapSizeH;
-    public int safeLength = safeSizeW * safeSizeH;
+    public int mapLength = mapWidth * mapHeight;
+    public int sfLength = sfMapW * sfMapH;
 
     //Surrounding cells index
     //0 1 2
     //3 C 4
     //5 6 7
-    public int[] SURROUNDING_CELLS = {-safeSizeW - 1, -safeSizeW, -safeSizeW + 1,
-                                             -1, + 1,
-                                             safeSizeW - 1, safeSizeW, safeSizeW + 1 };
+    public int[] s_cells = {-sfMapW - 1, -sfMapW, -sfMapW + 1,
+                                     -1,                  + 1,
+                             sfMapW - 1, sfMapW, sfMapW + 1 };
 
     public boolean isUnderground = false;
 
@@ -78,17 +77,17 @@ public abstract class Level extends Group implements Storable {
         itemMapper = new ItemMapper();
         mobMapper = new MobMapper();
 
-        map = new int[safeLength];
-        foremap = new int[safeLength];
-        watermap = new int[safeLength];
+        map = new int[sfLength];
+        foremap = new int[sfLength];
+        watermap = new int[sfLength];
 
-        explored = new boolean[safeLength];
+        explored = new boolean[sfLength];
         Arrays.fill(explored, false);
 
-        passable = new boolean[safeLength];
-        climbable = new boolean[safeLength];
-        flammable = new boolean[safeLength];
-        unstable = new boolean[safeLength];
+        passable = new boolean[sfLength];
+        climbable = new boolean[sfLength];
+        flammable = new boolean[sfLength];
+        unstable = new boolean[sfLength];
 
         tilemaps = new Group();
         add(tilemaps);
@@ -100,9 +99,6 @@ public abstract class Level extends Group implements Storable {
 
         controllers.add(itemMapper);
         controllers.add(mobMapper);
-
-        generate();
-        decorate();
     }
 
     @Override
@@ -162,6 +158,10 @@ public abstract class Level extends Group implements Storable {
 
     public AnimatedTilemap getTilemap(){
         return tilemap;
+    }
+
+    public AnimatedTilemap getWatertilemap() {
+        return watertilemap;
     }
 
     public boolean isPassable(int index){

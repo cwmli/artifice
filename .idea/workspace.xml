@@ -9,7 +9,39 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a3ad2109-a19a-4a90-af0e-70a9ac1e41b2" name="Default" comment="" />
+    <list default="true" id="a3ad2109-a19a-4a90-af0e-70a9ac1e41b2" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/.idea/misc.xml" afterPath="$PROJECT_DIR$/Artifice/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/.idea/modules/app/app.iml" afterPath="$PROJECT_DIR$/Artifice/.idea/modules/app/app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/.idea/workspace.xml" afterPath="$PROJECT_DIR$/Artifice/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/app/build/generated/source/r/debug/com/underwaterotter/artifice/R.java" afterPath="$PROJECT_DIR$/Artifice/app/build/generated/source/r/debug/com/underwaterotter/artifice/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" afterPath="$PROJECT_DIR$/Artifice/app/build/intermediates/manifests/full/debug/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/entities/Entity.java" afterPath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/entities/Entity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/entities/Mob.java" afterPath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/entities/Mob.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/entities/MobMapper.java" afterPath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/entities/MobMapper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/entities/items/Item.java" afterPath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/entities/items/Item.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/entities/items/ItemMapper.java" afterPath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/entities/items/ItemMapper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/entities/main/Char.java" afterPath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/entities/main/Char.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/entities/main/CharController.java" afterPath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/entities/main/CharController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/scenes/GameScene.java" afterPath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/scenes/GameScene.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/sprites/ItemSprite.java" afterPath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/sprites/ItemSprite.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/sprites/MobSprite.java" afterPath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/sprites/MobSprite.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/sprites/Sprite.java" afterPath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/sprites/Sprite.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/AnimatedTilemap.java" afterPath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/AnimatedTilemap.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/TestLevel.java" afterPath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/TestLevel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Level.java" afterPath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Level.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Painter.java" afterPath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Painter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Room.java" afterPath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Room.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/ceto/Group.java" afterPath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/ceto/Group.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/ceto/Image.java" afterPath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/ceto/Image.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/ceto/Overlay.java" afterPath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/ceto/Overlay.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/ceto/Player.java" afterPath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/ceto/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/gleswrap/Program.java" afterPath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/gleswrap/Program.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/utils/BitmapCache.java" afterPath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/utils/BitmapCache.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/utils/Listener.java" afterPath="$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/utils/Listener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Artifice/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/Artifice/build/intermediates/dex-cache/cache.xml" />
+    </list>
     <ignored path="artifice.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -32,7 +64,7 @@
       <file leaf-file-name="Level.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Level.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
+            <state vertical-scroll-proportion="0.040665433">
               <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
               <folding />
             </state>
@@ -42,10 +74,15 @@
       <file leaf-file-name="Painter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Painter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1892">
+            <state vertical-scroll-proportion="0.0">
               <caret line="94" column="0" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#265#266#0" expanded="false" />
+                <element signature="e#289#290#0" expanded="false" />
+                <element signature="e#328#329#0" expanded="false" />
+                <element signature="e#355#356#0" expanded="false" />
+                <element signature="e#409#410#0" expanded="false" />
+                <element signature="e#449#450#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -54,9 +91,11 @@
       <file leaf-file-name="Room.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Room.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
+            <state vertical-scroll-proportion="0.0">
               <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -83,7 +122,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-9" />
     <option name="y" value="-9" />
-    <option name="width" value="1938" />
+    <option name="width" value="1932" />
     <option name="height" value="1048" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -130,7 +169,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="AndroidView" />
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -311,42 +360,20 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="PackagesPane" />
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/GitHub/PortableGit_d76a6a98c9315931ec4927243517bc09e9b731a0/cmd/git.exe" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RunManager">
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
-      <module name="" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
-      <option name="PROGRAM_PARAMETERS" />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <module />
-      <method />
-    </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" />
@@ -420,9 +447,7 @@
       <method />
     </configuration>
   </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
-  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -431,41 +456,40 @@
       <changelist id="a3ad2109-a19a-4a90-af0e-70a9ac1e41b2" name="Default" comment="" />
       <created>1455470398246</created>
       <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
       <updated>1455470398246</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <frame x="-9" y="-9" width="1932" height="1048" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32943925" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.159375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15913978" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39935064" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -488,7 +512,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Level.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -496,25 +520,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Painter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1892">
+        <state vertical-scroll-proportion="0.0">
           <caret line="94" column="0" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#265#266#0" expanded="false" />
+            <element signature="e#289#290#0" expanded="false" />
+            <element signature="e#328#329#0" expanded="false" />
+            <element signature="e#355#356#0" expanded="false" />
+            <element signature="e#409#410#0" expanded="false" />
+            <element signature="e#449#450#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Room.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
+        <state vertical-scroll-proportion="0.0">
           <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Level.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -522,25 +553,65 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Painter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1892">
+        <state vertical-scroll-proportion="0.0">
           <caret line="94" column="0" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#265#266#0" expanded="false" />
+            <element signature="e#289#290#0" expanded="false" />
+            <element signature="e#328#329#0" expanded="false" />
+            <element signature="e#355#356#0" expanded="false" />
+            <element signature="e#409#410#0" expanded="false" />
+            <element signature="e#449#450#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Room.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
+        <state vertical-scroll-proportion="0.0">
           <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Level.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Painter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="94" column="0" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
+          <folding>
+            <element signature="e#265#266#0" expanded="false" />
+            <element signature="e#289#290#0" expanded="false" />
+            <element signature="e#328#329#0" expanded="false" />
+            <element signature="e#355#356#0" expanded="false" />
+            <element signature="e#409#410#0" expanded="false" />
+            <element signature="e#449#450#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Room.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Level.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
           <caret line="49" column="31" selection-start-line="49" selection-start-column="31" selection-end-line="49" selection-end-column="31" />
           <folding />
         </state>
@@ -548,26 +619,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Painter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#265#266#0" expanded="false" />
+            <element signature="e#289#290#0" expanded="false" />
+            <element signature="e#328#329#0" expanded="false" />
+            <element signature="e#355#356#0" expanded="false" />
+            <element signature="e#409#410#0" expanded="false" />
+            <element signature="e#449#450#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Room.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="23" column="26" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Seed.java" />
     <entry file="file://$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Level.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="49" column="31" selection-start-line="49" selection-start-column="31" selection-end-line="49" selection-end-column="31" />
           <folding />
         </state>
@@ -575,26 +652,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Painter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#265#266#0" expanded="false" />
+            <element signature="e#289#290#0" expanded="false" />
+            <element signature="e#328#329#0" expanded="false" />
+            <element signature="e#355#356#0" expanded="false" />
+            <element signature="e#409#410#0" expanded="false" />
+            <element signature="e#449#450#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Room.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state vertical-scroll-proportion="0.0">
           <caret line="23" column="26" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Seed.java" />
     <entry file="file://$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Level.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
+        <state vertical-scroll-proportion="0.040665433">
           <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
           <folding />
         </state>
@@ -602,23 +685,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Painter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1892">
+        <state vertical-scroll-proportion="0.0">
           <caret line="94" column="0" selection-start-line="94" selection-start-column="0" selection-end-line="94" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#265#266#0" expanded="false" />
+            <element signature="e#289#290#0" expanded="false" />
+            <element signature="e#328#329#0" expanded="false" />
+            <element signature="e#355#356#0" expanded="false" />
+            <element signature="e#409#410#0" expanded="false" />
+            <element signature="e#449#450#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Room.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
+        <state vertical-scroll-proportion="0.0">
           <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Artifice/app/src/main/java/com/underwaterotter/artifice/world/generation/Seed.java" />
   </component>
   <component name="masterDetails">
     <states>
@@ -659,7 +748,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>1.8</last-edited>
+          <last-edited>Android API 24 Platform</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -676,7 +765,6 @@
             <option name="proportions">
               <list>
                 <option value="0.2" />
-                <option value="0.6" />
               </list>
             </option>
           </splitter-proportions>

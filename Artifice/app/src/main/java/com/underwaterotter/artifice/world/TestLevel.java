@@ -53,20 +53,23 @@ public class TestLevel extends Level {
 //        tilemaps.add(foretilemap);
         tilemaps.add(watertilemap);
 
+        generate();
+        decorate();
+
         prespawnMobs();
         prespawnItems();
     }
 
     public void generate(){
         Map heightmap = new Map(
-                mapSizeW, mapSizeH, Rand.range(0,65536L),
+                mapWidth, mapHeight, 0,
                 Map.AMP, Map.RISE, Map.DROP,
                 Map.F1, Map.F2, Map.F3,
                 Map.EOCT1, Map.EOCT2, Map.EOCT3,
                 Map.SMOOTH, Map.REDIS);
         heightmap.build();
 
-        int[][] displaymap = heightmap.genDispMap();
+        int[][] displaymap = heightmap.getDisplayMaps();
 
         map = displaymap[0];
         watermap = displaymap[1];

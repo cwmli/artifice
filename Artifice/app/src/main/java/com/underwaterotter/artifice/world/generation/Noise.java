@@ -19,7 +19,9 @@ public class Noise {
 
         for(int y = 0; y < ymax; y++){
             for(int x = 0; x < xmax; x++){
-                noise[y][x] = seed.range(0.0f, 1.0f);
+//                noise[y][x] = seed.range(0.0f, 1.0f);
+                float bias = (seed.range(0.0f, 1.0f)) * (((float)ymax - (float)y) / (float)ymax);
+                noise[y][x] = bias;
             }
         }
     }

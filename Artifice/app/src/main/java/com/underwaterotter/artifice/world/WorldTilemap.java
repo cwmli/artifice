@@ -1,6 +1,5 @@
 package com.underwaterotter.artifice.world;
 
-import com.underwaterotter.artifice.Artifice;
 import com.underwaterotter.artifice.world.generation.Level;
 import com.underwaterotter.ceto.Image;
 import com.underwaterotter.ceto.Tilemap;
@@ -33,20 +32,20 @@ public class WorldTilemap extends Tilemap {
         this.level = level;
         this.type = type;
 
-        oldmap = new int[level.safeLength];
+        oldmap = new int[level.sfLength];
         Arrays.fill(oldmap, INVALID_TILE);
 
-        flipData = new boolean[level.safeLength];
+        flipData = new boolean[level.sfLength];
         Arrays.fill(flipData, false);
 
-        readMapData(oldmap, flipData, level.safeSizeW);
+        readMapData(oldmap, flipData, level.sfMapW);
     }
 
     @Override
     public void update(){
         map = level.getMapData(type);
         if(!Arrays.equals(map, oldmap)){
-            readMapData(map, flipData, level.safeSizeW);
+            readMapData(map, flipData, level.sfMapW);
             oldmap = map.clone();
         }
     }
