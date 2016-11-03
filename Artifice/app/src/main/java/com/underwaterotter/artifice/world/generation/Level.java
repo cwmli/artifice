@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 public abstract class Level extends Group implements Storable {
-    public static final int SAFE_OFFSET = 3;
+    public static final int SAFE_OFFSET = 5;
 
     private static final String UNDERGROUND = "underground";
     private static final String OVERWORLD_MAP = "overworld";
@@ -30,8 +30,8 @@ public abstract class Level extends Group implements Storable {
 
     private static boolean overworldGenerated = false;
 
-    public int mapWidth = 50;
-    public int mapHeight = 50;
+    public int mapWidth = 20;
+    public int mapHeight = 20;
 
     public int sfMapW = mapWidth;
     public int sfMapH = mapHeight + SAFE_OFFSET;
