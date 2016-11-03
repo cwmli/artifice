@@ -61,9 +61,8 @@ public class Tilemap extends Overlay {
     protected void updateAllVertices(){
 
         for(int y = 0; y < mapCellsH; y++){
-
-            for(int x = 0; x < mapCellsW; x++){
-
+            for(int x = 0; x < mapCellsW &&
+                    Camera.main.inScreenView(x * cellW, y * cellH); x++){
                 //update regular vertices
                 vertices[0] = x * cellW;
                 vertices[1] = y * cellH;

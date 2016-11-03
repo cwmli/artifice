@@ -60,11 +60,12 @@ public class Camera extends Article {
         int h = (int)Math.ceil(Game.height / zoom);
 
         Camera camera = new Camera(
-                new Vector2((int)(Game.width - w * zoom) / 2,
+                new Vector2(
+                        (int)(Game.width - w * zoom) / 2,
                         (int)(Game.height - h * zoom) / 2),
-                w,
-                h,
-                zoom);
+                        w,
+                        h,
+                        zoom);
 
         return add(camera);
     }

@@ -62,7 +62,7 @@ public class TestLevel extends Level {
 
     public void generate(){
         Map heightmap = new Map(
-                mapWidth, mapHeight, 0,
+                mapWidth, mapHeight, Rand.range(0, 25565),
                 Map.AMP, Map.RISE, Map.DROP,
                 Map.F1, Map.F2, Map.F3,
                 Map.EOCT1, Map.EOCT2, Map.EOCT3,

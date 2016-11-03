@@ -34,7 +34,7 @@ public class Article {
         } else if (parent != null) {
             return parent.camera();
         } else {
-            return null;
+            return Camera.main;
         }
     }
 

@@ -30,8 +30,8 @@ public abstract class Level extends Group implements Storable {
 
     private static boolean overworldGenerated = false;
 
-    public int mapWidth = 100;
-    public int mapHeight = 100;
+    public int mapWidth = 50;
+    public int mapHeight = 50;
 
     public int sfMapW = mapWidth;
     public int sfMapH = mapHeight + SAFE_OFFSET;
