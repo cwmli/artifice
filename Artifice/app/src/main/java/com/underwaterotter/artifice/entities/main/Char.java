@@ -1,6 +1,7 @@
 package com.underwaterotter.artifice.entities.main;
 
 import android.graphics.RectF;
+import android.util.Log;
 
 import com.underwaterotter.artifice.entities.Mob;
 import com.underwaterotter.artifice.scenes.GameScene;
@@ -105,8 +106,10 @@ public class Char extends Mob {
                 idle.setFrames(new RectF(0, 0, 0.125f, 0.5f));
 
                 run = new Animation(5f, true);
-                run.setFrames(new RectF(0, 0, 0.125f, 0.5f), new RectF(0.125f, 0, 0.25f, 0.5f),  new RectF(0.25f, 0, 0.375f, 0.5f), new RectF(0.125f, 0, 0.25f, 0.5f),
-                        new RectF(0, 0, 0.125f, 0.5f),  new RectF(0.375f, 0, 0.5f, 0.5f),  new RectF(0.5f, 0, 0.625f, 0.5f),  new RectF(0.375f, 0, 0.5f, 0.5f));
+                run.setFrames(new RectF(0, 0, 0.125f, 0.5f), new RectF(0.125f, 0, 0.25f, 0.5f),
+                        new RectF(0.25f, 0, 0.375f, 0.5f), new RectF(0.125f, 0, 0.25f, 0.5f),
+                        new RectF(0, 0, 0.125f, 0.5f),  new RectF(0.375f, 0, 0.5f, 0.5f),
+                        new RectF(0.5f, 0, 0.625f, 0.5f),  new RectF(0.375f, 0, 0.5f, 0.5f));
             }
         };
         sprite.setMob(this);

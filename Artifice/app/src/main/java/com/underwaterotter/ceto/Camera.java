@@ -156,8 +156,8 @@ public class Camera extends Article {
     }
 
     public boolean inScreenView(float x, float y){
-        return x >= this.pos.x && x < this.pos.x + screenWidth &&
-               y >= this.pos.y && y < this.pos.y + screenHeight;
+        return x >= this.distanceToFocus.x && x < this.distanceToFocus.x + viewWidth &&
+               y >= this.distanceToFocus.y && y < this.distanceToFocus.y + viewHeight;
     }
 
     public void setFocusPoint(float x, float y){

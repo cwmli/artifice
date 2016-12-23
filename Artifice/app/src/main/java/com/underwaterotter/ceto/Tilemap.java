@@ -61,55 +61,56 @@ public class Tilemap extends Overlay {
     protected void updateAllVertices(){
 
         for(int y = 0; y < mapCellsH; y++){
-            for(int x = 0; x < mapCellsW &&
-                    Camera.main.inScreenView(x * cellW, y * cellH); x++){
-                //update regular vertices
-                vertices[0] = x * cellW;
-                vertices[1] = y * cellH;
+            for(int x = 0; x < mapCellsW; x++){
+                if (Camera.main.inScreenView(x * cellW, y * cellH)) {
+                    //update regular vertices
+                    vertices[0] = x * cellW;
+                    vertices[1] = y * cellH;
 
-                vertices[2] = x * cellW;
-                vertices[3] = y * cellH + cellH;
+                    vertices[2] = x * cellW;
+                    vertices[3] = y * cellH + cellH;
 
-                vertices[4] = x * cellW + cellW;
-                vertices[5] = y * cellH;
+                    vertices[4] = x * cellW + cellW;
+                    vertices[5] = y * cellH;
 
-                vertices[6] = x * cellW + cellW;
-                vertices[7] = y * cellH + cellH;
+                    vertices[6] = x * cellW + cellW;
+                    vertices[7] = y * cellH + cellH;
 
-                vertexBuffer.put(vertices);
+                    vertexBuffer.put(vertices);
 
-                //retrieve texture id and return a rect
-                RectF tileRect = src.get(mapData[y * mapCellsW + x]);
-                boolean flipHorizontal = flipData[y * mapCellsW + x];
-                //now update texture vertices
+                    //retrieve texture id and return a rect
+                    RectF tileRect = src.get(mapData[y * mapCellsW + x]);
+                    boolean flipHorizontal = flipData[y * mapCellsW + x];
+                    //now update texture vertices
 
-                if(!flipHorizontal) {
-                    stVertices[0] = tileRect.left;
-                    stVertices[1] = tileRect.top;
+                    if (!flipHorizontal) {
+                        stVertices[0] = tileRect.left;
+                        stVertices[1] = tileRect.top;
 
-                    stVertices[2] = tileRect.left;
-                    stVertices[3] = tileRect.bottom;
+                        stVertices[2] = tileRect.left;
+                        stVertices[3] = tileRect.bottom;
 
-                    stVertices[4] = tileRect.right;
-                    stVertices[5] = tileRect.top;
+                        stVertices[4] = tileRect.right;
+                        stVertices[5] = tileRect.top;
 
-                    stVertices[6] = tileRect.right;
-                    stVertices[7] = tileRect.bottom;
-                } else {
-                    stVertices[0] = tileRect.right;
-                    stVertices[1] = tileRect.top;
+                        stVertices[6] = tileRect.right;
+                        stVertices[7] = tileRect.bottom;
+                    } else {
+                        stVertices[0] = tileRect.right;
+                        stVertices[1] = tileRect.top;
 
-                    stVertices[2] = tileRect.right;
-                    stVertices[3] = tileRect.bottom;
+                        stVertices[2] = tileRect.right;
+                        stVertices[3] = tileRect.bottom;
 
-                    stVertices[4] = tileRect.left;
-                    stVertices[5] = tileRect.top;
+                        stVertices[4] = tileRect.left;
+                        stVertices[5] = tileRect.top;
 
-                    stVertices[6] = tileRect.left;
-                    stVertices[7] = tileRect.bottom;
+                        stVertices[6] = tileRect.left;
+                        stVertices[7] = tileRect.bottom;
+                    }
+
+                    stVertexBuffer.put(stVertices);
                 }
-
-                stVertexBuffer.put(stVertices);
             }
         }
 

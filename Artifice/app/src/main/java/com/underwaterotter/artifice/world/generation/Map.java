@@ -39,18 +39,18 @@ public class Map {
     private double[][] heightmap;
     private double[][] moisturemap;
 
-    private int[] md;
-    private int[] wm;
-    private int[] hm;
+    private int[] mapdata;
+    private int[] watermap;
+    private int[] heightdata;
 
     private int xsize, ysize;
 
-    double amp;           //amplitude = 0.0 - 1.0
-    double rise;          //rise = 0.0 - 2.0
-    double drop;          //drop = 0.0 - 10.0
+    double amp;           //amplitude = 0.0 - 1.0d
+    double rise;          //rise = 0.0 - 2.0d
+    double drop;          //drop = 0.0 - 10.0d
     double f1, f2, f3;    //frequencies
     double eo1, eo2, eo3; //elevation octaves
-    int smooth;        //average sample size
+    int smooth;           //average sample size
     double redis;         //redistribution
 
     public Map(int w, int h, long seed,
@@ -84,22 +84,23 @@ public class Map {
     }
 
     public void build() {
-        md = new int[xsize * (ysize + Level.SAFE_OFFSET)]; //map data
-        Arrays.fill(md, Terrain.SOLID_BED);
-        wm = new int[xsize * (ysize + Level.SAFE_OFFSET)]; //water
-        Arrays.fill(wm, Terrain.SWATER_1);
-        hm = new int[xsize * (ysize + Level.SAFE_OFFSET)]; //height data
+        mapdata = new int[xsize * (ysize + Level.SAFE_OFFSET)];
+        Arrays.fill(mapdata, Terrain.SOLID_BED);
+
+        watermap = new int[xsize * (ysize + Level.SAFE_OFFSET)];
+        Arrays.fill(watermap, Terrain.SWATER_1);
+
+        heightdata = new int[xsize * (ysize + Level.SAFE_OFFSET)];
 
         genHeightmap();
         normalizeHeightmap();
-        genDispMap();
+        genDisplayMap();
         cleanWaterTiles();
         cleanGrassTiles();
-//        cleanWallTiles();
     }
 
     public int[][] getDisplayMaps() {
-        return new int[][]{md, wm};
+        return new int[][]{mapdata, watermap};
     }
 
     public double[][] getHeightmap() {
@@ -190,8 +191,8 @@ public class Map {
         for (int y = 0; y < ysize; y++) {
             for (int x = 0; x < xsize; x++) {
                 double e = eo1 * hmapnoise.smoothNoise(x / f1, y / f1)
-                        + eo2 * hmapnoise.smoothNoise(x / f2, y / f2)
-                        + eo3 * hmapnoise.smoothNoise(x / f3, y / f3);
+                         + eo2 * hmapnoise.smoothNoise(x / f2, y / f2)
+                         + eo3 * hmapnoise.smoothNoise(x / f3, y / f3);
                 e /= (eo1 + eo2 + eo3);
                 e = Math.pow(e, redis);
 
@@ -213,90 +214,91 @@ public class Map {
     private void normalizeHeightmap() {
         for (int y = 0; y < ysize; y++) {
             for (int x = 0; x < xsize; x++) {
-                hm[(y * xsize) + x] = getHeight(heightmap[y][x]);
+                heightdata[(y * xsize) + x] = getHeight(heightmap[y][x]);
             }
         }
 
-        GenerationDebug.ShowMapData(hm);
+        GenerationDebug.ShowMapData(heightdata);
     }
 
-    private void genDispMap() {
+    private void genDisplayMap() {
         for (int y = ysize - 1; y >= 0; y--) {
             for (int x = xsize - 1; x >= 0; x--) {
-                int h1 = hm[(y * xsize) + x];
-                int h2 = hm[((y + 1) * xsize) + x];
+                int h1 = heightdata[(y * xsize) + x];
+                int h2 = heightdata[((y + 1) * xsize) + x];
 
                 if (h1 == 0) {
-                    wm[y * xsize + x] = Terrain.SWATER_1;
-                    md[y * xsize + x] = Terrain.SOLID_BED;
+                    watermap[y * xsize + x] = Terrain.SWATER_1;
+                    mapdata[y * xsize + x] = Terrain.SOLID_BED;
                 } else if (h1 > h2 && h1 > 1) {
-                    md[y * xsize + x] = Terrain.TGRASS;
-                    wm[y * xsize + x] = Terrain.EMPTY;
-                    md[(y - 1) * xsize + x] = Terrain.SGRASS;
-                    wm[(y - 1) * xsize + x] = Terrain.EMPTY;
-                    shifthmTiles(x, y);
+                    mapdata[y * xsize + x] = Terrain.TOP_GRASS;
+                    watermap[y * xsize + x] = Terrain.EMPTY;
+                    mapdata[(y - 1) * xsize + x] = Terrain.SOLID_GRASS;
+                    watermap[(y - 1) * xsize + x] = Terrain.EMPTY;
+                    offsetHeightData(x, y);
                 } else if (h1 == h2 && h1 > 1){
-                    md[y * xsize + x] = Terrain.SGRASS;
-                    wm[y * xsize + x] = Terrain.EMPTY;
+                    mapdata[y * xsize + x] = Terrain.SOLID_GRASS;
+                    watermap[y * xsize + x] = Terrain.EMPTY;
                 } else {
-                    md[y * xsize + x] = Terrain.SGRASS;
-                    wm[y * xsize + x] = Terrain.EMPTY;
+                    mapdata[y * xsize + x] = Terrain.SOLID_GRASS;
+                    watermap[y * xsize + x] = Terrain.EMPTY;
                 }
             }
         }
 
-        GenerationDebug.ShowMapData(hm);
+        GenerationDebug.ShowMapData(heightdata);
     }
 
     private void cleanWaterTiles() {
         Level lv = Artifice.getLevel();
-        for (int i = 0; i < wm.length; i++) {
+        for (int i = 0; i < watermap.length; i++) {
             //clean tiles that are adjacent to water tiles
-            if (wm[i] == Terrain.EMPTY) {
-                if (wm[i + lv.s_cells[6]] == Terrain.SWATER_1) {
-                    if (checkTile(i) == TileType.BR_CORNER) {
-                        md[i] = Terrain.CONV_GRASS;
-                        md[i + lv.s_cells[1]] = Terrain.D1GRASS;
-                        wm[i] = Terrain.DWATER_1;
-                        wm[i + lv.s_cells[1]] = Terrain.EMPTY;
-                        hm[i + lv.s_cells[1]] = hm[i];
-                        lv.getTilemap().updateFlipData(i, false);
-                        lv.getTilemap().updateFlipData(i + lv.s_cells[1], false);
-                        lv.getWatertilemap().updateFlipData(i, false);
-                    } else if (checkTile(i) == TileType.BL_CORNER) {
-                        md[i] = Terrain.CONV_GRASS;
-                        md[i + lv.s_cells[1]] = Terrain.D1GRASS;
-                        wm[i] = Terrain.DWATER_1;
-                        wm[i + lv.s_cells[1]] = Terrain.EMPTY;
-                        hm[i + lv.s_cells[1]] = hm[i];
-                        lv.getTilemap().updateFlipData(i, true);
-                        lv.getTilemap().updateFlipData(i + lv.s_cells[1], true);
-                        lv.getWatertilemap().updateFlipData(i, true);
-                        //clean bottom flat tiles
-                    } else if (checkTile(i) == TileType.BOTTOM) {
-                        md[i] = Terrain.TGRASS;
-                        wm[i + lv.s_cells[6]] = Terrain.TWATER_1;
-                    }
-                } else if (wm[i + lv.s_cells[1]] == Terrain.SWATER_1) {
-                    //clean top corner tiles
-                    if (checkTile(i) == TileType.TR_CORNER) {
-                        md[i] = Terrain.CONV_CGRASS;
-                        wm[i] = Terrain.SWATER_2;
-                        hm[i] = hm[i + lv.s_cells[6]];
-                        lv.getTilemap().updateFlipData(i, false);
-                        lv.getTilemap().updateFlipData(i + lv.s_cells[1], false);
-                        lv.getWatertilemap().updateFlipData(i, false);
-                    } else if (checkTile(i) == TileType.TL_CORNER) {
-                        md[i] = Terrain.CONV_CGRASS;
-                        wm[i] = Terrain.SWATER_2;
-                        hm[i] = hm[i + lv.s_cells[6]];
-                        lv.getTilemap().updateFlipData(i, true);
-                        lv.getTilemap().updateFlipData(i + lv.s_cells[1], true);
-                        lv.getWatertilemap().updateFlipData(i, true);
-                        //clean top flat tiles
+            if (watermap[i] == Terrain.EMPTY) {
+                if (watermap[i + lv.s_cells[6]] == Terrain.SWATER_1) {
+                    TileType tiletype = checkTile(i);
+                    if (tiletype == TileType.BR_CORNER ||
+                            tiletype == TileType.BL_CORNER) {
+                        mapdata[i] = Terrain.CONV_GRASS;
+                        mapdata[i + lv.s_cells[1]] = Terrain.DIAG_GRASS;
+
+                        watermap[i] = Terrain.DWATER_1;
+                        watermap[i + lv.s_cells[1]] = Terrain.EMPTY;
+
+                        heightdata[i + lv.s_cells[1]] = heightdata[i];
+
+                        if (tiletype == TileType.BR_CORNER) {
+                            lv.getTilemap().updateFlipData(i, false);
+                            lv.getTilemap().updateFlipData(i + lv.s_cells[1], false);
+                            lv.getWatertilemap().updateFlipData(i, false);
+                        } else {
+                            lv.getTilemap().updateFlipData(i, true);
+                            lv.getTilemap().updateFlipData(i + lv.s_cells[1], true);
+                            lv.getWatertilemap().updateFlipData(i, true);
+                        }
                     } else {
-                        md[i] = Terrain.CONV_EGRASS;
-                        wm[i] = Terrain.SWATER_3;
+                        mapdata[i] = Terrain.TOP_GRASS;
+                        watermap[i + lv.s_cells[6]] = Terrain.TWATER_1;
+                    }
+                } else if (watermap[i + lv.s_cells[1]] == Terrain.SWATER_1) {
+                    TileType tiletype = checkTile(i);
+                    if (tiletype == TileType.TR_CORNER ||
+                            tiletype == TileType.TL_CORNER) {
+                        mapdata[i] = Terrain.CORNER_GRASS;
+                        watermap[i] = Terrain.SWATER_2;
+                        heightdata[i] = heightdata[i + lv.s_cells[6]];
+
+                        if (tiletype == TileType.TR_CORNER) {
+                            lv.getTilemap().updateFlipData(i, false);
+                            lv.getTilemap().updateFlipData(i + lv.s_cells[1], false);
+                            lv.getWatertilemap().updateFlipData(i, false);
+                        } else {
+                            lv.getTilemap().updateFlipData(i, true);
+                            lv.getTilemap().updateFlipData(i + lv.s_cells[1], true);
+                            lv.getWatertilemap().updateFlipData(i, true);
+                        }
+                    } else {
+                        mapdata[i] = Terrain.EDGE_GRASS;
+                        watermap[i] = Terrain.SWATER_3;
                     }
                 }
             }
@@ -307,38 +309,55 @@ public class Map {
         Level lv = Artifice.getLevel();
         //clean tiles based on height differences
         for (int e = 5; e > 1; e--) {
-            for (int i = 1 + lv.mapWidth; i < hm.length - lv.mapWidth - 1; i++) {
-                if (hm[i] == e) {
-                    if (md[i] == Terrain.TGRASS) {
-                        if (checkTile(i) == TileType.BL_CORNER) {
-                            md[i] = Terrain.D2GRASS;
-                            md[i + lv.s_cells[1]] = Terrain.D1GRASS;
-                            lv.getTilemap().updateFlipData(i, true);
-                            lv.getTilemap().updateFlipData(i + lv.s_cells[1], true);
-                        } else if (checkTile(i) == TileType.BR_CORNER) {
-                            md[i] = Terrain.D2GRASS;
-                            md[i + lv.s_cells[1]] = Terrain.D1GRASS;
+            for (int i = 1 + lv.mapWidth; i < heightdata.length - lv.mapWidth - 1; i++) {
+                if (heightdata[i] == e) {
+                    if (mapdata[i] == Terrain.TOP_GRASS) {
+                        TileType tiletype = checkTile(i);
+
+                        if (tiletype == TileType.BR_CORNER ||
+                                tiletype == TileType.BL_CORNER) {
+                            mapdata[i] = Terrain.DIAG_GRASS_H;
+                            mapdata[i + lv.s_cells[1]] = Terrain.DIAG_GRASS;
+
+                            if (tiletype == TileType.BR_CORNER) {
+                                lv.getTilemap().updateFlipData(i, false);
+                                lv.getTilemap().updateFlipData(i + lv.s_cells[1], false);
+                            } else {
+                                lv.getTilemap().updateFlipData(i, true);
+                                lv.getTilemap().updateFlipData(i + lv.s_cells[1], true);
+                            }
+                        } else if (tiletype == TileType.L_AND_R) {
+                            mapdata[i] = Terrain.B_TOP_GRASS_H;
                             lv.getTilemap().updateFlipData(i, false);
-                            lv.getTilemap().updateFlipData(i + lv.s_cells[1], false);
-                        } else if (checkTile(i) == TileType.TL_CORNER) {
-                            md[i] = Terrain.CGRASS;
-                            lv.getTilemap().updateFlipData(i, true);
-                        } else if (checkTile(i) == TileType.TR_CORNER) {
-                            md[i] = Terrain.CGRASS;
+                        } else if (tiletype == TileType.RIGHT) {
+                            mapdata[i] = Terrain.R_TOP_GRASS_H;
                             lv.getTilemap().updateFlipData(i, false);
+                        } else if (tiletype== TileType.LEFT) {
+                            mapdata[i] = Terrain.R_TOP_GRASS_H;
+                            lv.getTilemap().updateFlipData(i, true);
                         }
-                    } else if (md[i] == Terrain.SGRASS) {
-                        if (checkTile(i) == TileType.TOP) {
-                            md[i] = Terrain.EGRASS;
+                    } else if (mapdata[i] == Terrain.SOLID_GRASS) {
+                        TileType tiletype = checkTile(i);
+
+                        if (tiletype == TileType.TR_CORNER ||
+                                tiletype == TileType.TL_CORNER) {
+                            mapdata[i] = Terrain.CORNER_GRASS_H;
+
+                            if (tiletype == TileType.TR_CORNER)
+                                lv.getTilemap().updateFlipData(i, false);
+                            else
+                                lv.getTilemap().updateFlipData(i, true);
+                        } else if (tiletype == TileType.TOP) {
+                            mapdata[i] = Terrain.EDGE_GRASS_H;
                             lv.getTilemap().updateFlipData(i, false);
-                        } else if (checkTile(i) == TileType.L_AND_R) {
-                            md[i] = Terrain.VBGRASS;
+                        } else if (tiletype == TileType.L_AND_R) {
+                            mapdata[i] = Terrain.B_EDGE_GRASS_H;
                             lv.getTilemap().updateFlipData(i, true);
-                        } else if (checkTile(i) == TileType.RIGHT) {
-                            md[i] = Terrain.VGRASS;
+                        } else if (tiletype == TileType.RIGHT) {
+                            mapdata[i] = Terrain.V_EDGE_GRASS_H;
                             lv.getTilemap().updateFlipData(i, false);
-                        } else if (checkTile(i) == TileType.LEFT) {
-                            md[i] = Terrain.VGRASS;
+                        } else if (tiletype== TileType.LEFT) {
+                            mapdata[i] = Terrain.V_EDGE_GRASS_H;
                             lv.getTilemap().updateFlipData(i, true);
                         }
                     }
@@ -347,79 +366,56 @@ public class Map {
         }
     }
 
-    private void cleanWallTiles() {
-        Level lv = Artifice.getLevel();
-
-        for (int i = 0; i < wm.length; i++) {
-            if (md[i] == Terrain.ELEVATED_END) {
-                if (md[i + lv.s_cells[1]] == Terrain.CONV_GRASS &&
-                        md[i + lv.s_cells[0]] == Terrain.TGRASS &&
-                        md[i + lv.s_cells[6]] != Terrain.TGRASS) {
-                    md[i] = Terrain.DSTONE;
-                    lv.getTilemap().updateFlipData(i, false);
-                } else if (md[i + lv.s_cells[1]] == Terrain.CONV_GRASS &&
-                        md[i + lv.s_cells[2]] == Terrain.TGRASS &&
-                        md[i + lv.s_cells[6]] != Terrain.TGRASS) {
-                    md[i] = Terrain.DSTONE;
-                    lv.getTilemap().updateFlipData(i, true);
-                } else {
-                    md[i] = Terrain.STONE;
-                }
-            }
-        }
-    }
-
     private TileType checkTile(int cell) {
-        boolean[] tiles = checkHeightSimilar(cell);
+        boolean[] tiles = checkSimilarHeight(cell);
 
         if (tiles[4] && tiles[3]) {
-            if (tiles[2] && tiles[7] &&
-                    tiles[0] && tiles[5])
                 return TileType.L_AND_R;
         } else if (tiles[4]) {
-            if (tiles[6] && tiles[7])
+            if (tiles[6] && tiles[7] && !tiles[1])
                 return TileType.BR_CORNER;
-            else if (tiles[2] && tiles[1])
+            else if (tiles[2] && tiles[1] && !tiles[6])
                 return TileType.TR_CORNER;
-            else if (tiles[2] && tiles[7])
+            else
                 return TileType.RIGHT;
         } else if (tiles[3]) {
-            if (tiles[6] && tiles[5])
+            if (tiles[6] && tiles[5] && !tiles[1])
                 return TileType.BL_CORNER;
-            else if (tiles[0] && tiles[1])
+            else if (tiles[0] && tiles[1] && !tiles[6])
                 return TileType.TL_CORNER;
-            else if (tiles[0] && tiles[5])
+            else
                 return TileType.LEFT;
         } else if (tiles[1]) {
             return TileType.TOP;
         } else if (tiles[6]) {
             return TileType.BOTTOM;
+        } else {
+            return TileType.SOLID;
         }
-        return TileType.SOLID;
     }
 
-    private boolean[] checkHeightSimilar(int cell) {
+    private boolean[] checkSimilarHeight(int cell) {
         Level lv = Artifice.getLevel();
 
         boolean[] heightSim = new boolean[lv.s_cells.length];
 
         for (int i = 0; i < lv.s_cells.length; i++) {
-            if (hm[cell] > hm[cell + lv.s_cells[i]])
+            if (heightdata[cell] > heightdata[cell + lv.s_cells[i]])
                 heightSim[i] = true;
         }
 
         return heightSim;
     }
 
-    private void shifthmTiles(int x, int y){
-        if(hm[(y - 1) * xsize + x] == hm[y * xsize + x]) {
-            shifthmTiles(x, y - 1);
-        } else if (hm[(y - 1) * xsize + x] < hm[y * xsize + x]){
-            hm[(y - 1) * xsize + x] = hm[y * xsize + x];
+    private void offsetHeightData(int x, int y){
+        if(heightdata[(y - 1) * xsize + x] == heightdata[y * xsize + x]) {
+            offsetHeightData(x, y - 1);
+        } else if (heightdata[(y - 1) * xsize + x] < heightdata[y * xsize + x]){
+            heightdata[(y - 1) * xsize + x] = heightdata[y * xsize + x];
         } else {
-            hm[(y - 2) * xsize + x] = hm[(y - 1) * xsize + x];
-            hm[(y - 1) * xsize + x] = hm[y * xsize + x];
-            shifthmTiles(x, y - 3);
+            heightdata[(y - 2) * xsize + x] = heightdata[(y - 1) * xsize + x];
+            heightdata[(y - 1) * xsize + x] = heightdata[y * xsize + x];
+            offsetHeightData(x, y - 3);
         }
     }
 }

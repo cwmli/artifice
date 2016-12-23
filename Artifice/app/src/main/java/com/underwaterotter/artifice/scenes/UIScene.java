@@ -13,7 +13,7 @@ import com.underwaterotter.cetoinput.Motions;
  * UI Overlay that goes over extended scenes
  */
 
-public class UIScene extends Scene{
+public class UIScene extends Scene {
 
     //Target virtual resolution
     public static final float VIRTUAL_WIDTH = 320;

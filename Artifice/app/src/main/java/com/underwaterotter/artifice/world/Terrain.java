@@ -2,7 +2,6 @@ package com.underwaterotter.artifice.world;
 
 public class Terrain {
 
-    //PLACEHOLDER TILES
     public static final int ELEVATED_END  = 95;
     public static final int EMPTY         = 96;
 
@@ -20,25 +19,29 @@ public class Terrain {
 
     public static final int[] WATER = {DWATER_1, DWATER_2, DWATER_3, SWATER_1, SWATER_2};
 
-    //TILESET 3
-    public static final int SGRASS        = 0;
-    public static final int EGRASS        = 1;
-    public static final int VGRASS        = 2;
-    public static final int VBGRASS       = 3;
-    public static final int CGRASS        = 4;
-    public static final int CONV_EGRASS   = 5;
-    public static final int CONV_VGRASS   = 6;
-    public static final int CONV_CGRASS   = 7;
-    public static final int TGRASS        = 8;
-    public static final int D1GRASS       = 9;
-    public static final int D2GRASS       = 10;
-    public static final int CONV_GRASS    = 11;
+    //ABOVEGROUND TILESET
+    public static final int SOLID_GRASS   = 0;
+    public static final int EDGE_GRASS    = 1;
+    public static final int V_EDGE_GRASS  = 2;
+    public static final int CORNER_GRASS  = 3;
+    public static final int TOP_GRASS     = 4;
+    public static final int DIAG_GRASS    = 5;
 
-    public static final int STONE         = 12;
-    public static final int DSTONE        = 13;
-    public static final int CONV_STONE    = 14;
+    public static final int EDGE_GRASS_H  = 10;
+    public static final int V_EDGE_GRASS_H= 11;
+    public static final int B_EDGE_GRASS_H= 12;
+    public static final int CORNER_GRASS_H= 13;
+    public static final int B_TOP_GRASS_H = 14;
+    public static final int R_TOP_GRASS_H = 15;
+    public static final int L_DIAG_GRASS_H= 16;
 
-    //water bed tiles
+    public static final int DIAG_GRASS_H  = 20;
+    public static final int CONV_GRASS    = 21;
+    public static final int STONE         = 22;
+    public static final int DSTONE        = 23;
+    public static final int CONV_STONE    = 24;
+
+    //WATER BED TILES
     public static final int SOLID_BED     = 47;
     public static final int R_C_BED       = 48;
     public static final int TOP_BED       = 49;
@@ -61,24 +64,24 @@ public class Terrain {
 
 
     //Flag Bitmasks
-    public static final int PASSABLE = 0x01;
-    public static final int CLIMBABLE = 0x02;
-    public static final int FLAMMABLE = 0x04;
-    public static final int UNSTABLE = 0x08;
+    public static final int PASSABLE      = 0x01;
+    public static final int CLIMBABLE     = 0x02;
+    public static final int FLAMMABLE     = 0x04;
+    public static final int UNSTABLE      = 0x08;
 
-    public static final int SOLID = 0x10; //UNPASSABLE
-    public static final int LIQUID = 0x20;
+    public static final int SOLID         = 0x10; //UNPASSABLE
+    public static final int LIQUID        = 0x20;
 
     public static final int[] flags = new int[512];
     static {
         flags[EMPTY] = SOLID;
 
-        flags[SGRASS] = PASSABLE | FLAMMABLE;
-        flags[EGRASS] = PASSABLE | FLAMMABLE;
-        flags[CGRASS] = PASSABLE | FLAMMABLE;
-        flags[TGRASS] = SOLID | FLAMMABLE;
-        flags[D1GRASS] = PASSABLE | FLAMMABLE;
-        flags[D2GRASS] = SOLID | FLAMMABLE;
+        flags[SOLID_GRASS] = PASSABLE | FLAMMABLE;
+        flags[EDGE_GRASS_H] = PASSABLE | FLAMMABLE;
+        flags[CORNER_GRASS_H] = PASSABLE | FLAMMABLE;
+        flags[TOP_GRASS] = SOLID | FLAMMABLE;
+        flags[DIAG_GRASS] = PASSABLE | FLAMMABLE;
+        flags[DIAG_GRASS_H] = SOLID | FLAMMABLE;
         flags[CONV_GRASS] = SOLID | FLAMMABLE;
 
         flags[SWATER_1] = SOLID | LIQUID;

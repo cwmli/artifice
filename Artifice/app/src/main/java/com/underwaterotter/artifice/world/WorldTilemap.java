@@ -44,10 +44,8 @@ public class WorldTilemap extends Tilemap {
     @Override
     public void update(){
         map = level.getMapData(type);
-        if(!Arrays.equals(map, oldmap)){
-            readMapData(map, flipData, level.sfMapW);
-            oldmap = map.clone();
-        }
+        readMapData(map, flipData, level.sfMapW);
+        oldmap = map.clone();
     }
 
     //draw a "lightened" colored tile texture over the existing tilemap
