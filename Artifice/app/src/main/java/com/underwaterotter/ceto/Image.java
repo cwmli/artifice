@@ -49,9 +49,13 @@ public class Image extends Overlay {
     public Image(Vector3 pos, Object bitmap){
         this();
 
-        position(pos);
+        setPos(pos);
         texture = bitmap instanceof ModelTexture ? (ModelTexture)bitmap : TextureCache.get(bitmap);
         textureRect(texture.stRect(0, 0, texture.width, texture.height));
+    }
+
+    public Vector3 getPos(){
+        return pos;
     }
 
     @Override

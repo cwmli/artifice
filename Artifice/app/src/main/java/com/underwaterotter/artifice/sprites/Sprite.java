@@ -1,5 +1,7 @@
 package com.underwaterotter.artifice.sprites;
 
+import android.graphics.RectF;
+
 import com.underwaterotter.ceto.Player;
 
 public abstract class Sprite extends Player {
@@ -10,6 +12,10 @@ public abstract class Sprite extends Player {
 
     public Sprite(Object id){
         super(id);
+    }
+
+    public RectF getBoundingBox(){
+        return boundingBox;
     }
 
     @Override

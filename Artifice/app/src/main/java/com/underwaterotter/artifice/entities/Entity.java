@@ -30,7 +30,7 @@ public class Entity extends Group implements Storable {
     @Override
     public void update(){
         super.update();
-        cellNumber = currentLevel.getTilemap().worldToCell(worldPosition);
+        cellNumber = currentLevel.worldToCell(worldPosition);
     }
 
     @Override
@@ -62,11 +62,6 @@ public class Entity extends Group implements Storable {
 
     public int cellPosition(){
         return cellNumber;
-    }
-
-    public void cellPosition(int pos){
-        cellNumber = pos;
-        worldPosition = currentLevel.getTilemap().cellToWorld(pos);
     }
 
     public Vector3 worldPosition(){

@@ -62,18 +62,18 @@ public class Button extends HotBox {
 
     @Override
     protected void updateHitbox(){
-        hitZone.position(x, y, 0);
-        hitZone.width = width;
-        hitZone.height = height;
+        hitZone.setPos(x, y, 0);
+        hitZone.setWidth(width);
+        hitZone.setHeight(height);
     }
 
     protected boolean longTouchAllowed(){
         return false;
     }
 
-    protected void onTouch() {};
+    protected void onTouch() {}
 
-    protected void onRelease() {};
+    protected void onRelease() {}
 
-    protected void onClick() {};
+    protected void onClick() {}
 }

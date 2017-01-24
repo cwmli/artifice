@@ -15,7 +15,6 @@ public class TextureCache {
 
     public static Context context;
 
-
     private static BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
     static {
         bitmapOptions.inScaled = false;

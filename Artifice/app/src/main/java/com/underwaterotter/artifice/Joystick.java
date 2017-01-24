@@ -1,6 +1,7 @@
 package com.underwaterotter.artifice;
 
 import android.graphics.Color;
+import android.util.Log;
 
 import com.underwaterotter.ceto.Image;
 import com.underwaterotter.ceto.ui.CirclePad;
@@ -45,11 +46,11 @@ public class Joystick extends CirclePad {
     public void updateHitbox(){
         super.updateHitbox();
 
-        nob.pos.x = x + SIZE_R - (nob.width / 2);
-        nob.pos.y = y + SIZE_R - (nob.height / 2);
+        nob.setPos(x + SIZE_R - (nob.getWidth() / 2),
+                y + SIZE_R - (nob.getHeight() / 2),
+                0);
 
-        joystick.pos.x = x;
-        joystick.pos.y = y;
+        joystick.setPos(x, y, 0);
     }
 
     public double angle(Motions.Point p){
@@ -74,7 +75,8 @@ public class Joystick extends CirclePad {
     protected void onRelease(Motions.Point p){
         //recenter the nob
         Vector2 lcJoy = position();
-        nob.position(lcJoy.x + SIZE_R - (nob.width / 2), lcJoy.y + SIZE_R - (nob.height / 2), 0);
+        nob.setPos(lcJoy.x + SIZE_R - (nob.getWidth() / 2),
+                lcJoy.y + SIZE_R - (nob.getHeight() / 2), 0);
 
         initialDrag = false;
 
@@ -84,18 +86,22 @@ public class Joystick extends CirclePad {
 
     protected void onDragged(Motions.Point p){
         Vector2 pos = camera().screenToCamera((int)p.endPos.x, (int)p.endPos.y);
-        CharController.setVelocity((float)angle(p));
+        CharController.setAngle((float)angle(p));
 
         if(initialDrag) {
 
             if(joystick.center().distance(pos) > SIZE_R){
-                nob.position((float)Math.cos(Math.toRadians(angle(p))) * SIZE_R + joystick.center().x - (nob.width / 2),
-                        (float)Math.sin(Math.toRadians(angle(p))) * SIZE_R + joystick.center().y - (nob.height / 2), 0);
+                nob.setPos((float)Math.cos(Math.toRadians(angle(p))) *
+                                SIZE_R + joystick.center().x - (nob.getWidth() / 2),
+                            (float)Math.sin(Math.toRadians(angle(p))) *
+                                SIZE_R + joystick.center().y - (nob.getHeight() / 2), 0);
                 CharController.setSpeed(1.0f);
             } else {
-                nob.position(pos.x - SIZE_N, pos.y - SIZE_N, 0);
+                nob.setPos(pos.x - SIZE_N, pos.y - SIZE_N, 0);
                 CharController.setSpeed(joystick.center().distance(pos) / (SIZE_R * 2));
             }
+
+
 
             lastPoint.set(pos);
 

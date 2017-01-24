@@ -44,7 +44,7 @@ public class Particle extends Image {
 
         timer = 0;
 
-        position(x, y, 0);
+        setPos(x, y, 0);
         this.width = width;
         this.height = height;
 

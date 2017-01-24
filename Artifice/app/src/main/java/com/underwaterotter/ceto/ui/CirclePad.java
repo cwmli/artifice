@@ -16,11 +16,7 @@ public abstract class CirclePad extends HotCircle {
             public boolean pointOverlap(int x, int y){
 
                 int distance = (int)center().distance(new Vector2(x, y));
-                if(distance * distance <= radius * radius){
-                    return true;
-                } else {
-                    return false;
-                }
+                return distance * distance <= radius * radius;
             }
 
             @Override
@@ -55,9 +51,9 @@ public abstract class CirclePad extends HotCircle {
 
     @Override
     protected void updateHitbox(){
-        hitZone.position(x, y, 0);
-        hitZone.width = radius * 2;
-        hitZone.height = radius * 2;
+        hitZone.setPos(x, y, 0);
+        hitZone.setWidth(radius * 2);
+        hitZone.setHeight(radius * 2);
     }
 
     protected abstract void onTouch(Motions.Point p);

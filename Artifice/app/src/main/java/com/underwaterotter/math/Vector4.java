@@ -37,8 +37,7 @@ public class Vector4 {
     }
 
     public float[] getAsFloat(){
-        float[] vec4 = { x, y, z, w };
-        return vec4;
+        return new float[] { x, y, z, w };
     }
 
     public float distance(Vector4 vec4){

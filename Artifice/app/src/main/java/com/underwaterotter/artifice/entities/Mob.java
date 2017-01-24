@@ -6,7 +6,10 @@ import com.underwaterotter.artifice.Artifice;
 import com.underwaterotter.artifice.entities.items.Item;
 import com.underwaterotter.artifice.sprites.ItemSprite;
 import com.underwaterotter.artifice.sprites.MobSprite;
+import com.underwaterotter.artifice.sprites.Sprite;
+import com.underwaterotter.artifice.world.generation.Level;
 import com.underwaterotter.ceto.Image;
+import com.underwaterotter.math.Vector2;
 import com.underwaterotter.math.Vector3;
 import com.underwaterotter.utils.Block;
 import com.underwaterotter.utils.Storable;
@@ -15,44 +18,50 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.UUID;
+import java.util.Vector;
 
 public abstract class Mob extends Entity implements Storable {
 
-    public static final String HP = "hp";
-    public static final String STATUS = "status";
-    public static final String BUFFS = "buffs";
-    public static final String EQUIPS = "equips";
+    private static final String HP = "hp";
+    private static final String STATUS = "status";
+    private static final String BUFFS = "buffs";
+    private static final String EQUIPS = "equips";
+
+    private static final int SAFE_ZONE = 4;
 
     //the "z" length of the mob
-    public static final int MOB_THICKNESS = 5;
+    private static final int MOB_THICKNESS = 5;
 
     //for tracking
     private UUID mob_id;
 
-    public MobSprite sprite;
-    public Image shadow;
+    protected MobSprite sprite;
+    protected RectF hitBox;
+    protected Image shadow;
 
-    public ItemSprite[] equipped; //equal in length to attachPositions, corresponds to index
-    public Vector3[] attachPositions;
+    protected ItemSprite[] equipped; //equal in length to attachPositions, corresponds to index
+    protected Vector3[] attachPositions;
 
-    public String name = "generic_mob";
+    protected String name = "generic_mob";
 
-    public int max_hp;
-    public int hp;
-    public int def;
+    protected int max_hp;
+    protected int hp;
+    protected int def;
 
-    public float feather; //Max value of 100; higher values mean lighter weight
-    public float speed;
-    public float hindrance;
+    protected float feather; //Max value of 100; higher values mean lighter weight
+    protected float speed;
+    protected float hindrance;
 
-    public ArrayList<Integer> visibleCells;
-    public int agroRadius;
+    protected ArrayList<Integer> visibleCells;
+    protected int agroRadius;
     //view radius is calculated by cell blocks
 
     protected HashSet<Mob.STATUS> status;
     protected HashSet<BUFF> buffs;
 
     protected ArrayList<String> actions;
+
+    protected boolean[] availableDirections;
 
     private enum BUFF { DEFENSE, MAX_HP, ATTACK, SPEED}
     private enum STATUS { BLEEDING, FIRE, FROZEN, SHOCK, WET }
@@ -100,11 +109,113 @@ public abstract class Mob extends Entity implements Storable {
         );
     }
 
+    public UUID getMobID(){
+        return mob_id;
+    }
+
+    public void setSprite(MobSprite spr){
+        sprite = spr;
+    }
+
+    protected Mob[] getCollided(){
+        //find closest mobs to check
+        Mob[] mobs = currentLevel.getMobMapper().findByCell(cellPosition());
+        ArrayList<Mob> collided = new ArrayList<Mob>();
+
+//        if(mobs != null) {
+//            for(Mob mob : mobs) {
+//                if (RectF.intersects(mob.sprite.boundingBox, this.sprite.boundingBox) && mob.worldPosition().y - worldPosition().y <= MOB_THICKNESS) {
+//                    collided.add(mob);
+//                    mob.hindrance = 1 - (feather * 0.01f);
+//                }
+//            }
+//        }
+        Mob[] collidedMobs = new Mob[collided.size()];
+        collided.toArray(collidedMobs);
+
+        return collidedMobs;
+    }
+
+    public RectF getHitBox(){
+        return hitBox;
+    }
+
+    public Vector3[] getAttachPositions(){
+        return attachPositions;
+    }
+
+    public ItemSprite[] getEquipped(){
+        return equipped;
+    }
+
+    public Vector2 getVelocity(){
+        return sprite.getVelocity();
+    }
+
+    public void setVelocity(Vector2 vec2){
+        setVelocityX(vec2.x, vec2.y);
+    }
+
+    public void setVelocityX(float x, float y){
+        sprite.setVelocity(x, y);
+    }
+
+    public void setAngle(float angle){
+        sprite.setAngle(angle);
+    }
+
+    public void setSpeed(float s){
+        speed = s;
+        sprite.setSpeed(s);
+    }
+
+
     @Override
     public void update(){
         super.update();
 
         updateStatusEffects();
+        updateBounds();
+    }
+
+    private void updateBounds(){
+//        Level level = Artifice.getLevel();
+//        boolean top = level.isPassable(
+//                level.worldToCell(
+//                        (int)(hitBox.left + hitBox.width() / 2),
+//                        (int)hitBox.bottom - SAFE_ZONE));
+//
+//        boolean left = level.isPassable(
+//                level.worldToCell(
+//                        (int)hitBox.left + SAFE_ZONE,
+//                        (int)hitBox.bottom - SAFE_ZONE));
+//
+//        boolean bottom = level.isPassable(
+//                level.worldToCell(
+//                        (int)(hitBox.left + hitBox.width() / 2),
+//                        (int)hitBox.bottom));
+//
+//        boolean right = level.isPassable(
+//                level.worldToCell(
+//                        (int)hitBox.right - SAFE_ZONE,
+//                        (int)hitBox.bottom - SAFE_ZONE));
+//
+//        if(top && left && bottom && right) {
+//            Arrays.fill(availableDirections, true);
+//        }
+//
+//        if(sprite.getVelocity().x < 0 && !left) {
+//            availableDirections[0] = false;
+//        }
+//        if(sprite.getVelocity().x > 0 && !right) {
+//            availableDirections[2] = false;
+//        }
+//        if(sprite.getVelocity().y > 0 && !bottom) {
+//            availableDirections[3] = false;
+//        }
+//        if(sprite.getVelocity().y < 0 && !top) {
+//            availableDirections[1] = false;
+//        }
     }
 
     public void updateStatusEffects(){
@@ -136,34 +247,6 @@ public abstract class Mob extends Entity implements Storable {
             visibleCells.add(Artifice.getLevel().s_cells[i] * 2);
         }
     }
-
-    public UUID getMobID(){
-        return mob_id;
-    }
-
-    protected Mob[] getCollided(){
-        //find closest mobs to check
-        Mob[] mobs = currentLevel.getMobMapper().findByCell(cellPosition());
-        ArrayList<Mob> collided = new ArrayList<Mob>();
-
-        if(mobs != null) {
-            for(Mob mob : mobs) {
-                if (RectF.intersects(mob.sprite.boundingBox, this.sprite.boundingBox) && mob.worldPosition().y - worldPosition().y <= MOB_THICKNESS) {
-                    collided.add(mob);
-                    mob.hindrance = 1 - (feather * 0.01f);
-                }
-            }
-        }
-        Mob[] collidedMobs = new Mob[collided.size()];
-        collided.toArray(collidedMobs);
-
-        return collidedMobs;
-    }
-
-    public float getSpeed(){
-        return speed * hindrance;
-    }
-
 
     public UUID setMobID(UUID id){
         return mob_id = id;

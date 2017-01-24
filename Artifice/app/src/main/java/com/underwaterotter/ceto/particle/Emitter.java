@@ -90,8 +90,8 @@ public abstract class Emitter extends Group {
 
         source = src;
 
-        x = src.pos.x;
-        y = src.pos.y;
+        x = src.getPos().x;
+        y = src.getPos().y;
     }
 
     public void set(int rate, int lifetime, int limit, int speed){
@@ -106,8 +106,8 @@ public abstract class Emitter extends Group {
 
         if(source != null){
             createParticle(index,
-                           Rand.range(0, source.width),
-                           Rand.range(0, source.height));
+                           Rand.range(0, source.getWidth()),
+                           Rand.range(0, source.getHeight()));
         } else {
             createParticle(index, x, y);
         }

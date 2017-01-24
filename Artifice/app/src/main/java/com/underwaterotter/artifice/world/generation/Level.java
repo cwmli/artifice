@@ -8,6 +8,7 @@ import com.underwaterotter.artifice.world.AnimatedTilemap;
 import com.underwaterotter.artifice.world.Terrain;
 import com.underwaterotter.artifice.world.WorldTilemap;
 import com.underwaterotter.ceto.Group;
+import com.underwaterotter.math.Vector3;
 import com.underwaterotter.utils.Block;
 import com.underwaterotter.utils.Storable;
 
@@ -28,26 +29,28 @@ public abstract class Level extends Group implements Storable {
     private static final String UNSTABLE = "unstable";
     private static final String HIDDEN = "hidden";
 
+    enum MapType {WATERMAP, TILEMAP}
+
     private static boolean overworldGenerated = false;
 
-    public int mapWidth = 30;
-    public int mapHeight = 30;
+    protected int mapWidth = 30;
+    protected int mapHeight = 30;
 
-    public int sfMapW = mapWidth;
-    public int sfMapH = mapHeight + SAFE_OFFSET;
+    protected int sfMapW = mapWidth;
+    protected int sfMapH = mapHeight + SAFE_OFFSET;
 
-    public int mapLength = mapWidth * mapHeight;
-    public int sfLength = sfMapW * sfMapH;
+    protected int mapLength = mapWidth * mapHeight;
+    protected int sfLength = sfMapW * sfMapH;
 
     //Surrounding cells index
     //0 1 2
     //3 C 4
     //5 6 7
-    public int[] s_cells = {-sfMapW - 1, -sfMapW, -sfMapW + 1,
+    public final int[] s_cells = {-sfMapW - 1, -sfMapW, -sfMapW + 1,
                                      -1,                  + 1,
                              sfMapW - 1, sfMapW, sfMapW + 1 };
 
-    public boolean isUnderground = false;
+    public static boolean isUnderground = false;
 
     private ItemMapper itemMapper;
     private MobMapper mobMapper;
@@ -147,6 +150,14 @@ public abstract class Level extends Group implements Storable {
         //clear all arrays
     }
 
+    public int getSfLength(){
+        return sfLength;
+    }
+
+    public int getSfMapW(){
+        return sfMapW;
+    }
+
     public int[] getMapData(WorldTilemap.TILEMAP type){
         if(type == WorldTilemap.TILEMAP.WATER)
             return watermap;
@@ -154,14 +165,6 @@ public abstract class Level extends Group implements Storable {
             return map;
         else
             return foremap;
-    }
-
-    public AnimatedTilemap getTilemap(){
-        return tilemap;
-    }
-
-    public AnimatedTilemap getWatertilemap() {
-        return watertilemap;
     }
 
     public boolean isPassable(int index){
@@ -178,12 +181,27 @@ public abstract class Level extends Group implements Storable {
 
     public void addMob(Mob mob){
         mobMapper.addMob(mob);
-        mob.sprite.visible = mob.isVisible();
+        mob.visible = mob.isVisible();
     }
 
     public void addItem(Item item){
         itemMapper.addItem(item);
         item.sprite.visible = item.isVisible();
+    }
+
+    public int worldToCell(Vector3 pos) {
+        return tilemap.worldToCell(pos);
+    }
+
+    public int worldToCell(int x, int y){
+        return tilemap.worldToCell(x, y);
+    }
+
+    public void updateFlipData(int index, boolean setting, MapType type){
+        if(type == MapType.TILEMAP)
+            tilemap.updateFlipData(index, setting);
+        else
+            watertilemap.updateFlipData(index, setting);
     }
 
     public abstract void generate();

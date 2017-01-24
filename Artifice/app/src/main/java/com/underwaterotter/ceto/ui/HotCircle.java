@@ -49,8 +49,8 @@ public class HotCircle extends Group {
     }
 
     //define sub-entities to this ui card
-    protected void createContent(){};
+    protected void createContent(){}
 
-    protected void updateHitbox(){};
+    protected void updateHitbox(){}
 
 }

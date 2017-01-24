@@ -79,48 +79,4 @@ public class GameScene extends UIScene {
     public Char getPlayer(){
         return player;
     }
-
-    private static class DebugButton extends Button {
-
-        public static final int SIZE_W = 64;
-        public static final int SIZE_H = 20;
-        public static final int LEFT_PADDING = 5;
-
-        private Image image;
-        private Text label;
-
-        public DebugButton(String text){
-            super();
-
-            image.textureRect(0, 0, SIZE_W, SIZE_H);
-
-            this.label = createText(text, 12f); //12font
-            add(label);
-
-            resize(SIZE_W, SIZE_H);
-        }
-
-        @Override
-        public void createContent(){
-            super.createContent();
-
-            image = new Image(Assets.SELECTORS);
-            add(image);
-        }
-
-        @Override
-        public void updateHitbox(){
-            super.updateHitbox();
-
-            label.pos.x = x + LEFT_PADDING;
-            label.pos.y = y - 4 + (image.height() / 2);
-
-            image.pos.x = x;
-            image.pos.y = y;
-        }
-
-        protected void onTouch() {
-            Log.v("DEBUG_TOUCH", "Lightened button.");
-        }
-    }
 }

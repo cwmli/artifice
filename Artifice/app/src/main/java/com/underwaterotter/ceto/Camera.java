@@ -1,5 +1,6 @@
 package com.underwaterotter.ceto;
 
+import android.graphics.Rect;
 import android.opengl.Matrix;
 
 import com.underwaterotter.math.Vector2;
@@ -10,8 +11,9 @@ import java.util.HashMap;
 public class Camera extends Article {
 
     public static ArrayList<Camera> cameras = new ArrayList<Camera>();
+    private static int SCREEN_PADDING = 30;
 
-    public float[] mCameraMatrix = new float[16];
+    protected float[] mCameraMatrix = new float[16];
     protected static float invW2;
     protected static float invH2;
 
@@ -21,19 +23,19 @@ public class Camera extends Article {
     public static Overlay target;
 
     //position of camera to screen
-    public Vector2 pos;
+    protected Vector2 pos;
 
-    public Vector2 distanceToFocus;
+    protected Vector2 distanceToFocus;
 
     //view range corrected by zoom
-    public int viewWidth;
-    public int viewHeight;
+    protected int viewWidth;
+    protected int viewHeight;
 
-    public float zoom; //fragment zoom of 1
+    protected float zoom; //fragment zoom of 1
 
     //actual screen size
-    public int screenWidth;
-    public int screenHeight;
+    protected int screenWidth;
+    protected int screenHeight;
 
     public static Camera defaultCamera(float zoom){
 
@@ -146,18 +148,35 @@ public class Camera extends Article {
                 distanceToFocus.y + viewHeight / 2));
     }
 
-    public void zoom(float value, Vector2 focus){
+    public void zoom(float value, Vector2 focus) {
 
         zoom = value;
-        viewWidth = (int)(screenWidth / zoom);
-        viewHeight = (int)(screenHeight / zoom);
+        viewWidth = (int) (screenWidth / zoom);
+        viewHeight = (int) (screenHeight / zoom);
 
         setFocusPoint(focus);
     }
 
+    public Rect getScreenBoundries(){
+        return new Rect((int) this.distanceToFocus.x - SCREEN_PADDING,
+                (int) this.distanceToFocus.y - SCREEN_PADDING,
+                (int) this.distanceToFocus.x + viewWidth,
+                (int) this.distanceToFocus.y + viewHeight);
+    }
+
+    public int getViewWidth(){
+        return viewWidth;
+    }
+
+    public int getViewHeight(){
+        return viewHeight;
+    }
+
     public boolean inScreenView(float x, float y){
-        return x >= this.distanceToFocus.x && x < this.distanceToFocus.x + viewWidth &&
-               y >= this.distanceToFocus.y && y < this.distanceToFocus.y + viewHeight;
+        return x >= this.distanceToFocus.x - SCREEN_PADDING
+                && x < this.distanceToFocus.x + viewWidth &&
+               y >= this.distanceToFocus.y - SCREEN_PADDING
+                && y < this.distanceToFocus.y + viewHeight;
     }
 
     public void setFocusPoint(float x, float y){

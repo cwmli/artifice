@@ -2,6 +2,7 @@ package com.underwaterotter.glesutils;
 
 import android.graphics.Bitmap;
 import android.graphics.RectF;
+import android.util.Log;
 
 import com.underwaterotter.math.Vector2;
 

@@ -86,7 +86,7 @@ public class Item extends Entity{
 
         if(mobs != null) {
             for(Mob mob : mobs) {
-                if (RectF.intersects(mob.sprite.boundingBox, this.sprite.boundingBox) && mob.worldPosition().y - worldPosition().y <= ITEM_THICKNESS) {
+                if (RectF.intersects(mob.getHitBox(), sprite.getBoundingBox()) && mob.worldPosition().y - worldPosition().y <= ITEM_THICKNESS) {
                     collided.add(mob);
                 }
             }
@@ -111,11 +111,11 @@ public class Item extends Entity{
         boolean added = false;
         this.mob = mob;
 
-        for(int i = 0; i < mob.equipped.length; i++){
-            ItemSprite iSpr = mob.equipped[i];
+        for(int i = 0; i < mob.getEquipped().length; i++){
+            ItemSprite iSpr = mob.getEquipped()[i];
             if(iSpr == null){
-                mob.equipped[i] = sprite;
-                sprite.position(mob.attachPositions[i]);
+                mob.getEquipped()[i] = sprite;
+                sprite.setPos(mob.getAttachPositions()[i]);
                 added = true;
             }
         }
@@ -128,10 +128,10 @@ public class Item extends Entity{
     }
 
     public void detach(){
-        for(int i = 0; i < mob.equipped.length; i++){
-            ItemSprite iSpr = mob.equipped[i];
+        for(int i = 0; i < mob.getEquipped().length; i++){
+            ItemSprite iSpr = mob.getEquipped()[i];
             if(iSpr == sprite){
-                mob.equipped[i] = null;
+                mob.getEquipped()[i] = null;
             }
         }
     }

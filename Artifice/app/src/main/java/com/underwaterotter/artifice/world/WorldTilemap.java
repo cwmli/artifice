@@ -32,26 +32,25 @@ public class WorldTilemap extends Tilemap {
         this.level = level;
         this.type = type;
 
-        oldmap = new int[level.sfLength];
+        oldmap = new int[level.getSfLength()];
         Arrays.fill(oldmap, INVALID_TILE);
 
-        flipData = new boolean[level.sfLength];
+        flipData = new boolean[level.getSfLength()];
         Arrays.fill(flipData, false);
 
-        readMapData(oldmap, flipData, level.sfMapW);
+        readMapData(oldmap, flipData, level.getSfMapW());
     }
 
     @Override
     public void update(){
         map = level.getMapData(type);
-        readMapData(map, flipData, level.sfMapW);
-        oldmap = map.clone();
+        readMapData(map, flipData, level.getSfMapW());
     }
 
     //draw a "lightened" colored tile texture over the existing tilemap
     public void explore(int cellPos){
         Image whiteOverlay = new Image();
-        whiteOverlay.position(cellToWorld(cellPos));
+        whiteOverlay.setPos(cellToWorld(cellPos));
         whiteOverlay.tint(0xff000000, 0.5f);
 
         parent.add(whiteOverlay);

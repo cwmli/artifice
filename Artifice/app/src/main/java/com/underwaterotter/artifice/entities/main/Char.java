@@ -3,14 +3,17 @@ package com.underwaterotter.artifice.entities.main;
 import android.graphics.RectF;
 import android.util.Log;
 
+import com.underwaterotter.artifice.Artifice;
 import com.underwaterotter.artifice.entities.Mob;
 import com.underwaterotter.artifice.scenes.GameScene;
 import com.underwaterotter.artifice.sprites.MobSprite;
 import com.underwaterotter.artifice.world.AnimatedTilemap;
 import com.underwaterotter.artifice.world.Assets;
+import com.underwaterotter.artifice.world.generation.Level;
 import com.underwaterotter.ceto.Animation;
 import com.underwaterotter.ceto.Camera;
 import com.underwaterotter.ceto.Image;
+import com.underwaterotter.math.Vector2;
 import com.underwaterotter.math.Vector3;
 
 import java.util.ArrayList;
@@ -23,7 +26,6 @@ public class Char extends Mob {
     private static final int SHADOW_OFFSET = 8;
 
     private String currentAction;
-    private boolean[] availableDirections;
     //{left, top, right, bottom}
 
     public Char(){
@@ -51,46 +53,27 @@ public class Char extends Mob {
         shadow = new Image(Assets.SHADOWS);
 
         sprite = new MobSprite(Assets.HERO){
-
-            @Override
-            public void updateBounds(){
-//                if(top && left && bottom && right){
-//                    Arrays.fill(availableDirections, true);
-//                }
-//
-//                if(sprite.velocity.x < 0 && !left) {
-//                    availableDirections[0] = false;
-//                }
-//                if(sprite.velocity.x > 0 && !right) {
-//                    availableDirections[2] = false;
-//                }
-//                if(sprite.velocity.y > 0 && !bottom) {
-//                    availableDirections[3] = false;
-//                }
-//                if(sprite.velocity.y < 0 && !top){
-//                    availableDirections[1] = false;
-//                }
-            }
-
             @Override
             public void updateMotion(){
                 boolean movingLeft = Math.cos(Math.toRadians(angle)) * speed < 0;
                 boolean movingDown = Math.sin(Math.toRadians(angle)) * speed > 0;
 
                 float vX = speed * (float)Math.cos(Math.toRadians(angle)); //a * Math.PI / 180
-                if(!availableDirections[0] && movingLeft || !availableDirections[2] && !movingLeft){
-                    vX = 0;
-                }
+//                if(!availableDirections[0] && movingLeft || !availableDirections[2] && !movingLeft){
+//                    vX = 0;
+//                }
 
                 float vY = speed * (float)Math.sin(Math.toRadians(angle));
-                if(!availableDirections[1] && !movingDown || !availableDirections[3] && movingDown) {
-                    vY = 0;
-                }
+//                if(!availableDirections[1] && !movingDown || !availableDirections[3] && movingDown) {
+//                    vY = 0;
+//                }
 
                 velocity.set(vX, vY);
 
                 pos.x += velocity.x;
                 pos.y += velocity.y;
+
+                Log.d("INFO", "angle: " + velocity.x + ", " + velocity.y + " ACT: " + speed);
             }
 
             @Override
@@ -116,6 +99,8 @@ public class Char extends Mob {
         add(sprite);
         sprite.idle();
 
+        hitBox = sprite.getBoundingBox();
+
         add(shadow);
     }
 
@@ -125,9 +110,8 @@ public class Char extends Mob {
 
         Camera.main.setFocusPoint(worldPosition.x, worldPosition.y);
 
-        sprite.speed = speed * hindrance;
-        worldPosition = sprite.position();
-        shadow.position(worldPosition.x, worldPosition.y + SHADOW_OFFSET, 0);
+        worldPosition = sprite.getPos();
+        shadow.setPos(worldPosition.x, worldPosition.y + SHADOW_OFFSET, 0);
 
         checkMobCollision();
         parseAction();
@@ -142,23 +126,23 @@ public class Char extends Mob {
     }
 
     public void checkMobCollision(){
-        Mob[] mobs = getCollided();
-
-        float netX = 0;
-        float netY = 0;
-        //get the net velocity
-        for(Mob m : mobs){
-            netX += m.sprite.velocity.x ;
-            netY += m.sprite.velocity.y;
-        }
-        //addMob velocity of itself
-        netX += sprite.velocity.x;
-        netY += sprite.velocity.y;
-        sprite.velocity.set(netX, netY);
-
-        for(Mob m : mobs){
-            m.sprite.velocity.set(netX, netY);
-        }
+//        Mob[] mobs = getCollided();
+//
+//        float netX = 0;
+//        float netY = 0;
+//        //get the net velocity
+//        for(Mob m : mobs){
+//            netX += m.getVelocity().x ;
+//            netY += m.getVelocity().y;
+//        }
+//        //addMob velocity of itself
+//        netX += sprite.getVelocity().x;
+//        netY += sprite.getVelocity().y;
+//        sprite.setVelocity(netX, netY);
+//
+//        for(Mob m : mobs){
+//            m.setVelocity(new Vector2(netX, netY));
+//        }
 
     }
 

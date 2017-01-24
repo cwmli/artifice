@@ -3,10 +3,9 @@ package com.underwaterotter.artifice.sprites;
 import com.underwaterotter.artifice.world.generation.Level;
 import com.underwaterotter.ceto.Animation;
 import com.underwaterotter.artifice.entities.Mob;
+import com.underwaterotter.math.Vector2;
 
 public abstract class MobSprite extends Sprite {
-
-    private static final int SAFE_ZONE = 4;
 
     protected Animation[] attack;
     protected Animation run;
@@ -15,7 +14,6 @@ public abstract class MobSprite extends Sprite {
     protected Animation idle;
 
     private Mob mob;
-    private Level level;
 
     public enum Effect{ BLEEDING, FIRE, FROZEN, SHOCK, WET }
 
@@ -25,35 +23,33 @@ public abstract class MobSprite extends Sprite {
         setAnimations();
     }
 
-    public void updateBounds(){
-        boolean top = level.isPassable(
-                level.getTilemap().worldToCell(
-                        (int)(boundingBox.left + boundingBox.width() / 2),
-                        (int)boundingBox.bottom - SAFE_ZONE));
-
-        boolean left = level.isPassable(
-                level.getTilemap().worldToCell(
-                        (int)(boundingBox.left + SAFE_ZONE),
-                        (int)boundingBox.bottom - SAFE_ZONE));
-
-        boolean bottom = level.isPassable(
-                level.getTilemap().worldToCell(
-                        (int)(boundingBox.left + boundingBox.width() / 2),
-                        (int)boundingBox.bottom));
-
-        boolean right = level.isPassable(
-                level.getTilemap().worldToCell(
-                        (int)(boundingBox.right - SAFE_ZONE),
-                        (int)boundingBox.bottom - SAFE_ZONE));
-    }
-
     public void setMob(Mob mob){
         this.mob = mob;
-        level = mob.level();
-        mob.sprite = this;
 
-        position(mob.worldPosition());
+        mob.setSprite(this);
+
+        setPos(mob.worldPosition());
         mob.updateStatusEffects();
+    }
+
+    public Vector2 getVelocity(){
+        return velocity;
+    }
+
+    public void setVelocity(Vector2 vel){
+        setVelocity(vel.x, vel.y);
+    }
+
+    public void setVelocity(float x, float y){
+        velocity = new Vector2(x, y);
+    }
+
+    public float getSpeed(){
+        return speed;
+    }
+
+    public void setSpeed(float spd){
+        speed = spd;
     }
 
     public void idle(){

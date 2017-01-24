@@ -21,4 +21,17 @@ public class GenerationDebug {
 
         Log.d("MAP_DATA", sb.toString());
     }
+
+    public static void ShowBoolData(boolean[] dat){
+        StringBuilder sb = new StringBuilder();
+
+        for(int i = 0; i < dat.length; i++){
+            if (dat[i])
+                sb.append("T ");
+            else
+                sb.append("F ");
+        }
+
+        Log.d("BOOL_DATA", sb.toString());
+    }
 }

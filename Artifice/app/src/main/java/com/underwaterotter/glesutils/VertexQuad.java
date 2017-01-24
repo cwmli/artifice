@@ -28,22 +28,18 @@ public class VertexQuad {
     private static int size;
 
     //standard 8 xy/st/uv coords for a quad
-    public static FloatBuffer genBuffer(){
-        FloatBuffer emptyBuf = ByteBuffer
+    public static FloatBuffer genBuffer() {
+        return ByteBuffer
                 .allocateDirect(8 * BYTES_PER_FLOAT)
                 .order(ByteOrder.nativeOrder())
                 .asFloatBuffer();
-
-        return emptyBuf;
     }
 
-    public static FloatBuffer genBuffer(int quads){
-        FloatBuffer emptyBuf = ByteBuffer
-                                .allocateDirect(quads * 8 * BYTES_PER_FLOAT)
-                                .order(ByteOrder.nativeOrder())
-                                .asFloatBuffer();
-
-        return emptyBuf;
+    public static FloatBuffer genBuffer(int quads) {
+        return ByteBuffer
+                .allocateDirect(quads * 8 * BYTES_PER_FLOAT)
+                .order(ByteOrder.nativeOrder())
+                .asFloatBuffer();
     }
 
     public static ShortBuffer quadIndices(int quads){

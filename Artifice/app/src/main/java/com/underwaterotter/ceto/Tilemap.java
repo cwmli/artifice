@@ -1,6 +1,8 @@
 package com.underwaterotter.ceto;
 
+import android.graphics.Rect;
 import android.graphics.RectF;
+import android.util.Log;
 
 import com.underwaterotter.glesutils.TextureAtlas;
 import com.underwaterotter.glesutils.VertexQuad;
@@ -41,7 +43,7 @@ public class Tilemap extends Overlay {
         vertices = new float[8];
         stVertices = new float[8];
     }
-
+    
     public void readMapData(int[] data, boolean[] flipData, int horizontalCells){
 
         this.mapData = data;
@@ -60,8 +62,15 @@ public class Tilemap extends Overlay {
 
     protected void updateAllVertices(){
 
-        for(int y = 0; y < mapCellsH; y++){
-            for(int x = 0; x < mapCellsW; x++){
+        Rect viewBoundry = Camera.main.getScreenBoundries();
+        int cellStart_y = Math.max(0, Math.round(viewBoundry.top / cellH));
+        int cellEnd_y = Math.min(mapCellsH, Math.round(viewBoundry.bottom / cellH) + 1);
+
+        int cellStart_x = Math.max(0, Math.round(viewBoundry.left / cellW));
+        int cellEnd_x = Math.min(mapCellsW, Math.round(viewBoundry.right / cellW) + 1);
+
+        for(int y = cellStart_y; y < cellEnd_y; y++){
+            for(int x = cellStart_x; x < cellEnd_x; x++){
                 if (Camera.main.inScreenView(x * cellW, y * cellH)) {
                     //update regular vertices
                     vertices[0] = x * cellW;

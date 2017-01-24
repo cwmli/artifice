@@ -25,8 +25,8 @@ public class MenuScene extends UIScene {
 
         uiCamera.visible = false;
 
-        int vw = Camera.main.viewWidth;
-        int vh = Camera.main.viewHeight;
+        int vw = Camera.main.getViewWidth();
+        int vh = Camera.main.getViewHeight();
         this.camera = Camera.main;
 
         //TITLE
@@ -81,11 +81,9 @@ public class MenuScene extends UIScene {
         public void updateHitbox(){
             super.updateHitbox();
 
-            label.pos.x = x + LEFT_PADDING;
-            label.pos.y = y - 4 + (image.height() / 2);
+            label.setPos(x + LEFT_PADDING, y - 4 + (image.height() / 2), 0);
 
-            image.pos.x = x;
-            image.pos.y = y;
+            image.setPos(x, y, 0);
             //round x,y positions
         }
 

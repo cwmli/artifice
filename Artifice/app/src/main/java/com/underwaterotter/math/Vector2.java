@@ -37,8 +37,7 @@ public class Vector2 {
 
     //returns this vector information as a float array
     public float[] toArray(){
-        float[] vec2 = { x, y };
-        return vec2;
+        return new float[] { x, y };
     }
 
     public Vector2 difference(Vector2 vec2){

@@ -59,9 +59,11 @@ public class ItemSprite extends Sprite {
 
         float strength = timer / fullglowTime;
 
-        mr = mg = mb = 1 - strength;
-        ar = Color.red(enchantColor) * strength;
-        ag = Color.green(enchantColor) * strength;
-        ab = Color.blue(enchantColor) * strength;
+        setRGB_M(1 - strength,
+                 1 - strength,
+                 1 - strength);
+        setRGB_A(Color.red(enchantColor) * strength,
+                 Color.green(enchantColor) * strength,
+                 Color.blue(enchantColor) * strength);
     }
 }

@@ -27,13 +27,13 @@ public class Terrain {
     public static final int TOP_GRASS     = 4;
     public static final int DIAG_GRASS    = 5;
 
-    public static final int EDGE_GRASS_H  = 10;
+    public static final int T_EDGE_GRASS_H= 10;
     public static final int V_EDGE_GRASS_H= 11;
     public static final int B_EDGE_GRASS_H= 12;
     public static final int CORNER_GRASS_H= 13;
-    public static final int B_TOP_GRASS_H = 14;
-    public static final int R_TOP_GRASS_H = 15;
-    public static final int L_DIAG_GRASS_H= 16;
+    public static final int BT_EDGE_GRASS_H=14;
+    public static final int B_TOP_GRASS_H = 15;
+    public static final int R_TOP_GRASS_H = 16;
 
     public static final int DIAG_GRASS_H  = 20;
     public static final int CONV_GRASS    = 21;
@@ -77,7 +77,7 @@ public class Terrain {
         flags[EMPTY] = SOLID;
 
         flags[SOLID_GRASS] = PASSABLE | FLAMMABLE;
-        flags[EDGE_GRASS_H] = PASSABLE | FLAMMABLE;
+        flags[T_EDGE_GRASS_H] = PASSABLE | FLAMMABLE;
         flags[CORNER_GRASS_H] = PASSABLE | FLAMMABLE;
         flags[TOP_GRASS] = SOLID | FLAMMABLE;
         flags[DIAG_GRASS] = PASSABLE | FLAMMABLE;

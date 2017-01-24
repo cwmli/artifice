@@ -7,6 +7,7 @@ import android.graphics.RectF;
 import com.underwaterotter.glesutils.TextureAtlas;
 import com.underwaterotter.glesutils.VertexQuad;
 import com.underwaterotter.math.Vector2;
+import com.underwaterotter.math.Vector3;
 
 import java.nio.FloatBuffer;
 
