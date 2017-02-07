@@ -1,5 +1,6 @@
-package com.underwaterotter.artifice.entities;
+package com.underwaterotter.artifice.entities.mobs;
 
+import com.underwaterotter.artifice.entities.mobs.Mob;
 import com.underwaterotter.ceto.Article;
 import com.underwaterotter.utils.Block;
 import com.underwaterotter.utils.Storable;

@@ -12,12 +12,12 @@ import java.util.HashMap;
 
 public class BitmapCache {
 
+    public static Context context;
+
     private static BitmapFactory.Options options = new BitmapFactory.Options();
     static { options.inDither = false; }
 
     private static HashMap<String,Bit> bmpCache = new HashMap<String, Bit>();
-
-    public static Context context;
 
     public static Bitmap get(String cache, String assetName){
         Bit bit = new Bit();

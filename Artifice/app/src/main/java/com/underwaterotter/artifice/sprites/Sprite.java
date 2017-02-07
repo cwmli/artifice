@@ -3,8 +3,12 @@ package com.underwaterotter.artifice.sprites;
 import android.graphics.RectF;
 
 import com.underwaterotter.ceto.Player;
+import com.underwaterotter.math.Vector2;
 
 public abstract class Sprite extends Player {
+
+    protected Vector2 velocity;
+    protected float speed;
 
     public Sprite(){
         super();

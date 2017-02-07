@@ -2,7 +2,6 @@ package com.underwaterotter.glesutils;
 
 import android.graphics.Bitmap;
 import android.graphics.RectF;
-import android.util.Log;
 
 import com.underwaterotter.math.Vector2;
 
@@ -18,14 +17,38 @@ import java.util.HashMap;
 
 public class TextureAtlas {
 
-    public ModelTexture texture;
+    private ModelTexture texture;
 
-    public HashMap<Object, RectF> cells;
+    private HashMap<Object, RectF> cells;
 
     public TextureAtlas(Object texture){
 
         this.texture = texture instanceof ModelTexture ? (ModelTexture)texture : TextureCache.get(texture);
         cells = new HashMap<Object, RectF>();
+    }
+
+    public void bind() {
+        texture.bind();
+    }
+
+    public int getWidth() {
+        return texture.getWidth();
+    }
+
+    public int getHeight() {
+        return texture.getHeight();
+    }
+
+    public Bitmap getTextureBitmap() {
+        return texture.getBitmap();
+    }
+
+    public RectF getCell(Object o) {
+        return cells.get(o);
+    }
+
+    public void addCell(Object o, RectF rect) {
+        cells.put(o, rect);
     }
 
     public TextureAtlas populateFixedCells(int cellWidth, int cellHeight){
@@ -34,9 +57,9 @@ public class TextureAtlas {
 
     public TextureAtlas populateFixedCells(int cellWidth, int cellHeight, char[] ids){
 
-        int cols = texture.width / cellWidth;
+        int cols = texture.getWidth() / cellWidth;
 
-        for(int r = 0; r < texture.height / cellHeight; r++){
+        for(int r = 0; r < texture.getHeight() / cellHeight; r++){
 
             for(int c = 0; c < cols; c++){
 
@@ -74,7 +97,7 @@ public class TextureAtlas {
 
         int counter = 0;
 
-        int rows = texture.height / height;
+        int rows = texture.getHeight() / height;
 
         for(int row = 0; row < rows; row++){
 
@@ -83,7 +106,7 @@ public class TextureAtlas {
                 Vector2 separatorPt = new Vector2(x, row * height);
 
                 for(int y = row * height; y < (row * height) + height; y++){
-                    if(texture.bitmap.getPixel(x, y) == color){
+                    if(texture.getBitmap().getPixel(x, y) == color){
                         separatorPt = null;
                         break;
                     }
@@ -146,24 +169,24 @@ public class TextureAtlas {
 
         RectF cellBox = cells.get(id);
 
-        int x = (int)cellBox.left * texture.width;
-        int y = (int)cellBox.top * texture.height;
-        int w = (int)cellBox.height() * texture.height;
-        int h = (int)cellBox.width() * texture.width;
+        int x = (int)cellBox.left * texture.getWidth();
+        int y = (int)cellBox.top * texture.getHeight();
+        int w = (int)cellBox.height() * texture.getHeight();
+        int h = (int)cellBox.width() * texture.getWidth();
 
         int[] colorPortion = new int[w * h];
 
-        texture.bitmap.getPixels(colorPortion, 0, texture.width, x, y, w, h);
+        texture.getBitmap().getPixels(colorPortion, 0, texture.getWidth(), x, y, w, h);
 
         return Bitmap.createBitmap(colorPortion, w, h, Bitmap.Config.ARGB_8888);
     }
 
     //return the width/height in PIXELS (not normalized values)
     public int width(RectF rect){
-        return (int)(rect.width() * texture.width);
+        return (int)(rect.width() * texture.getWidth());
     }
 
     public int height(RectF rect){
-        return (int)(rect.height() * texture.height);
+        return (int)(rect.height() * texture.getHeight());
     }
 }

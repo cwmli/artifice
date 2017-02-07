@@ -1,7 +1,7 @@
 package com.underwaterotter.artifice.world.generation;
 
-import com.underwaterotter.artifice.entities.Mob;
-import com.underwaterotter.artifice.entities.MobMapper;
+import com.underwaterotter.artifice.entities.mobs.Mob;
+import com.underwaterotter.artifice.entities.mobs.MobMapper;
 import com.underwaterotter.artifice.entities.items.Item;
 import com.underwaterotter.artifice.entities.items.ItemMapper;
 import com.underwaterotter.artifice.world.AnimatedTilemap;
@@ -29,28 +29,36 @@ public abstract class Level extends Group implements Storable {
     private static final String UNSTABLE = "unstable";
     private static final String HIDDEN = "hidden";
 
-    enum MapType {WATERMAP, TILEMAP}
-
     private static boolean overworldGenerated = false;
+
+    public static boolean isUnderground = false;
 
     protected int mapWidth = 30;
     protected int mapHeight = 30;
-
-    protected int sfMapW = mapWidth;
-    protected int sfMapH = mapHeight + SAFE_OFFSET;
-
-    protected int mapLength = mapWidth * mapHeight;
-    protected int sfLength = sfMapW * sfMapH;
 
     //Surrounding cells index
     //0 1 2
     //3 C 4
     //5 6 7
-    public final int[] s_cells = {-sfMapW - 1, -sfMapW, -sfMapW + 1,
-                                     -1,                  + 1,
-                             sfMapW - 1, sfMapW, sfMapW + 1 };
+    final int[] s_cells = {-mapWidth - 1, -mapWidth, -mapWidth + 1,
+            -1,                  + 1,
+            mapWidth - 1, mapWidth, mapWidth + 1 };
 
-    public static boolean isUnderground = false;
+
+    protected Group tilemaps;
+    protected AnimatedTilemap tilemap;
+    protected AnimatedTilemap foretilemap;
+    protected AnimatedTilemap watertilemap;
+
+    protected int[] map;
+    protected int[] foremap;
+    protected int[] watermap;
+
+    private int sfMapW = mapWidth;
+    private int sfMapH = mapHeight + SAFE_OFFSET;
+
+    private int mapLength = mapWidth * mapHeight;
+    private int sfLength = sfMapW * sfMapH;
 
     private ItemMapper itemMapper;
     private MobMapper mobMapper;
@@ -58,22 +66,14 @@ public abstract class Level extends Group implements Storable {
     private HashSet<Item> items;
     private HashSet<Mob> mobs;
 
-    protected int[] map;
-    protected int[] foremap;
-    protected int[] watermap;
-
-    protected Group tilemaps;
-    protected AnimatedTilemap tilemap;
-    protected AnimatedTilemap foretilemap;
-    protected AnimatedTilemap watertilemap;
-
-    Group controllers;
-
     private boolean[] explored;
     private boolean[] passable;
     private boolean[] climbable;
     private boolean[] flammable;
     private boolean[] unstable;
+
+    Group controllers;
+    enum MapType {WATERMAP, TILEMAP}
 
     public void init(){
 
@@ -186,7 +186,7 @@ public abstract class Level extends Group implements Storable {
 
     public void addItem(Item item){
         itemMapper.addItem(item);
-        item.sprite.visible = item.isVisible();
+        item.getSprite().visible = item.isVisible();
     }
 
     public int worldToCell(Vector3 pos) {

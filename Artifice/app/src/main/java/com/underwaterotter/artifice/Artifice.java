@@ -5,9 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
-import com.underwaterotter.artifice.entities.MobMapper;
 import com.underwaterotter.ceto.Game;
-import com.underwaterotter.artifice.scenes.GameScene;
 import com.underwaterotter.artifice.scenes.MenuScene;
 import com.underwaterotter.artifice.world.generation.Level;
 
@@ -15,6 +13,7 @@ import com.underwaterotter.artifice.world.generation.Level;
 public class Artifice extends Game {
 
     public static Settings settings;
+
     private static Level level;
     private static int depth = 0;
 

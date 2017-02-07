@@ -8,7 +8,7 @@ public class Article {
 
     public Group parent;
 
-    public Camera camera;
+    protected Camera camera;
 
     public Article(){
         active = true;
@@ -36,6 +36,10 @@ public class Article {
         } else {
             return Camera.main;
         }
+    }
+
+    public void setCamera(Camera cam) {
+        camera = cam;
     }
 
     public void kill(){

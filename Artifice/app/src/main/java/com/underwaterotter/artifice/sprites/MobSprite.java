@@ -1,17 +1,18 @@
 package com.underwaterotter.artifice.sprites;
 
-import com.underwaterotter.artifice.world.generation.Level;
 import com.underwaterotter.ceto.Animation;
-import com.underwaterotter.artifice.entities.Mob;
+import com.underwaterotter.artifice.entities.mobs.Mob;
 import com.underwaterotter.math.Vector2;
 
 public abstract class MobSprite extends Sprite {
 
-    protected Animation[] attack;
-    protected Animation run;
-    protected Animation dodge;
-    protected Animation die;
-    protected Animation idle;
+    public static enum Orientation {SIDE, DOWN, UP}
+
+    Animation[] attack;
+    Animation[] run;
+    Animation dodge;
+    Animation die;
+    Animation[] idle;
 
     private Mob mob;
 
@@ -19,6 +20,11 @@ public abstract class MobSprite extends Sprite {
 
     public MobSprite(Object id){
         super(id);
+
+        velocity = new Vector2(0, 0);
+
+        run = new Animation[3];
+        idle = new Animation[3];
 
         setAnimations();
     }
@@ -52,20 +58,46 @@ public abstract class MobSprite extends Sprite {
         speed = spd;
     }
 
-    public void idle(){
-        play(idle, true);
+    public float getAngle() {
+        return angle;
     }
 
-    public void run(){
-        play(run, true);
+    public void setAngle(float a) {
+        angle = a;
+    }
+
+    public void idle(Orientation type){
+        if (type == Orientation.SIDE) {
+            play(idle[0], true);
+        } else if (type == Orientation.DOWN) {
+            play(idle[1], true);
+        } else {
+            play(idle[2], true);
+        }
+    }
+
+    public void run(Orientation type){
+        if (type == Orientation.SIDE) {
+            play(run[0], true);
+        } else if (type == Orientation.DOWN) {
+            play(run[1], true);
+        } else {
+            play(run[2], true);
+        }
     }
 
     public void dodge(){
         play(dodge, true);
     }
 
-    public void attack(int type){
-        play(attack[type], true);
+    public void attack(Orientation type){
+        if (type == Orientation.SIDE) {
+            play(attack[0], true);
+        } else if (type == Orientation.DOWN) {
+            play(attack[1], true);
+        } else {
+            play(attack[2], true);
+        }
     }
 
     public void die(){

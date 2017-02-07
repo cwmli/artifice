@@ -4,7 +4,7 @@ import com.underwaterotter.ceto.Game;
 import com.underwaterotter.ceto.TouchBox;
 import com.underwaterotter.cetoinput.Motions;
 
-public class Button extends HotBox {
+public abstract class Button extends HotBox {
 
     protected TouchBox hitZone;
 
@@ -13,11 +13,11 @@ public class Button extends HotBox {
     private long start;
 
     @Override
-    public void createContent(){
-        hitZone = new TouchBox(x, y, width, height){
+    protected void createContent() {
+        hitZone = new TouchBox(x, y, width, height) {
 
             @Override
-            public void onDownTouch(Motions.Point t){
+            public void onDownTouch(Motions.Point t) {
                 pressed = true;
                 start = 0;
                 readed = false;
@@ -25,13 +25,13 @@ public class Button extends HotBox {
             }
 
             @Override
-            public void onTouchRelease(Motions.Point t){
+            public void onTouchRelease(Motions.Point t) {
                 pressed = false;
                 onRelease();
             }
 
             @Override
-            public void onClick(Motions.Point t){
+            public void onClick(Motions.Point t) {
                 if(!readed) {
                     readed = true;
                     Button.this.onClick();
@@ -71,9 +71,9 @@ public class Button extends HotBox {
         return false;
     }
 
-    protected void onTouch() {}
+    protected abstract void onTouch();
 
-    protected void onRelease() {}
+    protected abstract void onRelease();
 
-    protected void onClick() {}
+    protected abstract void onClick();
 }

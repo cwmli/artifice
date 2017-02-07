@@ -22,6 +22,7 @@ public class VertexQuad {
     public static final int BYTES_PER_FLOAT = Float.SIZE / 8;
     public static final int BYTES_PER_SHORT = Short.SIZE / 8;
     public static final int INDICES_PER_QUAD = 6;
+
     private static final int OFFSET_TO_NEXT_TRIANGLE = 2;
 
     private static ShortBuffer indices;

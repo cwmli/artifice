@@ -5,11 +5,10 @@ import com.underwaterotter.glesutils.TextureCache;
 public class Player extends Image {
 
     public Animation activeAnimation;
+    public boolean playing;
 
     private int currentFrame;
     private float timer;
-
-    public boolean playing;
 
     public Player(){
         super();

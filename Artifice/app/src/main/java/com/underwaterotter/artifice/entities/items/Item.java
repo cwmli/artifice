@@ -2,9 +2,8 @@ package com.underwaterotter.artifice.entities.items;
 
 import android.graphics.RectF;
 
-import com.underwaterotter.artifice.Artifice;
 import com.underwaterotter.artifice.entities.Entity;
-import com.underwaterotter.artifice.entities.Mob;
+import com.underwaterotter.artifice.entities.mobs.Mob;
 import com.underwaterotter.artifice.sprites.ItemSprite;
 import com.underwaterotter.utils.Block;
 
@@ -13,32 +12,31 @@ import java.util.UUID;
 
 public class Item extends Entity{
 
-    public static String LEVEL = "level";
-    public static String ENCHANTED = "enchanted";
-    public static String UUID = "uuid";
-    public static String BELONGS_TO = "belongs_to";
-    public static String OWNER = "owner";
+    public static final String LEVEL = "level";
+    public static final String ENCHANTED = "enchanted";
+    public static final String UUID = "uuid";
+    public static final String BELONGS_TO = "belongs_to";
+    public static final String OWNER = "owner";
 
-    public static int ITEM_THICKNESS = 5;
+    public static final int ITEM_THICKNESS = 5;
+
+    ItemSprite sprite;
+
+    String name = "generic_item";
+
+    int damage;
+    int level;
+    boolean enchanted;
+    int animationSpeed;
+
+    int throwSpeed;
+
+    ArrayList<String> actions;
+
+    Mob mob; //Equipped to; therefore, will follow animations
 
     //for tracking
     private UUID item_id;
-
-    public ItemSprite sprite;
-
-    public static String name = "generic_item";
-
-    public int damage;
-    public int level;
-    public boolean enchanted;
-    public int animationSpeed;
-
-    public int throwSpeed;
-
-    protected ArrayList<String> actions;
-
-    public Mob mob; //Equipped to; therefore, will follow animations
-
     private Pouch host;//can be a chest or any other inventory
 
     @Override
@@ -77,6 +75,10 @@ public class Item extends Entity{
 
     public UUID setItemID(UUID id){
         return item_id = id;
+    }
+
+    public ItemSprite getSprite() {
+        return sprite;
     }
 
     protected Mob[] checkCollision(){

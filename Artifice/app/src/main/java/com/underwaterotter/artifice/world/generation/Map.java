@@ -45,13 +45,13 @@ public class Map {
 
     private int xsize, ysize;
 
-    double amp;           //amplitude = 0.0 - 1.0d
-    double rise;          //rise = 0.0 - 2.0d
-    double drop;          //drop = 0.0 - 10.0d
-    double f1, f2, f3;    //frequencies
-    double eo1, eo2, eo3; //elevation octaves
-    int smooth;           //average sample size
-    double redis;         //redistribution
+    private double amp;           //amplitude = 0.0 - 1.0d
+    private double rise;          //rise = 0.0 - 2.0d
+    private double drop;          //drop = 0.0 - 10.0d
+    private double f1, f2, f3;    //frequencies
+    private double eo1, eo2, eo3; //elevation octaves
+    private int smooth;           //average sample size
+    private double redis;         //redistribution
 
     public Map(int w, int h, long seed,
                double amp, double rise, double drop,

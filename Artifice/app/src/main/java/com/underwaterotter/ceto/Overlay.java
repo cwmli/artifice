@@ -18,9 +18,6 @@ public class Overlay extends Article {
     protected Vector3 pos;
     protected Vector2 rOrigin;
 
-    private float scaleX;
-    private float scaleY;
-
     protected RectF boundingBox;
 
     protected float width;
@@ -28,13 +25,14 @@ public class Overlay extends Article {
 
     protected float[] modelMatrix;
 
-    protected float speed;
     //this also includes velocity (in degrees)
     //     90
     //  180-|-0/360
     //     270
     protected float angle;
-    protected Vector2 velocity;
+
+    private float scaleX;
+    private float scaleY;
 
     //color main
     //multiply
@@ -42,7 +40,7 @@ public class Overlay extends Article {
     float mg;
     float mb;
     float ma;
-    //addMob
+
     float ar;
     float ag;
     float ab;
@@ -60,7 +58,6 @@ public class Overlay extends Article {
 
         boundingBox = new RectF();
 
-        velocity = new Vector2();
         rOrigin = new Vector2();
         angle = 0;
 
@@ -75,8 +72,6 @@ public class Overlay extends Article {
     @Override
     public void update(){
         boundingBox.set(pos.x, pos.y, pos.x + width, pos.y + height);
-
-        updateMotion();
     }
 
     @Override
@@ -235,17 +230,6 @@ public class Overlay extends Article {
     public void resetColor(){
         mr = mg = mb = ma = 1;
         ar = ag = ab = aa = 0;
-    }
-
-    public void updateMotion(){
-        //based on the supplied angle, find the velocity vector
-        float vX = speed * (float)Math.cos(Math.toRadians(angle)); //a * Math.PI / 180
-        float vY = speed * (float)Math.sin(Math.toRadians(angle));
-
-        velocity.set(vX, vY);
-
-        pos.x += velocity.x;
-        pos.y += velocity.y;
     }
 
     public void updateMatrix(){

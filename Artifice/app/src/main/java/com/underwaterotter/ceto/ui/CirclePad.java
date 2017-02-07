@@ -9,7 +9,7 @@ public abstract class CirclePad extends HotCircle {
     protected TouchBox hitZone;
 
     @Override
-    public void createContent(){
+    protected void createContent(){
         hitZone = new TouchBox(x, y, radius * 2, radius * 2){
 
             @Override
@@ -36,7 +36,7 @@ public abstract class CirclePad extends HotCircle {
 
             @Override
             public void onClick(Motions.Point t){
-                onTouch(t);
+                CirclePad.this.onClick(t);
             }
         };
         add(hitZone);
@@ -61,4 +61,6 @@ public abstract class CirclePad extends HotCircle {
     protected abstract void onDragged(Motions.Point p);
 
     protected abstract void onRelease(Motions.Point p);
+
+    protected abstract void onClick(Motions.Point p);
 }

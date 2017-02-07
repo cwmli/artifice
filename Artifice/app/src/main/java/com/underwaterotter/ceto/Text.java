@@ -13,19 +13,19 @@ import java.nio.FloatBuffer;
 
 public class Text extends Overlay {
 
-    protected String[] lines;
-    protected int lineSpacing;
-    protected Font font;
+    private int textLength;
 
-    protected float[] vertices = new float[8];
-    protected float[] stVertices = new float[8];
+    private String[] lines;
+    private int lineSpacing;
+    private Font font;
 
-    protected FloatBuffer vertexBuffer;
-    protected FloatBuffer stVertexBuffer;
+    private float[] vertices = new float[8];
+    private float[] stVertices = new float[8];
 
-    public int textLength;
+    private FloatBuffer vertexBuffer;
+    private FloatBuffer stVertexBuffer;
 
-    protected boolean dirty = true;
+    private boolean dirty = true;
 
     private static String BY_NEWLINE = System.getProperty("line.separator");
 
@@ -84,7 +84,7 @@ public class Text extends Overlay {
 
         Renderer renderer = Renderer.get();
 
-        font.fontDir.texture.bind();
+        font.fontDir.bind();
 
         renderer.changeCamera(camera());
 
@@ -216,13 +216,13 @@ public class Text extends Overlay {
 
             int offsetX;
 
-            int width = fontDir.texture.width;
-            int height = fontDir.texture.height;
+            int width = fontDir.getWidth();
+            int height = fontDir.getHeight();
 
             checkSpaceGlyph:
             for(offsetX = 0; offsetX < width; offsetX++){
                 for(int y = 0; y < height; y++){
-                    if(fontDir.texture.bitmap.getPixel(offsetX,y) == Color.WHITE){
+                    if(fontDir.getTextureBitmap().getPixel(offsetX,y) == Color.WHITE){
                         break checkSpaceGlyph;
                     }
                 }
@@ -246,21 +246,21 @@ public class Text extends Overlay {
                         }
                         found = true;
                         for (int j=0; j < height; j++) {
-                            if (fontDir.texture.bitmap.getPixel( separator, j ) != Color.TRANSPARENT) {
+                            if (fontDir.getTextureBitmap().getPixel( separator, j ) != Color.TRANSPARENT) {
                                 found = false;
                                 break;
                             }
                         }
                     } while (!found);
 
-                    fontDir.cells.put( ch, new RectF( (float)offsetX / width, 0, (float)separator / width, height ) );
+                    fontDir.addCell(ch, new RectF( (float)offsetX / width, 0, (float)separator / width, height ) );
                     offsetX = separator + 1;
                 }
             }
 
             //fontDir.populateFreeCells(fontDir.texture.width, fontDir.texture.height, offsetX, Color.BLACK, latinType);
 
-            lineHeight = fontDir.texture.height;
+            lineHeight = fontDir.getHeight();
         }
 
         public static Font build(Object bmp, int color, char[] latinType){

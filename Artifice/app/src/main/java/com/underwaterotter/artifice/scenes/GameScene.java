@@ -1,19 +1,12 @@
 package com.underwaterotter.artifice.scenes;
 
-import android.util.Log;
-
-import com.underwaterotter.artifice.world.AnimatedTilemap;
+import com.underwaterotter.artifice.UIButtons.CharBscButton;
+import com.underwaterotter.artifice.UIButtons.CharSpcButton;
 import com.underwaterotter.artifice.Artifice;
-import com.underwaterotter.artifice.Joystick;
-import com.underwaterotter.artifice.world.Assets;
+import com.underwaterotter.artifice.UIButtons.Joystick;
 import com.underwaterotter.artifice.world.generation.Level;
 import com.underwaterotter.ceto.Group;
-import com.underwaterotter.artifice.entities.Mob;
-import com.underwaterotter.artifice.entities.items.Item;
-import com.underwaterotter.artifice.entities.main.Char;
-import com.underwaterotter.ceto.Image;
-import com.underwaterotter.ceto.Text;
-import com.underwaterotter.ceto.ui.Button;
+import com.underwaterotter.artifice.entities.mobs.main.Char;
 
 public class GameScene extends UIScene {
 
@@ -58,10 +51,20 @@ public class GameScene extends UIScene {
         add(pouches);
 
         Joystick joy = new Joystick();
-        joy.camera = uiCamera;
+        joy.setCamera(uiCamera);
         joy.position(Artifice.settings.getInt(Joystick.JOY_X, 20),
                 Artifice.settings.getInt(Joystick.JOY_Y, 130));
         add(joy);
+
+        CharBscButton bscButton = new CharBscButton();
+        bscButton.setCamera(uiCamera);
+        bscButton.position(240, 130);
+        add(bscButton);
+
+        CharSpcButton spcButton = new CharSpcButton();
+        spcButton.setCamera(uiCamera);
+        spcButton.position(255, 100);
+        add(spcButton);
     }
 
     @Override

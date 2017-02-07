@@ -1,12 +1,11 @@
-package com.underwaterotter.artifice;
+package com.underwaterotter.artifice.UIButtons;
 
 import android.graphics.Color;
-import android.util.Log;
 
 import com.underwaterotter.ceto.Image;
 import com.underwaterotter.ceto.ui.CirclePad;
 import com.underwaterotter.cetoinput.Motions;
-import com.underwaterotter.artifice.entities.main.CharController;
+import com.underwaterotter.artifice.entities.mobs.main.CharController;
 import com.underwaterotter.artifice.world.Assets;
 import com.underwaterotter.glesutils.TextureCache;
 import com.underwaterotter.math.Vector2;
@@ -16,8 +15,8 @@ public class Joystick extends CirclePad {
     public static final String JOY_X = "joy_x";
     public static final String JOY_Y = "joy_y";
 
-    public static final int SIZE_R = 16;
-    public static final int SIZE_N = 8;
+    private static final int SIZE_R = 16;
+    private static final int SIZE_N = 8;
 
     private Image joystick;
     private Image nob;
@@ -25,25 +24,27 @@ public class Joystick extends CirclePad {
     private Vector2 lastPoint;
     private boolean initialDrag = false;
 
-    public Joystick(){
+    public Joystick() {
         super();
 
         resize(SIZE_R);
     }
 
     @Override
-    public void createContent(){
+    public void createContent() {
         super.createContent();
 
         joystick = new Image(Assets.JOY);
+        joystick.alpha_M(0.5f);
         add(joystick);
 
         nob = new Image(TextureCache.createCircle(SIZE_R / 2, Color.GRAY, true));
+        nob.alpha_M(0.5f);
         add(nob);
     }
 
     @Override
-    public void updateHitbox(){
+    public void updateHitbox() {
         super.updateHitbox();
 
         nob.setPos(x + SIZE_R - (nob.getWidth() / 2),
@@ -53,7 +54,7 @@ public class Joystick extends CirclePad {
         joystick.setPos(x, y, 0);
     }
 
-    public double angle(Motions.Point p){
+    private double angle(Motions.Point p) {
         Vector2 pos = camera().screenToCamera((int)p.endPos.x, (int)p.endPos.y);
         pos.set(pos.x - center().x, pos.y - center().y);
         Vector2 refPoint = new Vector2(SIZE_R, 0);
@@ -64,27 +65,11 @@ public class Joystick extends CirclePad {
         return angle;
     }
 
-    protected void onLongTouch(Motions.Point p){
+    protected void onLongTouch(Motions.Point p) {}
 
-    }
+    protected void onTouch(Motions.Point p) {}
 
-    protected void onTouch(Motions.Point p){
-
-    }
-
-    protected void onRelease(Motions.Point p){
-        //recenter the nob
-        Vector2 lcJoy = position();
-        nob.setPos(lcJoy.x + SIZE_R - (nob.getWidth() / 2),
-                lcJoy.y + SIZE_R - (nob.getHeight() / 2), 0);
-
-        initialDrag = false;
-
-        CharController.setSpeed(0);
-        CharController.setAction("none");
-    }
-
-    protected void onDragged(Motions.Point p){
+    protected void onDragged(Motions.Point p) {
         Vector2 pos = camera().screenToCamera((int)p.endPos.x, (int)p.endPos.y);
         CharController.setAngle((float)angle(p));
 
@@ -93,7 +78,7 @@ public class Joystick extends CirclePad {
             if(joystick.center().distance(pos) > SIZE_R){
                 nob.setPos((float)Math.cos(Math.toRadians(angle(p))) *
                                 SIZE_R + joystick.center().x - (nob.getWidth() / 2),
-                            (float)Math.sin(Math.toRadians(angle(p))) *
+                        (float)Math.sin(Math.toRadians(angle(p))) *
                                 SIZE_R + joystick.center().y - (nob.getHeight() / 2), 0);
                 CharController.setSpeed(1.0f);
             } else {
@@ -110,4 +95,18 @@ public class Joystick extends CirclePad {
             lastPoint =  pos;
         }
     }
+
+    protected void onRelease(Motions.Point p) {
+        //recenter the nob
+        Vector2 lcJoy = position();
+        nob.setPos(lcJoy.x + SIZE_R - (nob.getWidth() / 2),
+                lcJoy.y + SIZE_R - (nob.getHeight() / 2), 0);
+
+        initialDrag = false;
+
+        CharController.setSpeed(0);
+        CharController.setAction("none");
+    }
+
+    protected void onClick(Motions.Point p) {}
 }

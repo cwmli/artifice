@@ -3,18 +3,17 @@ package com.underwaterotter.glesutils;
 import android.graphics.Bitmap;
 import android.graphics.RectF;
 import android.opengl.GLES20;
-import android.util.Log;
 
 import com.underwaterotter.gleswrap.Texture;
 
 public class ModelTexture extends Texture {
 
-    public int width;
-    public int height;
+    private int width;
+    private int height;
 
-    public TextureAtlas atlas;
+    private TextureAtlas atlas;
 
-    public Bitmap bitmap;
+    private Bitmap bitmap;
 
     public ModelTexture(Bitmap bitmap){
         this(bitmap, GLES20.GL_NEAREST, GLES20.GL_CLAMP_TO_EDGE);
@@ -28,6 +27,18 @@ public class ModelTexture extends Texture {
         wrap(wrapmethod, wrapmethod);
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
     @Override
     public void bitmap(Bitmap bitmap){
         super.bitmap(bitmap);
@@ -38,7 +49,7 @@ public class ModelTexture extends Texture {
     }
 
     public void reload(){
-        textureHandle = new ModelTexture(bitmap).textureHandle;
+        textureHandle = new ModelTexture(bitmap).getTextureHandle();
         //support saved wrap and filter methods
     }
 

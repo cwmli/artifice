@@ -1,13 +1,12 @@
-package com.underwaterotter.artifice.entities;
+package com.underwaterotter.artifice.entities.mobs;
 
 import android.graphics.RectF;
 
 import com.underwaterotter.artifice.Artifice;
+import com.underwaterotter.artifice.entities.Entity;
 import com.underwaterotter.artifice.entities.items.Item;
 import com.underwaterotter.artifice.sprites.ItemSprite;
 import com.underwaterotter.artifice.sprites.MobSprite;
-import com.underwaterotter.artifice.sprites.Sprite;
-import com.underwaterotter.artifice.world.generation.Level;
 import com.underwaterotter.ceto.Image;
 import com.underwaterotter.math.Vector2;
 import com.underwaterotter.math.Vector3;
@@ -18,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.UUID;
-import java.util.Vector;
 
 public abstract class Mob extends Entity implements Storable {
 
@@ -27,13 +25,8 @@ public abstract class Mob extends Entity implements Storable {
     private static final String BUFFS = "buffs";
     private static final String EQUIPS = "equips";
 
-    private static final int SAFE_ZONE = 4;
-
     //the "z" length of the mob
     private static final int MOB_THICKNESS = 5;
-
-    //for tracking
-    private UUID mob_id;
 
     protected MobSprite sprite;
     protected RectF hitBox;
@@ -63,6 +56,8 @@ public abstract class Mob extends Entity implements Storable {
 
     protected boolean[] availableDirections;
 
+    //for tracking
+    private UUID mob_id;
     private enum BUFF { DEFENSE, MAX_HP, ATTACK, SPEED}
     private enum STATUS { BLEEDING, FIRE, FROZEN, SHOCK, WET }
 
@@ -111,6 +106,11 @@ public abstract class Mob extends Entity implements Storable {
 
     public UUID getMobID(){
         return mob_id;
+    }
+
+    public UUID setMobID(UUID id) {
+        mob_id = id;
+        return id;
     }
 
     public void setSprite(MobSprite spr){
@@ -169,6 +169,20 @@ public abstract class Mob extends Entity implements Storable {
         sprite.setSpeed(s);
     }
 
+    @Override
+    public void worldPosition(Vector3 pos){
+        super.worldPosition(pos);
+        sprite.setPos(pos);
+    }
+
+    public Vector3 center(){
+        return new Vector3(worldPosition.x + sprite.width() / 2,
+                worldPosition.y + sprite.height() / 2, worldPosition.z);
+    }
+
+    public boolean isAlive(){
+        return hp > 0;
+    }
 
     @Override
     public void update(){
@@ -176,47 +190,12 @@ public abstract class Mob extends Entity implements Storable {
 
         updateStatusEffects();
         updateBounds();
+        updateMotion();
     }
 
-    private void updateBounds(){
-//        Level level = Artifice.getLevel();
-//        boolean top = level.isPassable(
-//                level.worldToCell(
-//                        (int)(hitBox.left + hitBox.width() / 2),
-//                        (int)hitBox.bottom - SAFE_ZONE));
-//
-//        boolean left = level.isPassable(
-//                level.worldToCell(
-//                        (int)hitBox.left + SAFE_ZONE,
-//                        (int)hitBox.bottom - SAFE_ZONE));
-//
-//        boolean bottom = level.isPassable(
-//                level.worldToCell(
-//                        (int)(hitBox.left + hitBox.width() / 2),
-//                        (int)hitBox.bottom));
-//
-//        boolean right = level.isPassable(
-//                level.worldToCell(
-//                        (int)hitBox.right - SAFE_ZONE,
-//                        (int)hitBox.bottom - SAFE_ZONE));
-//
-//        if(top && left && bottom && right) {
-//            Arrays.fill(availableDirections, true);
-//        }
-//
-//        if(sprite.getVelocity().x < 0 && !left) {
-//            availableDirections[0] = false;
-//        }
-//        if(sprite.getVelocity().x > 0 && !right) {
-//            availableDirections[2] = false;
-//        }
-//        if(sprite.getVelocity().y > 0 && !bottom) {
-//            availableDirections[3] = false;
-//        }
-//        if(sprite.getVelocity().y < 0 && !top) {
-//            availableDirections[1] = false;
-//        }
-    }
+    protected abstract void updateBounds();
+
+    protected abstract void updateMotion();
 
     public void updateStatusEffects(){
 
@@ -241,35 +220,12 @@ public abstract class Mob extends Entity implements Storable {
         }
     }
 
-    protected void updateAgro(){
+    protected void updateAgro() {
         visibleCells.clear();
-        for(int i = 0; i < Artifice.getLevel().s_cells.length; i++){
-            visibleCells.add(Artifice.getLevel().s_cells[i] * 2);
-        }
-    }
-
-    public UUID setMobID(UUID id){
-        return mob_id = id;
-    }
-
-    public boolean isAlive(){
-        return hp > 0;
-    }
-
-    public Vector3 center(){
-        return new Vector3(worldPosition.x + sprite.width() / 2,
-                worldPosition.y + sprite.height() / 2, worldPosition.z);
     }
 
     public void clearEquipped(){
         Arrays.fill(equipped, null);
-    }
-
-    public void damage(int damage, Item source){
-        damage -= def;
-        //log damage
-
-        hp -= damage;
     }
 
     public void addStatus(Mob.STATUS s){
@@ -282,7 +238,7 @@ public abstract class Mob extends Entity implements Storable {
         updateStatusEffects();
     }
 
-
+    public abstract void damage(int damage, Item source);
 
     public abstract String desc();
 }

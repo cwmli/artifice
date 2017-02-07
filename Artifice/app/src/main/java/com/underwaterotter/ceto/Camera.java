@@ -11,16 +11,14 @@ import java.util.HashMap;
 public class Camera extends Article {
 
     public static ArrayList<Camera> cameras = new ArrayList<Camera>();
-    private static int SCREEN_PADDING = 30;
+    private static final int SCREEN_PADDING = 30;
+
+    public static Camera main;
+    public static Overlay target;
 
     protected float[] mCameraMatrix = new float[16];
     protected static float invW2;
     protected static float invH2;
-
-    private float aspectRatio;
-
-    public static Camera main;
-    public static Overlay target;
 
     //position of camera to screen
     protected Vector2 pos;
@@ -36,6 +34,8 @@ public class Camera extends Article {
     //actual screen size
     protected int screenWidth;
     protected int screenHeight;
+
+    private float aspectRatio;
 
     public static Camera defaultCamera(float zoom){
 

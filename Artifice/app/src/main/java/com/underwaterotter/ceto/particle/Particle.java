@@ -9,20 +9,18 @@ import com.underwaterotter.math.Vector3;
 
 public class Particle extends Image {
 
+    public boolean dissipate;
+
+    private float timer;
     private float lifespan;
 
     private float sizeUpper = 1;
     private float sizeLower = 1;
 
-    public boolean dissipate;
-
-    private float timer;
-
     public Particle(){
         super();
 
         lifespan = 0;
-        speed = 0;
 
         dissipate = true;
     }

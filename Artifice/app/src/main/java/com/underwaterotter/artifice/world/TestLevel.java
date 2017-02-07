@@ -1,6 +1,8 @@
 package com.underwaterotter.artifice.world;
 
 
+import android.util.Log;
+
 import com.underwaterotter.artifice.scenes.GameScene;
 import com.underwaterotter.artifice.world.generation.Level;
 import com.underwaterotter.artifice.world.generation.Map;
@@ -83,9 +85,17 @@ public class TestLevel extends Level {
     }
 
     public void prespawnMobs(){
-        GameScene.scene.getPlayer().worldPosition(
-                tilemap.cellToWorld(
-                        (int)Math.floor((map.length) / 2) + 2));
+
+        int cell = mapWidth + (mapHeight / 2) * mapWidth;
+
+        do {
+            GameScene.scene.getPlayer().worldPosition(
+                    tilemap.cellToWorld(cell));
+            Log.v("TRY", "Attempt to place at: " + cell + " wPos: " + tilemap.cellToWorld(cell).x + " " + tilemap.cellToWorld(cell).y);
+            cell++;
+        } while (getMapData(WorldTilemap.TILEMAP.LAND)[cell] != Terrain.SOLID_GRASS);
+
+        Log.v("SUCCESS", "Placed at: " + GameScene.scene.getPlayer().worldPosition().x + " " + GameScene.scene.getPlayer().worldPosition().y);
     }
 
     public void prespawnItems(){

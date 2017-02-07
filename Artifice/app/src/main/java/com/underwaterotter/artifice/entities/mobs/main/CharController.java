@@ -1,4 +1,4 @@
-package com.underwaterotter.artifice.entities.main;
+package com.underwaterotter.artifice.entities.mobs.main;
 
 import com.underwaterotter.artifice.scenes.GameScene;
 

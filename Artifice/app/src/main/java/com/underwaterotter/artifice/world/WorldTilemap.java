@@ -63,7 +63,7 @@ public class WorldTilemap extends Tilemap {
     public Vector3 cellToWorld(int cellPos){
         int row = (int)Math.ceil(cellPos / mapCellsW);
         //offset 1 for index at 0
-        int col = cellPos & mapCellsW;
+        int col = cellPos % mapCellsW;
 
 
         //center of cell

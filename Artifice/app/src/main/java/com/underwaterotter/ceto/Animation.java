@@ -15,6 +15,10 @@ public class Animation {
         this.repeat = repeat;
     }
 
+    public void setFrameDuration(float duration) {
+        frameDuration = 1f / duration;
+    }
+
     public void setFrames(RectF...frames){
         this.frames = frames;
     }

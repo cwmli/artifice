@@ -7,17 +7,17 @@ import java.util.HashMap;
 
 public abstract class AnimatedTilemap extends WorldTilemap{
 
-    public HashMap<Integer, int[]> tileAnimations; //int[] -> terrain id in Terrain.java
-    public int frames;
+    HashMap<Integer, int[]> tileAnimations; //int[] -> terrain id in Terrain.java
+    int frames;
+
+    private boolean playing;
+
+    private boolean repeat;
 
     private float timer;
     private float frameDuration;
 
     private int currentFrame;
-
-    protected boolean repeat;
-
-    public boolean playing;
 
     public AnimatedTilemap(String tiles, Level level, WorldTilemap.TILEMAP type, int fps){
         super(tiles, level, type);

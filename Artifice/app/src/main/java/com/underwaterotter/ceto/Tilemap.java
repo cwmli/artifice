@@ -11,25 +11,24 @@ import java.nio.FloatBuffer;
 
 public class Tilemap extends Overlay {
 
-    protected TextureAtlas src;
-
     protected boolean[] flipData;
     protected int[] mapData;
     protected int mapCellsW;
     protected int mapCellsH;
 
-    int mapCells;
-
     protected int cellW;
     protected int cellH;
 
-    protected float[] vertices;
-    protected float[] stVertices;
+    private TextureAtlas src;
 
-    protected FloatBuffer vertexBuffer;
-    protected FloatBuffer stVertexBuffer;
+    private float[] vertices;
+    private float[] stVertices;
+
+    private FloatBuffer vertexBuffer;
+    private FloatBuffer stVertexBuffer;
 
     boolean dirty;
+    int mapCells;
 
     public Tilemap(Object id, int cellW, int cellH){
         super();
@@ -131,7 +130,7 @@ public class Tilemap extends Overlay {
 
         Renderer renderer = Renderer.get();
 
-        src.texture.bind();
+        src.bind();
 
         renderer.changeCamera(camera());
 

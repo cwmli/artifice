@@ -76,29 +76,38 @@ public class Terrain {
     static {
         flags[EMPTY] = SOLID;
 
-        flags[SOLID_GRASS] = PASSABLE | FLAMMABLE;
-        flags[T_EDGE_GRASS_H] = PASSABLE | FLAMMABLE;
-        flags[CORNER_GRASS_H] = PASSABLE | FLAMMABLE;
-        flags[TOP_GRASS] = SOLID | FLAMMABLE;
-        flags[DIAG_GRASS] = PASSABLE | FLAMMABLE;
-        flags[DIAG_GRASS_H] = SOLID | FLAMMABLE;
-        flags[CONV_GRASS] = SOLID | FLAMMABLE;
+        flags[SOLID_GRASS]     = PASSABLE | FLAMMABLE;
+        flags[EDGE_GRASS]      = PASSABLE | FLAMMABLE;
+        flags[V_EDGE_GRASS]    = PASSABLE | FLAMMABLE;
+        flags[CORNER_GRASS]    = PASSABLE | FLAMMABLE;
+        flags[TOP_GRASS]       = SOLID | FLAMMABLE;
+        flags[DIAG_GRASS]      = PASSABLE | FLAMMABLE;
 
-        flags[SWATER_1] = SOLID | LIQUID;
-        flags[SWATER_2] = SOLID | LIQUID;
-        flags[DWATER_1] = SOLID | LIQUID;
-        flags[DWATER_2] = SOLID | LIQUID;
-        flags[DWATER_3] = SOLID | LIQUID;
+        flags[T_EDGE_GRASS_H]  = PASSABLE | FLAMMABLE;
+        flags[V_EDGE_GRASS_H]  = PASSABLE | FLAMMABLE;
+        flags[B_EDGE_GRASS_H]  = PASSABLE | FLAMMABLE;
+        flags[CORNER_GRASS_H]  = PASSABLE | FLAMMABLE;
+        flags[BT_EDGE_GRASS_H] = PASSABLE | FLAMMABLE;
+        flags[B_TOP_GRASS_H]   = SOLID | FLAMMABLE;
+        flags[R_TOP_GRASS_H]   = SOLID | FLAMMABLE;
 
-        flags[STONE] = SOLID;
-        flags[DSTONE] = SOLID;
-        flags[CONV_STONE] = SOLID;
+        flags[DIAG_GRASS_H]    = PASSABLE | FLAMMABLE;
+        flags[CONV_GRASS]      = SOLID | FLAMMABLE;
+        flags[STONE]           = SOLID;
+        flags[DSTONE]          = PASSABLE | FLAMMABLE;
+        flags[CONV_STONE]      = SOLID;
 
-        flags[TREE] = PASSABLE | FLAMMABLE;
-        flags[THICK_TREE] = SOLID | FLAMMABLE;
-        flags[BUSH] = flags[TREE];
-        flags[THICK_BUSH] = flags[THICK_TREE];
-        flags[LARGE_STONE] = SOLID;
-        flags[LARGE_STONE_C] = flags[LARGE_STONE] | CLIMBABLE;
+        flags[SWATER_1]        = SOLID | LIQUID;
+        flags[SWATER_2]        = SOLID | LIQUID;
+        flags[DWATER_1]        = SOLID | LIQUID;
+        flags[DWATER_2]        = SOLID | LIQUID;
+        flags[DWATER_3]        = SOLID | LIQUID;
+
+        flags[TREE]            = PASSABLE | FLAMMABLE;
+        flags[THICK_TREE]      = SOLID | FLAMMABLE;
+        flags[BUSH]            = PASSABLE | FLAMMABLE;
+        flags[THICK_BUSH]      = SOLID | FLAMMABLE;
+        flags[LARGE_STONE]     = SOLID;
+        flags[LARGE_STONE_C]   = SOLID | CLIMBABLE;
     }
 }
