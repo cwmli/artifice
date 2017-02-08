@@ -1,5 +1,6 @@
 package com.underwaterotter.artifice.entities.items;
 
+import com.underwaterotter.ceto.Article;
 import com.underwaterotter.utils.Block;
 import com.underwaterotter.utils.Storable;
 
@@ -8,7 +9,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.UUID;
 
-public class ItemMapper implements Storable {
+public class ItemMapper extends Article implements Storable {
 
     public final String LEVEL_ITEMS = "levelitems";
     public final String ITEMS = "items";
@@ -17,11 +18,37 @@ public class ItemMapper implements Storable {
 
     public HashMap<UUID, Item> items;
 
-    public void init(){
-
+    public ItemMapper(){
         levelItems = new HashSet<String>();
         items = new HashMap<UUID, Item>();
-        //load all potential items form level and add to game scene
+        //load all potential items form level and addMob to game scene
+    }
+
+    @Override
+    public void update(){
+        for(Item i : items.values()){
+            if(i.isActive())
+                i.update();
+        }
+    }
+
+    @Override
+    public void draw(){
+        for(Item i : items.values()){
+            if(i.isVisible())
+                i.draw();
+        }
+    }
+
+    @Override
+    public void destroy(){
+        for(Item i : items.values()){
+            i.destroy();
+        }
+        items.clear();
+        items = null;
+        levelItems.clear();
+        levelItems = null;
     }
 
     @Override
@@ -46,27 +73,18 @@ public class ItemMapper implements Storable {
         }
     }
 
-    public void destroy(){
-
-        for(Item i : items.values()){
-            i.destroy();
-        }
-        reset();
-    }
-
-    public void reset(){
-        levelItems.clear();
-        items.clear();
-    }
-
-    public void add(Item item){
+    public void addItem(Item item){
         items.put(item.setItemID(UUID.randomUUID()), item);
     }
 
-    public void remove(Item item){
-        if(item == null){
-            return;
-        } else {
+    public void removeItem(Item item){
+        if(item != null)
+            items.remove(item.itemID());
+    }
+
+    public void destroyItem(Item item){
+        if(item != null && item.id() > 0) {
+            item.destroy();
             items.remove(item.itemID());
         }
     }

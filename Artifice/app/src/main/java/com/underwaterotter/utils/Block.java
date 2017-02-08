@@ -34,7 +34,6 @@ public class Block {
             jsonObj = new JSONObject(json);
         } catch (JSONException e){
             e.printStackTrace();
-            return;
         }
     }
 
@@ -110,7 +109,7 @@ public class Block {
         return jsonObj.optInt(name);
     }
 
-    public int[] getIntArray(String name){;
+    public int[] getIntArray(String name){
 
         try {
             JSONArray jArray = jsonObj.getJSONArray(name);
@@ -415,11 +414,7 @@ public class Block {
     public static boolean delete(String fileName){
         File fileToDelete = new File(fileName);
 
-        if (fileToDelete.delete()){
-            return true;
-        }
-
-        return false;
+        return fileToDelete.delete();
     }
 
 

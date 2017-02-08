@@ -24,31 +24,31 @@ public class Painter {
     public static void fillRect(int[] map, int terrain, int width, int height){
         for(int cy = 0; cy < height; cy++){
             Arrays.fill(map, cell, cell + width, terrain);
-            cell += Artifice.level.mapSizeW;
+            cell += Artifice.getLevel().mapWidth;
         }
     }
 
     public static int[] fillBorderRect(int[] map, int fill, int[] border, int width, int height){
         int[] flipdata = new int[height];
         for (int cy = 0; cy < height; cy++) {
-            for(int cx = 0; cx < width && cell + cy * Artifice.level.mapSizeW + cx < map.length; cx++) {
+            for(int cx = 0; cx < width && cell + cy * Artifice.getLevel().mapWidth + cx < map.length; cx++) {
                 if ((cy == 0 && cx == 0) || (cy == height - 1 && cx == 0)) {
-                    map[cell + cy * Artifice.level.mapSizeW + cx] = border[3];
+                    map[cell + cy * Artifice.getLevel().mapWidth + cx] = border[3];
                 } else if ((cy == 0 && cx == width - 1) ||
                         (cy == height - 1 && cx == width - 1)) {
-                    map[cell + cy * Artifice.level.mapSizeW + cx] = border[3];
-                    flipdata[cy] = cell + cy * Artifice.level.mapSizeW + cx;
+                    map[cell + cy * Artifice.getLevel().mapWidth + cx] = border[3];
+                    flipdata[cy] = cell + cy * Artifice.getLevel().mapWidth + cx;
                 } else if (cy == 0) {
-                    map[cell + cy * Artifice.level.mapSizeW + cx] = border[0];
+                    map[cell + cy * Artifice.getLevel().mapWidth + cx] = border[0];
                 } else if (cy == height - 1) {
-                    map[cell + cy * Artifice.level.mapSizeW + cx] = border[2];
+                    map[cell + cy * Artifice.getLevel().mapWidth + cx] = border[2];
                 } else if (cx == 0) {
-                    map[cell + cy * Artifice.level.mapSizeW + cx] = border[1];
+                    map[cell + cy * Artifice.getLevel().mapWidth + cx] = border[1];
                 } else if (cx == width - 1) {
-                    map[cell + cy * Artifice.level.mapSizeW + cx] = border[1];
-                    flipdata[cy] = cell + cy * Artifice.level.mapSizeW + cx;
+                    map[cell + cy * Artifice.getLevel().mapWidth + cx] = border[1];
+                    flipdata[cy] = cell + cy * Artifice.getLevel().mapWidth + cx;
                 } else {
-                    map[cell + cy * Artifice.level.mapSizeW + cx] = fill;
+                    map[cell + cy * Artifice.getLevel().mapWidth + cx] = fill;
                 }
             }
         }
@@ -61,29 +61,29 @@ public class Painter {
                                        int swap, int width, int height) {
         int[] flipdata = new int[height];
         for (int cy = 0; cy < height; cy++) {
-            for(int cx = 0; cx < width && cell + cy * Artifice.level.mapSizeW + cx < map.length; cx++){
-                if (map[cell + cy * Artifice.level.mapSizeW + cx] == swap) {
+            for(int cx = 0; cx < width && cell + cy * Artifice.getLevel().mapWidth + cx < map.length; cx++){
+                if (map[cell + cy * Artifice.getLevel().mapWidth + cx] == swap) {
                     if (cy == 0 && cx == 0) {
-                        map[cell + cy * Artifice.level.mapSizeW + cx] = border[3];
+                        map[cell + cy * Artifice.getLevel().mapWidth + cx] = border[3];
                     } else if (cy == height - 1 && cx == 0) {
-                        map[cell + cy * Artifice.level.mapSizeW + cx] = border[4];
+                        map[cell + cy * Artifice.getLevel().mapWidth + cx] = border[4];
                     } else if (cy == 0 && cx == width - 1) {
-                        map[cell + cy * Artifice.level.mapSizeW + cx] = border[3];
-                        flipdata[cy] = cell + cy * Artifice.level.mapSizeW + cx;
+                        map[cell + cy * Artifice.getLevel().mapWidth + cx] = border[3];
+                        flipdata[cy] = cell + cy * Artifice.getLevel().mapWidth + cx;
                     } else if (cy == height - 1 && cx == width - 1) {
-                        map[cell + cy * Artifice.level.mapSizeW + cx] = border[4];
-                        flipdata[cy] = cell + cy * Artifice.level.mapSizeW + cx;
+                        map[cell + cy * Artifice.getLevel().mapWidth + cx] = border[4];
+                        flipdata[cy] = cell + cy * Artifice.getLevel().mapWidth + cx;
                     } else if (cy == 0) {
-                        map[cell + cy * Artifice.level.mapSizeW + cx] = border[0];
+                        map[cell + cy * Artifice.getLevel().mapWidth + cx] = border[0];
                     } else if (cy == height - 1) {
-                        map[cell + cy * Artifice.level.mapSizeW + cx] = border[2];
+                        map[cell + cy * Artifice.getLevel().mapWidth + cx] = border[2];
                     } else if (cx == 0) {
-                        map[cell + cy * Artifice.level.mapSizeW + cx] = border[1];
+                        map[cell + cy * Artifice.getLevel().mapWidth + cx] = border[1];
                     } else if (cx == width - 1) {
-                        map[cell + cy * Artifice.level.mapSizeW + cx] = border[1];
-                        flipdata[cy] = cell + cy * Artifice.level.mapSizeW + cx;
+                        map[cell + cy * Artifice.getLevel().mapWidth + cx] = border[1];
+                        flipdata[cy] = cell + cy * Artifice.getLevel().mapWidth + cx;
                     } else {
-                        map[cell + cy * Artifice.level.mapSizeW + cx] = fill;
+                        map[cell + cy * Artifice.getLevel().mapWidth + cx] = fill;
                     }
                 }
             }

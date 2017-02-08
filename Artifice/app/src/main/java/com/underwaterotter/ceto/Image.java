@@ -11,6 +11,8 @@ import java.nio.FloatBuffer;
 
 public class Image extends Overlay {
 
+    public ModelTexture texture;
+
     protected float[] vertices;
     protected float[] stVertices;
 
@@ -19,7 +21,6 @@ public class Image extends Overlay {
 
     protected boolean flipHorizontal;
 
-    public ModelTexture texture;
     protected RectF texRect;
 
     protected boolean dirty;
@@ -49,9 +50,13 @@ public class Image extends Overlay {
     public Image(Vector3 pos, Object bitmap){
         this();
 
-        position(pos);
-        texture = bitmap instanceof ModelTexture ? (ModelTexture)bitmap : TextureCache.get((String)bitmap);
-        textureRect(texture.stRect(0, 0, texture.width, texture.height));
+        setPos(pos);
+        texture = bitmap instanceof ModelTexture ? (ModelTexture)bitmap : TextureCache.get(bitmap);
+        textureRect(texture.stRect(0, 0, texture.getWidth(), texture.getHeight()));
+    }
+
+    public Vector3 getPos(){
+        return pos;
     }
 
     @Override
@@ -75,8 +80,8 @@ public class Image extends Overlay {
         texRect = rect;
 
         //calculate width and height based on clipping in texRect, if any
-        width = texRect.width() * texture.width;
-        height = texRect.height() * texture.height;
+        width = texRect.width() * texture.getWidth();
+        height = texRect.height() * texture.getHeight();
 
         updateSTVertices();
         updateVertices();

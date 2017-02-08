@@ -3,7 +3,7 @@ package com.underwaterotter.ceto.particle;
 import com.underwaterotter.ceto.Game;
 import com.underwaterotter.ceto.Group;
 import com.underwaterotter.ceto.Overlay;
-import com.underwaterotter.math.Magic;
+import com.underwaterotter.math.Rand;
 import com.underwaterotter.math.Vector2;
 
 public abstract class Emitter extends Group {
@@ -90,8 +90,8 @@ public abstract class Emitter extends Group {
 
         source = src;
 
-        x = src.pos.x;
-        y = src.pos.y;
+        x = src.getPos().x;
+        y = src.getPos().y;
     }
 
     public void set(int rate, int lifetime, int limit, int speed){
@@ -106,8 +106,8 @@ public abstract class Emitter extends Group {
 
         if(source != null){
             createParticle(index,
-                           Magic.randRange(0, source.width),
-                           Magic.randRange(0, source.height));
+                           Rand.range(0, source.getWidth()),
+                           Rand.range(0, source.getHeight()));
         } else {
             createParticle(index, x, y);
         }

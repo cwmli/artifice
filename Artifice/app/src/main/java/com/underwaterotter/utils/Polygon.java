@@ -42,7 +42,7 @@ public class Polygon {
         for (int row = 0; row < AlphaData.size() - 1; row++) {
             for (int x = 0; x < bmpWidth - 1; x++) {
                 if (AlphaData.get(row)[x] < 0x80) {
-                    continue;
+                    return;
                 } else { //alpha is above 50%
 
                 }

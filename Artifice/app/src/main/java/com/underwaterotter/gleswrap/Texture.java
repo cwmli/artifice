@@ -8,7 +8,7 @@ import java.nio.IntBuffer;
 
 public class Texture {
 
-    public int textureHandle;
+    protected int textureHandle;
 
     public Texture(){
         int ids[] = new int[1];
@@ -19,6 +19,10 @@ public class Texture {
 
     public static void activate(int index){
         GLES20.glActiveTexture(GLES20.GL_TEXTURE+index);
+    }
+
+    public int getTextureHandle() {
+        return textureHandle;
     }
 
     public void bind(){

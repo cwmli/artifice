@@ -22,28 +22,25 @@ public class VertexQuad {
     public static final int BYTES_PER_FLOAT = Float.SIZE / 8;
     public static final int BYTES_PER_SHORT = Short.SIZE / 8;
     public static final int INDICES_PER_QUAD = 6;
+
     private static final int OFFSET_TO_NEXT_TRIANGLE = 2;
 
     private static ShortBuffer indices;
     private static int size;
 
     //standard 8 xy/st/uv coords for a quad
-    public static FloatBuffer genBuffer(){
-        FloatBuffer emptyBuf = ByteBuffer
+    public static FloatBuffer genBuffer() {
+        return ByteBuffer
                 .allocateDirect(8 * BYTES_PER_FLOAT)
                 .order(ByteOrder.nativeOrder())
                 .asFloatBuffer();
-
-        return emptyBuf;
     }
 
-    public static FloatBuffer genBuffer(int quads){
-        FloatBuffer emptyBuf = ByteBuffer
-                                .allocateDirect(quads * 8 * BYTES_PER_FLOAT)
-                                .order(ByteOrder.nativeOrder())
-                                .asFloatBuffer();
-
-        return emptyBuf;
+    public static FloatBuffer genBuffer(int quads) {
+        return ByteBuffer
+                .allocateDirect(quads * 8 * BYTES_PER_FLOAT)
+                .order(ByteOrder.nativeOrder())
+                .asFloatBuffer();
     }
 
     public static ShortBuffer quadIndices(int quads){
@@ -60,13 +57,13 @@ public class VertexQuad {
 
             int index = 0;
 
-            for (int i = 0; i < quads * 4; i+= 4) {
-                buffer[index++] = (short) (i + 0); //0,4,8,...
-                buffer[index++] = (short) (i + 1); //1,3,5,...
-                buffer[index++] = (short) (i + 2); //2,4,6,...
-                buffer[index++] = (short) (i + 1); //1,3,5,...
-                buffer[index++] = (short) (i + 3); //3,5,7,...
-                buffer[index++] = (short) (i + 2); //2,4,6,...
+            for (int i = 0; i < quads * 4; i += 4) {
+                buffer[index++] = (short) (i    ); //0,4,8,...
+                buffer[index++] = (short) (i + 1); //1,5,9,...
+                buffer[index++] = (short) (i + 2); //2,6,10,...
+                buffer[index++] = (short) (i + 1); //1,5,9,...
+                buffer[index++] = (short) (i + 3); //3,7,11,...
+                buffer[index++] = (short) (i + 2); //2,6,10,...
             }
 
             indices.put(buffer);
@@ -76,7 +73,9 @@ public class VertexQuad {
         return indices;
     }
 
-    public static void fill(float[] vertices, float x1, float y1, float x2, float y2, int offset){
+    public static void fill(float[] vertices,
+                            float x1, float y1, float x2, float y2,
+                            int offset){
         //Top Left
         vertices[0 + offset] = x1;
         vertices[1 + offset] = y1;

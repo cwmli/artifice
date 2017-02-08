@@ -23,16 +23,14 @@ public class MenuScene extends UIScene {
     public void create(){
         super.create();
 
-        uiCamera.visible = false;
-
-        int vw = Camera.main.viewWidth;
-        int vh = Camera.main.viewHeight;
+        int vw = Camera.main.getViewWidth();
+        int vh = Camera.main.getViewHeight();
         this.camera = Camera.main;
 
         //TITLE
         //BACKGROUND SCROLL OF TERRAIN
         MenuItem keyPlay = new MenuItem(BTN_START, 0){
-            public void onClick(){
+            protected void onClick(){
                 Artifice.switchLevel(new TestLevel());
                 Artifice.switchScene(GameScene.class);
             }
@@ -41,7 +39,7 @@ public class MenuScene extends UIScene {
         add(keyPlay);
 
         MenuItem keyQuit = new MenuItem(BTN_QUIT, 0){
-            public void onClick(){
+            protected void onClick(){
                 Game.instance.finish();
             }
         };
@@ -49,7 +47,7 @@ public class MenuScene extends UIScene {
         add(keyQuit);
     }
 
-    private static class MenuItem extends Button{
+    private abstract static class MenuItem extends Button{
 
         public static final int SIZE_W = 64;
         public static final int SIZE_H = 20;
@@ -70,7 +68,7 @@ public class MenuScene extends UIScene {
         }
 
         @Override
-        public void createContent(){
+        protected void createContent(){
             super.createContent();
 
             image = new Image(Assets.SELECTORS);
@@ -78,24 +76,21 @@ public class MenuScene extends UIScene {
         }
 
         @Override
-        public void updateHitbox(){
+        protected void updateHitbox(){
             super.updateHitbox();
 
-            label.pos.x = x + LEFT_PADDING;
-            label.pos.y = y - 4 + (image.height() / 2);
+            label.setPos(x + LEFT_PADDING, y - 4 + (image.height() / 2), 0);
 
-            image.pos.x = x;
-            image.pos.y = y;
+            image.setPos(x, y, 0);
             //round x,y positions
         }
 
         protected void onTouch() {
-            Log.v("MENU_TOUCH", "Lightened button.");
-            image.tint(Color.WHITE, 1f);
+            image.alpha_M(0.5f);
         }
 
         protected void onRelease() {
-            image.resetColor();
+            image.alpha_M(1f);
         }
     }
 }

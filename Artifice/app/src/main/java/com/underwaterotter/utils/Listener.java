@@ -27,7 +27,7 @@ public class Listener<T> {
         if (!listeners.isEmpty()) {
             for (int i = 0; i < listeners.size(); i++) {
                 Trigger<T> trigger = listeners.get(i);
-                if (trigger.work == true && matched != true) {
+                if (trigger.work && !matched) {
                     trigger.onCall(t);
                 }
             }

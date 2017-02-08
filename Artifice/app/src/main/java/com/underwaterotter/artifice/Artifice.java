@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.underwaterotter.ceto.Game;
-import com.underwaterotter.artifice.scenes.GameScene;
 import com.underwaterotter.artifice.scenes.MenuScene;
 import com.underwaterotter.artifice.world.generation.Level;
 
@@ -14,11 +13,20 @@ import com.underwaterotter.artifice.world.generation.Level;
 public class Artifice extends Game {
 
     public static Settings settings;
-    public static Level level = null;
-    public static int depth = 0;
+
+    private static Level level;
+    private static int depth = 0;
 
     public Artifice() {
         super(MenuScene.class);
+    }
+
+    public static int getDepth(){
+        return depth;
+    }
+
+    public static Level getLevel() {
+        return level;
     }
 
     @Override
@@ -40,7 +48,7 @@ public class Artifice extends Game {
     public static void switchLevel(Level slevel){
 
         if(level != null){
-            level.destroy();
+           level.destroy();
         }
 
         level = slevel;

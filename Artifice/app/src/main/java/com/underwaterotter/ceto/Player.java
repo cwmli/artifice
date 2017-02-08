@@ -5,11 +5,10 @@ import com.underwaterotter.glesutils.TextureCache;
 public class Player extends Image {
 
     public Animation activeAnimation;
+    public boolean playing;
 
     private int currentFrame;
     private float timer;
-
-    public boolean playing;
 
     public Player(){
         super();
@@ -81,7 +80,7 @@ public class Player extends Image {
     public void next(){
         if (currentFrame < activeAnimation.frames.length){
             textureRect(activeAnimation.frames[currentFrame++]);
-        } else if (activeAnimation.repeat == true){
+        } else if (activeAnimation.repeat){
             currentFrame = 0;
             textureRect(activeAnimation.frames[currentFrame++]);
             done();

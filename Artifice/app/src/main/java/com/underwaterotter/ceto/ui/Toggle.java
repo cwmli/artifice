@@ -10,12 +10,9 @@ public class Toggle extends Button {
         active = false;
     }
 
-    protected void onTouch(){
-    };
+    protected void onTouch(){}
 
-    protected void onRelease(){
-
-    }
+    protected void onRelease(){}
 
     public void onClick(){
         if(!active){

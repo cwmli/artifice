@@ -1,5 +1,6 @@
-package com.underwaterotter.artifice;
+package com.underwaterotter.artifice.world;
 
+import com.underwaterotter.artifice.world.generation.Level;
 import com.underwaterotter.ceto.Image;
 import com.underwaterotter.ceto.Tilemap;
 import com.underwaterotter.math.Vector3;
@@ -13,36 +14,43 @@ public class WorldTilemap extends Tilemap {
 
     public static final int INVALID_TILE = -1;
 
-    protected int[] map;
-    protected int[] oldmap;
+    public enum TILEMAP {
+        WATER,
+        LAND,
+        FOREGROUND
+    }
 
-    public WorldTilemap(String tiles){
+    private Level level;
+    private TILEMAP type;
+
+    protected int[] map;
+    private int[] oldmap;
+
+    public WorldTilemap(String tiles, Level level, TILEMAP type){
         super(tiles, CELL_SIZE_W, CELL_SIZE_H);
-        oldmap = new int[Artifice.level.mapLength];
+
+        this.level = level;
+        this.type = type;
+
+        oldmap = new int[level.getSfLength()];
         Arrays.fill(oldmap, INVALID_TILE);
 
-        flipData = new boolean[Artifice.level.mapLength];
+        flipData = new boolean[level.getSfLength()];
         Arrays.fill(flipData, false);
 
-        readMapData(oldmap, flipData, Artifice.level.mapSizeW);
+        readMapData(oldmap, flipData, level.getSfMapW());
     }
 
     @Override
     public void update(){
-        if(!Arrays.equals(map, oldmap)){
-            readMapData(map, flipData, Artifice.level.mapSizeW);
-            oldmap = map.clone();
-        }
-    }
-
-    public void setMap(int[] map){
-        this.map = map;
+        map = level.getMapData(type);
+        readMapData(map, flipData, level.getSfMapW());
     }
 
     //draw a "lightened" colored tile texture over the existing tilemap
     public void explore(int cellPos){
         Image whiteOverlay = new Image();
-        whiteOverlay.position(cellToWorld(cellPos));
+        whiteOverlay.setPos(cellToWorld(cellPos));
         whiteOverlay.tint(0xff000000, 0.5f);
 
         parent.add(whiteOverlay);
@@ -55,7 +63,7 @@ public class WorldTilemap extends Tilemap {
     public Vector3 cellToWorld(int cellPos){
         int row = (int)Math.ceil(cellPos / mapCellsW);
         //offset 1 for index at 0
-        int col = cellPos & mapCellsW;
+        int col = cellPos % mapCellsW;
 
 
         //center of cell

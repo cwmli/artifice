@@ -11,10 +11,9 @@ import java.util.HashMap;
 
 public class TextureCache {
 
-    private static HashMap<Object, ModelTexture> cache = new HashMap<Object, ModelTexture>();
-
     public static Context context;
 
+    private static HashMap<Object, ModelTexture> cache = new HashMap<Object, ModelTexture>();
 
     private static BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
     static {

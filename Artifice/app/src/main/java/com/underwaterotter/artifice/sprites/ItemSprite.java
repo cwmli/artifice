@@ -3,6 +3,7 @@ package com.underwaterotter.artifice.sprites;
 import android.graphics.Color;
 import android.graphics.RectF;
 
+import com.underwaterotter.artifice.world.generation.Level;
 import com.underwaterotter.ceto.Game;
 import com.underwaterotter.artifice.entities.items.Item;
 import com.underwaterotter.glesutils.TextureAtlas;
@@ -10,19 +11,20 @@ import com.underwaterotter.math.Vector2;
 
 public class ItemSprite extends Sprite {
 
-    public static final int SIZE = 16;
+    private static final int SIZE = 16;
     protected static TextureAtlas source;
 
-    public float fullglowTime = 1f;
+    private float fullglowTime = 1f;
 
     private boolean brighten;
     private float timer;
 
-    public int enchantColor;
+    private int enchantColor;
 
-    protected RectF texLoc;
+    private RectF texLoc;
 
-    public Item item;
+    private Item item;
+    private Level level;
 
     public ItemSprite(int id){
         //super(ITEMSPRITESHHET);
@@ -57,9 +59,11 @@ public class ItemSprite extends Sprite {
 
         float strength = timer / fullglowTime;
 
-        mr = mg = mb = 1 - strength;
-        ar = Color.red(enchantColor) * strength;
-        ag = Color.green(enchantColor) * strength;
-        ab = Color.blue(enchantColor) * strength;
+        setRGB_M(1 - strength,
+                 1 - strength,
+                 1 - strength);
+        setRGB_A(Color.red(enchantColor) * strength,
+                 Color.green(enchantColor) * strength,
+                 Color.blue(enchantColor) * strength);
     }
 }

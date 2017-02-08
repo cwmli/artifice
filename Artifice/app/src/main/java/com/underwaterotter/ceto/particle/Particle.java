@@ -4,25 +4,23 @@ import android.graphics.Bitmap;
 
 import com.underwaterotter.ceto.Game;
 import com.underwaterotter.ceto.Image;
-import com.underwaterotter.math.Magic;
+import com.underwaterotter.math.Rand;
 import com.underwaterotter.math.Vector3;
 
 public class Particle extends Image {
 
+    public boolean dissipate;
+
+    private float timer;
     private float lifespan;
 
     private float sizeUpper = 1;
     private float sizeLower = 1;
 
-    public boolean dissipate;
-
-    private float timer;
-
     public Particle(){
         super();
 
         lifespan = 0;
-        speed = 0;
 
         dissipate = true;
     }
@@ -44,7 +42,7 @@ public class Particle extends Image {
 
         timer = 0;
 
-        position(x, y, 0);
+        setPos(x, y, 0);
         this.width = width;
         this.height = height;
 
@@ -52,7 +50,7 @@ public class Particle extends Image {
     }
 
     public void pulsateSize(){
-        scale(Magic.randRange(sizeLower, sizeUpper));
+        scale(Rand.range(sizeLower, sizeUpper));
     }
 
     @Override

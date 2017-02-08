@@ -80,37 +80,41 @@ public class Renderer extends GLSL {
         }
     }
 
-    public void drawElement(FloatBuffer verticesXY, FloatBuffer verticesST, ShortBuffer indices, int indices_per_element){
+    public void drawElement(FloatBuffer vXY, FloatBuffer vST,
+                            ShortBuffer indices, int indices_per_element){
 
-        verticesXY.position(0);
-        aXY.setAttribPointer(2, 2, verticesXY);
+        vXY.position(0);
+        aXY.setAttribPointer(2, 2, vXY);
 
-        verticesST.position(0);
-        aST.setAttribPointer(2, 2, verticesST);
+        vST.position(0);
+        aST.setAttribPointer(2, 2, vST);
 
-        GLES20.glDrawElements(GLES20.GL_TRIANGLES, indices_per_element, GLES20.GL_UNSIGNED_SHORT, indices);
+        GLES20.glDrawElements(GLES20.GL_TRIANGLES, indices_per_element,
+                GLES20.GL_UNSIGNED_SHORT, indices);
     }
 
-    public void drawVQuad(FloatBuffer verticesXY, FloatBuffer verticesST){
+    public void drawVQuad(FloatBuffer vXY, FloatBuffer vST){
 
-        verticesXY.position(0);
-        aXY.setAttribPointer(2, 2, verticesXY);
+        vXY.position(0);
+        aXY.setAttribPointer(2, 2, vXY);
 
-        verticesST.position(0);
-        aST.setAttribPointer(2, 2, verticesST);
+        vST.position(0);
+        aST.setAttribPointer(2, 2, vST);
 
-        GLES20.glDrawElements(GLES20.GL_TRIANGLES, VertexQuad.INDICES_PER_QUAD, GLES20.GL_UNSIGNED_SHORT, VertexQuad.quadIndices(1));
+        GLES20.glDrawElements(GLES20.GL_TRIANGLES, VertexQuad.INDICES_PER_QUAD,
+                GLES20.GL_UNSIGNED_SHORT, VertexQuad.quadIndices(1));
     }
 
-    public void drawVQuads(FloatBuffer verticesXY, FloatBuffer verticesST, int size){
+    public void drawVQuads(FloatBuffer vXY, FloatBuffer vST, int size){
 
-        verticesXY.position(0);
-        aXY.setAttribPointer(2, 2, verticesXY);
+        vXY.position(0);
+        aXY.setAttribPointer(2, 2, vXY);
 
-        verticesST.position(0);
-        aST.setAttribPointer(2, 2, verticesST);
+        vST.position(0);
+        aST.setAttribPointer(2, 2, vST);
 
-        GLES20.glDrawElements(GLES20.GL_TRIANGLES, VertexQuad.INDICES_PER_QUAD * size, GLES20.GL_UNSIGNED_SHORT, VertexQuad.quadIndices(size));
+        GLES20.glDrawElements(GLES20.GL_TRIANGLES, VertexQuad.INDICES_PER_QUAD * size,
+                GLES20.GL_UNSIGNED_SHORT, VertexQuad.quadIndices(size));
     }
 
     public static Renderer get(){

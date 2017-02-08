@@ -8,13 +8,17 @@ public class Article {
 
     public Group parent;
 
-    public Camera camera;
+    protected Camera camera;
 
     public Article(){
         active = true;
         visible = true;
         awake = true;
         exists = true;
+    }
+
+    public void destroy(){
+        parent = null;
     }
 
     public void update(){
@@ -30,12 +34,12 @@ public class Article {
         } else if (parent != null) {
             return parent.camera();
         } else {
-            return null;
+            return Camera.main;
         }
     }
 
-    public void destroy(){
-        parent = null;
+    public void setCamera(Camera cam) {
+        camera = cam;
     }
 
     public void kill(){

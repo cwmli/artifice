@@ -29,6 +29,14 @@ public class Game extends Activity implements GLSurfaceView.Renderer, View.OnTou
     public static int width;
     public static int height;
 
+    //time from last update in seconds
+    public static float elapsedTime = 0f;
+    //lower values mean slower times and higher values mean sped up times, value of 1f is normal
+    public static float slowFactor = 1f;
+
+    //xhdpi = 2.0, hdpi = 1.5, mdpi = 1.0, ldpi = 0.75
+    public static float density = 1.0f; //base mdpi
+
     protected long elapsedMilli;
     protected long lastUpdateMilli;
     protected long elapsedUpdateMilli;
@@ -39,17 +47,7 @@ public class Game extends Activity implements GLSurfaceView.Renderer, View.OnTou
 
     protected static boolean requestScene = true;
 
-    //time from last update in seconds
-    public static float elapsedTime = 0f;
-    //lower values mean slower times and higher values mean sped up times, value of 1f is normal
-    public static float slowFactor = 1f;
-
-    //xhdpi = 2.0, hdpi = 1.5, mdpi = 1.0, ldpi = 0.75
-    public static float density = 1.0f; //base mdpi
-
     protected GLSurfaceView view;
-
-
     //touch event history
     protected ArrayList<MotionEvent> motionEvents = new ArrayList<MotionEvent>();
     protected ArrayList<KeyEvent> keyEvents = new ArrayList<KeyEvent>();

@@ -67,11 +67,11 @@ public class TouchBox extends Overlay implements Listener.Trigger<Motions.Point>
         lastPoint = null;
     }
 
-    public void onDownTouch(Motions.Point t){};
+    public void onDownTouch(Motions.Point t){}
 
-    public void onTouchRelease(Motions.Point t){};
+    public void onTouchRelease(Motions.Point t){}
 
-    public void onDrag(Motions.Point t){};
+    public void onDrag(Motions.Point t){}
 
-    public void onClick(Motions.Point t){};
+    public void onClick(Motions.Point t){}
 }

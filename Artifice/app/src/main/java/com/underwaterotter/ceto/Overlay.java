@@ -7,44 +7,44 @@ import android.opengl.Matrix;
 import com.underwaterotter.math.Vector2;
 import com.underwaterotter.math.Vector3;
 
+import java.util.Vector;
+
 /**
  * simple color effects
  */
 
 public class Overlay extends Article {
 
-    public Vector3 pos;
-    public Vector2 rOrigin;
+    protected Vector3 pos;
+    protected Vector2 rOrigin;
 
-    protected float scaleX;
-    protected float scaleY;
+    protected RectF boundingBox;
 
-    public RectF boundingBox;
-
-    public float width;
-    public float height;
+    protected float width;
+    protected float height;
 
     protected float[] modelMatrix;
 
-    public float speed;
     //this also includes velocity (in degrees)
     //     90
     //  180-|-0/360
     //     270
-    public float angle;
-    public Vector2 velocity;
+    protected float angle;
+
+    private float scaleX;
+    private float scaleY;
 
     //color main
     //multiply
-    protected float mr;
-    protected float mg;
-    protected float mb;
-    protected float ma;
-    //add
-    protected float ar;
-    protected float ag;
-    protected float ab;
-    protected float aa;
+    float mr;
+    float mg;
+    float mb;
+    float ma;
+
+    float ar;
+    float ag;
+    float ab;
+    float aa;
 
     public Overlay(){
         this(new Vector3(), 0, 0);
@@ -58,7 +58,6 @@ public class Overlay extends Article {
 
         boundingBox = new RectF();
 
-        velocity = new Vector2();
         rOrigin = new Vector2();
         angle = 0;
 
@@ -73,9 +72,6 @@ public class Overlay extends Article {
     @Override
     public void update(){
         boundingBox.set(pos.x, pos.y, pos.x + width, pos.y + height);
-
-        updateBounds();
-        updateMotion();
     }
 
     @Override
@@ -122,22 +118,16 @@ public class Overlay extends Article {
         rOrigin = o;
     }
 
-    public Vector3 position(){
-        return new Vector3(pos.x, pos.y, pos.z);
+    public Vector3 getPos(){
+        return pos;
     }
 
-    public Vector3 position(Vector3 vec3){
-        pos.x = vec3.x;
-        pos.y = vec3.y;
-        pos.z = vec3.z;
-        return vec3;
+    public void setPos(Vector3 newPos){
+        pos = newPos;
     }
 
-    public Vector3 position(float x, float y, float z){
-        pos.x = x;
-        pos.y = y;
-        pos.z = z;
-        return new Vector3(x, y, z);
+    public void setPos(float x, float y, float z){
+        pos = new Vector3(x, y, z);
     }
 
     public Vector2 center(){
@@ -155,8 +145,28 @@ public class Overlay extends Article {
         return width * scaleX;
     }
 
+    public float getWidth(){
+        return width;
+    }
+
+    public void setWidth(float w){
+        width = w;
+    }
+
     public float height(){
         return height * scaleY;
+    }
+
+    public float getHeight(){
+        return height;
+    }
+
+    public void setHeight(float h){
+        height = h;
+    }
+
+    public void setAngle(float a){
+        angle = a;
     }
 
     public void setRGB_M(int color){
@@ -220,19 +230,6 @@ public class Overlay extends Article {
     public void resetColor(){
         mr = mg = mb = ma = 1;
         ar = ag = ab = aa = 0;
-    }
-
-    public void updateBounds(){}
-
-    public void updateMotion(){
-        //based on the supplied angle, find the velocity vector
-        float vX = speed * (float)Math.cos(Math.toRadians(angle)); //a * Math.PI / 180
-        float vY = speed * (float)Math.sin(Math.toRadians(angle));
-
-        velocity.set(vX, vY);
-
-        pos.x += velocity.x;
-        pos.y += velocity.y;
     }
 
     public void updateMatrix(){

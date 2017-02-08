@@ -9,6 +9,7 @@ public class Assets {
     public static final String FONT20 = "font20x.png";
 
     public static final String JOY = "joystick.png";
+    public static final String PAUSE = "pause.png";
 
     public static final String SELECTORS = "selectors.png";
 

@@ -1,26 +1,26 @@
-package com.underwaterotter.artifice;
+package com.underwaterotter.artifice.world;
 
-import com.underwaterotter.artifice.world.Terrain;
+import com.underwaterotter.artifice.world.generation.Level;
 import com.underwaterotter.ceto.Game;
 
 import java.util.HashMap;
 
 public abstract class AnimatedTilemap extends WorldTilemap{
 
-    public HashMap<Integer, int[]> tileAnimations; //int[] -> terrain id in Terrain.java
-    public int frames;
+    HashMap<Integer, int[]> tileAnimations; //int[] -> terrain id in Terrain.java
+    int frames;
+
+    private boolean playing;
+
+    private boolean repeat;
 
     private float timer;
     private float frameDuration;
 
     private int currentFrame;
 
-    protected boolean repeat;
-
-    public boolean playing;
-
-    public AnimatedTilemap(String tiles, int fps){
-        super(tiles);
+    public AnimatedTilemap(String tiles, Level level, WorldTilemap.TILEMAP type, int fps){
+        super(tiles, level, type);
 
         currentFrame = 0;
 
@@ -62,7 +62,7 @@ public abstract class AnimatedTilemap extends WorldTilemap{
                 }
             }
             currentFrame++;
-        } else if (repeat == true){
+        } else if (repeat){
             currentFrame = 0;
             for(int i = 0; i < map.length; i++){
                 if(map[i] != Terrain.EMPTY && tileAnimations.containsKey(map[i])){
