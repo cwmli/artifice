@@ -25,6 +25,11 @@ public abstract class Mob extends Entity implements Storable {
     private static final String BUFFS = "buffs";
     private static final String EQUIPS = "equips";
 
+    public static final String BSC_ATK = "bsc_atk";
+    public static final String HVY_ATK = "hvy_atk";
+    public static final String DODGE = "dodge";
+    public static final String IDLE = "idle";
+
     //the "z" length of the mob
     private static final int MOB_THICKNESS = 5;
 
@@ -53,6 +58,7 @@ public abstract class Mob extends Entity implements Storable {
     protected HashSet<BUFF> buffs;
 
     protected ArrayList<String> actions;
+    protected String currentAction;
 
     protected boolean[] availableDirections;
 
@@ -111,6 +117,10 @@ public abstract class Mob extends Entity implements Storable {
     public UUID setMobID(UUID id) {
         mob_id = id;
         return id;
+    }
+
+    public String getCurrentAction() {
+        return currentAction;
     }
 
     public void setSprite(MobSprite spr){

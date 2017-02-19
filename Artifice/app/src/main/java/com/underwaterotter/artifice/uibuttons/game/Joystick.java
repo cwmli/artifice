@@ -1,12 +1,14 @@
-package com.underwaterotter.artifice.UIButtons;
+package com.underwaterotter.artifice.uibuttons.game;
 
 import android.graphics.Color;
+import android.util.Log;
 
+import com.underwaterotter.artifice.entities.mobs.Mob;
 import com.underwaterotter.ceto.Image;
 import com.underwaterotter.ceto.ui.CirclePad;
-import com.underwaterotter.cetoinput.Motions;
 import com.underwaterotter.artifice.entities.mobs.main.CharController;
 import com.underwaterotter.artifice.world.Assets;
+import com.underwaterotter.cetoinput.Point;
 import com.underwaterotter.glesutils.TextureCache;
 import com.underwaterotter.math.Vector2;
 
@@ -54,7 +56,7 @@ public class Joystick extends CirclePad {
         joystick.setPos(x, y, 0);
     }
 
-    private double angle(Motions.Point p) {
+    private double angle(Point p) {
         Vector2 pos = camera().screenToCamera((int)p.endPos.x, (int)p.endPos.y);
         pos.set(pos.x - center().x, pos.y - center().y);
         Vector2 refPoint = new Vector2(SIZE_R, 0);
@@ -65,11 +67,11 @@ public class Joystick extends CirclePad {
         return angle;
     }
 
-    protected void onLongTouch(Motions.Point p) {}
+    protected void onLongTouch(Point p) {}
 
-    protected void onTouch(Motions.Point p) {}
+    protected void onTouch(Point p) {}
 
-    protected void onDragged(Motions.Point p) {
+    protected void onDragged(Point p) {
         Vector2 pos = camera().screenToCamera((int)p.endPos.x, (int)p.endPos.y);
         CharController.setAngle((float)angle(p));
 
@@ -86,17 +88,17 @@ public class Joystick extends CirclePad {
                 CharController.setSpeed(joystick.center().distance(pos) / (SIZE_R * 2));
             }
 
-
-
             lastPoint.set(pos);
 
         } else {
             initialDrag = true;
             lastPoint =  pos;
         }
+
     }
 
-    protected void onRelease(Motions.Point p) {
+    protected void onRelease(Point p) {
+        Log.v("INFO", "Released joy.");
         //recenter the nob
         Vector2 lcJoy = position();
         nob.setPos(lcJoy.x + SIZE_R - (nob.getWidth() / 2),
@@ -105,8 +107,8 @@ public class Joystick extends CirclePad {
         initialDrag = false;
 
         CharController.setSpeed(0);
-        CharController.setAction("none");
+        CharController.setAction(Mob.IDLE);
     }
 
-    protected void onClick(Motions.Point p) {}
+    protected void onClick(Point p) {}
 }

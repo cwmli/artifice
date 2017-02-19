@@ -10,6 +10,7 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.underwaterotter.artifice.scenes.GameScene;
 import com.underwaterotter.cetoinput.Keys;
 import com.underwaterotter.cetoinput.Motions;
 import com.underwaterotter.glesutils.GLSL;

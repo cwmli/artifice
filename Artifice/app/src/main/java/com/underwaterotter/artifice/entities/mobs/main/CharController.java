@@ -15,4 +15,14 @@ public class CharController {
     public static void setAction(String action){
         GameScene.scene.getPlayer().setCurrentAction(action);
     }
+
+    public static void attack() {
+        setAction(Char.BSC_ATK);
+        GameScene.scene.getPlayer().basicAttack();
+    }
+
+    public static void spcAttack() {
+        setAction(Char.HVY_ATK);
+        GameScene.scene.getPlayer().heavyAttack();
+    }
 }

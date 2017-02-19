@@ -11,6 +11,8 @@ public class Assets {
     public static final String JOY = "joystick.png";
     public static final String PAUSE = "pause.png";
 
+    public static final String WINDOW = "window.png";
+
     public static final String SELECTORS = "selectors.png";
 
     public static final String HERO = "plr.png";

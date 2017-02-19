@@ -14,7 +14,7 @@ public class GenerationDebug {
 
         for(int y = 0; y < lv.mapHeight; y++){
             for(int x = 0; x < lv.mapWidth; x++){
-                sb.append(map[y * lv.mapWidth + x]);
+                sb.append(String.format("%3d", map[y * lv.mapWidth + x]));
             }
             sb.append("\n");
         }

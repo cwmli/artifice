@@ -16,7 +16,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 public abstract class Level extends Group implements Storable {
-    public static final int SAFE_OFFSET = 5;
+    public static final int SAFE_OFFSET = 10;
 
     private static final String UNDERGROUND = "underground";
     private static final String OVERWORLD_MAP = "overworld";
@@ -53,6 +53,7 @@ public abstract class Level extends Group implements Storable {
     protected int[] map;
     protected int[] foremap;
     protected int[] watermap;
+    protected int[] heightmap;
 
     private int sfMapW = mapWidth;
     private int sfMapH = mapHeight + SAFE_OFFSET;
@@ -83,6 +84,7 @@ public abstract class Level extends Group implements Storable {
         map = new int[sfLength];
         foremap = new int[sfLength];
         watermap = new int[sfLength];
+        heightmap = new int[sfLength];
 
         explored = new boolean[sfLength];
         Arrays.fill(explored, false);
@@ -167,15 +169,19 @@ public abstract class Level extends Group implements Storable {
             return foremap;
     }
 
-    public boolean isPassable(int index){
+    public boolean isPassable(int index) {
         return passable[index];
     }
 
-    public MobMapper getMobMapper(){
+    public int getElevation(int index) {
+        return heightmap[index];
+    }
+
+    public MobMapper getMobMapper() {
         return mobMapper;
     }
 
-    public ItemMapper getItemMapper(){
+    public ItemMapper getItemMapper() {
         return itemMapper;
     }
 

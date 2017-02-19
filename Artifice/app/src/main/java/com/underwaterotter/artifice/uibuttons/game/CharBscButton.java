@@ -1,11 +1,10 @@
-package com.underwaterotter.artifice.UIButtons;
+package com.underwaterotter.artifice.uibuttons.game;
 
-import com.underwaterotter.artifice.entities.mobs.main.Char;
 import com.underwaterotter.artifice.entities.mobs.main.CharController;
 import com.underwaterotter.artifice.world.Assets;
 import com.underwaterotter.ceto.Image;
 import com.underwaterotter.ceto.ui.CirclePad;
-import com.underwaterotter.cetoinput.Motions;
+import com.underwaterotter.cetoinput.Point;
 
 public class CharBscButton extends CirclePad {
 
@@ -38,13 +37,13 @@ public class CharBscButton extends CirclePad {
         button.setPos(x, y, 0);
     }
 
-    protected void onTouch(Motions.Point p) {}
+    protected void onTouch(Point p) {}
 
-    protected void onDragged(Motions.Point p) {}
+    protected void onDragged(Point p) {}
 
-    protected void onRelease(Motions.Point p) {}
+    protected void onRelease(Point p) {}
 
-    protected void onClick(Motions.Point p) {
-        CharController.setAction(Char.BSC_ATK);
+    protected void onClick(Point p) {
+        CharController.attack();
     }
 }

@@ -1,12 +1,12 @@
 package com.underwaterotter.ceto.ui;
 
 import com.underwaterotter.ceto.TouchBox;
-import com.underwaterotter.cetoinput.Motions;
+import com.underwaterotter.cetoinput.Point;
 import com.underwaterotter.math.Vector2;
 
 public abstract class CirclePad extends HotCircle {
 
-    protected TouchBox hitZone;
+    private TouchBox hitZone;
 
     @Override
     protected void createContent(){
@@ -20,22 +20,22 @@ public abstract class CirclePad extends HotCircle {
             }
 
             @Override
-            public void onDownTouch(Motions.Point t){
+            public void onDownTouch(Point t){
                 onTouch(t);
             }
 
             @Override
-            public void onTouchRelease(Motions.Point t){
+            public void onTouchRelease(Point t){
                 onRelease(t);
             }
 
             @Override
-            public void onDrag(Motions.Point t){
+            public void onDrag(Point t){
                 onDragged(t);
             }
 
             @Override
-            public void onClick(Motions.Point t){
+            public void onClick(Point t){
                 CirclePad.this.onClick(t);
             }
         };
@@ -56,11 +56,11 @@ public abstract class CirclePad extends HotCircle {
         hitZone.setHeight(radius * 2);
     }
 
-    protected abstract void onTouch(Motions.Point p);
+    protected abstract void onTouch(Point p);
 
-    protected abstract void onDragged(Motions.Point p);
+    protected abstract void onDragged(Point p);
 
-    protected abstract void onRelease(Motions.Point p);
+    protected abstract void onRelease(Point p);
 
-    protected abstract void onClick(Motions.Point p);
+    protected abstract void onClick(Point p);
 }

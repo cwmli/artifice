@@ -63,18 +63,19 @@ public class TestLevel extends Level {
     }
 
     public void generate(){
-        Map heightmap = new Map(
+        Map rawmap = new Map(
                 mapWidth, mapHeight, Rand.range(0, 25565),
                 Map.AMP, Map.RISE, Map.DROP,
                 Map.F1, Map.F2, Map.F3,
                 Map.EOCT1, Map.EOCT2, Map.EOCT3,
                 Map.SMOOTH, Map.REDIS);
-        heightmap.build();
+        rawmap.build();
 
-        int[][] displaymap = heightmap.getDisplayMaps();
+        int[][] displaymap = rawmap.getDisplayMaps();
 
         map = displaymap[0];
         watermap = displaymap[1];
+        heightmap = displaymap[2];
 
         buildFlags();
     }
@@ -90,7 +91,7 @@ public class TestLevel extends Level {
 
         do {
             GameScene.scene.getPlayer().worldPosition(
-                    tilemap.cellToWorld(cell));
+                    tilemap.cellToWorld(cell + 3));
             Log.v("TRY", "Attempt to place at: " + cell + " wPos: " + tilemap.cellToWorld(cell).x + " " + tilemap.cellToWorld(cell).y);
             cell++;
         } while (getMapData(WorldTilemap.TILEMAP.LAND)[cell] != Terrain.SOLID_GRASS);

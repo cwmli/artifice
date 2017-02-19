@@ -1,12 +1,13 @@
 package com.underwaterotter.ceto;
 
 import com.underwaterotter.cetoinput.Motions;
+import com.underwaterotter.cetoinput.Point;
 import com.underwaterotter.math.Vector3;
 import com.underwaterotter.utils.Listener;
 
-public class TouchBox extends Overlay implements Listener.Trigger<Motions.Point> {
+public class TouchBox extends Overlay implements Listener.Trigger<Point> {
 
-    protected Motions.Point lastPoint = null;
+    private Point lastPoint = null;
 
     public TouchBox(float x, float y, float width, float height){
         super(new Vector3(x, y, 0), width, height);
@@ -20,7 +21,7 @@ public class TouchBox extends Overlay implements Listener.Trigger<Motions.Point>
         Motions.motionListeners.remove(this);
     }
 
-    public void onCall(Motions.Point newPoint){
+    public void onCall(Point newPoint){
 
         if(!isActive()){
             return;
@@ -28,7 +29,7 @@ public class TouchBox extends Overlay implements Listener.Trigger<Motions.Point>
         
         boolean overlap = newPoint != null && screenPointOverlap((int) newPoint.startPos.x, (int) newPoint.startPos.y);
 
-        if(overlap){
+        if(overlap) {
 
             Motions.motionListeners.matched = true;
 
@@ -47,19 +48,14 @@ public class TouchBox extends Overlay implements Listener.Trigger<Motions.Point>
                     lastPoint = null;
 
                     onClick(newPoint);
+                } else {
+                    lastPoint = null;
                 }
             }
 
-        } else {
-
-            if(newPoint == null && lastPoint != null){
-                //use touchPoints for drag
-                onDrag(lastPoint);
-            }
-            else if(newPoint != null && lastPoint != null && !newPoint.isDown){
-                lastPoint = null;
-                onTouchRelease(newPoint);
-            }
+        } else if(newPoint == null && lastPoint != null) {
+            //use touchPoints for drag
+            onDrag(lastPoint);
         }
     }
 
@@ -67,11 +63,11 @@ public class TouchBox extends Overlay implements Listener.Trigger<Motions.Point>
         lastPoint = null;
     }
 
-    public void onDownTouch(Motions.Point t){}
+    public void onDownTouch(Point t){}
 
-    public void onTouchRelease(Motions.Point t){}
+    public void onTouchRelease(Point t){}
 
-    public void onDrag(Motions.Point t){}
+    public void onDrag(Point t){}
 
-    public void onClick(Motions.Point t){}
+    public void onClick(Point t){}
 }

@@ -94,16 +94,15 @@ public class Map {
 
         genHeightmap();
         normalizeHeightmap();
-        GenerationDebug.ShowMapData(heightdata);
         genDisplayMap();
-        GenerationDebug.ShowMapData(heightdata);
         cleanWaterTiles();
-        GenerationDebug.ShowMapData(heightdata);
         cleanGrassTiles();
+        GenerationDebug.ShowMapData(heightdata);
+        GenerationDebug.ShowMapData(mapdata);
     }
 
     public int[][] getDisplayMaps() {
-        return new int[][]{mapdata, watermap};
+        return new int[][]{mapdata, watermap, heightdata};
     }
 
     public double[][] getHeightmap() {

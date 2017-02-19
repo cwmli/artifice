@@ -1,8 +1,12 @@
-package com.underwaterotter.artifice.UIButtons;
+package com.underwaterotter.artifice.uibuttons.game;
 
+import com.underwaterotter.artifice.scenes.GameScene;
+import com.underwaterotter.artifice.windows.PauseWindow;
+import com.underwaterotter.artifice.windows.Window;
 import com.underwaterotter.artifice.world.Assets;
 import com.underwaterotter.ceto.Image;
 import com.underwaterotter.ceto.ui.Button;
+import com.underwaterotter.math.Vector3;
 
 /**
  * Created by Calvin on 01/02/2017.
@@ -49,6 +53,7 @@ public class PauseButton extends Button {
 
     @Override
     protected void onClick() {
-        //open menu
+        PauseWindow pauseWindow = new PauseWindow();
+        GameScene.scene.openWindow(pauseWindow);
     }
 }

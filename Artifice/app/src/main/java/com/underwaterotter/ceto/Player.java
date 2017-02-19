@@ -7,7 +7,8 @@ public class Player extends Image {
     public Animation activeAnimation;
     public boolean playing;
 
-    private int currentFrame;
+    public int currentFrame;
+
     private float timer;
 
     public Player(){
@@ -24,13 +25,21 @@ public class Player extends Image {
         playing = false;
     }
 
-    public void play(Animation animation, boolean interrupt){
+    public boolean isAnimationPlaying() {
+        return playing;
+    }
+
+    public void reset() {
+        currentFrame = 0;
+    }
+
+    public boolean play(Animation animation, boolean interrupt){
 
         if(activeAnimation == animation){
-            return;
+            return false;
         }
 
-        if(activeAnimation != null && playing && interrupt){
+        if(interrupt){
             forceStop();
 
             activeAnimation = animation;
@@ -38,12 +47,23 @@ public class Player extends Image {
             timer = 0;
 
             playing = true;
+            return true;
+        } else if (activeAnimation != null && !playing) {
+            activeAnimation = animation;
+            currentFrame = 0;
+            timer = 0;
+
+            playing = true;
+            return true;
         } else if (activeAnimation == null) {
             activeAnimation = animation;
             currentFrame = 0;
             timer = 0;
 
             playing = true;
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -99,5 +119,5 @@ public class Player extends Image {
         }
     }
 
-    public void done(){}
+    public void done() {}
 }

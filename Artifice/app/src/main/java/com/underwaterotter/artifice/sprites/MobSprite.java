@@ -14,7 +14,7 @@ public abstract class MobSprite extends Sprite {
     Animation die;
     Animation[] idle;
 
-    private Mob mob;
+    Mob mob;
 
     public enum Effect{ BLEEDING, FIRE, FROZEN, SHOCK, WET }
 
@@ -90,13 +90,13 @@ public abstract class MobSprite extends Sprite {
         play(dodge, true);
     }
 
-    public void attack(Orientation type){
+    public boolean attack(Orientation type, int unused){
         if (type == Orientation.SIDE) {
-            play(attack[0], true);
+            return play(attack[0], true);
         } else if (type == Orientation.DOWN) {
-            play(attack[1], true);
+            return play(attack[1], true);
         } else {
-            play(attack[2], true);
+            return play(attack[2], true);
         }
     }
 

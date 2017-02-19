@@ -2,7 +2,7 @@ package com.underwaterotter.ceto;
 
 public class Article {
     public boolean active;
-    public boolean visible; //fog
+    public boolean visible;
     public boolean awake;
     public boolean exists;
 

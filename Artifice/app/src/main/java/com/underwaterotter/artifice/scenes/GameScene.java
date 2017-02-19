@@ -1,9 +1,11 @@
 package com.underwaterotter.artifice.scenes;
 
-import com.underwaterotter.artifice.UIButtons.CharBscButton;
-import com.underwaterotter.artifice.UIButtons.CharSpcButton;
+import com.underwaterotter.artifice.uibuttons.game.CharBscButton;
+import com.underwaterotter.artifice.uibuttons.game.CharSpcButton;
 import com.underwaterotter.artifice.Artifice;
-import com.underwaterotter.artifice.UIButtons.Joystick;
+import com.underwaterotter.artifice.uibuttons.game.Joystick;
+import com.underwaterotter.artifice.uibuttons.game.PauseButton;
+import com.underwaterotter.artifice.windows.Window;
 import com.underwaterotter.artifice.world.generation.Level;
 import com.underwaterotter.ceto.Group;
 import com.underwaterotter.artifice.entities.mobs.main.Char;
@@ -65,13 +67,17 @@ public class GameScene extends UIScene {
         spcButton.setCamera(uiCamera);
         spcButton.position(255, 100);
         add(spcButton);
+
+        PauseButton pauseButton = new PauseButton();
+        pauseButton.setCamera(uiCamera);
+        pauseButton.position(260, 0);
+        add(pauseButton);
     }
 
     @Override
     public void destroy(){
-        scene = null;
-
         super.destroy();
+        scene = null;
     }
 
     @Override
@@ -81,5 +87,13 @@ public class GameScene extends UIScene {
 
     public Char getPlayer(){
         return player;
+    }
+
+    public void openWindow(Window window) {
+        add(window);
+    }
+
+    public void closeWindow(Window window) {
+        remove(window);
     }
 }
