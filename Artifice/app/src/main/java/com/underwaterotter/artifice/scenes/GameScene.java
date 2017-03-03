@@ -70,7 +70,7 @@ public class GameScene extends UIScene {
 
         PauseButton pauseButton = new PauseButton();
         pauseButton.setCamera(uiCamera);
-        pauseButton.position(260, 0);
+        pauseButton.position(270, 4);
         add(pauseButton);
     }
 

@@ -47,7 +47,7 @@ public class Group extends Article {
     }
 
     @Override
-    public void kill(){ //equivalent of disabling this group and all members
+    public void kill() { //equivalent of disabling this group and all members
 
         for (int i = 0; i < entities.size(); ++i){
             Article e = entities.get(i);
@@ -56,6 +56,17 @@ public class Group extends Article {
             }
         }
         super.kill();
+    }
+
+    public void revive() {
+
+        for (int i = 0; i < entities.size(); ++i){
+            Article e = entities.get(i);
+            if (e != null && e.exists) {
+                e.revive();
+            }
+        }
+        super.revive();
     }
 
     public Article insert(Article e) { //inserts to front of arraylist

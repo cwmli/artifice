@@ -14,7 +14,7 @@ public class Entity extends Group implements Storable {
     public static String W_POS = "wpos";
     public static String C_NUM = "cnum";
 
-    protected Vector3 worldPosition; //xy position
+    protected Vector3 position; //xy position
     protected int cellNumber;        //cell position based in tilemap mapData[]
     protected Level currentLevel;
 
@@ -30,7 +30,7 @@ public class Entity extends Group implements Storable {
     @Override
     public void update(){
         super.update();
-        cellNumber = currentLevel.worldToCell(worldPosition);
+        cellNumber = currentLevel.worldToCell(position);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class Entity extends Group implements Storable {
         block.put(TIMER, timer);
         block.put(ID, id);
 
-        double[] wPosArray = { worldPosition.x, worldPosition.y, worldPosition.z };
+        double[] wPosArray = { position.x, position.y, position.z };
         block.put(W_POS, wPosArray);
 
         block.put(C_NUM, cellNumber);
@@ -51,7 +51,7 @@ public class Entity extends Group implements Storable {
 
         double[] arrayblock = block.getDoubleArray(W_POS);
         float[] wPosArray = { (float)arrayblock[0], (float)arrayblock[1], (float)arrayblock[2]};
-        worldPosition = new Vector3(wPosArray);
+        position = new Vector3(wPosArray);
 
         cellNumber = block.getInt(C_NUM);
     }
@@ -65,11 +65,11 @@ public class Entity extends Group implements Storable {
     }
 
     public Vector3 worldPosition(){
-        return worldPosition;
+        return position;
     }
 
     public void worldPosition(Vector3 pos){
-        worldPosition = pos;
+        position = pos;
     }
 
     public Level level(){

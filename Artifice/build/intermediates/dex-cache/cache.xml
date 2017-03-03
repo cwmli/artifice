@@ -7,7 +7,7 @@
         jumboMode="true"
         optimize="true"
         revision="23.0.3"
-        sha1="efa435a6cd33d51997a4f4d2cbdffbdb285f6e4b">
+        sha1="df4db9af3d15971704090824c33c87f3a9127b42">
         <dex dex="C:\Users\Calvin\Documents\GitHub\artifice\Artifice\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_5fc2e6c1d3dbe55e8a83a294e84d3045e5c54436\classes.dex" />
     </item>
     <item
@@ -25,7 +25,7 @@
         jumboMode="true"
         optimize="true"
         revision="23.0.3"
-        sha1="da6bf25f9b4275cd0b2aef7ffedded285f66f3c8">
+        sha1="f28a4cf72ec145a939911aae7124b5eb7c826a19">
         <dex dex="C:\Users\Calvin\Documents\GitHub\artifice\Artifice\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_3dc3b6c4811820e344d86d4ad1b399aba214ebb9\classes.dex" />
     </item>
     <item

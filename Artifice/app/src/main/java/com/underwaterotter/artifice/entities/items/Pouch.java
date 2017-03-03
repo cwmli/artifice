@@ -1,14 +1,14 @@
 package com.underwaterotter.artifice.entities.items;
 
-import com.underwaterotter.artifice.entities.Entity;
+import com.underwaterotter.ceto.Group;
 import com.underwaterotter.utils.Block;
 import com.underwaterotter.utils.Storable;
 
-public class Pouch extends Entity implements Storable {
+public class Pouch implements Storable {
 
-    public static String INVENTORY = "inventory";
+    private static String INVENTORY = "inventory";
 
-    public Item[] inventory;
+    private Item[] inventory;
 
     @Override
     public void saveToBlock(Block block){
@@ -23,5 +23,30 @@ public class Pouch extends Entity implements Storable {
         }
     }
 
-    //create instances of the items
+    public void add(Item item) {
+        for (int i = 0; i < inventory.length; i++) {
+            if (inventory[i] == null) {
+                inventory[i] = item;
+                break;
+            }
+        }
+    }
+
+    public void remove(Item item) {
+        for (int i = 0; i < inventory.length; i++) {
+            if (inventory[i] == item) {
+                inventory[i] = null;
+                break;
+            }
+        }
+    }
+
+    public Item getItem(int slot) {
+        return inventory[slot];
+    }
+
+    public void dropItem(Item item) {
+        item.drop();
+        remove(item);
+    }
 }

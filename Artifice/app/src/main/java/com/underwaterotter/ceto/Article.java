@@ -47,7 +47,7 @@ public class Article {
         exists = false;
     }
 
-    public void resurrect(){
+    public void revive(){
         active = true;
         exists = true;
     }

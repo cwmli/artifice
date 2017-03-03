@@ -14,8 +14,8 @@ import com.underwaterotter.math.Vector3;
 
 public class PauseButton extends Button {
 
-    private static final int SIZE_W = 8;
-    private static final int SIZE_H = 8;
+    private static final int SIZE_W = 16;
+    private static final int SIZE_H = 16;
 
     private Image button;
 
@@ -53,6 +53,7 @@ public class PauseButton extends Button {
 
     @Override
     protected void onClick() {
+        GameScene.scene.kill();
         PauseWindow pauseWindow = new PauseWindow();
         GameScene.scene.openWindow(pauseWindow);
     }

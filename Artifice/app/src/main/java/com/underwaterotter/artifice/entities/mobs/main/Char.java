@@ -3,6 +3,8 @@ package com.underwaterotter.artifice.entities.mobs.main;
 import android.util.Log;
 
 import com.underwaterotter.artifice.Artifice;
+import com.underwaterotter.artifice.entities.items.ItemType;
+import com.underwaterotter.artifice.entities.items.Pouch;
 import com.underwaterotter.artifice.entities.mobs.Mob;
 import com.underwaterotter.artifice.entities.items.Item;
 import com.underwaterotter.artifice.sprites.CharSprite;
@@ -18,7 +20,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Char extends Mob {
-
     //ALL ACTIONS
     public static final String USE = "use";
     public static final String CLIMB = "climb";
@@ -33,9 +34,18 @@ public class Char extends Mob {
     private static final int TRAVEL_DIST_C4 = 7;
 
     private static final float DELAY_DURATION = 1.0f;
-    private static final float CHAIN_DURATION = 0.5f;
+    private static final float CHAIN_DURATION = 0.75f;
 
     private static final int CHAIN_LENGTH = 5;
+
+    // The maximum equip length is 8
+    // [0] = HEAD   [1] = BODY  [2] = LEGS  [3] = BOOTS
+    // [4] = GLOVES [5] = LEFT  [6] = RIGHT [7] = BACK
+    private Item[] equipped = new Item[EquipSlots.SIZE];
+    private Vector3[] attachPos = new Vector3[EquipSlots.SIZE];
+    // Attach position offsets
+
+    private Pouch inventory;
 
     private MobSprite.Orientation currentOrientation;
 
@@ -86,7 +96,11 @@ public class Char extends Mob {
 
         sprite.setPos(0, 0, 1);
         worldPosition(new Vector3(0,0,1));
-        startChainPos = worldPosition;
+        startChainPos = position;
+
+        attachPos[0] = new Vector3(position.x + 5, position.y + 7, position.z);
+        attachPos[1] = new Vector3(position.x + 4, position.y + 14, position.z);
+        attachPos[2] = new Vector3(position.x + 6, position.y + 24, position.z);
 
         hitBox = sprite.getBoundingBox();
     }
@@ -96,13 +110,13 @@ public class Char extends Mob {
         super.update();
         updateAttackChain();
 
-        Camera.main.setFocusPoint(worldPosition.x, worldPosition.y);
+        Camera.main.setFocusPoint(position.x, position.y);
 
-        worldPosition = sprite.getPos();
+        position = sprite.getPos();
         hitBox = sprite.getBoundingBox();
-        shadow.setPos(worldPosition.x, worldPosition.y + SHADOW_OFFSET, 1);
+        shadow.setPos(position.x, position.y + SHADOW_OFFSET, 1);
 
-        parseAction();
+        updateAnimation();
     }
 
     private void updateAttackChain() {
@@ -154,19 +168,20 @@ public class Char extends Mob {
 
         int topCell = level.worldToCell((int)hitBox.centerX(), (int)hitBox.bottom - SAFE_ZONE);
         boolean top = level.isPassable(topCell) &&
-                level.getElevation(topCell) == worldPosition.z;
+                level.getElevation(topCell) == position.z;
 
         int leftCell = level.worldToCell((int)hitBox.left, (int)hitBox.bottom);
         boolean left = level.isPassable(leftCell) &&
-                level.getElevation(leftCell) == worldPosition.z;
+                level.getElevation(leftCell) == position.z;
 
-        int bottomCell = level.worldToCell((int)hitBox.centerX(), (int)hitBox.bottom + SAFE_ZONE);
+        int bottomCell = level.worldToCell((int)hitBox.centerX(),
+                (int)hitBox.bottom + SAFE_ZONE);
         boolean bottom = level.isPassable(bottomCell) &&
-                level.getElevation(bottomCell) == worldPosition.z;
+                level.getElevation(bottomCell) == position.z;
 
         int rightCell = level.worldToCell((int)hitBox.right, (int)hitBox.bottom);
         boolean right = level.isPassable(rightCell) &&
-                level.getElevation(rightCell) == worldPosition.z;
+                level.getElevation(rightCell) == position.z;
 
         Arrays.fill(availableDirections, true);
 
@@ -219,42 +234,7 @@ public class Char extends Mob {
         sprite.setPos(lastPos.x + vX, lastPos.y + vY, 1);
     }
 
-    public String getCurrentAction(){
-        return currentAction;
-    }
-
-    public void setCurrentAction(String action){
-        currentAction = action;
-    }
-
-    @Override
-    public void setSpeed(float s) {
-        if (inChain) {
-            s = 1.0f;
-            if((chainCounter == 0 || chainCounter == 1) &&
-                    startChainPos.distance(sprite.getPos()) < TRAVEL_DIST_C01) {
-                s *= 0.5f;
-            } else if (chainCounter == 2 &&
-                    startChainPos.distance(sprite.getPos()) < TRAVEL_DIST_C2) {
-                s *= 0.75f;
-            } else if (chainCounter == 3 &&
-                    startChainPos.distance(sprite.getPos()) < TRAVEL_DIST_C3){
-                s *= 1.0f;
-            } else if (chainCounter == 4 &&
-                    startChainPos.distance(sprite.getPos()) < TRAVEL_DIST_C4){
-                s = 0.85f;
-            } else {
-                s = 0;
-            }
-
-            sprite.setAngle(lastAngle);
-        }
-
-        speed = s;
-        sprite.setSpeed(s);
-    }
-
-    public void parseAction() {
+    private void updateAnimation() {
 
         if(!isAlive()) {
             return;
@@ -274,11 +254,54 @@ public class Char extends Mob {
         }
     }
 
-    public void basicAttack() {
+    public String getCurrentAction(){
+        return currentAction;
+    }
+
+    void setCurrentAction(String action){
+        currentAction = action;
+    }
+
+    public Item[] getEquipped(){
+        return equipped;
+    }
+
+    public Vector3[] getAttachPos() {
+        return attachPos;
+    }
+
+    @Override
+    public void setSpeed(float s) {
+        if (inChain) {
+            s = 1.0f;
+            if((chainCounter == 0 || chainCounter == 1 || chainCounter == 6) &&
+                    startChainPos.distance(sprite.getPos()) < TRAVEL_DIST_C01) {
+                s *= 0.5f;
+            } else if ((chainCounter == 2 || chainCounter == 5) &&
+                    startChainPos.distance(sprite.getPos()) < TRAVEL_DIST_C2) {
+                s *= 0.75f;
+            } else if ((chainCounter == 3 || chainCounter == 7) &&
+                    startChainPos.distance(sprite.getPos()) < TRAVEL_DIST_C3){
+                s *= 1.0f;
+            } else if (chainCounter == 4 &&
+                    startChainPos.distance(sprite.getPos()) < TRAVEL_DIST_C4){
+                s = 0.85f;
+            } else {
+                s = 0;
+            }
+
+            sprite.setAngle(lastAngle);
+        }
+
+        speed = s;
+        sprite.setSpeed(s);
+    }
+
+    void basicAttack() {
         lastAngle = sprite.getAngle();
 
         if (!inDelay && chainCounter < CHAIN_LENGTH &&
-                sprite.attack(MobSprite.Orientation.SIDE, chainCounter)) {//placeholder
+                sprite.attack(currentOrientation, chainCounter)) {//placeholder
 
             inChain = true;
             setSpeed(0);
@@ -293,11 +316,11 @@ public class Char extends Mob {
 
     }
 
-    public void heavyAttack() {
+    void heavyAttack() {
         lastAngle = sprite.getAngle();
 
         Log.v("TRY", "Attempt to continue to combo: " + (chainCounter + 3));
-        if (chainCounter >= 2 && sprite.attack(MobSprite.Orientation.SIDE, chainCounter + 3)) {
+        if (chainCounter >= 2 && sprite.attack(currentOrientation, chainCounter + 3)) {
 
             inChain = true;
             setSpeed(0);
@@ -308,9 +331,51 @@ public class Char extends Mob {
         }
     }
 
-    public void dodge() {}
+    void dodge() {}
 
     public void use(Object o) {}
+
+    public boolean equip(Item item, int typePos) {
+
+        int itemtypeFlag = ItemType.flags[item.itemID()];
+        int typeposFlag = EquipSlots.flags[typePos];
+
+        if ((itemtypeFlag & typeposFlag) != 0) {
+            if ((typePos & ItemType.TWO_H) != 0) {
+                unequip(equipped[EquipSlots.LEFT]);
+                unequip(equipped[EquipSlots.RIGHT]);
+
+                equipped[EquipSlots.LEFT] = item;
+                equipped[EquipSlots.RIGHT] = item;
+
+                item.attach(this, EquipSlots.RIGHT);
+            } else {
+                unequip(equipped[typePos]);
+
+                equipped[typePos] = item;
+                item.attach(this, typePos);
+            }
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void unequip(Item item) {
+
+        if (item == null) {
+            return;
+        }
+
+        for (int i = 0; i < 8; i++) {
+            if (equipped[i] == item) {
+                equipped[i] = null;
+                item.detach();
+                break;
+            }
+        }
+    }
 
     public void damage(int damage, Item source) {}
 

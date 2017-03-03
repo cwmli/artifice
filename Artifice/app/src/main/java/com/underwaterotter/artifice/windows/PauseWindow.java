@@ -37,6 +37,7 @@ public class PauseWindow extends Window {
         MenuButton resume = new MenuButton(BTN_CONTINUE, 0) {
             @Override
             protected void onClick() {
+                GameScene.scene.revive();
                 GameScene.scene.closeWindow((Window)parent);
                 this.destroy();
             }

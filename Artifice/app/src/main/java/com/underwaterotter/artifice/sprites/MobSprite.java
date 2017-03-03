@@ -8,7 +8,7 @@ public abstract class MobSprite extends Sprite {
 
     public static enum Orientation {SIDE, DOWN, UP}
 
-    Animation[] attack;
+    Animation[][] attack;
     Animation[] run;
     Animation dodge;
     Animation die;
@@ -92,11 +92,11 @@ public abstract class MobSprite extends Sprite {
 
     public boolean attack(Orientation type, int unused){
         if (type == Orientation.SIDE) {
-            return play(attack[0], true);
+            return play(attack[0][0], true);
         } else if (type == Orientation.DOWN) {
-            return play(attack[1], true);
+            return play(attack[1][1], true);
         } else {
-            return play(attack[2], true);
+            return play(attack[2][2], true);
         }
     }
 

@@ -3,6 +3,7 @@ package com.underwaterotter.artifice.world;
 public class Assets {
 
     public static final String TEST_TILES = "test_tiles.png";
+    public static final String TEST_WEP = "testwep.png";
     //UTILITIES
     public static final String FONT12 = "font12x.png";
     public static final String FONT16 = "font16x.png";

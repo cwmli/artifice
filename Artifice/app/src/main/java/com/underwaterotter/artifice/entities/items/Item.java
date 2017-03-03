@@ -4,6 +4,7 @@ import android.graphics.RectF;
 
 import com.underwaterotter.artifice.entities.Entity;
 import com.underwaterotter.artifice.entities.mobs.Mob;
+import com.underwaterotter.artifice.entities.mobs.main.Char;
 import com.underwaterotter.artifice.sprites.ItemSprite;
 import com.underwaterotter.utils.Block;
 
@@ -12,50 +13,45 @@ import java.util.UUID;
 
 public class Item extends Entity{
 
-    public static final String LEVEL = "level";
-    public static final String ENCHANTED = "enchanted";
-    public static final String UUID = "uuid";
-    public static final String BELONGS_TO = "belongs_to";
-    public static final String OWNER = "owner";
+    private static final String LEVEL = "level";
+    private static final String ENCHANTED = "enchanted";
+    private static final String BELONGS_TO = "belongs_to";
+    private static final String OWNER = "owner";
 
-    public static final int ITEM_THICKNESS = 5;
+    private static final int ITEM_THICKNESS = 5;
 
+    int itemID;
     ItemSprite sprite;
+    RectF hitBox;
 
     String name = "generic_item";
 
     int damage;
-    int level;
-    boolean enchanted;
-    int animationSpeed;
-
     int throwSpeed;
+    boolean enchanted;
 
     ArrayList<String> actions;
 
-    Mob mob; //Equipped to; therefore, will follow animations
+    Char plr; //Equipped to; therefore, will follow animations
 
     //for tracking
-    private UUID item_id;
-    private Pouch host;//can be a chest or any other inventory
+    private UUID itemUID;
+    private Pouch pouch;//can be a chest or any other inventory
 
     @Override
     public void saveToBlock(Block block){
         super.saveToBlock(block);
 
-        block.put(LEVEL, level);
         block.put(ENCHANTED, enchanted);
-        block.put(UUID, item_id);
 
-        block.put(BELONGS_TO, mob);
-        block.put(OWNER, host);
+        block.put(BELONGS_TO, plr);
+        block.put(OWNER, pouch);
     }
 
     @Override
     public void loadFromBlock(Block block){
         super.loadFromBlock(block);
 
-        level = block.getInt(LEVEL);
         enchanted = block.getBoolean(ENCHANTED);
     }
 
@@ -63,18 +59,22 @@ public class Item extends Entity{
     public void destroy(){
         super.destroy();
 
-        mob = null;
-        host = null;
+        plr = null;
+        pouch = null;
 
         currentLevel.getItemMapper().removeItem(this);
     }
 
-    public UUID itemID(){
-        return item_id;
+    public UUID itemUID(){
+        return itemUID;
     }
 
-    public UUID setItemID(UUID id){
-        return item_id = id;
+    public UUID setItemUID(UUID id){
+        return itemUID = id;
+    }
+
+    public int itemID() {
+        return itemID;
     }
 
     public ItemSprite getSprite() {
@@ -86,13 +86,8 @@ public class Item extends Entity{
         Mob[] mobs = currentLevel.getMobMapper().findByCell(cellPosition());
         ArrayList<Mob> collided = new ArrayList<Mob>();
 
-        if(mobs != null) {
-            for(Mob mob : mobs) {
-                if (RectF.intersects(mob.getHitBox(), sprite.getBoundingBox()) && mob.worldPosition().y - worldPosition().y <= ITEM_THICKNESS) {
-                    collided.add(mob);
-                }
-            }
-        }
+        // Check mobs
+
         Mob[] collidedMobs = new Mob[collided.size()];
         collided.toArray(collidedMobs);
 
@@ -100,45 +95,29 @@ public class Item extends Entity{
     }
 
     public Pouch owner(){
-        return host;
+        return pouch;
     }
 
     public void owner(Pouch host){
-        this.host = host;
-        worldPosition(host.worldPosition());
+        pouch.add(this);
     }
 
-    public void attach(Mob mob){
-
-        boolean added = false;
-        this.mob = mob;
-
-        for(int i = 0; i < mob.getEquipped().length; i++){
-            ItemSprite iSpr = mob.getEquipped()[i];
-            if(iSpr == null){
-                mob.getEquipped()[i] = sprite;
-                sprite.setPos(mob.getAttachPositions()[i]);
-                added = true;
-            }
-        }
-
-        if(!added){
-            return;
-        }
-
-        /// FIXME: 29/08/15 scale down sprite to match Mob size
+    public void attach(Char mob, int pos){
+        plr = mob;
+        worldPosition(mob.getAttachPos()[pos]);
     }
 
     public void detach(){
-        for(int i = 0; i < mob.getEquipped().length; i++){
-            ItemSprite iSpr = mob.getEquipped()[i];
-            if(iSpr == sprite){
-                mob.getEquipped()[i] = null;
-            }
-        }
+        worldPosition(plr.worldPosition());
+        // set the angle etc.. reset the item
+        plr = null;
     }
 
     public void drop(){
-        ///// FIXME: 29/08/15 upscale sprite size back into regular size (icon)
+        if (pouch != null) {
+            pouch.remove(this);
+        }
+
+        detach();
     }
 }

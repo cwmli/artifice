@@ -46,7 +46,7 @@ public class Particle extends Image {
         this.width = width;
         this.height = height;
 
-        resurrect();
+        revive();
     }
 
     public void pulsateSize(){

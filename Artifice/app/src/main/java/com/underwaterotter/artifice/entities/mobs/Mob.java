@@ -2,10 +2,8 @@ package com.underwaterotter.artifice.entities.mobs;
 
 import android.graphics.RectF;
 
-import com.underwaterotter.artifice.Artifice;
 import com.underwaterotter.artifice.entities.Entity;
 import com.underwaterotter.artifice.entities.items.Item;
-import com.underwaterotter.artifice.sprites.ItemSprite;
 import com.underwaterotter.artifice.sprites.MobSprite;
 import com.underwaterotter.ceto.Image;
 import com.underwaterotter.math.Vector2;
@@ -14,7 +12,6 @@ import com.underwaterotter.utils.Block;
 import com.underwaterotter.utils.Storable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.UUID;
 
@@ -36,9 +33,6 @@ public abstract class Mob extends Entity implements Storable {
     protected MobSprite sprite;
     protected RectF hitBox;
     protected Image shadow;
-
-    protected ItemSprite[] equipped; //equal in length to attachPositions, corresponds to index
-    protected Vector3[] attachPositions;
 
     protected String name = "generic_mob";
 
@@ -132,14 +126,8 @@ public abstract class Mob extends Entity implements Storable {
         Mob[] mobs = currentLevel.getMobMapper().findByCell(cellPosition());
         ArrayList<Mob> collided = new ArrayList<Mob>();
 
-//        if(mobs != null) {
-//            for(Mob mob : mobs) {
-//                if (RectF.intersects(mob.sprite.boundingBox, this.sprite.boundingBox) && mob.worldPosition().y - worldPosition().y <= MOB_THICKNESS) {
-//                    collided.add(mob);
-//                    mob.hindrance = 1 - (feather * 0.01f);
-//                }
-//            }
-//        }
+        // Check mobs with hitbox
+
         Mob[] collidedMobs = new Mob[collided.size()];
         collided.toArray(collidedMobs);
 
@@ -148,14 +136,6 @@ public abstract class Mob extends Entity implements Storable {
 
     public RectF getHitBox(){
         return hitBox;
-    }
-
-    public Vector3[] getAttachPositions(){
-        return attachPositions;
-    }
-
-    public ItemSprite[] getEquipped(){
-        return equipped;
     }
 
     public Vector2 getVelocity(){
@@ -186,8 +166,8 @@ public abstract class Mob extends Entity implements Storable {
     }
 
     public Vector3 center(){
-        return new Vector3(worldPosition.x + sprite.width() / 2,
-                worldPosition.y + sprite.height() / 2, worldPosition.z);
+        return new Vector3(position.x + sprite.width() / 2,
+                position.y + sprite.height() / 2, position.z);
     }
 
     public boolean isAlive(){
@@ -232,10 +212,6 @@ public abstract class Mob extends Entity implements Storable {
 
     protected void updateAgro() {
         visibleCells.clear();
-    }
-
-    public void clearEquipped(){
-        Arrays.fill(equipped, null);
     }
 
     public void addStatus(Mob.STATUS s){
